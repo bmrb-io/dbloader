@@ -1,2 +1,5 @@
 # dbloader
-internal: BMRB RDB loading scripts
+
+internal: scripts for loading BMRB postgres database
+
+

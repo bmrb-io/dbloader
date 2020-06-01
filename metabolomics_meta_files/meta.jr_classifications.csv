@@ -1,0 +1,487 @@
+id,bmrbid,mol_dir_name,classification
+1,bmse010001,1_4_Hydroxyphenyl_ethanol,Monomers
+2,bmse010002,Apocynol,Monomers
+3,bmse010003,1_4_Hydroxy_3_5_dimethoxyphenyl_ethanol,Monomers
+4,bmse010004,1_3_4_Dimethoxyphenyl_ethanol,Monomers
+5,bmse010005,4_Hydroxybenzaldehyde,Monomers
+6,bmse010006,vanillin,Monomers
+7,bmse010007,Syringyl_alcohol,Monomers
+8,bmse010008,Methyl_4_acetoxybenzoate,Monomers
+9,bmse010009,Methyl_4_hydroxybenzoate,Monomers
+10,bmse010010,4_hydroxy_3_methoxybenzyl_alcohol,Monomers
+11,bmse010011,2_3_Diacetoxypropioveratrone,Monomers
+12,bmse010012,p_Anisic_acid,Monomers
+13,bmse010013,lignin_cw_compound_22,"b-O-4 Dimers, 2-Carbon Sidechain"
+14,bmse010014,Hydroxyphenylethanol_diacetate,Monomers
+15,bmse010015,p-Hydroxybenzyl-alcohol-diacetate,Monomers
+16,bmse010016,Methyl_p_anisate,Monomers
+17,bmse010017,lignin_cw_compound_26,"b-O-4 Dimers, 2-Carbon Sidechain"
+18,bmse010018,lignin_cw_compound_27,"b-O-4 Dimers, 2-Carbon Sidechain"
+19,bmse010019,Dehydrodivanillin,5-5 Dimers
+20,bmse010020,lignin_cw_compound_29,"b-O-4 Dimers, 3-Carbon Sidechain"
+21,bmse010021,lignin_cw_compound_2,"b-O-4 Dimers, 3-Carbon Sidechain"
+22,bmse010022,Xylan,Misc. Compounds
+23,bmse010023,Dihydroferulic_Acid,Monomers
+24,bmse010024,4_Methoxyacetophenone,Monomers
+25,bmse010025,p_Methoxybenzyl_alcohol,Monomers
+26,bmse010026,Phenol,Monomers
+27,bmse010027,Guaiacol,Monomers
+28,bmse010028,p_Hydroxybenzyl_alcohol,Monomers
+29,bmse010029,3_4_Dimethoxybenzyl_alcohol,Monomers
+30,bmse010030,p_hydroxyacetophenone,Monomers
+31,bmse010031,acetovanillone,Monomers
+32,bmse010032,acetosyringone,Monomers
+33,bmse010033,Acetoveratrone,Monomers
+34,bmse010034,lignin_cw_compound_1001,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+35,bmse010035,lignin_cw_compound_1002,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+36,bmse010036,lignin_cw_compound_1003,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+37,bmse010037,lignin_cw_compound_1004,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+38,bmse010038,lignin_cw_compound_1005,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+39,bmse010039,lignin_cw_compound_1006,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+40,bmse010040,lignin_cw_compound_100,"b-O-4 Dimers, 3-Carbon Sidechain"
+41,bmse010041,Guaiacylglycerol_B_guaiacyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain"
+42,bmse010042,Guaiacylglycerol_B_guaiacyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain"
+43,bmse010043,Acetylated_acetovanillone,Monomers
+44,bmse010044,Veratrylglycerol_B_guaiacyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain"
+45,bmse010045,Veratrylglycerol_B_guaiacyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain"
+46,bmse010046,Erone,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+47,bmse010047,Vanillyl_B_D_Glucoside,Misc. Compounds
+48,bmse010048,Acetylated_ferulic_acid,Monomers
+49,bmse010049,Pinoresinol_diacetate,b-b Dimers
+50,bmse010050,Veratrone,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+51,bmse010051,acetylated_isoeugenol,Monomers
+52,bmse010052,Isoeugenol,Monomers
+53,bmse010053,Eugenol,Monomers
+54,bmse010054,4_Allyl_2_6_dimethoxyphenol,Monomers
+55,bmse010055,acetylated_eugenol,Monomers
+56,bmse010056,lignin_cw_compound_116,Monomers
+57,bmse010057,Syringylresinol,b-b Dimers
+58,bmse010058,Coniferin_acetate,Misc. Compounds
+59,bmse010059,Syringin_acetate,Misc. Compounds
+60,bmse010060,Syringylresinol_diacetate,b-b Dimers
+61,bmse010061,cis_Ferulic_Acid,Monomers
+62,bmse010062,lignin_cw_compound_125,"b-O-4 Dimers, 2-Carbon Sidechain"
+63,bmse010063,lignin_cw_compound_126,"b-O-4 Dimers, 2-Carbon Sidechain"
+64,bmse010064,Dihydrocoumaric_acid,Monomers
+65,bmse010065,acetylated_dihydrocoumaric_acid,Monomers
+66,bmse010066,acetylated_coumaric_acid,Monomers
+67,bmse010067,lignin_cw_compound_130,Monomers
+68,bmse010068,lignin_cw_compound_132,"b-O-4 Dimers, 2-Carbon Sidechain"
+69,bmse010069,lignin_cw_compound_134,"b-O-4 Dimers, 3-Carbon Sidechain"
+70,bmse010070,lignin_cw_compound_135,"b-O-4 Dimers, 3-Carbon Sidechain"
+71,bmse010071,Vinyl_guaiacol,Monomers
+72,bmse010072,lignin_cw_compound_138,"b-O-4 Dimers, 2-Carbon Sidechain"
+73,bmse010073,acetylated_coniferylaldehyde,Monomers
+74,bmse010074,acetylated_coniferyl_alcohol,Monomers
+75,bmse010075,Acetylated_veratryl_alcohol,Monomers
+76,bmse010076,coniferaldehyde,Monomers
+77,bmse010077,3_4_dimethoxycinnamyl_alcohol,Monomers
+78,bmse010078,lignin_cw_compound_146,"b-O-4 Dimers, 2-Carbon Sidechain"
+79,bmse010079,lignin_cw_compound_147,"b-O-4 Dimers, 2-Carbon Sidechain"
+80,bmse010080,acetylated_methyl_coumarate,Monomers
+81,bmse010081,acetylated_methyl_ferulate,Monomers
+82,bmse010082,3_4_dimethoxy_cinnamaldehyde,Monomers
+83,bmse010083,p_coumaryl_alcohol,Monomers
+84,bmse010084,p_coumaraldehyde,Monomers
+85,bmse010085,sinapaldehyde,Monomers
+86,bmse010086,lignin_cw_compound_154,"b-O-4 Dimers, 2-Carbon Sidechain"
+87,bmse010087,Acetylated_sinapaldehyde,Monomers
+88,bmse010088,3_4_5_Trimethoxyacetophenone,Monomers
+89,bmse010089,acetylated_p_gluco_cinnamic_acid,Misc. Compounds
+90,bmse010090,3_4_dimethoxycinnamyl_acetate,Monomers
+91,bmse010091,Veratryl_glycerol,Monomers
+92,bmse010092,lignin_cw_compound_161,Monomers
+93,bmse010093,Erone_diacetate,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+94,bmse010094,Veratrone_acetate,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+95,bmse010095,Pinoresinol_biphenyl,Tetramers
+96,bmse010096,Pinoresinol_biphenyl_acetate,Tetramers
+97,bmse010097,Ethyl_vanillin,Monomers
+98,bmse010098,Phenylcoumaran_biphenyl_acetate,Tetramers
+99,bmse010099,Phenyl_coumaran_biphenyl,Tetramers
+100,bmse010100,1_2_diguaiacylpropane_1_3_diol,b-1 Dimers
+101,bmse010101,4_acetoxy_acetophenone,Monomers
+102,bmse010102,Vanillin_acetate,Monomers
+103,bmse010103,Syringic_Acid_Acetate,Monomers
+104,bmse010104,Guaiacol_acetate,Monomers
+105,bmse010105,Acetosyringone_acetate,Monomers
+106,bmse010106,Sinapic_acid_acetate,Monomers
+107,bmse010107,4_acetoxy_3_methoxy_methyl_benzoate,Monomers
+108,bmse010108,G_b_S_c_CA,Trimers
+109,bmse010109,G_b_S_c_CA_acetate,Trimers
+110,bmse010110,G_b_S_r_S,Trimers
+111,bmse010111,G_b_S_r_S_acetate,Trimers
+112,bmse010112,S_b_SA_acetate,"b-O-4 Dimers, 3-Carbon Sidechain"
+113,bmse010113,S_b_CA_acetate,"b-O-4 Dimers, 3-Carbon Sidechain"
+114,bmse010114,S_c_CA_acetate,b-5 Dimers
+115,bmse010115,G_b_SA_acetate,"b-O-4 Dimers, 3-Carbon Sidechain"
+116,bmse010116,2_6_dimethoxyphenol_acetate,Monomers
+117,bmse010117,phenol_acetate,Monomers
+118,bmse010118,lignin_cw_compound_191,Monomers
+119,bmse010119,lignin_cw_compound_192,Monomers
+120,bmse010120,lignin_cw_compound_193,Trimers
+121,bmse010121,G_b_S_r_S_b_G,Tetramers
+122,bmse010122,lignin_cw_compound_195,Monomers
+123,bmse010123,lignin_cw_compound_196,Monomers
+124,bmse010124,G_b_S_r_S_b_G_acetate,Tetramers
+125,bmse010125,S_b_S_r_S,Trimers
+126,bmse010126,S_b_S_r_S_acetate,Trimers
+127,bmse010127,Vanillyl_alcohol_diacetate,Monomers
+128,bmse010128,Syringyl_alcohol_diacetate,Monomers
+129,bmse010129,lignin_cw_compound_202,Monomers
+130,bmse010130,4_methoxy_benzaldehyde,Monomers
+131,bmse010131,lignin_cw_compound_204,Monomers
+132,bmse010132,lignin_cw_compound_205,Monomers
+133,bmse010133,Syringaldehyde_acetate,Monomers
+134,bmse010134,4_Acetoxy_benzaldehyde,Monomers
+135,bmse010135,4_Acetoxy_benzoic_acid,Monomers
+136,bmse010136,4_Methoxy_benzyl_alcohol,Monomers
+137,bmse010137,lignin_cw_compound_210,Monomers
+138,bmse010138,Sinapyl_alcohol_diacetate,Monomers
+139,bmse010139,lignin_cw_compound_212,"b-O-4 Dimers, 3-Carbon Sidechain"
+140,bmse010140,lignin_cw_compound_213,"b-O-4 Dimers, 3-Carbon Sidechain"
+141,bmse010141,lignin_cw_compound_214,"b-O-4 Dimers, 3-Carbon Sidechain"
+142,bmse010142,p_Methoxy_cinnamaldehyde,Monomers
+143,bmse010143,G_b_G_c_CA_acetate,Trimers
+144,bmse010144,lignin_cw_compound_217,"b-O-4 Dimers, 3-Carbon Sidechain"
+145,bmse010145,lignin_cw_compound_218,"b-O-4 Dimers, 3-Carbon Sidechain"
+146,bmse010146,p_Methoxy_coumaryl_alcohol,Monomers
+147,bmse010147,p_Methoxy_coumaryl_alcohol_acetate,Monomers
+148,bmse010148,V_c_CA,b-5 Dimers
+149,bmse010149,4_hydroxy_cinnamyl_alcohol_diacetate,Monomers
+150,bmse010150,4_acetoxy_cinnamaldehyde,Monomers
+151,bmse010151,S_b_G_5_5_G_b_S_A_CH2,Tetramers
+152,bmse010152,H_b_S,"b-O-4 Dimers, 3-Carbon Sidechain"
+153,bmse010153,G_bt_S_bt_G,Trimers
+154,bmse010154,S_b_S,"b-O-4 Dimers, 3-Carbon Sidechain"
+155,bmse010155,S_b_S,"b-O-4 Dimers, 3-Carbon Sidechain"
+156,bmse010156,cis_coniferyl_alcohol,Monomers
+157,bmse010157,G_b_S,"b-O-4 Dimers, 3-Carbon Sidechain"
+158,bmse010158,G_b1_G,b-1 Dimers
+159,bmse010159,G_c_G,b-5 Dimers
+160,bmse010160,S_b_G_b1_G,Trimers
+161,bmse010161,G_a_G_b_G,Trimers
+162,bmse010162,H_c_G,b-5 Dimers
+163,bmse010163,lignin_cw_compound_246,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+164,bmse010164,lignin_cw_compound_247,5-5 Dimers
+165,bmse010165,G_b_S_b_S,Trimers
+166,bmse010166,lignin_cw_compound_251,Misc. Compounds
+167,bmse010167,lignin_cw_compound_253,Misc. Compounds
+168,bmse010168,lignin_cw_compound_255,Misc. Compounds
+169,bmse010169,lignin_cw_compound_256,Misc. Compounds
+170,bmse010170,lignin_cw_compound_257,Misc. Compounds
+171,bmse010171,Vanillin_a_G_b_CA,Trimers
+172,bmse010172,lignin_cw_compound_260,5-5 Dimers
+173,bmse010173,S_b_t_G_b_e_S5,Trimers
+174,bmse010174,lignin_cw_compound_264,Monomers
+175,bmse010175,lignin_cw_compound_265,Monomers
+176,bmse010176,S_a_S_b_S,Trimers
+177,bmse010177,lignin_cw_compound_267,b-5 Dimers
+178,bmse010178,H_b_H5e,"b-O-4 Dimers, 3-Carbon Sidechain"
+179,bmse010179,H_b_H5t,"b-O-4 Dimers, 3-Carbon Sidechain"
+180,bmse010180,H_b_H5e,"b-O-4 Dimers, 3-Carbon Sidechain"
+181,bmse010181,H_b_H5t,"b-O-4 Dimers, 3-Carbon Sidechain"
+182,bmse010182,G_5_O_4_G,5-O-4 Dimers
+183,bmse010183,G_5_O_4_G_diacetate,5-O-4 Dimers
+184,bmse010184,lignin_cw_compound_275,5-5 Dimers
+185,bmse010185,lignin_cw_compound_276,5-5 Dimers
+186,bmse010186,dihydro_coniferyl_alcohol,Monomers
+187,bmse010187,lignin_cw_compound_280,Monomers
+188,bmse010188,lignin_cw_compound_281,5-5 Dimers
+189,bmse010189,lignin_cw_compound_282,5-5 Dimers
+190,bmse010190,biphenyl_methane,Biphenyl methane Dimer
+191,bmse010191,lignin_cw_compound_284,Trimers
+192,bmse010192,lignin_cw_compound_285,Monomers
+193,bmse010193,lignin_cw_compound_286,5-O-4 Dimers
+194,bmse010194,lignin_cw_compound_287,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+195,bmse010195,lignin_cw_compound_288,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+196,bmse010196,lignin_cw_compound_289,Trimers
+197,bmse010197,lignin_cw_compound_290,Monomers
+198,bmse010198,lignin_cw_compound_291,Monomers
+199,bmse010199,lignin_cw_compound_292,Monomers
+200,bmse010200,lignin_cw_compound_294,Monomers
+201,bmse010201,lignin_cw_compound_295,Monomers
+202,bmse010202,lignin_cw_compound_296,Monomers
+203,bmse010203,Syringol,Monomers
+204,bmse010204,syringaldehyde,Monomers
+205,bmse010205,vanillic_acid,Monomers
+206,bmse010206,syringic_acid,Monomers
+207,bmse010207,Veratric_acid,Monomers
+208,bmse010208,p_coumaric_acid,Monomers
+209,bmse010209,sinapinic_acid,Monomers
+210,bmse010210,3_4_Dimethoxycinnamic_acid,Monomers
+211,bmse010211,Ferulic_acid,Monomers
+212,bmse010212,4_Methoxycinnamic_acid,Monomers
+213,bmse010213,lignin_cw_compound_50,"b-O-4 Dimers, 2-Carbon Sidechain"
+214,bmse010214,lignin_cw_compound_51,"b-O-4 Dimers, 2-Carbon Sidechain"
+215,bmse010215,lignin_cw_compound_52,"b-O-4 Dimers, 2-Carbon Sidechain"
+216,bmse010216,lignin_cw_compound_53,"b-O-4 Dimers, 2-Carbon Sidechain"
+217,bmse010217,Anisole,Monomers
+218,bmse010218,1_2_3_trimethoxybenzene,Monomers
+219,bmse010219,Veratrole,Monomers
+220,bmse010220,Veratraldehyde,Monomers
+221,bmse010221,methyl_sinapate,Monomers
+222,bmse010222,Methyl_p_Coumarate,Monomers
+223,bmse010223,methyl_3_4_5_trimethoxy_cinnamate,Monomers
+224,bmse010224,3_4_5_trimethoxy_cinnamic_acid,Monomers
+225,bmse010225,Syringic_acid_methyl_ester,Monomers
+226,bmse010226,Vanillic_acid_methyl_ester,Monomers
+227,bmse010227,Dihydrodehydrodiisoeugenol,b-5 Dimers
+228,bmse010228,Dehydrodiisoeugenol,b-5 Dimers
+229,bmse010229,methyl_ferulate,Monomers
+230,bmse010230,Methylveratrate,Monomers
+231,bmse010231,methyl_3_4_dimethoxycinnamate,Monomers
+232,bmse010232,Dehydrodiveratraldehyde,5-5 Dimers
+233,bmse010233,Dehydrodiveratric_acid,5-5 Dimers
+234,bmse010234,lignin_cw_compound_73,b-5 Dimers
+235,bmse010235,lignin_cw_compound_74,"b-O-4 Dimers, 3-Carbon Sidechain"
+236,bmse010236,lignin_cw_compound_75,Trimers Containing Ferulic or Coumaric Acid
+237,bmse010237,lignin_cw_compound_76,Trimers Containing Ferulic or Coumaric Acid
+238,bmse010238,lignin_cw_compound_77,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+239,bmse010239,lignin_cw_compound_78,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+240,bmse010240,lignin_cw_compound_79,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+241,bmse010241,lignin_cw_compound_80,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+242,bmse010242,lignin_cw_compound_81,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+243,bmse010243,lignin_cw_compound_82,Trimers Containing Ferulic or Coumaric Acid
+244,bmse010244,lignin_cw_compound_83,Trimers Containing Ferulic or Coumaric Acid
+245,bmse010245,lignin_cw_compound_84,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+246,bmse010246,lignin_cw_compound_85,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+247,bmse010247,lignin_cw_compound_86,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+248,bmse010248,coniferyl_alcohol,Monomers
+249,bmse010249,lignin_cw_compound_88,"b-O-4 Dimers, 3-Carbon Sidechain"
+250,bmse010250,lignin_cw_compound_89,"b-O-4 Dimers, 3-Carbon Sidechain"
+251,bmse010251,Syringylglycerol_B_guaiacyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain"
+252,bmse010252,lignin_cw_compound_91,"b-O-4 Dimers, 3-Carbon Sidechain"
+253,bmse010253,lignin_cw_compound_92,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+254,bmse010254,Phenyl_benzoate,Misc. Compounds
+255,bmse010255,Ethyl_4-hydroxybenzoate,Monomers
+256,bmse010256,Cinnamyl_alcohol,Monomers
+257,bmse010257,Cinnamaldehyde,Monomers
+258,bmse010258,lignin_cw_compound_97,"b-O-4 Dimers, 3-Carbon Sidechain"
+259,bmse010259,lignin_cw_compound_98,"b-O-4 Dimers, 3-Carbon Sidechain"
+260,bmse010260,lignin_cw_compound_99,"b-O-4 Dimers, 3-Carbon Sidechain"
+261,bmse010261,lignin_cw_compound_1007,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+262,bmse010262,lignin_cw_compound_1008,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+263,bmse010263,lignin_cw_compound_1009,Trimers Containing Ferulic or Coumaric Acid
+264,bmse010264,lignin_cw_compound_1010,Trimers Containing Ferulic or Coumaric Acid
+265,bmse010265,lignin_cw_compound_1011,Trimers Containing Ferulic or Coumaric Acid
+266,bmse010266,lignin_cw_compound_1012,Trimers Containing Ferulic or Coumaric Acid
+267,bmse010267,lignin_cw_compound_1013,Trimers Containing Ferulic or Coumaric Acid
+268,bmse010268,lignin_cw_compound_1014,Trimers Containing Ferulic or Coumaric Acid
+269,bmse010269,lignin_cw_compound_1015,Trimers Containing Ferulic or Coumaric Acid
+270,bmse010270,lignin_cw_compound_1016,Trimers Containing Ferulic or Coumaric Acid
+271,bmse010271,lignin_cw_compound_1017,Trimers Containing Ferulic or Coumaric Acid
+272,bmse010272,lignin_cw_compound_1018,Trimers Containing Ferulic or Coumaric Acid
+273,bmse010273,lignin_cw_compound_1019,Trimers Containing Ferulic or Coumaric Acid
+274,bmse010274,lignin_cw_compound_1020,Trimers Containing Ferulic or Coumaric Acid
+275,bmse010275,lignin_cw_compound_1021,Trimers Containing Ferulic or Coumaric Acid
+276,bmse010276,lignin_cw_compound_1022,Trimers Containing Ferulic or Coumaric Acid
+277,bmse010277,lignin_cw_compound_1023,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+278,bmse010278,lignin_cw_compound_1024,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+279,bmse010279,lignin_cw_compound_1025,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+280,bmse010280,lignin_cw_compound_1026,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+281,bmse010281,lignin_cw_compound_1027,"b-O-4 Dimers, 2-Carbon Sidechain"
+282,bmse010282,lignin_cw_compound_1028,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+283,bmse010283,lignin_cw_compound_1029,"b-O-4 Dimers, 3-Carbon Sidechain"
+284,bmse010284,lignin_cw_compound_1030,"b-O-4 Dimers, 3-Carbon Sidechain"
+285,bmse010285,coniferyl_alcohol,Monomers
+286,bmse010286,sinapyl_alcohol,Monomers
+287,bmse010287,p_coumaryl_alcohol,Monomers
+288,bmse010288,lignin_cw_compound_2005,b-5 Dimers
+289,bmse010289,lignin_cw_compound_2006,b-5 Dimers
+290,bmse010290,lignin_cw_compound_2008,b-b Dimers
+291,bmse010291,coniferyl_p_coumarate,Misc. Compounds
+292,bmse010292,lignin_cw_compound_2011,"b-O-4 Dimers, 3-Carbon Sidechain"
+293,bmse010293,lignin_cw_compound_2012,"b-O-4 Dimers, 3-Carbon Sidechain"
+294,bmse010294,lignin_cw_compound_2015,Trimers
+295,bmse010295,lignin_cw_compound_2016,Trimers Containing Ferulic or Coumaric Acid
+296,bmse010296,lignin_cw_compound_2018,b-5 Dimers
+297,bmse010297,Pinoresinol,b-b Dimers
+298,bmse010298,lignin_cw_compound_2022,Trimers
+299,bmse010299,lignin_cw_compound_2026,b-b Dimers
+300,bmse010300,lignin_cw_compound_2031,b-b Dimers
+301,bmse010301,lignin_cw_compound_2032,b-b Dimers
+302,bmse010302,lignin_cw_compound_2035,b-b Dimers
+303,bmse010303,lignin_cw_compound_2036,b-b Dimers
+304,bmse010304,lignin_cw_compound_2038,5-O-4 Dimers
+305,bmse010305,lignin_cw_compound_2040,"b-O-4 Dimers, 3-Carbon Sidechain"
+306,bmse010306,lignin_cw_compound_2041,"b-O-4 Dimers, 3-Carbon Sidechain"
+307,bmse010307,lignin_cw_compound_2042,"b-O-4 Dimers, 3-Carbon Sidechain"
+308,bmse010308,lignin_cw_compound_2043,"b-O-4 Dimers, 3-Carbon Sidechain"
+309,bmse010309,lignin_cw_compound_2049,Trimers
+310,bmse010310,lignin_cw_compound_2050,Misc. Compounds
+311,bmse010311,lignin_cw_compound_2052,b-5 Dimers
+312,bmse010312,lignin_cw_compound_2053,Misc. Compounds
+313,bmse010313,lignin_cw_compound_2057,5-5 Dimers
+314,bmse010314,lignin_cw_compound_2058,5-5 Dimers
+315,bmse010315,lignin_cw_compound_2062,b-b Dimers
+316,bmse010316,lignin_cw_compound_2063,Misc. Compounds
+317,bmse010317,lignin_cw_compound_2064,Misc. Compounds
+318,bmse010318,Sinapyl_p_coumarate,Misc. Compounds
+319,bmse010319,lignin_cw_compound_2066,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+320,bmse010320,lignin_cw_compound_2067,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+321,bmse010321,lignin_cw_compound_2068,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+322,bmse010322,Seco_isolariciresinol,b-b Dimers
+323,bmse010323,lignin_cw_compound_2071,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+324,bmse010324,lignin_cw_compound_2072,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+325,bmse010325,lignin_cw_compound_2073,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+326,bmse010326,lignin_cw_compound_2074,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+327,bmse010327,lignin_cw_compound_2079,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+328,bmse010328,lignin_cw_compound_2080,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+329,bmse010329,lignin_cw_compound_2081,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+330,bmse010330,lignin_cw_compound_3001,5-O-4 Dimers
+331,bmse010331,lignin_cw_compound_3002,b-b Dimers
+332,bmse010332,lignin_cw_compound_3003,5-O-4 Dimers
+333,bmse010333,lignin_cw_compound_3004,b-1 Dimers
+334,bmse010334,lignin_cw_compound_3005,b-1 Dimers
+335,bmse010335,lignin_cw_compound_3006,b-1 Dimers
+336,bmse010336,lignin_cw_compound_3008,"b-O-4 Dimers, 3-Carbon Sidechain"
+337,bmse010337,lignin_cw_compound_3010,"b-O-4 Dimers, 3-Carbon Sidechain"
+338,bmse010338,lignin_cw_compound_3011,"b-O-4 Dimers, 3-Carbon Sidechain"
+339,bmse010339,lignin_cw_compound_3014,b-b Dimers
+340,bmse010340,lignin_cw_compound_3015,b-b Dimers
+341,bmse010341,lignin_cw_compound_3016,b-b Dimers
+342,bmse010342,lignin_cw_compound_3017,b-b Dimers
+343,bmse010343,lignin_cw_compound_3018,b-b Dimers
+344,bmse010344,lignin_cw_compound_3019,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+345,bmse010345,lignin_cw_compound_3020,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+346,bmse010346,lignin_cw_compound_3021,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+347,bmse010347,lignin_cw_compound_3022,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+348,bmse010348,lignin_cw_compound_3023,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+349,bmse010349,lignin_cw_compound_3025,"b-O-4 Dimers, 3-Carbon Sidechain"
+350,bmse010350,lignin_cw_compound_3026,"b-O-4 Dimers, 3-Carbon Sidechain"
+351,bmse010351,lignin_cw_compound_3027,"b-O-4 Dimers, 3-Carbon Sidechain"
+352,bmse010352,lignin_cw_compound_3028,"b-O-4 Dimers, 3-Carbon Sidechain"
+353,bmse010353,lignin_cw_compound_3031,"b-O-4 Dimers, 3-Carbon Sidechain"
+354,bmse010354,lignin_cw_compound_3033,5-5 Dimers
+355,bmse010355,lignin_cw_compound_3034,"b-O-4 Dimers, 3-Carbon Sidechain"
+356,bmse010356,lignin_cw_compound_3035,"b-O-4 Dimers, 3-Carbon Sidechain"
+357,bmse010357,lignin_cw_compound_3036,"b-O-4 Dimers, 3-Carbon Sidechain"
+358,bmse010358,lignin_cw_compound_3037,"b-O-4 Dimers, 3-Carbon Sidechain"
+359,bmse010359,lignin_cw_compound_3039,"b-O-4 Dimers, 3-Carbon Sidechain"
+360,bmse010360,lignin_cw_compound_3040,"b-O-4 Dimers, 3-Carbon Sidechain"
+361,bmse010361,lignin_cw_compound_3041,"b-O-4 Dimers, 3-Carbon Sidechain"
+362,bmse010362,lignin_cw_compound_3042,b-b Dimers
+363,bmse010363,lignin_cw_compound_3043,Misc. Compounds
+364,bmse010364,lignin_cw_compound_3044,Misc. Compounds
+365,bmse010365,lignin_cw_compound_3045,Misc. Compounds
+366,bmse010366,lignin_cw_compound_3046,Misc. Compounds
+367,bmse010367,lignin_cw_compound_3047,Misc. Compounds
+368,bmse010368,6_methoxy_indan_5_ol,Misc. Compounds
+369,bmse010369,lignin_cw_compound_3052,"b-O-4 Dimers, 3-Carbon Sidechain"
+370,bmse010370,lignin_cw_compound_3053,"b-O-4 Dimers, 3-Carbon Sidechain"
+371,bmse010371,lignin_cw_compound_3056,"b-O-4 Dimers, 3-Carbon Sidechain"
+372,bmse010372,lignin_cw_compound_3058,Trimers Containing Ferulic or Coumaric Acid
+373,bmse010373,lignin_cw_compound_3059,b-5 Dimers
+374,bmse010374,lignin_cw_compound_3061,b-5 Dimers
+375,bmse010375,lignin_cw_compound_3062,Trimers
+376,bmse010376,Simulanol,b-5 Dimers
+377,bmse010377,buddlenol_E,Trimers
+378,bmse010378,buddlenol_A,Trimers
+379,bmse010379,SP_8_8_S,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+380,bmse010380,G_8_O_4_-S,"b-O-4 Dimers, 3-Carbon Sidechain"
+381,bmse010381,lignin_cw_compound_3068,"5-Hyroxyconiferyl alcohol b-O-4 Dimers, 3-Carbon Sidechain"
+382,bmse010382,lignin_cw_compound_3069,"5-Hyroxyconiferyl alcohol b-O-4 Dimers, 3-Carbon Sidechain"
+383,bmse010383,lignin_cw_compound_3070,"5-Hyroxyconiferyl alcohol b-O-4 Dimers, 3-Carbon Sidechain"
+384,bmse010384,lignin_cw_compound_3071,"b-O-4 Dimers, 3-Carbon Sidechain"
+385,bmse010385,lignin_cw_compound_3,"b-O-4 Dimers, 3-Carbon Sidechain"
+386,bmse010386,lignin_cw_compound_21,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+387,bmse010387,lignin_cw_compound_31,"b-O-4 Dimers, 3-Carbon Sidechain"
+388,bmse010388,lignin_cw_compound_32,"b-O-4 Dimers, 3-Carbon Sidechain"
+389,bmse010389,lignin_cw_compound_33,"b-O-4 Dimers, 3-Carbon Sidechain"
+390,bmse010390,lignin_cw_compound_34,"b-O-4 Dimers, 3-Carbon Sidechain"
+391,bmse010395,4_hydroxybenzoic_acid,Monomers
+392,bmse010396,methyl_4_methoxy_cinnamate_methyl,Monomers
+393,bmse010420,coniferin,Misc. Compounds
+394,bmse010421,syringin,Misc. Compounds
+395,bmse010422,alpha_beta_Xylose_Acetate,Misc. Compounds
+396,bmse010423,lignin_cw_compound_131,"b-O-4 Dimers, 3-Carbon Sidechain"
+397,bmse010424,lignin_cw_compound_133,"b-O-4 Dimers, 3-Carbon Sidechain"
+398,bmse010425,lignin_cw_compound_137,"b-O-4 Dimers, 3-Carbon Sidechain"
+399,bmse010426,G_beta_S5,"b-O-4 Dimers, 3-Carbon Sidechain"
+400,bmse010427,lignin_cw_compound_140,"b-O-4 Dimers, 3-Carbon Sidechain"
+401,bmse010428,p_Gluco_cinnamyl_alcohol,Misc. Compounds
+402,bmse010430,lignin_cw_compound_172,b-1 Dimers
+403,bmse010432,G_b_G_AcO,"b-O-4 Dimers, 3-Carbon Sidechain"
+404,bmse010433,S_b_S_AcO,"b-O-4 Dimers, 3-Carbon Sidechain"
+405,bmse010434,G_b_G_b1_G,Trimers
+406,bmse010435,H_b_G_AcO,"b-O-4 Dimers, 3-Carbon Sidechain"
+407,bmse010436,lignin_cw_compound_240,Monomers
+408,bmse010437,H_b_G_OH,"b-O-4 Dimers, 3-Carbon Sidechain"
+409,bmse010438,G_b_S_OH,"b-O-4 Dimers, 3-Carbon Sidechain"
+410,bmse010439,S_b_S_OH,"b-O-4 Dimers, 3-Carbon Sidechain"
+411,bmse010440,G_b_H,"b-O-4 Dimers, 3-Carbon Sidechain"
+412,bmse010441,G_b_G_OH,"b-O-4 Dimers, 3-Carbon Sidechain"
+413,bmse010442,H_b_S_OH,"b-O-4 Dimers, 3-Carbon Sidechain"
+414,bmse010443,lignin_cw_compound_252,Misc. Compounds
+415,bmse010444,lignin_cw_compound_254,Misc. Compounds
+416,bmse010445,dihydrodiconiferyl_alcohol,5-5 Dimers
+417,bmse010446,lignin_cw_compound_262,b-5 Dimers
+418,bmse010447,lignin_cw_compound_263,Trimers
+419,bmse010448,lignin_cw_compound_272,Monomers
+420,bmse010449,dibenzodioxicin,Trimers
+421,bmse010450,lignin_cw_compound_278,Trimers
+422,bmse010451,lignin_cw_compound_293,Monomers
+423,bmse010452,Veratryl_alcohol_methyl_ether,Monomers
+424,bmse010453,Methoxy_hydroxy_stilbene_carboxylic_acid,Misc. Compounds
+425,bmse010454,lignin_cw_compound_299,Trimers
+426,bmse010455,5_O_4_diacetovanillone,5-O-4 Dimers
+427,bmse010456,guaiacyl_chalcone,Misc. Compounds
+428,bmse010457,345_trimethoxy_cinnamyl_alcohol,Monomers
+429,bmse010458,lignin_cw_compound_2004,b-5 Dimers
+430,bmse010459,lignin_cw_compound_2007,Misc. Compounds
+431,bmse010460,coniferyl_benzoate,Misc. Compounds
+432,bmse010461,Guaiacylglycerol_B_coniferyl,"b-O-4 Dimers, 3-Carbon Sidechain"
+433,bmse010462,Guaiacylglycerol_B_coniferyl,"b-O-4 Dimers, 3-Carbon Sidechain"
+434,bmse010463,lignin_cw_compound_2017,Tetramers
+435,bmse010464,lignin_cw_compound_2019,b-5 Dimers
+436,bmse010465,lignin_cw_compound_2021,b-5 Dimers
+437,bmse010466,lignin_cw_compound_2023,Tetramers
+438,bmse010467,lignin_cw_compound_2024,Tetramers
+439,bmse010468,lignin_cw_compound_2025,Tetramers
+440,bmse010469,lignin_cw_compound_2027,b-b Dimers
+441,bmse010470,lignin_cw_compound_2028,b-b Dimers
+442,bmse010471,lignin_cw_compound_2029,b-b Dimers
+443,bmse010472,lignin_cw_compound_2030,b-b Dimers
+444,bmse010473,lignin_cw_compound_2033,b-b Dimers
+445,bmse010474,lignin_cw_compound_2034,b-b Dimers
+446,bmse010475,lignin_cw_compound_2037,5-O-4 Dimers
+447,bmse010476,lignin_cw_compound_2039,5-O-4 Dimers
+448,bmse010477,lignin_cw_compound_2044,"b-O-4 Dimers, 3-Carbon Sidechain"
+449,bmse010478,lignin_cw_compound_2045,"b-O-4 Dimers, 3-Carbon Sidechain"
+450,bmse010479,lignin_cw_compound_2046,"b-O-4 Dimers, 3-Carbon Sidechain"
+451,bmse010480,lignin_cw_compound_2047,Misc. Compounds
+452,bmse010481,lignin_cw_compound_2048,Misc. Compounds
+453,bmse010483,lignin_cw_compound_2051,b-5 Dimers
+454,bmse010484,lignin_cw_compound_2054,b-5 Dimers
+455,bmse010485,lignin_cw_compound_2055,Misc. Compounds
+456,bmse010486,5_5_Dehydrodiferulic_Acid,5-5 Dimers
+457,bmse010487,lignin_cw_compound_2059,Tetramers
+458,bmse010488,lignin_cw_compound_2060,Tetramers
+459,bmse010489,lignin_cw_compound_2061,Tetramers
+460,bmse010490,Isotaxiresinol,b-b Dimers
+461,bmse010492,lignin_cw_compound_2075,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+462,bmse010493,lignin_cw_compound_2076,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+463,bmse010494,lignin_cw_compound_2077,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+464,bmse010495,lignin_cw_compound_2078,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+465,bmse010496,lignin_cw_compound_2082,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+466,bmse010497,lignin_cw_compound_3007,b-1 Dimers
+467,bmse010498,lignin_cw_compound_3009,Tetramers
+468,bmse010499,lignin_cw_compound_3013,Trimers
+469,bmse010502,lignin_cw_compound_3024,"More Trimers Containing Ferulic, Coumaric or p-OH-Benzoic Acid"
+470,bmse010504,lignin_cw_compound_3029,Misc. Compounds
+471,bmse010505,lignin_cw_compound_3030,b-5 Dimers
+472,bmse010506,lignin_cw_compound_3032,b-b Dimers
+473,bmse010507,lignin_cw_compound_3038,"b-O-4 Dimers, 3-Carbon Sidechain"
+474,bmse010508,lignin_cw_compound_3049,Misc. Compounds
+475,bmse010509,lignin_cw_compound_3050,"b-O-4 Dimers, 3-Carbon Sidechain"
+476,bmse010510,lignin_cw_compound_3051,"b-O-4 Dimers, 3-Carbon Sidechain"
+477,bmse010511,lignin_cw_compound_3054,"b-O-4 Dimers, 3-Carbon Sidechain"
+478,bmse010512,lignin_cw_compound_3055,"b-O-4 Dimers, 3-Carbon Sidechain"
+479,bmse010514,lignin_cw_compound_3057,"b-O-4 Dimers, 3-Carbon Sidechain"
+480,bmse010515,lignin_cw_compound_3060,b-b Dimers
+481,bmse010516,S_8_O_4_G_8_5_G,Trimers
+482,bmse010517,lignin_cw_compound_3012,Trimers
+483,bmse010518,lignin_cw_compound_166,"b-O-4 Dimers, 3-Carbon Sidechain"
+484,bmse010519,lignin_cw_compound_168,"b-O-4 Dimers, 3-Carbon Sidechain"
+485,bmse010520,Guaiacylglycerol_B_syringyl_ether,"b-O-4 Dimers, 3-Carbon Sidechain, a-C=O"
+486,bmse010521,S_b_G,"b-O-4 Dimers, 3-Carbon Sidechain"

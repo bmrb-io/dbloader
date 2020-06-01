@@ -1,0 +1,915 @@
+id,bmrb_id,dir_name,common_name,formula
+1,bmse000001,1_3_diaminopropane,"1,3-Diaminopropane",C3H10N2
+2,bmse000002,2_3_diphospho_D_glyceric_acid,"2,3-Diphospho-D-glyceric acid",C3H8O10P2
+3,bmse000003,2_deoxyguanosine,2'-Deoxyguanosine,C10H13N5O4
+4,bmse000004,ADP,ADP,C10H15N5O10P2
+5,bmse000005,AMP,AMP,C10H14N5O7P
+6,bmse000006,ATP,ATP,C10H16N5O13P3
+7,bmse000007,D_3_phosphoglyceric_acid,D-(-)-3-Phosphoglyceric acid,C3H7O7P
+8,bmse000008,D_allose,D-Allose,C6H12O6
+9,bmse000010,D_fructose,D-(-)-Fructose,C6H12O6
+10,bmse000011,D_fructose_1_6_bisphosphate,"D-Fructose-1,6-bisphosphate",C6H14O12P2
+11,bmse000012,D_fructose_6_phosphate,D-Fructose-6-phosphate,C6H13O9P
+12,bmse000013,D_galactose,D-(+)-Galactose,C6H12O6
+13,bmse000015,D_glucose,D-(+)-Glucose,C6H12O6
+14,bmse000016,D_glucose_6_phosphate,D-Glucose 6-phosphate,C6H13O9P
+15,bmse000017,D_maltose,D-(+)-Maltose,C12H22O11
+16,bmse000018,D_mannose,D-(+)-Mannose,C6H12O6
+17,bmse000019,D_ornithine,D-Ornithine,C5H12N2O2
+18,bmse000020,D_psicose,D-Psicose,C6H12O6
+19,bmse000022,D_sorbose,D-(+)-Sorbose,C6H12O6
+20,bmse000023,D_tagatose,D-(-)-Tagatose,C6H12O6
+21,bmse000025,D_threo_isocitric_acid,D-(+)-Threo-isocitric acid,C6H8O7
+22,bmse000026,D_xylose,D-(+)-Xylose,C5H10O5
+23,bmse000027,D_xylulose,D-Xylulose,C5H10O5
+24,bmse000028,L_alanine,L-Alanine,C3H7NO2
+25,bmse000029,L_arginine,L-Arginine,C6H14N4O2
+26,bmse000030,L_asparagine,L-Asparagine,C4H8N2O3
+27,bmse000031,L_aspartic_acid,L-Aspartic acid,C4H7NO4
+28,bmse000032,L_citrulline,L-Citrulline,C6H13N3O3
+29,bmse000033,L_cystathionine,L-Cystathionine,C7H14N2O4S
+30,bmse000034,L_cysteine,L-Cysteine,C3H7NO2S
+31,bmse000035,L_cystine,L-Cystine,C6H12N2O4S2
+32,bmse000036,L_fucose,L-(-)-Fucose,C6H12O5
+33,bmse000037,L_glutamic_acid,L-Glutamic acid,C5H9NO4
+34,bmse000038,L_glutamine,L-Glutamine,C5H10N2O3
+35,bmse000039,L_histidine,L-Histidine,C6H9N3O2
+36,bmse000040,L_homoserine,L-Homoserine,C4H9NO3
+37,bmse000041,L_isoleucine,L-Isoleucine,C6H13NO2
+38,bmse000042,L_leucine,L-Leucine,C6H13NO2
+39,bmse000043,L_lysine,L-Lysine,C6H14N2O2
+40,bmse000044,L_methionine,L-Methionine,C5H11NO2S
+41,bmse000045,L_phenylalanine,L-Phenylalanine,C9H11NO2
+42,bmse000046,malic_acid,Malic acid,C4H6O5
+43,bmse000047,L_proline,L-Proline,C5H9NO2
+44,bmse000048,L_serine,L-Serine,C3H7NO3
+45,bmse000049,L_threonine,L-Threonine,C4H9NO3
+46,bmse000050,L_tryptophan,L-Tryptophan,C11H12N2O2
+47,bmse000051,L_tyrosine,L-Tyrosine,C9H11NO3
+48,bmse000052,L_valine,L-Valine,C5H11NO2
+49,bmse000053,NAD,NAD,C21H28N7O14P2+
+50,bmse000054,NADH,NADH,C21H29N7O14P2
+51,bmse000055,NADPH,NADPH,C21H30N7O17P3
+52,bmse000056,N_acetyl_D_mannosamine,N-Acetyl-D-mannosamine,C8H15NO6
+53,bmse000057,N_acetylneuraminic_acid,N-Acetylneuraminic acid,C11H19NO9
+54,bmse000058,O_succinyl_L_homoserine,O-Succinyl-L-homoserine,C8H13NO6
+55,bmse000059,S_adenosyl_L_methionine,s-(5'-Adenosyl)-L-methionine,C15H23N6O5S+
+56,bmse000060,adenine,Adenine,C5H5N5
+57,bmse000061,adenosine,Adenosine,C10H13N5O4
+58,bmse000062,adonitol,Adonitol,C5H12O5
+59,bmse000063,agmatine,Agmatine,C5H14N4
+60,bmse000064,alpha_ketoglutaric_acid,alpha-Ketoglutaric acid,C5H6O5
+61,bmse000065,lactose,Lactose,C12H22O11
+62,bmse000066,4_aminobenzoic_acid,4-Aminobenzoic acid,C7H7NO2
+63,bmse000067,anthranilic_acid,Anthranilic acid,C7H7NO2
+64,bmse000068,L_arabitol,L-(-) Arabitol,C5H12O5
+65,bmse000069,betaine,Betaine,C5H11NO2
+66,bmse000070,betaine_aldehyde,Betaine aldehyde,C5H12NO+
+67,bmse000071,cAMP,cyclic AMP,C10H12N5O6P
+68,bmse000072,cadaverine,Cadaverine,C5H14N2
+69,bmse000073,L_canavanine,L-Canavanine,C5H12N4O3
+70,bmse000074,D_carnitine,D-Carnitine,C7H16NO3+
+71,bmse000075,chorismic_acid,Chorismic acid,C10H10O6
+72,bmse000076,citrate,Citrate,C6H8O7
+73,bmse000077,coumarin,Coumarin,C9H6O2
+74,bmse000078,creatine,Creatine,C4H9N3O2
+75,bmse000079,creatine_phosphate,Creatine phosphate,C4H10N3O5P
+76,bmse000080,dehydro_proline,"3,4-Dehydro-d/L-proline",C5H7NO2
+77,bmse000083,fumaric_acid,Fumaric acid,C4H4O4
+78,bmse000084,gluconic_acid,Gluconic acid,C6H12O7
+79,bmse000086,alpha_D_glucose_1_phosphate,alpha-D-Glucose-1-phosphate,C6H13O9P
+80,bmse000087,alpha_D_glucose_1_6_bisphosphate,"alpha-D-Glucose 1,6-bisphosphate",C6H14O12P2
+81,bmse000089,glycine,Glycine,C2H5NO2
+82,bmse000090,guanine,Guanine,C5H5N5O
+83,bmse000091,guanosine,Guanosine,C10H13N5O5
+84,bmse000092,4_hydroxybenzoic_acid,4-Hydroxy-benzoic acid,C7H6O3
+85,bmse000093,trans_3_hydroxycinnamic_acid,trans-3-Hydroxycinnamic acid,C9H8O3
+86,bmse000094,hypoxanthine,Hypoxanthine,C5H4N4O
+87,bmse000095,i_erythritol,i-Erythritol,C4H10O4
+88,bmse000096,imidazole,Imidazole,C3H4N2
+89,bmse000097,indole,Indole,C8H7N
+90,bmse000098,inosine,Inosine,C10H12N4O5
+91,bmse000099,D_mannitol,D-Mannitol,C6H14O6
+92,bmse000100,meso_erythritol,meso-Erythritol,C4H10O4
+93,bmse000101,methyl_oxobutanoic_acid,3-Methyl-2-oxobutinoic acid,C5H8O3
+94,bmse000102,muco_inositol,muco-Inositol,C6H12O6
+95,bmse000103,myo_inositol,myo-Inositol,C6H12O6
+96,bmse000104,niacin,Nicotinic acid,C6H5NO2
+97,bmse000105,nicotine,(+/-) Nicotine,C10H14N2
+98,bmse000106,oxalate,Oxalate,C2H2O4
+99,bmse000107,phosphoenolpyruvic_acid,Phosphoenolpyruvic acid,C3H5O6P
+100,bmse000108,prephenic_acid,Prephenic acid,C10H10O6
+101,bmse000109,putrescine,"Putrescine (1,4 diaminobutane)",C4H12N2
+102,bmse000110,pyridoxal,Pyridoxal,C8H9NO3
+103,bmse000111,pyridoxal_5_phosphate,Pyridoxal-5-phosphate,C8H10NO6P
+104,bmse000112,pyruvic_acid,Pyruvic acid,C3H4O3
+105,bmse000113,scyllo_inositol,scyllo-Inositol,C6H12O6
+106,bmse000114,shikimic_acid,Shikimic acid,C7H10O5
+107,bmse000115,D_sorbitol,D-Sorbitol,C6H14O6
+108,bmse000116,spermidine,Spermidine,C7H19N3
+109,bmse000117,spermine,Spermine,C10H26N4
+110,bmse000119,sucrose,Sucrose,C12H22O11
+111,bmse000120,taurine,Taurine,C2H7NO3S
+112,bmse000121,L_threitol,L-(-)-Threitol,C4H10O4
+113,bmse000123,trans_4_hydroxy_L_proline,trans 4 Hydroxy-L-proline,C5H9NO3
+114,bmse000124,trans_cinnamic_acid,trans-Cinnamic acid,C9H8O2
+115,bmse000125,D_trehalose,D-Trehalose,C12H22O11
+116,bmse000126,uric_acid,Uric acid,C5H4N4O3
+117,bmse000127,xanthine,Xanthine,C5H4N4O2
+118,bmse000128,xanthosine,Xanthosine,C10H12N4O6
+119,bmse000129,xylitol,Xylitol,C5H12O5
+120,bmse000130,pyridoxamine,Pyridoxamine,C8H12N2O2
+121,bmse000131,pyridoxamine_5_phosphate,Pyridoxamine-5-phosphate,C8H13N2O5P
+122,bmse000132,homovanillic_acid,Homovanillic acid,C9H10O4
+123,bmse000133,isonicotinic_acid,Isonicotinic acid,C6H5NO2
+124,bmse000134,ethacrynic_acid,Ethacrynic acid,C13H12O4Cl2
+125,bmse000135,cyanuric_acid,Cyanuric acid,C3H3N3O3
+126,bmse000137,itaconic_acid,Itaconic acid,C5H6O4
+127,bmse000138,D_cellobiose,D-Cellobiose,C12H22O11
+128,bmse000139,amygdalin,Amygdalin,C20H27NO11
+129,bmse000140,D_glucuronate,D-Glucuronate,C6H10O7
+130,bmse000141,gamma_D_galactonolactone,"D-Galactono-1,4-lactone",C6H10O6
+131,bmse000142,acetylcarnitine,(+-)-Acetylcarnitine,C9H17NO4
+132,bmse000143,5_acetylamido_2_chloroaniline,5-Acetylamido-2-chloroaniline,C8H9N2OCl
+133,bmse000144,dihydroxyacetone,Dihydroxyacetone,C3H6O3
+134,bmse000145,N_acetyl_L_glutamine,N-Acetyl-L-Glutamine,C7H12N2O4
+135,bmse000146,ADA,N-(2-Acetamido)iminodiacetic acid,C6H10N2O5
+136,bmse000147,4_aminoantipyrine,4-Aminoantipyrine,C11H13N3O
+137,bmse000148,diethyl_oxalacetate,Diethyl oxalacetate,C8H12O5
+138,bmse000150,4_hydroxycinnamic_acid,4-Hydroxycinnamic acid,C9H8O3
+139,bmse000151,alpha_D_galactose_1_phosphate,alpha-D-Galactose 1-phosphate,C6H13O9P
+140,bmse000152,trigonelline,Trigonelline,C7H8NO2+
+141,bmse000153,L_methionine_methylsulfonium_iodide,L-Methionine methylsulfonium iodide,C6H14NO2SI
+142,bmse000154,4_2_aminoethyl_morpholine,4-(2-Aminoethyl)morpholine,C6H14N2O
+143,bmse000155,creatinine,Creatinine,C4H7N3O
+144,bmse000156,trimethyl_phosphonoacetate,Trimethyl phosphonoacetate,C5H11O5P
+145,bmse000157,N_acetyl_L_alanine,N-Acetyl-L-alanine,C5H9NO3
+146,bmse000158,uridine,Uridine,C9H12N2O6
+147,bmse000159,beta_alanine,beta-Alanine,C3H7NO2
+148,bmse000160,sarcosine,Sarcosine,C3H7NO2
+149,bmse000161,3_hydroxybutyrate,3-Hydroxybutyrate,C4H8O3
+150,bmse000162,L_ornithine,L-Ornithine,C5H12N2O2
+151,bmse000163,N_acetyl_D_glucosamine_1_phosphate,N-Acetyl-D-glucosamine 1-phosphate,C8H16NO9P
+152,bmse000166,D_xylonate_cadmium,D-Xylonate,C5H10O6
+153,bmse000167,L_tartaric_acid,L-Tartaric acid,C4H6O6
+154,bmse000168,acetylcholine,Acetylcholine,C7H16NO2+
+155,bmse000169,L_selenomethionine,L(+)-Selenomethionine,C5H11NO2Se
+156,bmse000170,L_glutathione_oxidized,"L(-)-Glutathione, oxidized",C20H32N6O12S2
+157,bmse000171,1_amino_1_phenylmethyl_phosphonic_acid,(1-Amino-1-phenylmethyl)phosphonic acid,C7H10NO3P
+158,bmse000172,L_kynurenine,L-Kynurenine,C10H12N2O3
+159,bmse000173,4_hydroxyphenethyl_alcohol,4-Hydroxyphenethyl alcohol,C8H10O2
+160,bmse000174,5_acetylamino_2_nitrobenzoic_acid,5-(Acetylamino)-2-nitrobenzoic acid,C9H8N2O5
+161,bmse000175,inosine_5_monophosphate,Inosine 5'-monophosphate,C10H13N4O8P
+162,bmse000176,2_amino_5_ethyl_1_3_4_thiadiazole,"2-Amino-5-ethyl-1,3,4-thiadiazole",C4H7N3S
+163,bmse000177,indole_3_acetic_acid,Indole-3-acetic acid,C10H9NO2
+164,bmse000178,alpha_naphthoic_acid,alpha-Naphthoic acid,C11H8O2
+165,bmse000179,propionic_acid,Propionic acid,C3H6O2
+166,bmse000180,cytosine,Cytosine,C4H5N3O
+167,bmse000182,L-ascorbate,L-Ascorbate,C6H8O6
+168,bmse000183,succinic_acid,Succinic acid,C4H6O4
+169,bmse000184,glycerol,Glycerol,C3H8O3
+170,bmse000185,L_glutathione_reduced,L-Glutathione reduced,C10H17N3O6S
+171,bmse000187,uracil,Uracil,C4H4N2O2
+172,bmse000188,uridine_5_diphospho_N_acetlyglucosamine,Uridine 5'-diphospho-N-acetlyglucosamine,C17H27N3O17P2
+173,bmse000189,D_glucosamine_6_phosphate,D-Glucosamine 6-phosphate,C6H14NO8P
+174,bmse000190,cytidine,Cytidine,C9H13N3O5
+175,bmse000191,acetic_acid,Acetic acid,C2H4O2
+176,bmse000193,DL_alpha_glycerol_phosphate,DL-alpha-Glycerol phosphate,C3H9O6P
+177,bmse000194,L_arginine_L_glutamate,L-Arginine L-Glutamate,C11H23N5O6
+178,bmse000195,N_alpha_acetyl_DL_ornithine,N(alpha)-Acetyl-DL-ornithine,C7H14N2O3
+179,bmse000196,methyl_N_acetyl_alpha_D_glucosaminide,Methyl N-acetyl-alpha-D-glucosaminide,C9H17NO6
+180,bmse000198,6_phosphogluconic_acid,6-Phosphogluconic acid,C6H13O10P
+181,bmse000199,citraconic_acid,Citraconic acid,C5H6O4
+182,bmse000200,homogentisic_acid,Homogentisic acid,C8H8O4
+183,bmse000201,kanamycin,Kanamycin,C18H36N4O11
+184,bmse000202,HEPES,HEPES,C8H18N2O4S
+185,bmse000203,formate,Formate,CH2O2
+186,bmse000204,D_ribose_5_phosphate,D-Ribose 5-phosphate,C5H11O8P
+187,bmse000205,N_acetyl_D_glucosamine_6_phosphate,N-Acetyl-D-glucosamine 6-phosphate,C8H16NO9P
+188,bmse000206,caffeine,Caffeine,C8H10N4O2
+189,bmse000207,tryptamine,Tryptamine,C10H12N2
+190,bmse000208,L_lactic_acid,L-(+) Lactic acid,C3H6O3
+191,bmse000209,D_citrulline,D-Citrulline,C6H13N3O3
+192,bmse000210,2_deoxyguanosine_5_triphosphate,2'-Deoxyguanosine 5'-triphosphate,C10H16N5O13P3
+193,bmse000211,L_carnitine,L(-)-Carnitine,C7H15NO3
+194,bmse000212,maleic_acid,Maleic Acid,C4H4O4
+195,bmse000213,L_arabinose,L-(+)-Arabinose,C5H10O5
+196,bmse000216,D_galacturonic_acid,D-Galacturonic acid,C6H10O7
+197,bmse000219,quinolinic_acid,Quinolinic acid,C7H5NO4
+198,bmse000220,phenylacetic_acid,Phenylacetic acid,C8H8O2
+199,bmse000221,raffinose,Raffinose,C18H32O16
+200,bmse000222,DL_serine,DL-Serine,C3H7NO3
+201,bmse000223,4_nitrophenol,4-Nitrophenol,C6H5NO3
+202,bmse000224,trimethylamine,Trimethylamine,C3H9N
+203,bmse000225,D_L_glyceraldehyde,"D,L-Glyceraldehyde",C3H6O3
+204,bmse000226,FAD,FAD,C27H33N9O15P2
+205,bmse000227,biotin,(+)-Biotin,C10H16N2O3S
+206,bmse000228,polygalacturonic_acid,Polygalacturonic acid,C6H10O7
+207,bmse000230,D_glucono_1_5_lactone,"D-Glucono-1,5-lactone",C6H10O6
+208,bmse000231,N_acetyl_D_glucosamine,N-Acetyl-D-glucosamine,C8H15NO6
+209,bmse000232,glycogen,Glycogen,C24H42O21
+210,bmse000233,melibiose,Melibiose,C12H22O11
+211,bmse000235,L_gulonolactone,L-Gulonolactone,C6H10O6
+212,bmse000236,D_alanine,D-Alanine,C3H7NO2
+213,bmse000237,DL_pipecolic_acid,DL-Pipecolic acid,C6H11NO2
+214,bmse000238,L_malic_acid,L-Malic acid,C4H6O5
+215,bmse000239,D_saccharate,D-Saccharate,C6H10O8
+216,bmse000240,stachyose,Stachyose,C24H42O21
+217,bmse000241,N_N_dimethylglycine,"N,N-Dimethylglycine",C4H9NO2
+218,bmse000242,isethionic_acid,Isethionic acid,C2H6O4S
+219,bmse000243,tyramine,Tyramine,C8H11NO
+220,bmse000244,thymidine,Thymidine,C10H14N2O5
+221,bmse000245,glycolate,Glycolate,C2H4O3
+222,bmse000246,L_carnosine,L-Carnosine,C9H14N4O3
+223,bmse000247,D_glucosamine,D-Glucosamine,C6H13NO5
+224,bmse000248,1_3_dimethylurea,"1,3-Dimethylurea",C3H8N2O
+225,bmse000249,methyl_4_aminobutyrate,Methyl 4-aminobutyrate,C5H11NO2
+226,bmse000250,dAMP,dAMP,C10H14N5O6P
+227,bmse000251,Oxalosuccinate,Oxalosuccinate,C6H6O7
+228,bmse000252,Salicylate,Salicylate,C7H6O3
+229,bmse000253,dADP,dADP,C10H15N5O9P2
+230,bmse000254,D_Fructose_1_phosphate,D-Fructose 1-phosphate,C6H13O9P
+231,bmse000255,ITP,ITP,C10H15N4O14P3
+232,bmse000256,Formaldehyde,Formaldehyde,CH2O
+233,bmse000257,FMN,FMN,C17H21N4O9P
+234,bmse000258,Glycolaldehyde,Glycolaldehyde,C2H4O2
+235,bmse000259,4_Hydroxybenzaldehyde,4-Hydroxybenzaldehyde,C7H6O2
+236,bmse000260,Nicotinamide_D_ribonucleotide,Nicotinamide D-ribonucleotide,C11H15N2O8P
+237,bmse000261,Acetyl_phosphate,Acetyl phosphate,C2H5O5P
+238,bmse000262,3_4_Hydroxyphenyl_pyruvate,3-(4-Hydroxyphenyl)pyruvate,C9H8O4
+239,bmse000263,NADP,NADP+,C21H29N7O17P3+
+240,bmse000264,4_Nitrophenyl_phosphate,4-Nitrophenyl phosphate,C6H6NO6P
+241,bmse000265,4_Nitrocatechol,4-Nitrocatechol,C6H5NO4
+242,bmse000266,UDP,UDP,C9H14N2O12P2
+243,bmse000267,Formamide,Formamide,CH3NO
+244,bmse000269,R_Lactate,(R)-Lactate,C3H6O3
+245,bmse000270,GDP,GDP,C10H15N5O11P2
+246,bmse000271,CoA,CoA,C21H36N7O16P3S
+247,bmse000272,CDP,CDP,C9H15N3O11P2
+248,bmse000273,D_Aspartate,D-Aspartate,C4H7NO4
+249,bmse000274,Thiamin,Thiamin,C12H17N4OS+
+250,bmse000275,D_Fructose_2_6_bisphosphate,"D-Fructose 2,6-bisphosphate",C6H14O12P2
+251,bmse000276,Ethanolamine,Ethanolamine,C2H7NO
+252,bmse000277,CTP,CTP,C9H16N3O14P3
+253,bmse000278,D_Ribulose_5_phosphate,D-Ribulose 5-phosphate,C5H11O8P
+254,bmse000279,Urocanate,Urocanate,C6H6N2O2
+255,bmse000280,UMP,UMP,C9H13N2O9P
+256,bmse000281,Nicotinamide,Nicotinamide,C6H6N2O
+257,bmse000282,DL_Alanine,Alanine,C3H7NO2
+258,bmse000283,Orotate,Orotate,C5H4N2O4
+259,bmse000284,Benzonitrile,Benzonitrile,C7H5N
+260,bmse000285,Choline,Choline,C5H14NO+
+261,bmse000286,Acetophenone,Acetophenone,C8H8O
+262,bmse000287,Pantothenate,Pantothenate,C9H17NO5
+263,bmse000288,Pyridoxine,Pyridoxine,C8H11NO3
+264,bmse000289,S_Adenosyl_L_homocysteine,S-Adenosyl-L-homocysteine,C14H20N6O5S
+265,bmse000290,Phenol,Phenol,C6H6O
+266,bmse000291,Selenomethionine,Selenomethionine,C5H11NO2Se
+267,bmse000292,UDPglucuronate,UDP glucuronate,C15H22N2O18P2
+268,bmse000293,Hydroquinone,Hydroquinone,C6H6O2
+269,bmse000294,Methanol,Methanol,CH4O
+270,bmse000295,UTP,UTP,C9H15N2O15P3
+271,bmse000296,dTMP,dTMP,C10H15N2O8P
+272,bmse000297,Ethanol,Ethanol,C2H6O
+273,bmse000298,D_Glyceraldehyde,D-Glyceraldehyde,C3H6O3
+274,bmse000299,Folate,Folate,C19H19N7O6
+275,bmse000300,Benzoate,Benzoate,C7H6O2
+276,bmse000302,1_2_Propanediol,"1,2-Propanediol",C3H8O2
+277,bmse000303,1_3_Propanediol,"1,3-Propanediol",C3H8O2
+278,bmse000305,1_amino_2_propanol,1-amino-2-propanol,C3H9NO
+279,bmse000306,Quinic_acid,"(1R,3R,4R,5R)-(-)-Quinic acid",C7H12O6
+280,bmse000307,2_Amino_1_phenylethanol,2-Amino-1-phenylethanol,C8H11NO
+281,bmse000308,2_Aminoethyl_dihydrogen_phosphate,2-Aminoethyl dihydrogen phosphate,C2H8NO4P
+282,bmse000309,2_Aminoethylphosphonic_acid,2-Aminoethylphosphonic acid,C2H8NO3P
+283,bmse000310,2_Aminophenol,2-Aminophenol,C6H7NO
+284,bmse000311,Cytidine_5_monophosphate,Cytidine-5'-monophosphate,C9H14N3O8P
+285,bmse000312,6_aminopenicillanic_acid,6-aminopenicillanic acid,C8H12N2O3S
+286,bmse000313,beta_gentiobiose,beta-gentiobiose,C12H22O11
+287,bmse000314,d_desthiobiotin,d-desthiobiotin,C10H18N2O3
+288,bmse000315,D_Salicin,D-Salicin,C13H18O7
+289,bmse000316,Epinephrine,Epinephrine,C9H13NO3
+290,bmse000317,Gibberellic_acid,Gibberellic acid,C19H22O6
+291,bmse000318,sinapic_acid,Sinapic acid,C11H12O5
+292,bmse000319,3_Methyl_2_oxopentanoic_acid,3-Methyl-2-oxopentanoic acid,C6H10O3
+293,bmse000320,2_Deoxyuridine,2'-Deoxyuridine,C9H12N2O5
+294,bmse000321,3_Hydroxyanthranilic_acid,3-Hydroxyanthranilic acid,C7H7NO3
+295,bmse000322,3_4_Dihydroxy_L_phenylalanine,"3,4-Dihydroxy-L-phenylalanine",C9H11NO4
+296,bmse000323,2_Deoxycytidine,2'-Deoxycytidine,C9H13N3O4
+297,bmse000324,3_hydroxybenzoic_acid,3-hydroxybenzoic acid,C7H6O3
+298,bmse000325,2_ketobutyric_acid,2-ketobutyric acid,C4H6O3
+299,bmse000326,2_5_dihydroxybenzoic_acid,"2,5-dihydroxybenzoic acid",C7H6O4
+300,bmse000327,3_5_Diiodo_L_tyrosine,"3,5-Diiodo-L-tyrosine",C9H9NO3I2
+301,bmse000328,3_4_Dihydroxybenzoic_acid,"3,4-Dihydroxybenzoic acid",C7H6O4
+302,bmse000329,3_4_Dihydroxyphenylacetic_acid,"3,4-Dihydroxyphenylacetic acid",C8H8O4
+303,bmse000330,2_Furoic_acid,2-Furoic acid,C5H4O3
+304,bmse000331,3_2_Hydroxyphenylpropionic_acid,3-(2-Hydroxyphenyl)propionic acid,C9H10O3
+305,bmse000332,2_Chlorobenzoic_acid,2-Chlorobenzoic acid,C7H5O2Cl
+306,bmse000333,3_Ureidopropionic_acid,3-Ureidopropionic acid,C4H8N2O3
+307,bmse000334,3_Methylcatechol,3-Methylcatechol,C7H8O2
+308,bmse000335,3_Hydroxy_3_methylglutaric_acid,3-Hydroxy-3-methylglutaric acid,C6H10O5
+309,bmse000336,3_5_dichlorocatechol,"3,5-dichlorocatechol",C6H4O2Cl2
+310,bmse000337,3_Iodo_L_tyrosine,3-Iodo_L-tyrosine,C9H10NO3I
+311,bmse000338,2_Hydroxyisocaproic_acid,2-Hydroxyisocaproic acid,C6H12O3
+312,bmse000339,3_hydroxyphenylacetic_acid,3-hydroxyphenylacetic acid,C8H8O3
+313,bmse000340,gamma_Aminobutyric_acid,gamma-Aminobutyric acid,C4H9NO2
+314,bmse000341,6_Hydroxynicotinic_acid,6-Hydroxynicotinic acid,C6H5NO3
+315,bmse000342,L_Dihydroorotic_acid,L-Dihydroorotic acid,C5H6N2O4
+316,bmse000343,vanillin,vanillin,C8H8O3
+317,bmse000344,4_Guanidinobutyric_acid,4-Guanidinobutyric acid,C5H11N3O2
+318,bmse000345,Valeric_acid,Valeric acid,C5H10O2
+319,bmse000346,Barbituric_acid,Barbituric acid,C4H4N2O3
+320,bmse000347,trans_2_Hydroxycinnamic_acid,trans-2-Hydroxycinnamic acid,C9H8O3
+321,bmse000349,Adenosine_3_monophosphate,Adenosine-3'-monophosphate,C10H14N5O7P
+322,bmse000350,m_Cresol,m-Cresol,C7H8O
+323,bmse000351,Hexanoic_acid,Hexanoic acid,C6H12O2
+324,bmse000352,DL_threo_beta_Methylaspartate,DL-threo-beta-Methylaspartate,C5H9NO4
+325,bmse000353,Nepsilon_Acetyl_L_lysine,Nepsilon-Acetyl-L-lysine,C8H16N2O3
+326,bmse000354,Pimelic_acid,Pimelic acid,C7H12O4
+327,bmse000355,4_methyl_5_thiazoleethanol,4-methyl-5-thiazoleethanol,C6H9NOS
+328,bmse000356,p_Anisic_acid,p-Anisic_acid,C8H8O3
+329,bmse000358,chlorohydroquinone,chlorohydroquinone,C6H5O2Cl
+330,bmse000360,2_chloroethanol,2-chloroethanol,C2H5OCl
+331,bmse000361,2_hydroxybutanoic_acid,(R)-2-hydroxybutyric acid,C4H8O3
+332,bmse000362,2_hydroxyethylacetylene,3-butyn-1-ol,C4H6O
+333,bmse000363,2_propyn_1_ol,Propargyl alcohol,C3H4O
+334,bmse000364,5_hydroxyindoleacetate,5-hydroxyindole-3-acetic acid,C10H9NO3
+335,bmse000365,arbutin,arbutin,C12H16O7
+336,bmse000367,chloroacetic_acid,Chloroacetic Acid,C2H3O2Cl
+337,bmse000368,cis_3_chloroacrylic_acid,cis-3-chloroacrylic acid,C3H3O2Cl
+338,bmse000369,cis_3_hexen_1_ol,cis-3-hexen-1-ol,C6H12O
+339,bmse000370,decanoic_acid,decanoic acid,C10H20O2
+340,bmse000371,diethanolamine,diethanolamine,C4H11NO2
+341,bmse000372,epsilon_caprolactam,epsilon-caprolactam,C6H11NO
+342,bmse000373,isovaleric_acid,isovaleric-acid,C5H10O2
+343,bmse000375,L_menthone,L-menthone,C10H18O
+344,bmse000376,N_carbamyl_L_glutamate,N-carbamyl-L-glutamic acid,C6H10N2O5
+345,bmse000377,phenethylamine,Phenethylamine,C8H11N
+346,bmse000378,suberic_acid,suberic acid,C8H14O4
+347,bmse000379,triethanolamine,triethanolamine,C6H15NO3
+348,bmse000380,L_Cysteic_acid,L-Cysteic acid,C3H7NO5S
+349,bmse000381,R_Pantolactone,(R)-(-)-Pantolactone,C6H10O3
+350,bmse000382,N_Acetyl_L_glutamic_acid,N-Acetyl-L-glutamic acid,C7H11NO5
+351,bmse000383,4_Methyl_2_oxovaleric_acid,4-Methyl-2-oxovaleric acid,C6H10O3
+352,bmse000384,Guanidineacetic_acid,Guanidineacetic acid,C3H7N3O2
+353,bmse000385,Pyrocatechol,Pyrocatechol,C6H6O2
+354,bmse000387,Chlorogenic_acid,Chlorogenic acid,C16H18O9
+355,bmse000388,Cysteamine,Cysteamine,C2H7NS
+356,bmse000389,Gallic_acid,Gallic acid,C7H6O5
+357,bmse000390,DL_2_Aminobutyric_acid,DL-2-Aminobutyric acid,C4H9NO2
+358,bmse000391,Phthalic_acid,Phthalic acid,C8H6O4
+359,bmse000392,Acrylamide,Acrylamide,C3H5NO
+360,bmse000394,6_Aminohexanoic_acid,6-Aminohexanoic acid,C6H13NO2
+361,bmse000395,4_Chlorophenylacetate,4-Chlorophenylacetate,C8H7O2Cl
+362,bmse000396,alpha_Methylaminomethylbenzyl_alcohol,alpha-((Methylamino)methyl)benzyl alcohol,C9H13NO
+363,bmse000397,DL_Methionine_sulfoxide,DL-Methionine sulfoxide,C5H11NO3S
+364,bmse000398,Methylmalonic_acid,Methylmalonic acid,C4H6O4
+365,bmse000399,O_Phospho_L_serine,O-Phospho-L-serine,C3H8NO6P
+366,bmse000400,Ethanesulfonic_acid,Ethanesulfonic acid,C2H5O3S-
+367,bmse000401,DL_alpha_epsilon_Diaminopimelic_acid,"DL-alpha,epsilon-Diaminopimelic acid",C7H14N2O4
+368,bmse000402,Butyric_acid,Butyric acid,C4H8O2
+369,bmse000403,Ala_Ala,Ala-Ala,C6H12N2O3
+370,bmse000404,Norepinephrine,(-)-Norepinephrine,C8H11NO3
+371,bmse000405,Cyclohexanone,Cyclohexanone,C6H10O
+372,bmse000406,Glutaric_acid,Glutaric acid,C5H8O4
+373,bmse000407,Benzyl_alcohol,Benzyl alcohol,C7H8O
+374,bmse000408,Hippuric_acid,Hippuric acid,C9H9NO3
+375,bmse000409,dl_Indole_3_lactic_acid,dl-Indole-3-lactic acid,C11H11NO3
+376,bmse000410,Kynurenic_acid,Kynurenic acid,C10H7NO3
+377,bmse000411,L_Norleucine,L-Norleucine,C6H13NO2
+378,bmse000412,Dihydrocoumarin,Dihydrocoumarin,C9H8O2
+379,bmse000413,Tropic_acid,Tropic acid,C9H10O3
+380,bmse000414,p_Toluic_acid,p-Toluic acid,C8H8O2
+381,bmse000415,Resorcinol,Resorcinol,C6H6O2
+382,bmse000416,Acetylenedicarboxylic_acid,Acetylenedicarboxylic acid,C4H2O4
+383,bmse000417,quinaldic_acid,quinaldic acid,C10H7NO2
+384,bmse000420,4_Chlorocatechol,4-Chlorocatechol,C6H5O2Cl
+385,bmse000421,5_methylcytosine,5-methylcytosine,C5H7N3O
+386,bmse000422,4_Hydroxy_3_methoxycinnamaldehyde,4-Hydroxy-3-methoxycinnamaldehyde,C10H10O3
+387,bmse000423,N_acetyl_L_aspartic_acid,N-acetyl-L-aspartic acid,C6H9NO5
+388,bmse000424,Adipic_acid,Adipic acid,C6H10O4
+389,bmse000425,Dihydrouracil,Dihydrouracil,C4H6N2O2
+390,bmse000426,Trimethylamine_N_oxide,Trimethylamine N-oxide,C3H9NO
+391,bmse000427,phenylacetaldehyde,phenylacetaldehyde,C8H8O
+392,bmse000428,R_Citramalic_acid,R-(-)-Citramalic acid,C5H8O5
+393,bmse000429,DL_2_Aminoadipic_acid,DL-2-Aminoadipic acid,C6H11NO4
+394,bmse000430,DL_homocysteine,DL-homocysteine,C4H9NO2S
+395,bmse000431,Cyclohexanol,Cyclohexanol,C6H12O
+396,bmse000432,Pyridine,Pyridine,C5H5N
+397,bmse000433,o_Cresol,o-Cresol,C7H8O
+398,bmse000434,acetylcholine,Acetylcholine,C7H16NO2+
+399,bmse000435,Glutaconic_acid,Glutaconic acid,C5H6O4
+400,bmse000436,Guaiacol,Guaiacol,C7H8O2
+401,bmse000437,Allantoin,Allantoin,C4H6N4O3
+402,bmse000438,4_Chlorobenzoic_acid,4-Chlorobenzoic acid,C7H5O2Cl
+403,bmse000439,Isobutyric_acid,Isobutyric acid,C4H8O2
+404,bmse000440,D_Glucosaminic_acid,D-Glucosaminic acid,C6H13NO6
+405,bmse000441,4_Hydroxyphenylacetonitrile,4-Hydroxyphenylacetonitrile,C8H7NO
+406,bmse000442,L_homocitrulline,L-homocitrulline,C7H15N3O3
+407,bmse000443,5_Hydroxymethyluracil,5-(Hydroxymethyl)uracil,C5H6N2O3
+408,bmse000444,4_hydroxy_3_methoxybenzyl_alcohol,4-hydroxy-3-methoxybenzyl alcohol,C8H10O3
+409,bmse000445,D_Panthenol,D-Panthenol,C9H19NO4
+410,bmse000446,propanol,propanol,C3H8O
+411,bmse000447,butanol,butanol,C4H10O
+412,bmse000448,L_Histidinol,L-Histidinol,C6H11N3O
+413,bmse000449,Npai_Methyl_L_histidine,1-Methyl-L-histidine,C7H11N3O2
+414,bmse000450,D_Methionine,D-Methionine,C5H11NO2S
+415,bmse000451,Cyclohexylamine,Cyclohexylamine,C6H13N
+416,bmse000452,Hypotaurine,Hypotaurine,C2H7NO2S
+417,bmse000453,Ureidosuccinic_acid,Ureidosuccinic acid,C5H8N2O5
+418,bmse000454,purine,purine,C5H4N4
+419,bmse000455,4_Hydroxyphenylacetic_acid,4-Hydroxyphenylacetic acid,C8H8O3
+420,bmse000457,5_Hydroxy_L_tryptophan,5-Hydroxy-L-tryptophan,C11H12N2O3
+421,bmse000458,p_Cresol,p-Cresol,C7H8O
+422,bmse000459,Ferulic_acid,Ferulic acid,C10H10O4
+423,bmse000460,Maleamic_acid,Maleamic acid,C4H5NO3
+424,bmse000461,4_Chlorophenol,4-Chlorophenol,C6H5OCl
+425,bmse000462,4_Aminophenol,4-Aminophenol,C6H7NO
+426,bmse000463,trans_trans_Muconic_acid,trans-trans-Muconic acid,C6H6O4
+427,bmse000464,Acetyl_L_carnitine,Acetyl-L-carnitine,C9H17NO4
+428,bmse000465,Phthalaldehydic_acid,Phthalaldehydic acid,C8H6O3
+429,bmse000466,DL_beta_leucine,DL-beta-leucine,C6H13NO2
+430,bmse000467,Acetaldehyde_oxime_mixture,Acetaldehyde oxime mixture of syn and anti,C2H5NO
+431,bmse000468,4_Acetamidobutyric_acid,4-Acetamidobutyric acid,C6H11NO3
+432,bmse000469,cis_1_2_cyclohexanediol,"cis-1,2-cyclohexanediol",C6H12O2
+433,bmse000470,biuret,biuret,C2H5N3O2
+434,bmse000471,Glyoxylic_acid,Glyoxylic acid,C2H2O3
+435,bmse000472,17_alpha_hydroxyprogesterone,17-alpha-hydroxyprogesterone,C21H30O3
+436,bmse000473,3_2_hydroxyethyl_indole,3-(2-hydroxyethyl)indole,C10H11NO
+437,bmse000474,3_methylcrotonaldehyde,3-methylcrotonaldehyde,C5H8O
+438,bmse000475,4_methylcatechol,4-methylcatechol,C7H8O2
+439,bmse000476,5_pregnen_3_beta_ol_20_one,5-pregnen-3-beta-ol-20-one,C21H32O2
+440,bmse000477,beta_sitosterol,beta-sitosterol,C29H50O
+441,bmse000479,N_acetyl_D_Phenyl_alanine,N-acetyl-D-Phenyl alanine,C11H13NO3
+442,bmse000480,octane,Octane,C8H18
+443,bmse000481,phenyl_acetate,Phenyl Acetate,C8H8O2
+444,bmse000482,progesterone,Progesterone,C21H30O2
+445,bmse000483,R_2_Pyrrolidinone_5_carboxylate,R-(+)-2-Pyrrolidinone-5-carboxylate,C5H7NO3
+446,bmse000484,squalene,squalene,C30H50
+447,bmse000485,stearic_acid,Stearic Acid,C18H36O2
+448,bmse000486,vanillic_acid,vanillic acid,C8H8O4
+449,bmse000487,1_hexadecanol,1-Hexadecanol,C16H34O
+450,bmse000488,3_indoleacetonitrile,3-indoleacetonitrile,C10H8N2
+451,bmse000489,5_alpha_cholestan_3_one,5-alpha-cholestan-3-one,C27H46O
+452,bmse000490,5_alpha_pregnane_3_20_dione,"5-alpha-pregnane-3,20-dione(allo)",C21H32O2
+453,bmse000491,alpha_pinene_oxide,alpha-pinene-oxide,C10H16O
+454,bmse000493,epsilon_caprolactone,Epsilon-caprolactone,C6H10O2
+455,bmse000494,ergosterol,Ergosterol,C28H44O
+456,bmse000495,fenchol,Fenchol,C10H18O
+457,bmse000496,indanone,Indanone,C9H8O
+458,bmse000497,linoleic_acid,Linoleic Acid,C18H32O2
+459,bmse000498,neomenthol,"(1S,2S,5R)-(+)-neomenthol",C10H20O
+460,bmse000499,nonanoic_acid,Nonanoic Acid,C9H18O2
+461,bmse000500,R_carvone,(R)-(-)-Carvone,C10H14O
+462,bmse000501,retinyl_palmitate,Retinyl palmitate,C36H60O2
+463,bmse000502,octanoic_acid,Octanoic Acid,C8H16O2
+464,bmse000503,p_cymene,p-cymene,C10H14
+465,bmse000504,terpinolene,Terpinolene,C10H16
+466,bmse000506,biphenyl,biphenyl,C12H10
+467,bmse000507,cholecalciferol,cholecalciferol,C27H44O
+468,bmse000508,cuminaldehyde,cuminaldehyde,C10H12O
+469,bmse000509,dodecanoic_acid,Dodecanoic acid,C12H24O2
+470,bmse000510,ergocalciferol,ergocalciferol,C28H44O
+471,bmse000511,quinidine,quinidine,C20H24N2O2
+472,bmse000512,cortexolone,cortexolone,C21H30O4
+473,bmse000513,1_4_cyclohexanedione,"1,4-cyclohexanedione",C6H8O2
+474,bmse000514,2_indanone,2-Indanone,C9H8O
+475,bmse000515,2_methylbenzyl_alcohol,2-methylbenzyl alcohol,C8H10O
+476,bmse000516,3_methylindole,3-methylindole,C9H9N
+477,bmse000517,4_4_dichlorobenzophenone,"4,4-dichlorobenzophenone",C13H8OCl2
+478,bmse000518,4_chloroacetophenone,4-chloroacetophenone,C8H7OCl
+479,bmse000519,4_cholesten_3_one,(+)-4-cholesten-3-one,C27H44O
+480,bmse000520,4_methylbenzyl_alcohol,4-methylbenzyl alcohol,C8H10O
+481,bmse000521,9_fluorenone,9-fluorenone,C13H8O
+482,bmse000522,adrenosterone,adrenosterone,C19H24O3
+483,bmse000523,eucalyptol,eucalyptol,C10H18O
+484,bmse000524,fluorene,fluorene,C13H10
+485,bmse000525,jasmonic_acid,jasmonic acid,C12H18O3
+486,bmse000526,o_xylene,o-xylene,C8H10
+487,bmse000527,p_tolualdehyde,p-tolualdehyde,C8H8O
+488,bmse000528,stigmasterol,stigmasterol,C29H48O
+489,bmse000529,11_alpha_hydroxyprogesterone,11-alpha-hydroxyprogesterone,C21H30O3
+490,bmse000530,1_2_3_4_tetrahydronaphthalene,"1,2,3,4-tetrahydronaphthalene",C10H12
+491,bmse000531,1_methylnaphthalene,1-methylnaphthalene,C11H10
+492,bmse000532,1_naphthaldehyde,1-naphthaldehyde,C11H8O
+493,bmse000533,1R_2R_4R_dihydrocarveol,"(1R,2R,4R)-dihydrocarveol",C10H18O
+494,bmse000534,1R_myrtenal,(1R)-(-)-myrtenal,C10H14O
+495,bmse000535,21_hydroxyprogesterone,21-hydroxyprogesterone,C21H30O3
+496,bmse000536,2_hexenal,2-hexenal,C6H10O
+497,bmse000537,2_methylnaphthalene,2-methylnaphthalene,C11H10
+498,bmse000538,3_hydroxy_2_methyl_4_pyrone,3-hydroxy-2-methyl-4-pyrone,C6H6O3
+499,bmse000539,3_isochromanone,3-isochromanone,C9H8O2
+500,bmse000540,3_methylbenzyl_alcohol,3-methylbenzyl alcohol,C8H10O
+501,bmse000541,5_alpha_cholestan_3_beta_ol,5-alpha-cholestan-3-beta-ol,C27H48O
+502,bmse000542,alpha_lipoic_acid,alpha-lipoic acid,C8H14O2S2
+503,bmse000543,androsterone,androsterone,C19H30O2
+504,bmse000544,cholesteryl_palmitate,cholesteryl palmitate,C43H76O2
+505,bmse000545,cyclohexane,cyclohexane,C6H12
+506,bmse000546,cyclohexanecarboxylic_acid,cyclohexanecarboxylic acid,C7H12O2
+507,bmse000547,delta_tocopherol,delta-tocopherol,C27H46O2
+508,bmse000548,dibenzofuran,dibenzofuran,C12H8O
+509,bmse000549,estrone,estrone,C18H22O2
+510,bmse000550,ethyl_heptanoate,ethyl heptanoate,C9H18O2
+511,bmse000551,methyl_jasmonate,methyl jasmonate,C13H20O3
+512,bmse000552,m_tolualdehyde,m-tolualdehyde,C8H8O
+513,bmse000553,m_toluic_acid,m-toluic acid,C8H8O2
+514,bmse000554,m_xylene,m-xylene,C8H10
+515,bmse000555,myrtenol,myrtenol,C10H16O
+516,bmse000556,o_tolualdehyde,o-tolualdehyde,C8H8O
+517,bmse000557,o_toluic_acid,o-toluic acid,C8H8O2
+518,bmse000558,pentadecanoic_acid,pentadecanoic acid,C15H30O2
+519,bmse000559,perillyl_alcohol,(s)-(-)-perillyl alcohol,C10H16O
+520,bmse000560,phenanthrene,phenanthrene,C14H10
+521,bmse000561,pinocarveol,pinocarveol,C10H16O
+522,bmse000562,retinoic_acid,retinoic acid,C20H28O2
+523,bmse000563,undecanoic_acid,undecanoic acid,C11H22O2
+524,bmse000564,9_hydroxyfluorene,9-hydroxyfluorene,C13H10O
+525,bmse000565,cis_5_dodecenoic_acid,cis-5-dodecenoic acid,C12H22O2
+526,bmse000566,glyceryl_tridecanoate,glyceryl tridecanoate,C33H62O6
+527,bmse000567,tetrabromobisphenol_A,tetrabromobisphenol A,C15H12O2Br4
+528,bmse000568,1_2_dichloroethane,"1,2-dichloroethane",C2H4Cl2
+529,bmse000569,1_6_anhydro_beta_d_glucose,"1,6-anhydro-beta-d-glucose",C6H10O5
+530,bmse000570,2_hydroxy_3_methylbutyric_acid,(S)-(+)-2-hydroxy-3-methylbutyric acid,C5H10O3
+531,bmse000571,2_hydroxyhexanoic_acid,2-hydroxyhexanoic acid,C6H12O3
+532,bmse000572,2_hydroxyoctanoic_acid,2-hydroxyoctanoic acid,C8H16O3
+533,bmse000573,3_hydroxymandelic_acid,3-hydroxymandelic acid,C8H8O4
+534,bmse000574,3_Methyl_2_oxopentanoic_acid,3-methyl-2-oxopentanoic acid,C6H10O3
+535,bmse000575,3_methylglutaric_acid,3-methylglutaric acid,C6H10O4
+536,bmse000576,acetosyringone,acetosyringone,C10H12O4
+537,bmse000577,cotinine,(-)-cotinine,C10H12N2O
+538,bmse000578,ethylmalonic_acid,ethylmalonic acid,C5H8O4
+539,bmse000579,monoethyl_malonate,monoethyl malonate,C5H8O4
+540,bmse000581,3_methyl_2_butenoic_acid,3-methyl-2-butenoic acid,C5H8O2
+541,bmse000582,4_Hydroxybenzaldehyde,4-Hydroxybenzaldehyde,C7H6O2
+542,bmse000583,4_hydroxybenzoic_acid,4-Hydroxy-benzoic acid,C7H6O3
+543,bmse000584,acetovanillone,acetovanillone,C9H10O3
+544,bmse000585,dihydroconiferyl_alcohol,dihydroconiferyl alcohol,C10H14O3
+545,bmse000586,dihydro_sinapyl_alcohol,dihydro-sinapyl alcohol,C11H16O4
+546,bmse000587,Ferulic_acid,Ferulic acid,C10H10O4
+547,bmse000588,gly_pro,gly-pro,C7H12N2O3
+548,bmse000589,methyl_sinapate,methyl sinapate,C12H14O5
+549,bmse000590,palmitic_acid,palmitic acid,C16H32O2
+550,bmse000591,p_coumaric_acid,p-coumaric acid,C9H8O3
+551,bmse000592,p_coumaryl_alcohol,p-coumaryl alcohol,C9H10O2
+552,bmse000593,p_hydroxyacetophenone,p-hydroxyacetophenone,C8H8O2
+553,bmse000594,sinapinic_acid,sinapinic acid,C11H12O5
+554,bmse000595,syringaldehyde,syringaldehyde,C9H10O4
+555,bmse000596,trans_3_hexenedioic_acid,trans-3-hexenedioic acid,C6H8O4
+556,bmse000597,vanillin,vanillin,C8H8O3
+557,bmse000598,17_alpha_hydroxyprogesterone,17-alpha-hydroxyprogesterone,C21H30O3
+558,bmse000599,4_isopropylbenzyl_alcohol,4-isopropylbenzyl alcohol,C10H14O
+559,bmse000600,alpha_tocopherol,(+)alpha-tocopherol,C29H50O2
+560,bmse000601,coniferaldehyde,coniferaldehyde,C10H10O3
+561,bmse000602,coniferyl_alcohol,coniferyl alcohol,C10H12O3
+562,bmse000603,cyclohexanecarboxylic_acid,cyclohexanecarboxylic acid,C7H12O2
+563,bmse000604,linoleic_acid,Linoleic Acid,C18H32O2
+564,bmse000605,methyl_4_coumarate,methyl 4-coumarate,C10H10O3
+565,bmse000606,sinapaldehyde,sinapaldehyde,C11H12O4
+566,bmse000607,syringic_acid,syringic acid,C9H10O5
+567,bmse000608,coniferin,coniferin,C16H22O8
+568,bmse000609,methyl_ferulate,methyl ferulate,C11H12O4
+569,bmse000610,n_acetylglycine,n-acetylglycine,C4H7NO3
+570,bmse000611,p_coumaraldehyde,p-coumaraldehyde,C9H8O2
+571,bmse000612,sinapyl_alcohol,sinapyl alcohol,C11H14O4
+572,bmse000613,syringin,syringin,C17H24O9
+573,bmse000614,vanillic_acid,vanillic acid,C8H8O4
+574,bmse000615,2_furoylglycine,2-furoylglycine,C7H7NO4
+575,bmse000616,2_octenoic_acid,2-octenoic acid,C8H14O2
+576,bmse000617,2_phenylbutyric_acid,2-phenylbutyric acid,C10H12O2
+577,bmse000618,3_hydroxy_4_methoxycinnamic_acid,3-hydroxy-4-methoxycinnamic acid,C10H10O4
+578,bmse000619,3_methyladipic_acid,3-methyladipic acid,C7H12O4
+579,bmse000620,3_methylsalicylic_acid,3-methylsalicylic acid,C8H8O3
+580,bmse000621,3_pyridine_aldoxime,3-pyridine aldoxime,C6H6N2O
+581,bmse000622,3_pyridinecarbonitrile,3-pyridinecarbonitrile,C6H4N2
+582,bmse000623,4_hydroxybenzyl_alcohol,4-hydroxybenzyl alcohol,C7H8O2
+583,bmse000624,4_methylsalicylic_acid,4-methylsalicylic acid,C8H8O3
+584,bmse000625,4_methylvaleric_acid,4-methylvaleric acid,C6H12O2
+585,bmse000626,5_methoxytryptamine,5_methoxytryptamine,C11H14N2O
+586,bmse000627,bilirubin,bilirubin,C33H36N4O6
+587,bmse000628,cis_fenpropimorph,cis-fenpropimorph,C20H33NO
+588,bmse000629,L_4_hydroxyphenylglycine,L-4-hydroxyphenylglycine,C8H9NO3
+589,bmse000630,N_cyclohexylformamide,N-cyclohexylformamide,C7H13NO
+590,bmse000631,O_phospho_DL_threonine,O-phospho-DL-threonine,C4H10NO6P
+591,bmse000632,sulfoacetic_acid,sulfoacetic acid,C2H4O5S
+592,bmse000633,tetrachloroethylene,tetrachloroethylene,C2Cl4
+593,bmse000634,4_4_DDT,"4,4-DDT",C14H9Cl5
+594,bmse000638,s_perillaldehyde,(S)-(-)-perillaldehyde,C10H14O
+595,bmse000639,1_methylnicotinamide,1-methylnicotinamide,C7H9N2O+
+596,bmse000640,2_4_5_trichlorophenoxyacetic_acid,"2,4,5-trichlorophenoxyacetic acid",C8H5O3Cl3
+597,bmse000641,3_Ureidopropionic_acid,3-ureidopropionic acid,C4H8N2O3
+598,bmse000642,beta_estradiol,beta-Estradiol,C18H24O2
+599,bmse000643,elaidic_acid,elaidic acid,C18H34O2
+600,bmse000644,glycodesoxycholic_acid,glycodesoxycholic acid,C26H43NO5
+601,bmse000645,indole_3_carboxaldehyde,indole-3-carboxaldehyde,C9H7NO
+602,bmse000646,indole_3_pyruvic_acid,indole-3-pyruvic acid,C11H9NO3
+603,bmse000647,metaldehyde,metaldehyde,C2H4O
+604,bmse000648,rosmarinic_acid,rosmarinic acid,C18H16O8
+605,bmse000649,atropine,atropine,C17H23NO3
+606,bmse000650,cholic_acid,cholic acid,C24H40O5
+607,bmse000651,glycocholic_acid,glycocholic acid,C26H43NO6
+608,bmse000652,lactulose,lactulose,C12H22O11
+609,bmse000653,O_O_diethyl_thiophosphate,"O,O-diethyl thiophosphate",C4H10O3PSK
+610,bmse000654,2_methylglutaric_acid,2-methylglutaric acid,C6H10O4
+611,bmse000655,cis_1_2_dihydronaphthalene_1_2_diol,"cis-1,2-dihydronaphthalene-1,2-diol",C10H10O2
+612,bmse000656,cyanamide,cyanamide,CH2N2
+613,bmse000657,N_cyclohexylsulfamic_acid,N-cyclohexylsulfamic acid,C6H13NO3S
+614,bmse000658,phenylacetylglycine,phenylacetylglycine,C10H11NO3
+615,bmse000659,2_phenylethanol,2-phenylethanol,C8H10O
+616,bmse000660,phosphonoacetic_acid,phosphonoacetic acid,C2H5O5P
+617,bmse000661,2_5_dichlorohydroquinone,"2,5-dichlorohydroquinone",C6H4O2Cl2
+618,bmse000662,4_isopropylbenzoic_acid,4-isopropylbenzoic acid,C10H12O2
+619,bmse000663,cortisone,cortisone,C21H28O5
+620,bmse000664,erythromycin,erythromycin,C37H67NO13
+621,bmse000665,trans_dehydroandrosterone,trans_dehydroandrosterone,C19H28O2
+622,bmse000666,carbazole,carbazole,C12H9N
+623,bmse000667,alpha_terpineol,alpha_terpineol,C10H18O
+624,bmse000668,benzamide,benzamide,C7H7NO
+625,bmse000669,corticosterone,corticosterone,C21H30O4
+626,bmse000670,p_hydroxyacetophenone,p-hydroxyacetophenone,C8H8O2
+627,bmse000671,2_2_bis_4_chlorophenyl_ethanol,"2,2-bis(4-chlorophenyl)ethanol",C14H12OCl2
+628,bmse000672,2_4_dichlorobenzoic_acid,"2,4-Dichlorobenzoic acid",C7H4O2Cl2
+629,bmse000673,2_5_dichlorophenol,"2,5-dichlorophenol",C6H4OCl2
+630,bmse000674,2_6_dichlorophenol,"2,6-dichlorophenol",C6H4OCl2
+631,bmse000675,hydrocinnamic_acid,hydrocinnamic acid,C9H10O2
+632,bmse000676,nitrobenzene,nitrobenzene,C6H5NO2
+633,bmse000677,salicylaldehyde,salicylaldehyde,C7H6O2
+634,bmse000678,2_4_6_trichlorophenol,"2,4,6-trichlorophenol",C6H3OCl3
+635,bmse000679,2_naphthaldehyde,2-naphthaldehyde,C11H8O
+636,bmse000680,3_4_dihydroxyhydrocinnamate,"3,4-dihydroxyhydrocinnamate",C9H10O4
+637,bmse000681,4_ethylphenol,4-ethylphenol,C8H10O
+638,bmse000682,homoveratric_acid,homoveratric acid,C10H12O4
+639,bmse000683,2_naphthalenemethanol,2-naphthalenemethanol,C11H10O
+640,bmse000684,DL_3_4_dihydroxymandelic_acid,"DL-3,4-dihydroxymandelic acid",C8H8O5
+641,bmse000685,indole_3_pyruvic_acid,indole-3-pyruvic acid,C11H9NO3
+642,bmse000686,lithocholic_acid,lithocholic acid,C24H40O3
+643,bmse000687,N_3_indolylacetyl_L_alanine,N-(3-indolylacetyl)-L-alanine,C13H14N2O3
+644,bmse000688,1_4_dihydroxy_2_naphthoic_acid,"1,4-dihydroxy-2-naphthanoic acid",C11H8O4
+645,bmse000689,1_hydroxy_2_naphthoic_acid,1-hydroxy-2-naphthoic acid,C11H8O3
+646,bmse000690,1_naphthalenemethanol,1_naphthalenemethanol,C11H10O
+647,bmse000691,2_4_dichlorophenol,"2,4-dichlorophenol",C6H4OCl2
+648,bmse000692,2_amino_3_methoxybenzoic_acid,2-amino-3-methoxybenzoic acid,C8H9NO3
+649,bmse000693,2_naphthoic_acid,2-naphthoic acid,C11H8O2
+650,bmse000694,5_methoxy_3_indoleacetic_acid,5-methoxy-3-indoleacetic acid,C11H11NO3
+651,bmse000695,benzylsuccinic_acid,benzylsuccinic acid,C11H12O4
+652,bmse000696,indole_3_acetamide,indole-3-acetamide,C10H10N2O
+653,bmse000697,pentachlorophenol,pentachlorophenol,C6HOCl5
+654,bmse000698,s_perillic_acid,(S)-(-)-perillic acid,C10H14O2
+655,bmse000699,thiamine_monophosphate,thiamine monophosphate,C12H18N4O4PS+
+656,bmse000700,16_hydroxyhexadecanoic_acid,16-hydroxyhexadecanoic acid,C16H32O3
+657,bmse000701,4_phenylbutyric_acid,4-phenylbutyric acid,C10H12O2
+658,bmse000702,hyodeoxycholic_acid,hyodeoxycholic acid,C24H40O4
+659,bmse000703,4_hydroxy_3_methoxymandelic_acid,4-hydroxy-3-methoxymandelic acid,C9H10O5
+660,bmse000704,chalcone,chalcone,C15H12O
+661,bmse000705,cis_aconitic_acid,cis-aconitic acid,C6H6O6
+662,bmse000706,L_cysteinesulfinic_acid,L-cysteinesulfinic acid,C3H7NO4S
+663,bmse000707,N_acetyl_histidine,N-acetyl-histidine,C8H11N3O3
+664,bmse000708,nicotinuric_acid,nicotinuric acid,C8H8N2O3
+665,bmse000709,N_N_dimethylformamide,"N,N-dimethylformamide",C3H7NO
+666,bmse000711,L_arginine,L-Arginine,C6H14N4O2
+667,bmse000712,2_3_dideoxycytidine,"2,3-dideoxycytidine",C9H13N3O3
+668,bmse000713,2_amino_3_phosphonopropionic_acid,2-amino-3-phosphonopropionic acid,C3H8NO5P
+669,bmse000714,2_ethylpiperidine,2-ethylpiperidine,C7H15N
+670,bmse000715,2_hydroxyphenylacetic_acid,2-hydroxyphenylacetic acid,C8H8O3
+671,bmse000716,8_anilino_1_naphthalenesulfonic_acid,8-anilino-1-naphthalenesulfonic acid,C16H13NO3S
+672,bmse000717,cetyl_trimethyl_ammonium,cetyl-trimethyl-ammonium,C19H42N+
+673,bmse000718,cis_1_3_dichloropropene,"cis-1,3-dichloropropene",C3H4Cl2
+674,bmse000719,decamethonium,decamethonium,C16H38N2+2
+675,bmse000720,dioctyl_sulfosuccinate,dioctyl sulfosuccinate,C20H38O7S
+676,bmse000721,diphenylacetic_acid,diphenylacetic acid,C14H12O2
+677,bmse000722,epichlorohydrin,epichlorohydrin,C3H5OCl
+678,bmse000723,N_2_furoyl_glycine_methyl_ester,N-(2-furoyl)glycine methyl ester,C8H9NO4
+679,bmse000724,o_fluoroaniline,o-fluoroaniline,C6H6NF
+680,bmse000725,sec_butylbenzene,sec-butylbenzene,C10H14
+681,bmse000726,sulfanilic_acid,sulfanilic acid,C6H7NO3S
+682,bmse000727,trans_2_3_dimethylacrylic_acid,"trans-2,3-dimethylacrylic acid",C5H8O2
+683,bmse000728,1_amino_1_cyclohexanecarboxylic_acid,1-amino-1-cyclohexanecarboxylic acid,C7H13NO2
+684,bmse000729,2_3_difluorobenzyl_alcohol,"2,3-difluorobenzyl alcohol",C7H6OF2
+685,bmse000730,2_2_dimethylsuccinic_acid,"2,2-dimethylsuccinic acid",C6H10O4
+686,bmse000731,3_deazauridine,3-deazauridine,C10H13NO6
+687,bmse000732,6_ethylmercaptopurine,6-ethylmercaptopurine,C7H8N4S
+688,bmse000733,apocholic_acid,apocholic acid,C24H38O4
+689,bmse000734,bis_2_butoxyethyl_phthalate,bis(2-butoxyethyl)phthalate,C20H30O6
+690,bmse000735,digoxigenin,digoxigenin,C23H34O5
+691,bmse000736,3_methylphenylacetate,3-methylphenylacetate,C9H10O2
+692,bmse000737,myristic_acid,myristic acid,C14H28O2
+693,bmse000738,N_methylurea,N-methylurea,C2H6N2O
+694,bmse000739,p_fluorobenzoic_acid,p-fluorobenzoic acid,C7H5O2F
+695,bmse000740,D_pinitol,D-pinitol,C7H14O6
+696,bmse000741,N_methyl_L_aspartic_acid,N-methyl-L-aspartic acid,C5H9NO4
+697,bmse000742,phenoxyacetic_acid,phenoxyacetic acid,C8H8O3
+698,bmse000743,phenylglyoxylic_acid,phenylglyoxylic acid,C8H6O3
+699,bmse000744,histamine,Histamine,C5H9N3
+700,bmse000745,homoarginine,Homoarginine,C7H16N4O2
+701,bmse000746,mesaconic_acid,Mesaconic acid,C5H6O4
+702,bmse000748,parabanic_acid,Parabanic acid,C3H2N2O3
+703,bmse000749,21_hydroxypregnenolone,21-Hydroxypregnenolone,C21H32O3
+704,bmse000750,2_hydroxyethyl_salicylate,2-Hydroxyethyl salicylate,C9H10O4
+705,bmse000751,khellin,khellin,C14H12O5
+706,bmse000752,phenylmethanesulfonyl_fluoride,Phenylmethanesulfonyl fluoride,C7H7O2FS
+707,bmse000753,polyoxyethylene_23_lauryl_ether,Polyoxyethylene 23 lauryl ether,C14H30O2
+708,bmse000754,precocene_1,Precocene 1,C12H14O2
+709,bmse000755,procyclidine,Procyclidine,C19H29NO
+710,bmse000756,3_nitrofluoranthene,3-Nitrofluoranthene,C16H9NO2
+711,bmse000757,serotonin,serotonin,C10H12N2O
+712,bmse000758,5_methoxypsoralen,5-Methoxypsoralen,C12H8O4
+713,bmse000759,5_methyluridine,5-methyluridine,C10H14N2O6
+714,bmse000762,neostigmine,neostigmine,C12H19N2O2+
+715,bmse000763,nonactin,nonactin,C40H64O12
+716,bmse000764,nonadecane,Nonadecane,C19H40
+717,bmse000765,octamethylcyclotetrasiloxane,octamethylcyclotetrasiloxane,C8H24O4Si4
+718,bmse000766,orthanilic_acid,orthanilic acid,C6H7NO3S
+719,bmse000768,saligenin,saligenin,C7H8O2
+720,bmse000769,alpha_lipoamide,alpha-Lipoamide,C8H15NOS2
+721,bmse000770,phenyl_beta_D_glucoside,Phenyl beta-D-glucoside,C12H16O6
+722,bmse000771,pyromellitic_acid,Pyromellitic acid,C10H6O8
+723,bmse000772,salicylhydroxamic_acid,Salicylhydroxamic Acid,C7H7NO3
+724,bmse000773,triethylenetetramine,triethylenetetramine,C6H18N4
+725,bmse000774,trimethyl_phosphate,Trimethyl Phosphate,C3H9O4P
+726,bmse000775,3_methoxybenzamide,3-Methoxybenzamide,C8H9NO2
+727,bmse000776,L_anserine,L-Anserine,C10H16N4O3
+728,bmse000777,tributyl_phosphate,Tributyl Phosphate,C12H27O4P
+729,bmse000778,gamma_terpinene,gamma-terpinene,C10H16
+730,bmse000779,metoclopramide,Metoclopramide,C14H22N3O2Cl
+731,bmse000780,tetramethylammonium,Tetramethylammonium ,C4H12N+
+732,bmse000781,thioacetamide,thioacetamide,C2H5NS
+733,bmse010001,1_4_Hydroxyphenyl_ethanol,1-(4-Hydroxyphenyl)ethanol,C8H10O2
+734,bmse010002,Apocynol,Apocynol,C9H12O3
+735,bmse010003,1_4_Hydroxy_3_5_dimethoxyphenyl_ethanol,"1-(4-Hydroxy-3,5-dimethoxyphenyl)ethanol",C10H14O4
+736,bmse010004,1_3_4_Dimethoxyphenyl_ethanol,"1-(3,4-Dimethoxyphenyl)ethanol",C10H14O3
+737,bmse010005,4_Hydroxybenzaldehyde,p-Hydroxybenzaldehyde,C7H6O2
+738,bmse010006,vanillin,vanillin,C8H8O3
+739,bmse010007,Syringyl_alcohol,Syringyl alcohol,C9H12O4
+740,bmse010008,Methyl_4_acetoxybenzoate,Methyl 4-acetoxybenzoate,C10H10O4
+741,bmse010009,Methyl_4_hydroxybenzoate,Methyl 4-hydroxybenzoate,C8H8O3
+742,bmse010010,4_hydroxy_3_methoxybenzyl_alcohol,4-Hydroxy-3-methoxybenzyl alcohol,C8H10O3
+743,bmse010011,2_3_Diacetoxypropioveratrone,"2,3-Diacetoxypropioveratrone",C15H18O7
+744,bmse010012,p_Anisic_acid,p-Anisic_acid,C8H8O3
+745,bmse010014,Hydroxyphenylethanol_diacetate,Hydroxyphenylethanol diacetate,C12H14O4
+746,bmse010015,p-Hydroxybenzyl-alcohol-diacetate,4-acetoxybenzyl acetate,C11H12O4
+747,bmse010016,Methyl_p_anisate,Methyl-p-anisate,C9H10O3
+748,bmse010019,Dehydrodivanillin,Dehydrodivanillin,C16H14O6
+749,bmse010022,Xylan,Xylan,C5H10O6
+750,bmse010023,Dihydroferulic_Acid,Dihydroferulic Acid,C10H12O4
+751,bmse010024,4_Methoxyacetophenone,4-Methoxyacetophenone,C9H10O2
+752,bmse010025,p_Methoxybenzyl_alcohol,p-Methoxybenzyl alcohol,C8H10O2
+753,bmse010026,Phenol,Phenol,C6H6O
+754,bmse010027,Guaiacol,Guaiacol,C7H8O2
+755,bmse010028,p_Hydroxybenzyl_alcohol,p-Hydroxybenzyl alcohol,C7H8O2
+756,bmse010029,3_4_Dimethoxybenzyl_alcohol,"3,4-Dimethoxybenzyl alcohol",C9H12O3
+757,bmse010030,p_hydroxyacetophenone,p-hydroxyacetophenone,C8H8O2
+758,bmse010031,acetovanillone,acetovanillone,C9H10O3
+759,bmse010032,acetosyringone,acetosyringone,C10H12O4
+760,bmse010033,Acetoveratrone,Acetoveratrone,C10H12O3
+761,bmse010041,Guaiacylglycerol_B_guaiacyl_ether,Guaiacylglycerol-B-guaiacyl ether,C17H20O6
+762,bmse010042,Guaiacylglycerol_B_guaiacyl_ether,Guaiacylglycerol-B-guaiacyl ether,C17H20O6
+763,bmse010043,Acetylated_acetovanillone,Acetylated acetovanillone,C11H12O4
+764,bmse010044,Veratrylglycerol_B_guaiacyl_ether,Veratrylglycerol-B-guaiacyl ether,C18H22O6
+765,bmse010045,Veratrylglycerol_B_guaiacyl_ether,Veratrylglycerol-B-guaiacyl ether,C18H22O6
+766,bmse010046,Erone,Erone,C17H18O6
+767,bmse010047,Vanillyl_B_D_Glucoside,Vanillyl-B-D-Glucoside,C14H20O8
+768,bmse010048,Acetylated_ferulic_acid,Acetylated ferulic acid,C12H12O5
+769,bmse010049,Pinoresinol_diacetate,Pinoresinol diacetate,C24H26O8
+770,bmse010050,Veratrone,Veratrone,C18H20O6
+771,bmse010051,acetylated_isoeugenol,acetylated isoeugenol,C12H14O3
+772,bmse010052,Isoeugenol,Isoeugenol,C10H12O2
+773,bmse010053,Eugenol,Eugenol,C10H12O2
+774,bmse010054,4_Allyl_2_6_dimethoxyphenol,"4-Allyl-2,6-dimethoxyphenol",C11H14O3
+775,bmse010055,acetylated_eugenol,acetylated eugenol,C12H14O3
+776,bmse010057,Syringylresinol,Syringylresinol,C22H26O8
+777,bmse010058,Coniferin_acetate,Coniferin acetate,C26H32O13
+778,bmse010059,Syringin_acetate,Syringin acetate,C27H34O14
+779,bmse010060,Syringylresinol_diacetate,Syringylresinol diacetate,C26H30O10
+780,bmse010061,cis_Ferulic_Acid,cis-Ferulic Acid,C10H10O4
+781,bmse010064,Dihydrocoumaric_acid,Dihydrocoumaric acid,C9H10O3
+782,bmse010065,acetylated_dihydrocoumaric_acid,acetylated dihydrocoumaric acid,C11H12O4
+783,bmse010066,acetylated_coumaric_acid,acetylated coumaric acid,C11H10O4
+784,bmse010071,Vinyl_guaiacol,Vinyl guaiacol,C9H10O2
+785,bmse010073,acetylated_coniferylaldehyde,acetylated coniferylaldehyde,C12H12O4
+786,bmse010074,acetylated_coniferyl_alcohol,acetylated coniferyl alcohol,C14H16O5
+787,bmse010075,Acetylated_veratryl_alcohol,"3,4-dimethoxybenzylacetate",C11H14O4
+788,bmse010076,coniferaldehyde,coniferaldehyde,C10H10O3
+789,bmse010077,3_4_dimethoxycinnamyl_alcohol,"3,4-dimethoxycinnamyl alcohol",C11H14O3
+790,bmse010080,acetylated_methyl_coumarate,methyl 4-acetoxycinnamate,C12H12O4
+791,bmse010081,acetylated_methyl_ferulate,acetylated methyl ferulate,C13H14O5
+792,bmse010082,3_4_dimethoxy_cinnamaldehyde,"3,4-dimethoxy cinnamaldehyde",C11H12O3
+793,bmse010083,p_coumaryl_alcohol,p-coumaryl alcohol,C9H10O2
+794,bmse010084,p_coumaraldehyde,p-coumaraldehyde,C9H8O2
+795,bmse010085,sinapaldehyde,sinapaldehyde,C11H12O4
+796,bmse010087,Acetylated_sinapaldehyde,Acetylated sinapaldehyde,C13H14O5
+797,bmse010088,3_4_5_Trimethoxyacetophenone,"3,4,5-Trimethoxyacetophenone",C11H14O4
+798,bmse010089,acetylated_p_gluco_cinnamic_acid,acetylated p-gluco cinnamic acid,C23H26O12
+799,bmse010090,3_4_dimethoxycinnamyl_acetate,"3,4-dimethoxycinnamyl acetate",C13H16O4
+800,bmse010091,Veratryl_glycerol,Veratryl glycerol,C11H16O5
+801,bmse010093,Erone_diacetate,Erone diacetate,C21H22O8
+802,bmse010094,Veratrone_acetate,Veratrone acetate,C20H22O7
+803,bmse010095,Pinoresinol_biphenyl,Pinoresinol biphenyl,C40H42O12
+804,bmse010096,Pinoresinol_biphenyl_acetate,Pinoresinol biphenyl acetate,C48H50O16
+805,bmse010097,Ethyl_vanillin,Ethyl vanillin,C10H12O3
+806,bmse010098,Phenylcoumaran_biphenyl_acetate,Phenylcoumaran biphenyl acetate,C44H50O10
+807,bmse010099,Phenyl_coumaran_biphenyl,Phenyl coumaran biphenyl,C40H46O8
+808,bmse010100,1_2_diguaiacylpropane_1_3_diol,"1,2-diguaiacylpropane-1,3-diol",C17H20O6
+809,bmse010101,4_acetoxy_acetophenone,4-acetoxy-acetophenone,C10H10O3
+810,bmse010102,Vanillin_acetate,Vanillin acetate,C10H10O4
+811,bmse010103,Syringic_Acid_Acetate,Syringic Acid Acetate,C11H12O6
+812,bmse010104,Guaiacol_acetate,Guaiacol acetate,C9H10O3
+813,bmse010105,Acetosyringone_acetate,Acetosyringone acetate,C12H14O5
+814,bmse010106,Sinapic_acid_acetate,Sinapic acid acetate,C13H14O6
+815,bmse010107,4_acetoxy_3_methoxy_methyl_benzoate,4-acetoxy-3-methoxy methyl benzoate,C11H12O5
+816,bmse010108,G_b_S_c_CA,G-b-S-c-CA,C31H36O11
+817,bmse010109,G_b_S_c_CA_acetate,G-b-S-c-CA (acetate),C41H46O16
+818,bmse010110,G_b_S_r_S,G-b-S-r-S,C32H38O12
+819,bmse010111,G_b_S_r_S_acetate,G-b-S-r-S (acetate),C40H46O16
+820,bmse010112,S_b_SA_acetate,S-b-SA (acetate),C30H36O13
+821,bmse010113,S_b_CA_acetate,S-b-CA (acetate),C29H34O12
+822,bmse010114,S_c_CA_acetate,S-c-CA (acetate),C27H30O10
+823,bmse010115,G_b_SA_acetate,G-b-SA acetate,C29H34O12
+824,bmse010116,2_6_dimethoxyphenol_acetate,"2,6-dimethoxyphenol acetate",C10H12O4
+825,bmse010117,phenol_acetate,phenol acetate,C8H8O2
+826,bmse010121,G_b_S_r_S_b_G,G-b-S-r-S-b-G,C42H50O16
+827,bmse010124,G_b_S_r_S_b_G_acetate,G-b-S-r-S-b-G (acetate),C54H62O22
+828,bmse010125,S_b_S_r_S,S-b-S-r-S,C33H40O13
+829,bmse010126,S_b_S_r_S_acetate,S-b-S-r-S (acetate),C41H48O17
+830,bmse010127,Vanillyl_alcohol_diacetate,Vanillyl alcohol diacetate,C12H14O5
+831,bmse010128,Syringyl_alcohol_diacetate,Syringyl alcohol diacetate,C13H16O6
+832,bmse010130,4_methoxy_benzaldehyde,4-methoxy benzaldehyde,C8H8O2
+833,bmse010133,Syringaldehyde_acetate,Syringaldehyde acetate,C11H12O5
+834,bmse010134,4_Acetoxy_benzaldehyde,4-Acetoxy benzaldehyde,C9H8O3
+835,bmse010135,4_Acetoxy_benzoic_acid,4-Acetoxy benzoic acid,C9H8O4
+836,bmse010136,4_Methoxy_benzyl_alcohol,4-Methoxy benzyl alcohol,C9H12O2
+837,bmse010138,Sinapyl_alcohol_diacetate,Sinapyl alcohol diacetate,C15H18O6
+838,bmse010142,p_Methoxy_cinnamaldehyde,p-Methoxy cinnamaldehyde,C10H10O2
+839,bmse010143,G_b_G_c_CA_acetate,G-b-G-c-CA (acetate),C40H44O15
+840,bmse010146,p_Methoxy_coumaryl_alcohol,p-Methoxy coumaryl alcohol,C10H12O2
+841,bmse010147,p_Methoxy_coumaryl_alcohol_acetate,p-Methoxy coumaryl alcohol acetate,C12H14O3
+842,bmse010148,V_c_CA,V-c-CA,C25H28O8
+843,bmse010149,4_hydroxy_cinnamyl_alcohol_diacetate,Coumaryl alcohol acetate,C13H14O4
+844,bmse010150,4_acetoxy_cinnamaldehyde,4-acetoxy cinnamaldehyde,C11H10O3
+845,bmse010151,S_b_G_5_5_G_b_S_A_CH2,"S-b-G-5,5-G-b-S (A = CH2)",C44H50O16
+846,bmse010152,H_b_S,H-b-S,C27H32O11
+847,bmse010153,G_bt_S_bt_G,G-bt-S-bt-G,C38H44O16
+848,bmse010154,S_b_S,S-b-S,C26H30O12
+849,bmse010155,S_b_S,S-b-S,C28H34O13
+850,bmse010156,cis_coniferyl_alcohol,cis-coniferyl alcohol,C10H12O3
+851,bmse010157,G_b_S,G-b-S,C25H30O10
+852,bmse010158,G_b1_G,G-b1-G,C23H24O9
+853,bmse010159,G_c_G,G-c-G,C22H24O7
+854,bmse010160,S_b_G_b1_G,S-b-G-b1-G,C40H46O17
+855,bmse010161,G_a_G_b_G,G-a-G-b-G,C30H34O9
+856,bmse010162,H_c_G,H-c-G,C21H22O6
+857,bmse010165,G_b_S_b_S,G-b-S-b-S,C40H48O17
+858,bmse010171,Vanillin_a_G_b_CA,Vanillin-a-G-b-CA,C34H36O12
+859,bmse010173,S_b_t_G_b_e_S5,S-b(t)-G-b(e)-S5,C40H48O17
+860,bmse010176,S_a_S_b_S,S-a-S-b-S,C33H40O12
+861,bmse010178,H_b_H5e,H-b-H5e,C16H18O4
+862,bmse010179,H_b_H5t,H-b-H5t,C16H18O4
+863,bmse010180,H_b_H5e,H-b-H5e,C22H24O7
+864,bmse010181,H_b_H5t,H-b-H5t,C22H24O7
+865,bmse010182,G_5_O_4_G,G-5-O-4-G,C20H26O5
+866,bmse010183,G_5_O_4_G_diacetate,G-5-O-4-G diacetate,C24H30O7
+867,bmse010186,dihydro_coniferyl_alcohol,dihydro-coniferyl alcohol,C10H14O3
+868,bmse010190,biphenyl_methane,biphenyl methane,C21H28O4
+869,bmse010203,Syringol,Syringol,C8H10O3
+870,bmse010204,syringaldehyde,syringaldehyde,C9H10O4
+871,bmse010205,vanillic_acid,vanillic acid,C8H8O4
+872,bmse010206,syringic_acid,syringic acid,C9H10O5
+873,bmse010207,Veratric_acid,Veratric acid,C9H10O4
+874,bmse010208,p_coumaric_acid,p-Coumaric acid,C9H8O3
+875,bmse010209,sinapinic_acid,sinapinic acid,C11H12O5
+876,bmse010210,3_4_Dimethoxycinnamic_acid,"3,4-Dimethoxycinnamic acid",C11H12O4
+877,bmse010211,Ferulic_acid,Ferulic acid,C10H10O4
+878,bmse010212,4_Methoxycinnamic_acid,4-Methoxycinnamic acid,C10H10O3
+879,bmse010217,Anisole,Anisole,C7H8O
+880,bmse010218,1_2_3_trimethoxybenzene,"1,2,3-trimethoxybenzene",C9H12O3
+881,bmse010219,Veratrole,Veratrole,C8H10O2
+882,bmse010220,Veratraldehyde,Veratraldehyde,C9H10O3
+883,bmse010221,methyl_sinapate,methyl sinapate,C12H14O5
+884,bmse010222,Methyl_p_Coumarate,Methyl p-Coumarate,C10H10O3
+885,bmse010223,methyl_3_4_5_trimethoxy_cinnamate,"methyl (3,4,5-trimethoxy)cinnamate",C13H16O5
+886,bmse010224,3_4_5_trimethoxy_cinnamic_acid,"3,4,5-trimethoxy cinnamic acid",C12H14O5
+887,bmse010225,Syringic_acid_methyl_ester,Syringic acid methyl ester,C10H12O5
+888,bmse010226,Vanillic_acid_methyl_ester,Vanillic acid methyl ester,C9H10O4
+889,bmse010227,Dihydrodehydrodiisoeugenol,Dihydrodehydrodiisoeugenol,C20H24O4
+890,bmse010228,Dehydrodiisoeugenol,Dehydrodiisoeugenol,C20H22O4
+891,bmse010229,methyl_ferulate,methyl ferulate,C11H12O4
+892,bmse010230,Methylveratrate,Methylveratrate,C10H12O4
+893,bmse010231,methyl_3_4_dimethoxycinnamate,"methyl 3,4-dimethoxycinnamate",C12H14O4
+894,bmse010232,Dehydrodiveratraldehyde,Dehydrodiveratraldehyde,C18H18O6
+895,bmse010233,Dehydrodiveratric_acid,Dehydrodiveratric acid,C18H18O8
+896,bmse010248,coniferyl_alcohol,coniferyl alcohol,C10H12O3
+897,bmse010251,Syringylglycerol_B_guaiacyl_ether,Syringylglycerol-B-guaiacyl ether,C18H22O7
+898,bmse010254,Phenyl_benzoate,Phenyl benzoate,C13H10O2
+899,bmse010255,Ethyl_4-hydroxybenzoate,Ethyl 4-hydroxybenzoate,C9H10O3
+900,bmse010256,Cinnamyl_alcohol,Cinnamyl alcohol,C9H10O
+901,bmse010257,Cinnamaldehyde,Cinnamaldehyde,C9H8O
+902,bmse010285,coniferyl_alcohol,coniferyl alcohol,C10H12O3
+903,bmse010286,sinapyl_alcohol,sinapyl alcohol,C11H14O4
+904,bmse010287,p_coumaryl_alcohol,p-coumaryl alcohol,C9H10O2
+905,bmse010291,coniferyl_p_coumarate,coniferyl p-coumarate,C19H18O5
+906,bmse010297,Pinoresinol,Pinoresinol,C20H22O6
+907,bmse010318,Sinapyl_p_coumarate,Sinapyl p-coumarate,C20H20O6
+908,bmse010322,Seco_isolariciresinol,Seco-isolariciresinol,C28H34O10
+909,bmse010368,6_methoxy_indan_5_ol,6-methoxy-indan-5-ol,C10H12O2
+910,bmse010376,Simulanol,Simulanol,C21H24O7
+911,bmse010377,buddlenol_E,buddlenol E,C31H36O11
+912,bmse010378,buddlenol_A,buddlenol A,C31H34O11
+913,bmse010379,SP_8_8_S,SP-(8-8)-S,C29H32O11
+914,bmse010380,G_8_O_4_-S,G-(8-O-4)-S,C21H26O8

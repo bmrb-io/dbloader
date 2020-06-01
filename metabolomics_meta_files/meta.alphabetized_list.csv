@@ -1,0 +1,1250 @@
+dir_name,common_name,alpha_name,first_char,has_theoretical,image_file,struct_file,date_struct_finalized,struct_source
+1_3_diaminopropane,"1,3-Diaminopropane",diaminopropane,D,no  ,4233.png,4233.mol,2006-02-23,pubchem sid sdf file
+2_3_diphospho_D_glyceric_acid,"2,3-Diphospho-D-glyceric acid",glyceric diphospho D,G,no  ,4387.png,4387.mol,2006-02-23,pubchem sid sdf file
+2_deoxyguanosine,2'-Deoxyguanosine,deoxyguanosine,D,no  ,3624.png,3624.mol,2006-10-16,pubchem sid sdf file
+ADP,ADP,adp,A,no  ,3310.png,3310.mol,2006-02-23,pubchem sid sdf file
+AMP,AMP,amp,A,no  ,3322.png,3322.mol,2006-02-23,pubchem sid sdf file
+ATP,ATP,atp,A,no  ,3304.png,3304.mol,2006-02-23,pubchem sid sdf file
+D_3_phosphoglyceric_acid,D-(-)-3-Phosphoglyceric acid,phosphoglyceric,P,no  ,3497.png,3497.mol,2006-02-23,pubchem sid sdf file
+D_allose,D-Allose,allose,A,no  ,4657.png,4657.mol,2006-02-23,pubchem sid sdf file
+D_fructose,D-(-)-Fructose,fructose,F,no  ,3395.png,3395.mol,2006-02-23,pubchem sid sdf file
+D_fructose_1_6_bisphosphate,"D-Fructose-1,6-bisphosphate",fructose bisphosphate,F,no  ,7752.png,7752.mol,2006-02-23,pubchem sid sdf file
+D_fructose_6_phosphate,D-Fructose-6-phosphate,fructose phosphate,F,no  ,3385.png,3385.mol,2006-02-23,pubchem sid sdf file
+D_galactose,D-(+)-Galactose,galactose,G,no  ,4231.png,4231.mol,2006-02-23,pubchem sid sdf file
+D_glucose,D-(+)-Glucose,glucose,G,no  ,3565.png,3565.mol,2006-02-23,pubchem sid sdf file
+D_glucose_6_phosphate,D-Glucose 6-phosphate,glucose phosphate,G,no  ,4399.png,4399.mol,2006-02-23,pubchem sid sdf file
+D_maltose,D-(+)-Maltose,maltose,M,no  ,3508.png,3508.mol,2006-02-23,pubchem sid sdf file
+D_mannose,D-(+)-Mannose,mannose,M,no  ,3459.png,3459.mol,2006-02-23,pubchem sid sdf file
+D_ornithine,D-Ornithine,ornithine,O,no  ,3798.png,3798.mol,2006-02-23,pubchem sid sdf file
+D_psicose,D-Psicose,psicose,P,no  ,8700.png,8700.mol,2006-02-23,pubchem sid sdf file
+D_sorbose,D-(+)-Sorbose,sorbose,S,no  ,4026.png,4026.mol,2006-02-23,pubchem sid sdf file
+D_tagatose,D-(-)-Tagatose,tagatose d,T,no  ,4053.png,4053.mol,2006-02-23,pubchem sid sdf file
+D_threo_isocitric_acid,D-(+)-Threo-isocitric acid,isocitric threo_,I,no  ,3739.png,3739.mol,2006-02-23,pubchem sid sdf file
+D_xylose,D-(+)-Xylose,xylose,X,no  ,148884.png,148884.mol,2006-02-23,pubchem sid sdf file
+D_xylulose,D-Xylulose,xylulose,X,no  ,3604.png,3604.mol,2006-02-23,pubchem sid sdf file
+L_alanine,L-Alanine,alanine,A,no  ,3343.png,3343.mol,2006-02-23,pubchem sid sdf file
+L_arginine,L-Arginine,arginine,A,no  ,3362.png,3362.mol,2006-02-23,pubchem sid sdf file
+L_asparagine,L-Asparagine,asparagine,A,no  ,3452.png,3452.mol,2006-02-23,pubchem sid sdf file
+L_aspartic_acid,L-Aspartic acid,aspartic,A,no  ,3351.png,3351.mol,2006-02-23,pubchem sid sdf file
+L_citrulline,L-Citrulline,citrulline,C,no  ,3621.png,3621.mol,2006-02-23,pubchem sid sdf file
+L_cystathionine,L-Cystathionine,cystathionine,C,no  ,5347.png,5347.mol,2006-02-23,pubchem sid sdf file
+L_cysteine,L-Cysteine,cysteine,C,no  ,3397.png,3397.mol,2006-02-23,pubchem sid sdf file
+L_cystine,L-Cystine,cystine,C,no  ,3774.png,3774.mol,2006-02-23,pubchem sid sdf file
+L_fucose,L-(-)-Fucose,fucose,F,no  ,4264.png,4264.mol,2006-02-23,pubchem sid sdf file
+L_glutamic_acid,L-Glutamic acid,glutamic,G,no  ,3596.png,3596.mol,2006-02-23,pubchem sid sdf file
+L_glutamine,L-Glutamine,glutamine,G,no  ,148793.png,148793.mol,2006-02-23,pubchem sid sdf file
+L_histidine,L-Histidine,histidine,H,no  ,3435.png,3435.mol,2006-02-23,pubchem sid sdf file
+L_homoserine,L-Homoserine,homoserine,H,no  ,3561.png,3561.mol,2006-02-23,pubchem sid sdf file
+L_isoleucine,L-Isoleucine,isoleucine,I,no  ,3697.png,3697.mol,2006-02-23,pubchem sid sdf file
+L_leucine,L-Leucine,leucine,L,no  ,3423.png,3423.mol,2006-02-23,pubchem sid sdf file
+L_lysine,L-Lysine,lysine,L,no  ,3349.png,3349.mol,2006-02-23,pubchem sid sdf file
+L_methionine,L-Methionine,methionine,M,no  ,3373.png,3373.mol,2006-02-23,pubchem sid sdf file
+L_phenylalanine,L-Phenylalanine,phenylalanine,P,no  ,3379.png,3379.mol,2006-02-23,pubchem sid sdf file
+malic_acid,Malic acid,malic,M,no  ,3977.png,3977.mol,2006-02-23,pubchem sid sdf file
+L_proline,L-Proline,proline,P,no  ,3448.png,3448.mol,2006-02-23,pubchem sid sdf file
+L_serine,L-Serine,serine,S,no  ,3365.png,3365.mol,2006-02-23,pubchem sid sdf file
+L_threonine,L-Threonine,threonine,T,no  ,3488.png,3488.mol,2006-02-23,pubchem sid sdf file
+L_tryptophan,L-Tryptophan,tryptophan,T,no  ,3378.png,3378.mol,2006-02-23,pubchem sid sdf file
+L_tyrosine,L-Tyrosine,tyrosine,T,no  ,3382.png,3382.mol,2006-02-23,pubchem sid sdf file
+L_valine,L-Valine,valine,V,no  ,3483.png,3483.mol,2006-02-23,pubchem sid sdf file
+NAD,NAD,nad,N,no  ,3305.png,3305.mol,2006-02-23,pubchem sid sdf file
+NADH,NADH,nadh,N,no  ,3306.png,3306.mol,2006-02-23,pubchem sid sdf file
+NADPH,NADPH,nadph,N,no  ,3307.png,3307.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_D_mannosamine,N-Acetyl-D-mannosamine,mannosamine acetyl,M,no  ,3918.png,3918.mol,2006-02-23,pubchem sid sdf file
+N_acetylneuraminic_acid,N-Acetylneuraminic acid,acetylneuraminic,A,no  ,3568.png,3568.mol,2006-02-23,pubchem sid sdf file
+O_succinyl_L_homoserine,O-Succinyl-L-homoserine,homoserine succinyl O L,H,no  ,4349.png,4349.mol,2006-02-23,pubchem sid sdf file
+S_adenosyl_L_methionine,s-(5'-Adenosyl)-L-methionine,adenosyl methionine,A,no  ,3321.png,3321.mol,2006-02-23,pubchem sid sdf file
+adenine,Adenine,adenine,A,no  ,3447.png,3447.mol,2006-02-23,pubchem sid sdf file
+adenosine,Adenosine,adenosine,A,no  ,3512.png,3512.mol,2006-02-23,pubchem sid sdf file
+adonitol,Adonitol,adonitol,A,no  ,841607.png,841607.mol,2006-03-01,pubchem sid sdf file
+agmatine,Agmatine,agmatine,A,no  ,3479.png,3479.mol,2006-02-23,pubchem sid sdf file
+alpha_ketoglutaric_acid,alpha-Ketoglutaric acid,alphaketoglutaric,A,no  ,3328.png,3328.mol,2006-02-23,pubchem sid sdf file
+lactose,Lactose,lactose,L,no  ,3542.png,3542.mol,2006-02-23,pubchem sid sdf file
+4_aminobenzoic_acid,4-Aminobenzoic acid,aminobenzoic,A,no  ,3847.png,3847.mol,2006-02-23,pubchem sid sdf file
+anthranilic_acid,Anthranilic acid,anthranilic,A,no  ,3408.png,3408.mol,2006-02-23,pubchem sid sdf file
+L_arabitol,L-(-) Arabitol,arabitol,A,no  ,3814.png,3814.mol,2006-02-23,pubchem sid sdf file
+betaine,Betaine,betaine,B,no  ,3985.png,3985.mol,2006-02-23,pubchem sid sdf file
+betaine_aldehyde,Betaine aldehyde,betaine aldehyde,B,no  ,3855.png,3855.mol,2006-02-23,pubchem sid sdf file
+cAMP,cyclic AMP,camp,C,no  ,3854.png,3854.mol,2006-02-23,pubchem sid sdf file
+cadaverine,Cadaverine,cadaverine,C,no  ,4816.png,4816.mol,2006-02-23,pubchem sid sdf file
+L_canavanine,L-Canavanine,canavanine,C,no  ,3602.png,3602.mol,2006-02-23,pubchem sid sdf file
+D_carnitine,D-Carnitine,carnitine,C,no  ,3770.png,3770.mol,2006-02-23,pubchem sid sdf file
+chorismic_acid,Chorismic acid,chorismic,C,no  ,3550.png,3550.mol,2006-02-23,pubchem sid sdf file
+citrate,Citrate,citrate,C,no  ,3458.png,3458.mol,2006-02-23,pubchem sid sdf file
+coumarin,Coumarin,coumarin,C,no  ,8144.png,8144.mol,2006-02-23,pubchem sid sdf file
+creatine,Creatine,creatine,C,no  ,3594.png,3594.mol,2006-02-23,pubchem sid sdf file
+creatine_phosphate,Creatine phosphate,creatine phosphate,C,no  ,5359.png,5359.mol,2006-02-23,pubchem sid sdf file
+dehydro_proline,"3,4-Dehydro-d/L-proline",proline dehydro,P,no  ,680495.png,680495.mol,2006-02-23,pubchem sid sdf file
+fumaric_acid,Fumaric acid,fumarate,F,no  ,3422.png,3422.mol,2006-02-23,pubchem sid sdf file
+gluconic_acid,Gluconic acid,gluconic_acid,G,no  ,153991.png,153991.mol,2006-02-23,pubchem sid sdf file
+alpha_D_glucose_1_phosphate,alpha-D-Glucose-1-phosphate,glucose phosphate alpha D,G,no  ,13622.png,13622.mol,2006-02-23,pubchem sid sdf file
+alpha_D_glucose_1_6_bisphosphate,"alpha-D-Glucose 1,6-bisphosphate",glucose bisphosphate alpha_D_1_6,G,no  ,3929.png,3929.mol,2006-02-23,pubchem sid sdf file
+glycine,Glycine,glycine,G,no  ,3339.png,3339.mol,2006-02-23,pubchem sid sdf file
+guanine,Guanine,guanine,G,no  ,149248.png,149248.mol,2006-02-23,pubchem sid sdf file
+guanosine,Guanosine,guanosine,G,no  ,6802.png,6802.mol,2011-12-09,pubchem cid sdf file
+4_hydroxybenzoic_acid,4-Hydroxy-benzoic acid,benzoic hydroxy,B,no  ,3456.png,3456.mol,2006-02-23,pubchem sid sdf file
+trans_3_hydroxycinnamic_acid,trans-3-Hydroxycinnamic acid,cinnamic hydroxy trans 3,C,no  ,583011.png,583011.mol,2006-02-23,pubchem sid sdf file
+hypoxanthine,Hypoxanthine,hypoxanthine,H,no  ,149159.png,149159.mol,2006-02-23,pubchem sid sdf file
+i_erythritol,i-Erythritol,erythritol,E,no  ,3786.png,3786.mol,2006-03-10,pubchem sid sdf file
+imidazole,Imidazole,imidazole,I,no  ,4744.png,4744.mol,2006-02-23,pubchem sid sdf file
+indole,Indole,indole,I,no  ,3747.png,3747.mol,2006-02-23,pubchem sid sdf file
+inosine,Inosine,inosine,I,no  ,3588.png,3588.mol,2006-10-17,pubchem sid sdf file
+D_mannitol,D-Mannitol,mannitol,M,no  ,149173.png,149173.mol,2006-02-23,pubchem sid sdf file
+meso_erythritol,meso-Erythritol,erythritol meso,E,no  ,3786.png,3786.mol,2006-02-23,pubchem sid sdf file
+methyl_oxobutanoic_acid,3-Methyl-2-oxobutinoic acid,methyloxobutanoic,M,no  ,3441.png,3441.mol,2006-02-23,pubchem sid sdf file
+muco_inositol,muco-Inositol,inositol muco,I,no  ,muco_inositol.png,muco_inositol.mol,2006-03-27,bmrb from pubchem sid sdf file
+myo_inositol,myo-Inositol,inositol myo,I,no  ,myo_inositol.png,myo_inositol.mol,2006-03-27,bmrb
+niacin,Nicotinic acid,niacin,N,no  ,3552.png,3552.mol,2006-02-23,pubchem sid sdf file
+nicotine,(+/-) Nicotine,nicotine,N,no  ,4007.png,4007.mol,2006-02-23,pubchem sid sdf file
+oxalate,Oxalate,oxalate,O,no  ,3509.png,3509.mol,2006-02-23,pubchem sid sdf file
+phosphoenolpyruvic_acid,Phosphoenolpyruvic acid,phosphoenolpyruvic,P,no  ,3374.png,3374.mol,2006-02-23,pubchem sid sdf file
+prephenic_acid,Prephenic acid,prephenic,P,no  ,3553.png,3553.mol,2006-02-23,pubchem sid sdf file
+putrescine,"Putrescine (1,4 diaminobutane)",putrescine,P,no  ,3434.png,3434.mol,2006-02-23,pubchem sid sdf file
+pyridoxal,Pyridoxal,pyridoxal,P,no  ,3549.png,3549.mol,2006-02-23,pubchem sid sdf file
+pyridoxal_5_phosphate,Pyridoxal-5-phosphate,pyridoxal phosphate,P,no  ,3320.png,3320.mol,2006-02-23,pubchem sid sdf file
+pyruvic_acid,Pyruvic acid,pyruvicacid,P,no  ,1060.png,1060.mol,2008-09-26,pubchem cid sdf file
+scyllo_inositol,scyllo-Inositol,inositol scyllo,I,no  ,8409.png,8409.mol,2006-03-27,bmrb from pubchem sid sdf file
+shikimic_acid,Shikimic acid,shikimic,S,no  ,3776.png,3776.mol,2006-02-23,pubchem sid sdf file
+D_sorbitol,D-Sorbitol,sorbitol,S,no  ,148568.png,148568.mol,2006-02-23,pubchem sid sdf file
+spermidine,Spermidine,spermidine,S,no  ,3609.png,3609.mol,2006-02-23,pubchem sid sdf file
+spermine,Spermine,spermine,S,no  ,4012.png,4012.mol,2006-02-23,pubchem sid sdf file
+sucrose,Sucrose,sucrose,S,no  ,3389.png,3389.mol,2006-02-23,pubchem sid sdf file
+taurine,Taurine,taurine,T,no  ,3544.png,3544.mol,2006-02-23,pubchem sid sdf file
+L_threitol,L-(-)-Threitol,threitol,T,no  ,272831.png,272831.mol,2006-02-23,pubchem sid sdf file
+trans_4_hydroxy_L_proline,trans 4 Hydroxy-L-proline,proline hydroxy L trans,P,no  ,148602.png,148602.mol,2006-02-23,pubchem sid sdf file
+trans_cinnamic_acid,trans-Cinnamic acid,cinnamic trans,C,no  ,3713.png,3713.mol,2006-02-23,pubchem sid sdf file
+D_trehalose,D-Trehalose,trehalose,T,no  ,4320.png,4320.mol,2006-02-23,pubchem sid sdf file
+uric_acid,Uric acid,uric,U,no  ,149180.png,149180.mol,2006-11-30,pubchem sid sdf file
+xanthine,Xanthine,xanthine,X,no  ,149179.png,149179.mol,2006-02-23,pubchem sid sdf file
+xanthosine,Xanthosine,xanthosine,X,no  ,4895.png,4895.mol,2007-01-18,pubchem sid sdf file
+xylitol,Xylitol,xylitol,X,no  ,149920.png,149920.mol,2006-02-23,pubchem sid sdf file
+pyridoxamine,Pyridoxamine,pyridoxamine,P,no  ,3816.png,3816.mol,2006-02-23,pubchem sid sdf file
+pyridoxamine_5_phosphate,Pyridoxamine-5-phosphate,pyridoxamine phosphate,P,no  ,3919.png,3919.mol,2006-02-23,pubchem sid sdf file
+homovanillic_acid,Homovanillic acid,homovanillic,H,no  ,7908.png,7908.mol,2006-02-23,pubchem sid sdf file
+isonicotinic_acid,Isonicotinic acid,isonicotinic,I,no  ,9649.png,9649.mol,2006-02-23,pubchem sid sdf file
+ethacrynic_acid,Ethacrynic acid,ethacrynic,E,no  ,9197.png,9197.mol,2006-02-23,pubchem sid sdf file
+cyanuric_acid,Cyanuric acid,cyanuric,C,no  ,8783.png,8783.mol,2006-02-23,pubchem sid sdf file
+itaconic_acid,Itaconic acid,itaconic,I,no  ,3773.png,3773.mol,2006-02-23,pubchem sid sdf file
+D_cellobiose,D-Cellobiose,cellobiose,C,no  ,3485.png,3485.mol,2006-02-23,pubchem sid sdf file
+amygdalin,Amygdalin,amygdalin,A,no  ,10523.png,10523.mol,2006-02-23,pubchem sid sdf file
+D_glucuronate,D-Glucuronate,glucuronate,G,no  ,3491.png,3491.mol,2006-02-23,pubchem sid sdf file
+gamma_D_galactonolactone,"D-Galactono-1,4-lactone",galactonolactone,G,no  ,6218.png,6218.mol,2006-02-23,pubchem sid sdf file
+acetylcarnitine,(+-)-Acetylcarnitine,acetylcarnitine,A,no  ,697490.png,697490.mol,2006-02-23,pubchem sid sdf file
+5_acetylamido_2_chloroaniline,5-Acetylamido-2-chloroaniline,acetylamido chloroaniline,A,no  ,681431.png,681431.mol,2006-02-23,pubchem sid sdf file
+dihydroxyacetone,Dihydroxyacetone,acetone dihydroxy,A,no  ,3484.png,3484.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_L_glutamine,N-Acetyl-L-Glutamine,acetyl glutamine,A,no  ,680315.png,680315.mol,2006-02-23,pubchem sid sdf file
+ADA,N-(2-Acetamido)iminodiacetic acid,ada,A,no  ,694467.png,694467.mol,2006-02-23,pubchem sid sdf file
+4_aminoantipyrine,4-Aminoantipyrine,aminoantipyrine,A,no  ,149712.png,149712.mol,2006-02-23,pubchem sid sdf file
+diethyl_oxalacetate,Diethyl oxalacetate,diethyl oxalacetate,D,no  ,209052.png,209052.mol,2006-02-23,pubchem sid sdf file
+4_hydroxycinnamic_acid,4-Hydroxycinnamic acid,cinnamic hydroxy,C,no  ,4069.png,4069.mol,2006-02-23,pubchem sid sdf file
+alpha_D_galactose_1_phosphate,alpha-D-Galactose 1-phosphate,galactose phosphate alpha d,G,no  ,3734.png,3734.mol,2006-02-23,pubchem sid sdf file
+trigonelline,Trigonelline,trigonelline,T,no  ,4250.png,4250.mol,2006-02-23,pubchem sid sdf file
+L_methionine_methylsulfonium_iodide,L-Methionine methylsulfonium iodide,methionine methylsulfonium,M,no  ,3886671.png,3886671.mol,2006-02-23,pubchem sid sdf file
+4_2_aminoethyl_morpholine,4-(2-Aminoethyl)morpholine,aminoethyl morpholine,A,no  ,cid_408285.png,cid_408285.mol,2006-03-31,pubchem cid sdf file
+creatinine,Creatinine,creatinine,C,no  ,4049.png,4049.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_L_alanine,N-Acetyl-L-alanine,acetyl alanine N L,A,no  ,150408.png,150408.mol,2006-02-23,pubchem sid sdf file
+uridine,Uridine,uridine,U,no  ,3593.png,3593.mol,2006-02-23,pubchem sid sdf file
+beta_alanine,beta-Alanine,alanine beta,A,no  ,3399.png,3399.mol,2006-02-23,pubchem sid sdf file
+sarcosine,Sarcosine,sarcosine,S,no  ,3513.png,3513.mol,2006-02-23,pubchem sid sdf file
+3_hydroxybutyrate,3-Hydroxybutyrate,butyrate hydroxy,B,no  ,152509.png,152509.mol,2006-02-23,pubchem sid sdf file
+L_ornithine,L-Ornithine,ornithine,O,no  ,3377.png,3377.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_D_glucosamine_1_phosphate,N-Acetyl-D-glucosamine 1-phosphate,glucosamine phosphate N_acetyl_alpha_,G,no  ,6921.png,6921.mol,2006-02-23,pubchem sid sdf file
+D_xylonate_cadmium,D-Xylonate,xylonate,X,no  ,3785.png,3785.mol,2006-02-23,pubchem sid sdf file
+L_tartaric_acid,L-Tartaric acid,tartaric,T,no  ,4154.png,4154.mol,2006-02-23,pubchem sid sdf file
+acetylcholine,Acetylcholine,acetylcholine,A,no  ,187.png,187.mol,2011-01-21,pubchem sid sdf file
+L_selenomethionine,L(+)-Selenomethionine,selenomethionine,S,no  ,682499.png,682499.mol,2006-02-23,pubchem sid sdf file
+L_glutathione_oxidized,"L(-)-Glutathione, oxidized",glutathione oxidized,G,no  ,3427.png,3427.mol,2006-02-23,pubchem sid sdf file
+1_amino_1_phenylmethyl_phosphonic_acid,(1-Amino-1-phenylmethyl)phosphonic acid,amino phosphonic phenylmethyl,A,no  ,675736.png,675736.mol,2006-02-23,pubchem sid sdf file
+L_kynurenine,L-Kynurenine,kynurenine,K,no  ,3622.png,3622.mol,2006-02-23,pubchem sid sdf file
+4_hydroxyphenethyl_alcohol,4-Hydroxyphenethyl alcohol,hydroxyphenethyl,H,no  ,8315.png,8315.mol,2006-02-23,pubchem sid sdf file
+5_acetylamino_2_nitrobenzoic_acid,5-(Acetylamino)-2-nitrobenzoic acid,acetylamino nitrobenzoic,A,no  ,655125.png,655125.mol,2006-02-23,pubchem sid sdf file
+inosine_5_monophosphate,Inosine 5'-monophosphate,inosine monophosphate,I,no  ,151738.png,151738.mol,2006-02-23,pubchem sid sdf file
+2_amino_5_ethyl_1_3_4_thiadiazole,"2-Amino-5-ethyl-1,3,4-thiadiazole",amino ethyl thiadiazole,A,no  ,169177.png,169177.mol,2006-02-23,pubchem sid sdf file
+indole_3_acetic_acid,Indole-3-acetic acid,indole acetic,I,no  ,4205.png,4205.mol,2006-02-23,pubchem sid sdf file
+alpha_naphthoic_acid,alpha-Naphthoic acid,naphthoic alpha_,N,no  ,149851.png,149851.mol,2006-02-23,pubchem sid sdf file
+propionic_acid,Propionic acid,propionic,P,no  ,3463.png,3463.mol,2006-02-23,pubchem sid sdf file
+cytosine,Cytosine,cytosine,C,no  ,3670.png,3670.mol,2006-10-17,pubchem sid sdf file
+L-ascorbate,L-Ascorbate,ascorbate,A,no  ,148575.png,148575.mol,2006-02-23,pubchem sid sdf file
+succinic_acid,Succinic acid,succinate,S,no  ,3344.png,3344.mol,2006-02-23,pubchem sid sdf file
+glycerol,Glycerol,glycerol,G,no  ,3416.png,3416.mol,2006-02-23,pubchem sid sdf file
+L_glutathione_reduced,L-Glutathione reduced,glutathione reduced,G,no  ,3353.png,3353.mol,2006-02-23,pubchem sid sdf file
+uracil,Uracil,uracil,U,no  ,3272.png,3272.mol,2006-03-13,pubchem sid sdf file
+uridine_5_diphospho_N_acetlyglucosamine,Uridine 5'-diphospho-N-acetlyglucosamine,uridine diphospho acetlyglucosamine,U,no  ,154007.png,154007.mol,2006-02-23,pubchem sid sdf file
+D_glucosamine_6_phosphate,D-Glucosamine 6-phosphate,glucosamine phosphate,G,no  ,3645.png,3645.mol,2006-02-23,pubchem sid sdf file
+cytidine,Cytidine,cytidine,C,no  ,3758.png,3758.mol,2006-02-23,pubchem sid sdf file
+acetic_acid,Acetic acid,acetic,A,no  ,3335.png,3335.mol,2006-02-23,pubchem sid sdf file
+DL_alpha_glycerol_phosphate,DL-alpha-Glycerol phosphate,glycerol phosphate alpha,G,no  ,148805.png,148805.mol,2006-02-23,pubchem sid sdf file
+L_arginine_L_glutamate,L-Arginine L-Glutamate,arginine glutamate,A,no  ,163138.png,163138.mol,2006-02-23,pubchem sid sdf file
+N_alpha_acetyl_DL_ornithine,N(alpha)-Acetyl-DL-ornithine,ornithine alpha acetyl,O,no  ,3726.png,3726.mol,2006-02-23,pubchem sid sdf file
+methyl_N_acetyl_alpha_D_glucosaminide,Methyl N-acetyl-alpha-D-glucosaminide,glucosaminide methyl_N_acetyl_alpha_D_,G,no  ,673727.png,673727.mol,2006-02-23,pubchem sid sdf file
+6_phosphogluconic_acid,6-Phosphogluconic acid,phosphogluconic ,P,no  ,3638.png,3638.mol,2006-02-23,pubchem sid sdf file
+citraconic_acid,Citraconic acid,citraconic,C,no  ,5291.png,5291.mol,2006-02-23,pubchem sid sdf file
+homogentisic_acid,Homogentisic acid,homogentisic,H,no  ,3825.png,3825.mol,2006-02-23,pubchem sid sdf file
+kanamycin,Kanamycin,kanamycin,K,no  ,4946.png,4946.mol,2006-02-23,pubchem sid sdf file
+HEPES,HEPES,hepes,H,no  ,166367.png,166367.mol,2006-02-23,pubchem sid sdf file
+formate,Formate,formate,F,no  ,3358.png,3358.mol,2006-02-23,pubchem sid sdf file
+D_ribose_5_phosphate,D-Ribose 5-phosphate,ribose phosphate 5,R,no  ,3417.png,3417.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_D_glucosamine_6_phosphate,N-Acetyl-D-glucosamine 6-phosphate,glucosamine phosphate N_acetyl_D_6_,G,no  ,2965.png,2965.mol,2006-02-23,pubchem sid sdf file
+caffeine,Caffeine,caffeine,C,no  ,9684.png,9684.mol,2006-02-23,pubchem sid sdf file
+tryptamine,Tryptamine,tryptamine,T,no  ,3688.png,3688.mol,2006-02-23,pubchem sid sdf file
+L_lactic_acid,L-(+) Lactic acid,lactic,L,no  ,3486.png,3486.mol,2006-02-23,pubchem sid sdf file
+D_citrulline,D-Citrulline,citrulline,C,no  ,254119.png,254119.mol,2006-02-23,pubchem sid sdf file
+2_deoxyguanosine_5_triphosphate,2'-Deoxyguanosine 5'-triphosphate,deoxyguanosine triphosphate,D,no  ,207063.png,207063.mol,2012-10-26,pubchem sid sdf file
+L_carnitine,L(-)-Carnitine,carnitine,C,no  ,154219.png,154219.mol,2006-02-23,pubchem sid sdf file
+maleic_acid,Maleic Acid,maleic,M,no  ,4579.png,4579.mol,2006-02-23,pubchem sid sdf file
+L_arabinose,L-(+)-Arabinose,arabinose,A,no  ,5591.png,5591.mol,2006-02-23,pubchem sid sdf file
+D_galacturonic_acid,D-Galacturonic acid,galacturonic,G,no  ,3627.png,3627.mol,2006-02-23,pubchem sid sdf file
+quinolinic_acid,Quinolinic acid,quinolinic,Q,no  ,6487.png,6487.mol,2006-02-23,pubchem sid sdf file
+phenylacetic_acid,Phenylacetic acid,phenylacetic,P,no  ,9297.png,9297.mol,2006-02-23,pubchem sid sdf file
+raffinose,Raffinose,raffinose,R,no  ,3775.png,3775.mol,2006-02-23,pubchem sid sdf file
+DL_serine,DL-Serine,serine,S,no  ,3982.png,3982.mol,2006-02-23,pubchem sid sdf file
+4_nitrophenol,4-Nitrophenol,nitrophenol,N,no  ,4127.png,4127.mol,2006-02-23,pubchem sid sdf file
+trimethylamine,Trimethylamine,trimethylamine,T,no  ,3844.png,3844.mol,2006-02-23,pubchem sid sdf file
+D_L_glyceraldehyde,"D,L-Glyceraldehyde",glyceraldehyde,G,no  ,5231.png,5231.mol,2006-02-23,pubchem sid sdf file
+FAD,FAD,fad,F,no  ,152122.png,152122.mol,2006-02-23,pubchem sid sdf file
+biotin,(+)-Biotin,biotin,B,no  ,3420.png,3420.mol,2006-02-23,pubchem sid sdf file
+polygalacturonic_acid,Polygalacturonic acid,polygalacturonic,P,no  ,3885810.png,3885810.mol,2006-03-10,pubchem sid sdf file
+D_glucono_1_5_lactone,"D-Glucono-1,5-lactone",gluconolactone,G,no  ,3498.png,3498.mol,2006-02-23,pubchem sid sdf file
+N_acetyl_D_glucosamine,N-Acetyl-D-glucosamine,glucosamine acetyl,G,no  ,166661.png,166661.mol,2006-02-23,pubchem sid sdf file
+glycogen,Glycogen,glycogen,G,no  ,3482.png,3482.mol,2006-02-23,pubchem sid sdf file
+melibiose,Melibiose,melibiose,M,no  ,7769.png,7769.mol,2006-02-23,pubchem sid sdf file
+L_gulonolactone,L-Gulonolactone,gulonolactone,G,no  ,4282.png,4282.mol,2006-02-23,pubchem sid sdf file
+D_alanine,D-Alanine,alanine,A,no  ,3433.png,3433.mol,2006-02-23,pubchem sid sdf file
+DL_pipecolic_acid,DL-Pipecolic acid,pipecolic,P,no  ,3698.png,3698.mol,2006-02-23,pubchem sid sdf file
+L_malic_acid,L-Malic acid,malic,M,no  ,3449.png,3449.mol,2006-02-23,pubchem sid sdf file
+D_saccharate,D-Saccharate,saccharate,S,no  ,668181.png,668181.mol,2006-02-23,pubchem sid sdf file
+stachyose,Stachyose,stachyose,S,no  ,4765.png,4765.mol,2006-02-23,pubchem sid sdf file
+N_N_dimethylglycine,"N,N-Dimethylglycine",dimethylglycine,D,no  ,4271.png,4271.mol,2006-02-23,pubchem sid sdf file
+isethionic_acid,Isethionic acid,isethionic,I,no  ,7545.png,7545.mol,2006-02-23,pubchem sid sdf file
+tyramine,Tyramine,tyramine,T,no  ,3766.png,3766.mol,2006-02-23,pubchem sid sdf file
+thymidine,Thymidine,thymidine,T,no  ,3514.png,3514.mol,2006-02-23,pubchem sid sdf file
+glycolate,Glycolate,glycolate,G,no  ,3460.png,3460.mol,2006-02-23,pubchem sid sdf file
+L_carnosine,L-Carnosine,carnosine,C,no  ,3676.png,3676.mol,2006-02-23,pubchem sid sdf file
+D_glucosamine,D-Glucosamine,glucosamine,G,no  ,3623.png,3623.mol,2006-02-23,pubchem sid sdf file
+1_3_dimethylurea,"1,3-Dimethylurea",dimethylurea,D,no  ,150345.png,150345.mol,2006-02-23,pubchem sid sdf file
+methyl_4_aminobutyrate,Methyl 4-aminobutyrate,aminobutyrate methyl,A,no  ,161621.png,161621.mol,2006-02-23,pubchem sid sdf file
+dAMP,dAMP,damp,D,no  ,3651.png,3651.mol,2006-04-06,pubchem sid sdf file
+Oxalosuccinate,Oxalosuccinate,oxalosuccinate,O,no  ,7753.png,7753.mol,2006-04-06,pubchem sid sdf file
+Salicylate,Salicylate,salicylate,S,no  ,4063.png,4063.mol,2006-04-06,pubchem sid sdf file
+dADP,dADP,dadp,D,no  ,3506.png,3506.mol,2006-04-06,pubchem sid sdf file
+D_Fructose_1_phosphate,D-Fructose 1-phosphate,fructose phosphate,F,no  ,4329.png,4329.mol,2006-04-06,pubchem sid sdf file
+ITP,ITP,itp,I,no  ,no,3381.mol,2006-04-06,pubchem sid sdf file
+Formaldehyde,Formaldehyde,formaldehyde,F,no  ,3367.png,3367.mol,2006-04-06,pubchem sid sdf file
+FMN,FMN,fmn,F,no  ,no,3361.mol,2006-04-06,pubchem sid sdf file
+Glycolaldehyde,Glycolaldehyde,glycolaldehyde,G,no  ,3564.png,3564.mol,2006-04-06,pubchem sid sdf file
+4_Hydroxybenzaldehyde,4-Hydroxybenzaldehyde,hydroxybenzaldehyde,H,no  ,3906.png,3906.mol,2006-04-06,pubchem sid sdf file
+Nicotinamide_D_ribonucleotide,Nicotinamide D-ribonucleotide,nicotinamide ribonucleotide,N,no  ,3741.png,3741.mol,2006-04-06,pubchem sid sdf file
+Acetyl_phosphate,Acetyl phosphate,acetyl phosphate,A,no  ,3527.png,3527.mol,2006-04-06,pubchem sid sdf file
+3_4_Hydroxyphenyl_pyruvate,3-(4-Hydroxyphenyl)pyruvate,hydroxyphenyl pyruvate,H,no  ,4406.png,4406.mol,2006-04-06,pubchem sid sdf file
+NADP,NADP+,nadp,N,no  ,3308.png,3308.mol,2006-04-06,pubchem sid sdf file
+4_Nitrophenyl_phosphate,4-Nitrophenyl phosphate,nitrophenyl phosphate,N,no  ,6198.png,6198.mol,2006-04-06,pubchem sid sdf file
+4_Nitrocatechol,4-Nitrocatechol,nitrocatechol,N,no  ,5299.png,5299.mol,2006-04-06,pubchem sid sdf file
+UDP,UDP,udp,U,no  ,3317.png,3317.mol,2006-04-06,pubchem sid sdf file
+Formamide,Formamide,formamide,F,no  ,3771.png,3771.mol,2006-04-06,pubchem sid sdf file
+R_Lactate,(R)-Lactate,lactate,L,no  ,3555.png,3555.mol,2006-04-06,pubchem sid sdf file
+GDP,GDP,gdp,G,no  ,3337.png,3337.mol,2006-04-06,pubchem sid sdf file
+CoA,CoA,coa,C,no  ,3312.png,3312.mol,2006-04-06,pubchem sid sdf file
+CDP,CDP,cdp,C,no  ,3412.png,3412.mol,2006-04-06,pubchem sid sdf file
+D_Aspartate,D-Aspartate,aspartate,A,no  ,3692.png,3692.mol,2006-04-06,pubchem sid sdf file
+Thiamin,Thiamin,thiamin,T,no  ,3668.png,3668.mol,2006-04-06,pubchem sid sdf file
+D_Fructose_2_6_bisphosphate,"D-Fructose 2,6-bisphosphate",fructose bisphosphate,F,no  ,3934.png,3934.mol,2006-04-06,pubchem sid sdf file
+Ethanolamine,Ethanolamine,ethanolamine,E,no  ,3489.png,3489.mol,2006-04-06,pubchem sid sdf file
+CTP,CTP,ctp,C,no  ,3363.png,3363.mol,2006-04-06,pubchem sid sdf file
+D_Ribulose_5_phosphate,D-Ribulose 5-phosphate,ribulose phosphate,R,no  ,655036.png,655036.mol,2006-04-06,pubchem sid sdf file
+Urocanate,Urocanate,urocanate,U,no  ,4043.png,4043.mol,2006-04-06,pubchem sid sdf file
+UMP,UMP,ump,U,no  ,no,3405.mol,2006-04-06,pubchem sid sdf file
+Nicotinamide,Nicotinamide,nicotinamide,N,no  ,3453.png,3453.mol,2006-04-06,pubchem sid sdf file
+DL_Alanine,Alanine,alanine,A,no  ,4590.png,4590.mol,2006-04-06,pubchem sid sdf file
+Orotate,Orotate,orotate,O,no  ,3589.png,3589.mol,2006-04-06,pubchem sid sdf file
+Benzonitrile,Benzonitrile,benzonitrile,B,no  ,12002.png,12002.mol,2006-04-06,pubchem sid sdf file
+Choline,Choline,choline,C,no  ,3414.png,3414.mol,2006-04-06,pubchem sid sdf file
+Acetophenone,Acetophenone,acetophenone,A,no  ,9324.png,9324.mol,2006-04-06,pubchem sid sdf file
+Pantothenate,Pantothenate,pantothenate,P,no  ,4121.png,4121.mol,2006-04-06,pubchem sid sdf file
+Pyridoxine,Pyridoxine,pyridoxine,P,no  ,149073.png,149073.mol,2006-04-06,pubchem sid sdf file
+S_Adenosyl_L_homocysteine,S-Adenosyl-L-homocysteine,adenosyl homocysteine,A,no  ,3323.png,3323.mol,2006-04-06,pubchem sid sdf file
+Phenol,Phenol,phenol,P,no  ,3446.png,3446.mol,2006-04-06,pubchem sid sdf file
+Selenomethionine,Selenomethionine,selenomethionine,S,no  ,7713.png,7713.mol,2006-04-06,pubchem sid sdf file
+UDPglucuronate,UDP glucuronate,udp glucuronate,U,no  ,3467.png,3467.mol,2006-04-06,pubchem sid sdf file
+Hydroquinone,Hydroquinone,hydroquinone,H,no  ,3812.png,3812.mol,2006-04-06,pubchem sid sdf file
+Methanol,Methanol,methanol,M,no  ,3432.png,3432.mol,2006-04-06,pubchem sid sdf file
+UTP,UTP,utp,U,no  ,3375.png,3375.mol,2006-04-06,pubchem sid sdf file
+dTMP,dTMP,dtmp,D,no  ,3655.png,3655.mol,2006-04-06,pubchem sid sdf file
+Ethanol,Ethanol,ethanol,E,no  ,3752.png,3752.mol,2006-04-06,pubchem sid sdf file
+D_Glyceraldehyde,D-Glyceraldehyde,glyceraldehyde,G,no  ,3856.png,3856.mol,2006-04-06,pubchem sid sdf file
+Folate,Folate,folate,F,no  ,3787.png,3787.mol,2006-04-06,pubchem sid sdf file
+Benzoate,Benzoate,benzoate,B,no  ,3480.png,3480.mol,2006-04-06,pubchem sid sdf file
+1_2_Propanediol,"1,2-Propanediol",Propanediol_2,P,no  ,1030.png,1030.mol,2007-11-16,pubchem cid sdf file
+1_3_Propanediol,"1,3-Propanediol",Propanediol_3,P,no  ,10442.png,10442.mol,2007-11-16,pubchem cid sdf file
+1_amino_2_propanol,1-amino-2-propanol,amino_2_propanol,A,no  ,4.png,4.mol,2007-11-16,pubchem cid sdf file
+Quinic_acid,"(1R,3R,4R,5R)-(-)-Quinic acid",Quinic acid,Q,no  ,6508.png,6508.mol,2007-11-16,pubchem cid sdf file
+2_Amino_1_phenylethanol,2-Amino-1-phenylethanol,Amino-1-phenylethanol,A,no  ,1000.png,1000.mol,2007-12-04,pubchem cid sdf file
+2_Aminoethyl_dihydrogen_phosphate,2-Aminoethyl dihydrogen phosphate,Aminoethyl dihydrogen phosphate,A,no  ,1015.png,1015.mol,2007-12-04,pubchem cid sdf file
+2_Aminoethylphosphonic_acid,2-Aminoethylphosphonic acid,aminoethylphosphonic,A,no  ,339.png,339.mol,2007-12-04,pubchem cid sdf file
+2_Aminophenol,2-Aminophenol,Aminophenol,A,no  ,5801.png,5801.mol,2007-12-04,pubchem cid sdf file
+Cytidine_5_monophosphate,Cytidine-5'-monophosphate,cytidine-5'-monophosphate,C,no  ,6131.png,6131.mol,2007-12-11,pubchem cid sdf file
+6_aminopenicillanic_acid,6-aminopenicillanic acid,aminopenicillanic,A,no  ,11082.png,11082.mol,2007-12-11,pubchem cid sdf file
+beta_gentiobiose,beta-gentiobiose,gentiobiose,G,no  ,5460026.png,5460026.mol,2007-12-11,pubchem cid sdf file
+d_desthiobiotin,d-desthiobiotin,desthiobiotin,D,no  ,445027.png,445027.mol,2007-12-11,pubchem cid sdf file
+D_Salicin,D-Salicin,Salicin,S,no  ,439503.png,439503.mol,2007-12-11,pubchem cid sdf file
+Epinephrine,Epinephrine,Epinephrine,E,no  ,5816.png,5816.mol,2007-12-11,pubchem cid sdf file
+Gibberellic_acid,Gibberellic acid,Gibberellic,G,no  ,6466.png,6466.mol,2007-12-11,pubchem cid sdf file
+sinapic_acid,Sinapic acid,Sinapic,S,no  ,637775.png,637775.mol,2007-12-11,pubchem cid sdf file
+3_Methyl_2_oxopentanoic_acid,3-Methyl-2-oxopentanoic acid,methyloxopentanoic,M,no  ,47.png,47.mol,2007-12-20,pubchem cid sdf file
+2_Deoxyuridine,2'-Deoxyuridine,deoxyuridine,D,no  ,13712.png,13712.mol,2007-12-20,pubchem cid sdf file
+3_Hydroxyanthranilic_acid,3-Hydroxyanthranilic acid,hydroxyanthranilic,H,no  ,86.png,86.mol,2007-12-20,pubchem cid sdf file
+3_4_Dihydroxy_L_phenylalanine,"3,4-Dihydroxy-L-phenylalanine",dihydroxyphenylalanine,D,no  ,6047.png,6047.mol,2007-12-20,pubchem cid sdf file
+2_Deoxycytidine,2'-Deoxycytidine,deoxycytidine,D,no  ,637.png,637.mol,2007-12-20,pubchem cid sdf file
+3_hydroxybenzoic_acid,3-hydroxybenzoic acid,hydroxybenzoic3,H,no  ,7420.png,7420.mol,2007-12-20,pubchem cid sdf file
+2_ketobutyric_acid,2-ketobutyric acid,ketobutyric,K,no  ,58.png,58.mol,2007-12-20,pubchem cid sdf file
+2_5_dihydroxybenzoic_acid,"2,5-dihydroxybenzoic acid",dihydroxybenzoic,D,no  ,3469.png,3469.mol,2007-12-20,pubchem cid sdf file
+3_5_Diiodo_L_tyrosine,"3,5-Diiodo-L-tyrosine",diiodotyrosine,D,no  ,9305.png,9305.mol,2007-12-20,pubchem cid sdf file
+3_4_Dihydroxybenzoic_acid,"3,4-Dihydroxybenzoic acid",dihydroxybenzoic34,D,no  ,72.png,72.mol,2007-12-20,pubchem cid sdf file
+3_4_Dihydroxyphenylacetic_acid,"3,4-Dihydroxyphenylacetic acid",dihydroxyphenylacetic34,D,no  ,547.png,547.mol,2007-12-20,pubchem cid sdf file
+2_Furoic_acid,2-Furoic acid,furoic,F,no  ,6919.png,6919.mol,2007-12-20,pubchem cid sdf file
+3_2_Hydroxyphenylpropionic_acid,3-(2-Hydroxyphenyl)propionic acid,hydroxyphenylpropionic,H,no  ,873.png,873.mol,2007-12-20,pubchem cid sdf file
+2_Chlorobenzoic_acid,2-Chlorobenzoic acid,chlorobenzoic,C,no  ,8374.png,8374.mol,2007-12-20,pubchem cid sdf file
+3_Ureidopropionic_acid,3-Ureidopropionic acid,ureidopropionic,U,no  ,111.png,111.mol,2007-12-20,pubchem cid sdf file
+3_Methylcatechol,3-Methylcatechol,methylcatechol,M,no  ,340.png,340.mol,2007-12-20,pubchem cid sdf file
+3_Hydroxy_3_methylglutaric_acid,3-Hydroxy-3-methylglutaric acid,hydroxymethylglutaric,H,no  ,1662.png,1662.mol,2007-12-20,pubchem cid sdf file
+3_5_dichlorocatechol,"3,5-dichlorocatechol",dichlorocatechol,D,no  ,26173.png,26173.mol,2007-12-20,pubchem cid sdf file
+3_Iodo_L_tyrosine,3-Iodo_L-tyrosine,iodotyrosine,I,no  ,439744.png,439744.mol,2007-12-20,pubchem cid sdf file
+2_Hydroxyisocaproic_acid,2-Hydroxyisocaproic acid,hydroxyisocaproic,H,no  ,92779.png,92779.mol,2007-12-20,pubchem cid sdf file
+3_hydroxyphenylacetic_acid,3-hydroxyphenylacetic acid,hydroxyphenylacetic,H,no  ,12122.png,12122.mol,2007-12-20,pubchem cid sdf file
+gamma_Aminobutyric_acid,gamma-Aminobutyric acid,aminobutyric-g,A,no  ,119.png,119.mol,2008-01-07,pubchem cid sdf file
+6_Hydroxynicotinic_acid,6-Hydroxynicotinic acid,hydroxynicotinic,H,no  ,72924.png,72924.mol,2008-01-07,pubchem cid sdf file
+L_Dihydroorotic_acid,L-Dihydroorotic acid,dihydroorotic,D,no  ,439216.png,439216.mol,2008-01-07,pubchem cid sdf file
+vanillin,vanillin,vanillin,V,no  ,1183.png,1183.mol,2008-01-07,pubchem cid sdf file
+4_Guanidinobutyric_acid,4-Guanidinobutyric acid,guanidinobutyric,G,no  ,500.png,500.mol,2008-01-07,pubchem cid sdf file
+Valeric_acid,Valeric acid,valeric,V,no  ,7991.png,7991.mol,2008-01-07,pubchem cid sdf file
+Barbituric_acid,Barbituric acid,barbituric,B,no  ,6211.png,6211.mol,2008-01-07,pubchem cid sdf file
+trans_2_Hydroxycinnamic_acid,trans-2-Hydroxycinnamic acid,hydroxycinnamic,H,no  ,637540.png,637540.mol,2008-01-07,pubchem cid sdf file
+Adenosine_3_monophosphate,Adenosine-3'-monophosphate,adenosinemonophosphate3,A,no  ,41211.png,41211.mol,2008-01-07,pubchem cid sdf file
+m_Cresol,m-Cresol,cresol,C,no  ,342.png,342.mol,2008-01-07,pubchem cid sdf file
+Hexanoic_acid,Hexanoic acid,hexanoic,H,no  ,8892.png,8892.mol,2008-01-07,pubchem cid sdf file
+DL_threo_beta_Methylaspartate,DL-threo-beta-Methylaspartate,threobetamethylaspartate,T,no  ,852.png,852.mol,2008-01-07,pubchem cid sdf file
+Nepsilon_Acetyl_L_lysine,Nepsilon-Acetyl-L-lysine,acetyllysinenepsilon,A,no  ,92832.png,92832.mol,2008-01-07,pubchem cid sdf file
+Pimelic_acid,Pimelic acid,pimelic_acid,P,no  ,385.png,385.mol,2008-01-07,pubchem cid sdf file
+4_methyl_5_thiazoleethanol,4-methyl-5-thiazoleethanol,methylthiazoleethanol,M,no  ,1136.png,1136.mol,2008-01-07,pubchem cid sdf file
+p_Anisic_acid,p-Anisic_acid,anisic_acid,A,no  ,7478.png,7478.mol,2008-01-07,pubchem cid sdf file
+chlorohydroquinone,chlorohydroquinone,chlorohydroquinone,C,no  ,301.png,301.mol,2008-01-07,pubchem cid sdf file
+2_chloroethanol,2-chloroethanol,chloroethanol-2,C,no  ,34.png,34.mol,2008-01-18,pubchem cid sdf file
+2_hydroxybutanoic_acid,(R)-2-hydroxybutyric acid,hydroxybutyric-2,H,no  ,449265.png,449265.mol,2008-01-18,pubchem cid sdf file
+2_hydroxyethylacetylene,3-butyn-1-ol,hydroxyethylacetylene,H,no  ,13566.png,13566.mol,2008-01-18,pubchem cid sdf file
+2_propyn_1_ol,Propargyl alcohol,propargylalcohol,P,no  ,7859.png,7859.mol,2008-01-18,pubchem cid sdf file
+5_hydroxyindoleacetate,5-hydroxyindole-3-acetic acid,hydroxyindoleacetic,H,no  ,1826.png,1826.mol,2008-01-18,pubchem cid sdf file
+arbutin,arbutin,arbutin,A,no  ,440936.png,440936.mol,2008-01-18,pubchem cid sdf file
+chloroacetic_acid,Chloroacetic Acid,chloroacetic,C,no  ,300.png,300.mol,2008-01-18,pubchem cid sdf file
+cis_3_chloroacrylic_acid,cis-3-chloroacrylic acid,chloroacrylic_cis-3-,C,no  ,643794.png,643794.mol,2008-01-18,pubchem cid sdf file
+cis_3_hexen_1_ol,cis-3-hexen-1-ol,hexen_cis-3-,H,no  ,5281167.png,5281167.mol,2008-01-18,pubchem cid sdf file
+decanoic_acid,decanoic acid,decanoic,D,no  ,2969.png,2969.mol,2008-01-18,pubchem cid sdf file
+diethanolamine,diethanolamine,diethanolamine,D,no  ,8113.png,8113.mol,2008-01-18,pubchem cid sdf file
+epsilon_caprolactam,epsilon-caprolactam,caprolactamepsilon,C,no  ,7768.png,7768.mol,2008-01-18,pubchem cid sdf file
+isovaleric_acid,isovaleric-acid,isovaleric,I,no  ,10430.png,10430.mol,2008-01-18,pubchem cid sdf file
+L_menthone,L-menthone,menthoneL,M,no  ,26447.png,26447.mol,2008-01-18,pubchem cid sdf file
+N_carbamyl_L_glutamate,N-carbamyl-L-glutamic acid,carbamylglutamicNL,C,no  ,3679006.png,3679006.mol,2008-01-18,pubchem cid sdf file
+phenethylamine,Phenethylamine,phenethylamine,P,no  ,1001.png,1001.mol,2008-01-18,pubchem cid sdf file
+suberic_acid,suberic acid,suberic,S,no  ,10457.png,10457.mol,2008-01-18,pubchem cid sdf file
+triethanolamine,triethanolamine,triethanolamine,T,no  ,7618.png,7618.mol,2008-01-18,pubchem cid sdf file
+L_Cysteic_acid,L-Cysteic acid,cysteic acid_l,C,no  ,72886.png,72886.mol,2008-01-25,pubchem cid sdf file
+R_Pantolactone,(R)-(-)-Pantolactone,pantolactoneR,P,no  ,439368.png,439368.mol,2008-01-25,pubchem cid sdf file
+N_Acetyl_L_glutamic_acid,N-Acetyl-L-glutamic acid,acetylglutamicacidNL,A,no  ,70914.png,70914.mol,2008-01-25,pubchem cid sdf file
+4_Methyl_2_oxovaleric_acid,4-Methyl-2-oxovaleric acid,methyloxovaleric_acid42,M,no  ,70.png,70.mol,2008-01-25,pubchem cid sdf file
+Guanidineacetic_acid,Guanidineacetic acid,guanidineacetic_acid,G,no  ,763.png,763.mol,2008-01-25,pubchem cid sdf file
+Pyrocatechol,Pyrocatechol,pyrocatechol,P,no  ,289.png,289.mol,2008-01-25,pubchem cid sdf file
+Chlorogenic_acid,Chlorogenic acid,chlorogenic_acid,C,no  ,1794427.png,1794427.mol,2008-01-25,pubchem cid sdf file
+Cysteamine,Cysteamine,Cysteamine,C,no  ,6058.png,6058.mol,2008-01-25,pubchem cid sdf file
+Gallic_acid,Gallic acid,gallic_acid,G,no  ,370.png,370.mol,2008-01-25,pubchem cid sdf file
+DL_2_Aminobutyric_acid,DL-2-Aminobutyric acid,aminobutyric_acidDL_2_,A,no  ,6657.png,6657.mol,2008-01-25,pubchem cid sdf file
+Phthalic_acid,Phthalic acid,phthalic_acid,P,no  ,1017.png,1017.mol,2008-01-25,pubchem cid sdf file
+Acrylamide,Acrylamide,acrylamide,A,no  ,6579.png,6579.mol,2008-01-25,pubchem cid sdf file
+6_Aminohexanoic_acid,6-Aminohexanoic acid,aminohexanoic_acid6,A,no  ,564.png,564.mol,2008-01-25,pubchem cid sdf file
+4_Chlorophenylacetate,4-Chlorophenylacetate,chlorophenylacetate4,C,no  ,15880.png,15880.mol,2008-01-25,pubchem cid sdf file
+alpha_Methylaminomethylbenzyl_alcohol,alpha-((Methylamino)methyl)benzyl alcohol,alpha_Methylaminomethylbenzyl_alcohol,A,no  ,913.png,913.mol,2008-01-25,pubchem cid sdf file
+DL_Methionine_sulfoxide,DL-Methionine sulfoxide,methionine_sulfoxideDL,M,no  ,847.png,847.mol,2008-01-25,pubchem cid sdf file
+Methylmalonic_acid,Methylmalonic acid,methylmalonic_acid,M,no  ,487.png,487.mol,2008-02-01,pubchem cid sdf file
+O_Phospho_L_serine,O-Phospho-L-serine,phospho_serineOL,P,no  ,68841.png,68841.mol,2008-02-01,pubchem cid sdf file
+Ethanesulfonic_acid,Ethanesulfonic acid,ethanesulfonic_acid,E,no  ,3717105.png,3717105.mol,2010-12-07,pubchem cid sdf file
+DL_alpha_epsilon_Diaminopimelic_acid,"DL-alpha,epsilon-Diaminopimelic acid",diaminopimelic_acid_alpha_epsilon_DL,D,no  ,865.png,865.mol,2008-02-01,pubchem cid sdf file
+Butyric_acid,Butyric acid,butyric_acid,B,no  ,264.png,264.mol,2008-02-01,pubchem cid sdf file
+Ala_Ala,Ala-Ala,ala_ala,A,no  ,5484352.png,5484352.mol,2008-02-01,pubchem cid sdf file
+Norepinephrine,(-)-Norepinephrine,norepinephrine,N,no  ,439260.png,439260.mol,2008-02-01,pubchem cid sdf file
+Cyclohexanone,Cyclohexanone,cyclohexanone,C,no  ,7967.png,7967.mol,2008-02-01,pubchem cid sdf file
+Glutaric_acid,Glutaric acid,glutaric_acid,G,no  ,743.png,743.mol,2008-02-01,pubchem cid sdf file
+Benzyl_alcohol,Benzyl alcohol,benzyl_alcohol,B,no  ,244.png,244.mol,2008-02-01,pubchem cid sdf file
+Hippuric_acid,Hippuric acid,hippuric_acid,H,no  ,464.png,464.mol,2008-02-01,pubchem cid sdf file
+dl_Indole_3_lactic_acid,dl-Indole-3-lactic acid,indolelactic_acid_dl_3,I,no  ,92904.png,92904.mol,2008-02-01,pubchem cid sdf file
+Kynurenic_acid,Kynurenic acid,kynurenic_acid,K,no  ,3845.png,3845.mol,2008-02-01,pubchem cid sdf file
+L_Norleucine,L-Norleucine,norleucine_L,N,no  ,21236.png,21236.mol,2008-02-01,pubchem cid sdf file
+Dihydrocoumarin,Dihydrocoumarin,dihydrocoumarin,D,no  ,660.png,660.mol,2008-02-01,pubchem cid sdf file
+Tropic_acid,Tropic acid,tropic_acid,T,no  ,10726.png,10726.mol,2008-02-01,pubchem cid sdf file
+p_Toluic_acid,p-Toluic acid,toluic_acid_p,T,no  ,7470.png,7470.mol,2008-02-01,pubchem cid sdf file
+Resorcinol,Resorcinol,resorcinol,R,no  ,5054.png,5054.mol,2008-02-01,pubchem cid sdf file
+Acetylenedicarboxylic_acid,Acetylenedicarboxylic acid,acetylenedicarboxylic_acid,A,no  ,371.png,371.mol,2008-02-01,pubchem cid sdf file
+quinaldic_acid,quinaldic acid,quinaldic_acid,Q,no  ,7124.png,7124.mol,2008-02-01,pubchem cid sdf file
+4_Chlorocatechol,4-Chlorocatechol,chlorocatechol_4,C,no  ,16496.png,16496.mol,2008-02-01,pubchem cid sdf file
+5_methylcytosine,5-methylcytosine,methylcytosine5,M,no  ,65040.png,65040.mol,2011-01-19,pubchem cid sdf file
+4_Hydroxy_3_methoxycinnamaldehyde,4-Hydroxy-3-methoxycinnamaldehyde,hydroxy_methoxycinnamaldehyde_43,H,no  ,5280536.png,5280536.mol,2008-02-01,pubchem cid sdf file
+N_acetyl_L_aspartic_acid,N-acetyl-L-aspartic acid,acetyl_aspartic_acid_NL,A,no  ,65065.png,65065.mol,2008-02-05,pubchem cid sdf file
+Adipic_acid,Adipic acid,adipic_acid,A,no  ,196.png,196.mol,2008-02-05,pubchem cid sdf file
+Dihydrouracil,Dihydrouracil,dihydrouracil,D,no  ,649.png,649.mol,2008-02-05,pubchem cid sdf file
+Trimethylamine_N_oxide,Trimethylamine N-oxide,trimethylamine_oxide_N,T,no  ,1145.png,1145.mol,2008-02-05,pubchem cid sdf file
+R_Citramalic_acid,R-(-)-Citramalic acid,citramalic_acid_R,C,no  ,439766.png,439766.mol,2008-02-05,pubchem cid sdf file
+DL_2_Aminoadipic_acid,DL-2-Aminoadipic acid,aminoadipic_acid_DL2,A,no  ,469.png,469.mol,2008-02-05,pubchem cid sdf file
+DL_homocysteine,DL-homocysteine,homocysteineDL,H,no  ,778.png,778.mol,2008-02-05,pubchem cid sdf file
+Cyclohexanol,Cyclohexanol,cyclohexanol,C,no  ,7966.png,7966.mol,2008-02-05,pubchem cid sdf file
+Pyridine,Pyridine,pyridine,P,no  ,1049.png,1049.mol,2008-02-05,pubchem cid sdf file
+o_Cresol,o-Cresol,cresol_o,C,no  ,335.png,335.mol,2008-02-05,pubchem cid sdf file
+Glutaconic_acid,Glutaconic acid,glutaconic_acid,G,no  ,5280498.png,5280498.mol,2008-02-05,pubchem cid sdf file
+Guaiacol,Guaiacol,guaiacol,G,no  ,460.png,460.mol,2008-02-05,pubchem cid sdf file
+Allantoin,Allantoin,allantoin,A,no  ,204.png,204.mol,2008-02-05,pubchem cid sdf file
+4_Chlorobenzoic_acid,4-Chlorobenzoic acid,chlorobenzoic_acid_4,C,no  ,6318.png,6318.mol,2008-02-05,pubchem cid sdf file
+Isobutyric_acid,Isobutyric acid,isobutyric_acid,I,no  ,6590.png,6590.mol,2008-02-05,pubchem cid sdf file
+D_Glucosaminic_acid,D-Glucosaminic acid,glucosaminic_acid_D,G,no  ,73563.png,73563.mol,2008-02-05,pubchem cid sdf file
+4_Hydroxyphenylacetonitrile,4-Hydroxyphenylacetonitrile,hydroxyphenylacetonitrile4,H,no  ,26548.png,26548.mol,2008-02-05,pubchem cid sdf file
+L_homocitrulline,L-homocitrulline,homocitrulline_L,H,no  ,65072.png,65072.mol,2008-02-05,pubchem cid sdf file
+5_Hydroxymethyluracil,5-(Hydroxymethyl)uracil,hydroxymethyluracil,H,no  ,78168.png,78168.mol,2011-01-19,pubchem cid sdf file
+4_hydroxy_3_methoxybenzyl_alcohol,4-hydroxy-3-methoxybenzyl alcohol,hydroxy_methoxybenzyl_alcohol43,H,no  ,62348.png,62348.mol,2008-02-05,pubchem cid sdf file
+D_Panthenol,D-Panthenol,panthenol_D,P,no  ,131204.png,131204.mol,2008-02-05,pubchem cid sdf file
+propanol,propanol,propanol,P,no  ,1031.png,1031.mol,2008-02-05,pubchem cid sdf file
+butanol,butanol,butanol,B,no  ,263.png,263.mol,2008-02-05,pubchem cid sdf file
+L_Histidinol,L-Histidinol,histidinol_L,H,no  ,165271.png,165271.mol,2011-01-19,pubchem cid sdf file
+Npai_Methyl_L_histidine,1-Methyl-L-histidine,methylhistidine1L,M,no  ,92105.png,92105.mol,2008-02-07,pubchem cid sdf file
+D_Methionine,D-Methionine,methionine_D,M,no  ,84815.png,84815.mol,2008-02-07,pubchem cid sdf file
+Cyclohexylamine,Cyclohexylamine,cyclohexylamine,C,no  ,7965.png,7965.mol,2008-02-07,pubchem cid sdf file
+Hypotaurine,Hypotaurine,hypotaurine,H,no  ,107812.png,107812.mol,2008-02-07,pubchem cid sdf file
+Ureidosuccinic_acid,Ureidosuccinic acid,ureidosuccinic_acid,U,no  ,279.png,279.mol,2008-02-07,pubchem cid sdf file
+purine,purine,purine,P,no  ,1044.png,1044.mol,2008-02-07,pubchem cid sdf file
+4_Hydroxyphenylacetic_acid,4-Hydroxyphenylacetic acid,hydroxyphenylacetic_acid_4,H,no  ,127.png,127.mol,2008-02-07,pubchem cid sdf file
+5_Hydroxy_L_tryptophan,5-Hydroxy-L-tryptophan,hydroxy_tryptophan_5L,H,no  ,439280.png,439280.mol,2008-02-07,pubchem cid sdf file
+p_Cresol,p-Cresol,cresol_p,C,no  ,2879.png,2879.mol,2008-02-07,pubchem cid sdf file
+Ferulic_acid,Ferulic acid,ferulic_acid,F,no  ,445858.png,445858.mol,2008-02-07,pubchem cid sdf file
+Maleamic_acid,Maleamic acid,maleamic_acid,M,no  ,5280451.png,5280451.mol,2008-02-07,pubchem cid sdf file
+4_Chlorophenol,4-Chlorophenol,chlorophenol_4,C,no  ,4684.png,4684.mol,2008-02-07,pubchem cid sdf file
+4_Aminophenol,4-Aminophenol,aminophenol_4,A,no  ,403.png,403.mol,2008-02-07,pubchem cid sdf file
+trans_trans_Muconic_acid,trans-trans-Muconic acid,muconic_acid_trans_trans,M,no  ,5356793.png,5356793.mol,2008-02-07,pubchem cid sdf file
+Acetyl_L_carnitine,Acetyl-L-carnitine,acetyl_carnitine_L,A,no  ,7045767.png,7045767.mol,2011-01-21,pubchem cid sdf file
+Phthalaldehydic_acid,Phthalaldehydic acid,phthalaldehydic_acid,P,no  ,16211212_open_conf.png,16211212_open_conf.mol,2008-06-04,pubchem cid sdf file; altered
+DL_beta_leucine,DL-beta-leucine,leucine_DL_beta,L,no  ,193411.png,193411.mol,2008-02-07,pubchem cid sdf file
+Acetaldehyde_oxime_mixture,Acetaldehyde oxime mixture of syn and anti,acetaldehyde_oxime_mixture,A,no  ,5324279.png,5324279.mol,2008-02-07,pubchem cid sdf file
+4_Acetamidobutyric_acid,4-Acetamidobutyric acid,acetamidobutyric_acid_4,A,no  ,18189.png,18189.mol,2008-02-07,pubchem cid sdf file
+cis_1_2_cyclohexanediol,"cis-1,2-cyclohexanediol",cyclohexanediol_cis_1_2,C,no  ,92903.png,92903.mol,2008-02-07,pubchem cid sdf file
+biuret,biuret,biuret,B,no  ,7913.png,7913.mol,2008-02-07,pubchem cid sdf file
+Glyoxylic_acid,Glyoxylic acid,glyoxylic_acid,G,no  ,760.png,760.mol,2011-01-14,pubchem cid sdf file
+17_alpha_hydroxyprogesterone,17-alpha-hydroxyprogesterone,alphahydroxyprogesterone,A,no  ,6238.png,6238.mol,2008-04-17,pubchem cid sdf file
+3_2_hydroxyethyl_indole,3-(2-hydroxyethyl)indole,hydroxyethylindole,H,no  ,10685.png,10685.mol,2008-04-17,pubchem cid sdf file
+3_methylcrotonaldehyde,3-methylcrotonaldehyde,methylcrotonaldehyde3,M,no  ,61020.png,61020.mol,2008-04-17,pubchem cid sdf file
+4_methylcatechol,4-methylcatechol,methylcatechol4,M,no  ,9958.png,9958.mol,2008-04-17,pubchem cid sdf file
+5_pregnen_3_beta_ol_20_one,5-pregnen-3-beta-ol-20-one,pregnenbeta35,P,no  ,8955.png,8955.mol,2008-04-17,pubchem cid sdf file
+beta_sitosterol,beta-sitosterol,sitosterolbeta,S,no  ,222284.png,222284.mol,2008-04-17,pubchem cid sdf file
+N_acetyl_D_Phenyl_alanine,N-acetyl-D-Phenyl alanine,acetylPhenylalanineDN,A,no  ,101184.png,101184.mol,2008-04-17,pubchem cid sdf file
+octane,Octane,octane,O,no  ,356.png,356.mol,2008-04-17,pubchem cid sdf file
+phenyl_acetate,Phenyl Acetate,phenylacetate,P,no  ,31229.png,31229.mol,2008-04-17,pubchem cid sdf file
+progesterone,Progesterone,progesterone,P,no  ,5994.png,5994.mol,2008-04-17,pubchem cid sdf file
+R_2_Pyrrolidinone_5_carboxylate,R-(+)-2-Pyrrolidinone-5-carboxylate,pyrrolidinonecarboxylateR25,P,no  ,439685.png,439685.mol,2008-04-17,pubchem cid sdf file
+squalene,squalene,squalene,S,no  ,5280370.png,5280370.mol,2008-04-17,pubchem cid sdf file
+stearic_acid,Stearic Acid,stearicacid,S,no  ,5281.png,5281.mol,2008-04-17,pubchem cid sdf file
+vanillic_acid,vanillic acid,vanillicacid,V,no  ,8468.png,8468.mol,2008-04-17,pubchem cid sdf file
+1_hexadecanol,1-Hexadecanol,hexadecanol1,H,no  ,2682.png,2682.mol,2008-05-07,pubchem cid sdf file
+3_indoleacetonitrile,3-indoleacetonitrile,indoleacetonitrile3,I,no  ,351795.png,351795.mol,2008-05-07,pubchem cid sdf file
+5_alpha_cholestan_3_one,5-alpha-cholestan-3-one,alphacholestanone533,A,no  ,92128.png,92128.mol,2008-05-07,pubchem cid sdf file
+5_alpha_pregnane_3_20_dione,"5-alpha-pregnane-3,20-dione(allo)",alphapregnanedione5320,A,no  ,92810.png,92810.mol,2008-05-07,pubchem cid sdf file
+alpha_pinene_oxide,alpha-pinene-oxide,alphapineneoxide,A,no  ,91508.png,91508.mol,2008-05-07,pubchem cid sdf file
+epsilon_caprolactone,Epsilon-caprolactone,epsiloncaprolactone,E,no  ,10401.png,10401.mol,2008-05-07,pubchem cid sdf file
+ergosterol,Ergosterol,ergosterol,E,no  ,444679.png,444679.mol,2008-05-07,pubchem cid sdf file
+fenchol,Fenchol,fenchol,F,no  ,6997371.png,6997371.mol,2008-05-07,pubchem cid sdf file
+indanone,Indanone,indanone,I,no  ,6735.png,6735.mol,2008-05-07,pubchem cid sdf file
+linoleic_acid,Linoleic Acid,linoleicacid,L,no  ,5280450.png,5280450.mol,2008-05-07,pubchem cid sdf file
+neomenthol,"(1S,2S,5R)-(+)-neomenthol",neomenthol,N,no  ,439263.png,439263.mol,2008-05-07,pubchem cid sdf file
+nonanoic_acid,Nonanoic Acid,nonanoicacid,N,no  ,8158.png,8158.mol,2008-05-07,pubchem cid sdf file
+R_carvone,(R)-(-)-Carvone,carvoneR,C,no  ,439570.png,439570.mol,2008-05-07,pubchem cid sdf file
+retinyl_palmitate,Retinyl palmitate,retinylpalmitate,R,no  ,5280531.png,5280531.mol,2008-05-07,pubchem cid sdf file
+octanoic_acid,Octanoic Acid,octanoicacid,O,no  ,379.png,379.mol,2008-07-11,pubchem cid sdf file
+p_cymene,p-cymene,cymenep,C,no  ,7463.png,7463.mol,2008-07-11,pubchem cid sdf file
+terpinolene,Terpinolene,terpinolene,T,no  ,11463.png,11463.mol,2008-07-11,pubchem cid sdf file
+biphenyl,biphenyl,biphenyl,B,no  ,7095.png,7095.mol,2008-08-04,pubchem cid sdf file
+cholecalciferol,cholecalciferol,cholecalciferol,C,no  ,5280795.png,5280795.mol,2008-08-04,pubchem cid sdf file
+cuminaldehyde,cuminaldehyde,cuminaldehyde,C,no  ,326.png,326.mol,2008-08-04,pubchem cid sdf file
+dodecanoic_acid,Dodecanoic acid,dodecanoicacid,D,no  ,3893.png,3893.mol,2008-08-04,pubchem cid sdf file
+ergocalciferol,ergocalciferol,ergocalciferol,E,no  ,5280793.png,5280793.mol,2008-08-04,pubchem cid sdf file
+quinidine,quinidine,quinidine,Q,no  ,441074.png,441074.mol,2008-08-04,pubchem cid sdf file
+cortexolone,cortexolone,cortexolone,C,no  ,16219924.png,16219924.mol,2008-08-04,pubchem cid sdf file
+1_4_cyclohexanedione,"1,4-cyclohexanedione",cyclohexanedione14,C,no  ,12511.png,12511.mol,2008-09-24,pubchem cid sdf file
+2_indanone,2-Indanone,indanone2,I,no  ,11983.png,11983.mol,2008-09-24,pubchem cid sdf file
+2_methylbenzyl_alcohol,2-methylbenzyl alcohol,methylbenzylalcohol2,M,no  ,6994.png,6994.mol,2008-09-24,pubchem cid sdf file
+3_methylindole,3-methylindole,methylindole3,M,no  ,6736.png,6736.mol,2008-09-24,pubchem cid sdf file
+4_4_dichlorobenzophenone,"4,4-dichlorobenzophenone",dichlorobenzophenone44,D,no  ,7034.png,7034.mol,2008-09-24,pubchem cid sdf file
+4_chloroacetophenone,4-chloroacetophenone,chloroacetophenone4,C,no  ,7467.png,7467.mol,2008-09-24,pubchem cid sdf file
+4_cholesten_3_one,(+)-4-cholesten-3-one,cholestenone43,C,no  ,91477.png,91477.mol,2008-09-24,pubchem cid sdf file
+4_methylbenzyl_alcohol,4-methylbenzyl alcohol,methylbenzylalcohol4,M,no  ,11505.png,11505.mol,2008-09-24,pubchem cid sdf file
+9_fluorenone,9-fluorenone,fluorenone9,F,no  ,10241.png,10241.mol,2008-09-24,pubchem cid sdf file
+adrenosterone,adrenosterone,adrenosterone,A,no  ,223997.png,223997.mol,2008-09-24,pubchem cid sdf file
+eucalyptol,eucalyptol,eucalyptol,E,no  ,2758.png,2758.mol,2008-09-24,pubchem cid sdf file
+fluorene,fluorene,fluorene,F,no  ,6853.png,6853.mol,2008-09-24,pubchem cid sdf file
+jasmonic_acid,jasmonic acid,jasmonicacid,J,no  ,5281166.png,5281166.mol,2008-09-24,pubchem cid sdf file
+o_xylene,o-xylene,xyleneo,X,no  ,7237.png,7237.mol,2008-09-24,pubchem cid sdf file
+p_tolualdehyde,p-tolualdehyde,tolualdehydep,T,no  ,7725.png,7725.mol,2008-09-24,pubchem cid sdf file
+stigmasterol,stigmasterol,stigmasterol,S,no  ,5281330.png,5281330.mol,2008-09-24,pubchem cid sdf file
+11_alpha_hydroxyprogesterone,11-alpha-hydroxyprogesterone,alphahydroxyprogesterone,A,no  ,92730.png,92730.mol,2008-12-10,pubchem cid sdf file
+1_2_3_4_tetrahydronaphthalene,"1,2,3,4-tetrahydronaphthalene",tetrahydronaphthalene,T,no  ,8404.png,8404.mol,2008-12-10,pubchem cid sdf file
+1_methylnaphthalene,1-methylnaphthalene,methylnaphthalene,M,no  ,7002.png,7002.mol,2008-12-10,pubchem cid sdf file
+1_naphthaldehyde,1-naphthaldehyde,naphthaldehyde,N,no  ,6195.png,6195.mol,2008-12-10,pubchem cid sdf file
+1R_2R_4R_dihydrocarveol,"(1R,2R,4R)-dihydrocarveol",dihydrocarveol,D,no  ,443163.png,443163.mol,2008-12-10,pubchem cid sdf file
+1R_myrtenal,(1R)-(-)-myrtenal,myrtenal1R-,M,no  ,61130.png,61130.mol,2008-12-10,pubchem cid sdf file
+21_hydroxyprogesterone,21-hydroxyprogesterone,hydroxyprogesterone21,H,no  ,6166.png,6166.mol,2008-12-10,pubchem cid sdf file
+2_hexenal,2-hexenal,hexenal2,H,no  ,5281168.png,5281168.mol,2008-12-10,pubchem cid sdf file
+2_methylnaphthalene,2-methylnaphthalene,methylnaphthalene2,M,no  ,7055.png,7055.mol,2008-12-10,pubchem cid sdf file
+3_hydroxy_2_methyl_4_pyrone,3-hydroxy-2-methyl-4-pyrone,hydroxymethylpyrone324,H,no  ,8369.png,8369.mol,2008-12-10,pubchem cid sdf file
+3_isochromanone,3-isochromanone,isochromanone3,I,no  ,78092.png,78092.mol,2008-12-10,pubchem cid sdf file
+3_methylbenzyl_alcohol,3-methylbenzyl alcohol,methylbenzylalcohol3,M,no  ,11476.png,11476.mol,2008-12-10,pubchem cid sdf file
+5_alpha_cholestan_3_beta_ol,5-alpha-cholestan-3-beta-ol,cholestan5alpha3betaol,C,no  ,6665.png,6665.mol,2008-12-10,pubchem cid sdf file
+alpha_lipoic_acid,alpha-lipoic acid,lipoicacidalpha,L,no  ,864.png,864.mol,2008-12-10,pubchem cid sdf file
+androsterone,androsterone,androsterone,A,no  ,5879.png,5879.mol,2008-12-10,pubchem cid sdf file
+cholesteryl_palmitate,cholesteryl palmitate,cholesterylpalmitate,C,no  ,246520.png,246520.mol,2008-12-10,pubchem cid sdf file
+cyclohexane,cyclohexane,cyclohexane,C,no  ,8078.png,8078.mol,2008-12-10,pubchem cid sdf file
+cyclohexanecarboxylic_acid,cyclohexanecarboxylic acid,cyclohexanecarboxylicacid,C,no  ,7413.png,7413.mol,2008-12-10,pubchem cid sdf file
+delta_tocopherol,delta-tocopherol,tocopheroldelta,T,no  ,92094.png,92094.mol,2008-12-10,pubchem cid sdf file
+dibenzofuran,dibenzofuran,dibenzofuran,D,no  ,568.png,568.mol,2008-12-10,pubchem cid sdf file
+estrone,estrone,estrone,E,no  ,5870.png,5870.mol,2008-12-10,pubchem cid sdf file
+ethyl_heptanoate,ethyl heptanoate,ethylheptanoate,E,no  ,7797.png,7797.mol,2008-12-10,pubchem cid sdf file
+methyl_jasmonate,methyl jasmonate,methyljasmonate,M,no  ,62388.png,62388.mol,2008-12-10,pubchem cid sdf file
+m_tolualdehyde,m-tolualdehyde,tolualdehydem,T,no  ,12105.png,12105.mol,2008-12-10,pubchem cid sdf file
+m_toluic_acid,m-toluic acid,toluicacidm,T,no  ,7418.png,7418.mol,2008-12-10,pubchem cid sdf file
+m_xylene,m-xylene,xylenem,X,no  ,7929.png,7929.mol,2008-12-10,pubchem cid sdf file
+myrtenol,myrtenol,myrtenol,M,no  ,10582.png,10582.mol,2008-12-10,pubchem cid sdf file
+o_tolualdehyde,o-tolualdehyde,tolualdehydeo,T,no  ,10722.png,10722.mol,2008-02-13,pubchem cid sdf file
+o_toluic_acid,o-toluic acid,toluicacido,T,no  ,8373.png,8373.mol,2008-12-10,pubchem cid sdf file
+pentadecanoic_acid,pentadecanoic acid,pentadecanoicacid,P,no  ,13849.png,13849.mol,2008-12-10,pubchem cid sdf file
+perillyl_alcohol,(s)-(-)-perillyl alcohol,perillylalcohols-,P,no  ,369312.png,369312.mol,2008-12-10,pubchem cid sdf file
+phenanthrene,phenanthrene,phenanthrene,P,no  ,995.png,995.mol,2008-12-10,pubchem cid sdf file
+pinocarveol,pinocarveol,pinocarveol,P,no  ,12314318.png,12314318.mol,2008-12-10,pubchem cid sdf file
+retinoic_acid,retinoic acid,retinoicacid,R,no  ,444795.png,444795.mol,2008-12-10,pubchem cid sdf file
+undecanoic_acid,undecanoic acid,undecanoicacid,U,no  ,8180.png,8180.mol,2008-12-10,pubchem cid sdf file
+9_hydroxyfluorene,9-hydroxyfluorene,hydroxyfluorene9,H,no  ,74318.png,74318.mol,2008-12-19,pubchem cid sdf file
+cis_5_dodecenoic_acid,cis-5-dodecenoic acid,dodecenoic_acidcis_5,D,no  ,5312378.png,5312378.mol,2008-12-19,pubchem cid sdf file
+glyceryl_tridecanoate,glyceryl tridecanoate,glyceryl_tridecanoate,G,no  ,69310.png,69310.mol,2008-12-19,pubchem cid sdf file
+tetrabromobisphenol_A,tetrabromobisphenol A,tetrabromobisphenol_A,T,no  ,6618.png,6618.mol,2008-12-19,pubchem cid sdf file
+1_2_dichloroethane,"1,2-dichloroethane",dichloroethane12,D,no  ,11.png,11.mol,2009-01-23,pubchem cid sdf file
+1_6_anhydro_beta_d_glucose,"1,6-anhydro-beta-d-glucose",anhydrobetadglucose16,A,no  ,2724705.png,2724705.mol,2009-01-23,pubchem cid sdf file
+2_hydroxy_3_methylbutyric_acid,(S)-(+)-2-hydroxy-3-methylbutyric acid,hydroxymethylbutyric_acid,H,no  ,853180.png,853180.mol,2009-01-23,pubchem cid sdf file
+2_hydroxyhexanoic_acid,2-hydroxyhexanoic acid,hydroxyhexanoic_acid,H,no  ,99824.png,99824.mol,2009-01-23,pubchem cid sdf file
+2_hydroxyoctanoic_acid,2-hydroxyoctanoic acid,hydroxyoctanoic_acid,H,no  ,94180.png,94180.mol,2009-01-23,pubchem cid sdf file
+3_hydroxymandelic_acid,3-hydroxymandelic acid,hydroxymandelic_acid,H,no  ,86957.png,86957.mol,2009-01-23,pubchem cid sdf file
+3_methylglutaric_acid,3-methylglutaric acid,methylglutaric_acid,M,no  ,12284.png,12284.mol,2009-01-23,pubchem cid sdf file
+acetosyringone,acetosyringone,acetosyringone,A,no  ,17198.png,17198.mol,2009-01-23,pubchem cid sdf file
+cotinine,(-)-cotinine,cotinine,C,no  ,854019.png,854019.mol,2009-01-23,pubchem cid sdf file
+ethylmalonic_acid,ethylmalonic acid,ethylmalonic_acid,E,no  ,11756.png,11756.mol,2009-01-23,pubchem cid sdf file
+monoethyl_malonate,monoethyl malonate,monoethyl_malonate,M,no  ,70615.png,70615.mol,2009-01-23,pubchem cid sdf file
+3_methyl_2_butenoic_acid,3-methyl-2-butenoic acid,methyl-2-butenoic_3,M,no  ,10931.png,10931.mol,2009-03-03,pubchem cid sdf file
+acetovanillone,acetovanillone,acetovanillone,A,no  ,2214.png,2214.mol,2009-03-03,pubchem cid sdf file
+dihydroconiferyl_alcohol,dihydroconiferyl alcohol,dihydroconiferyl_alcohol,D,no  ,16822.png,16822.mol,2009-03-03,pubchem cid sdf file
+dihydro_sinapyl_alcohol,dihydro-sinapyl alcohol,dihydrosynapylalcohol,D,no  ,529893.png,529893.mol,2009-03-03,pubchem cid sdf file
+gly_pro,gly-pro,gly_pro,G,no  ,79101.png,79101.mol,2009-03-03,pubchem cid sdf file
+methyl_sinapate,methyl sinapate,methyl_sinapate,M,no  ,5321318.png,5321318.mol,2009-03-03,pubchem cid sdf file
+palmitic_acid,palmitic acid,palmitic_acid,P,no  ,985.png,985.mol,2009-03-03,pubchem cid sdf file
+p_coumaric_acid,p-coumaric acid,coumaric_acid_p,C,no  ,637542.png,637542.mol,2009-03-03,pubchem cid sdf file
+p_coumaryl_alcohol,p-coumaryl alcohol,coumaryl_alcohol_p,C,no  ,5280535.png,5280535.mol,2009-03-03,pubchem cid sdf file
+p_hydroxyacetophenone,p-hydroxyacetophenone,hydroxyacetophenone_p,H,no  ,7469.png,7469.mol,2009-03-03,pubchem cid sdf file
+sinapinic_acid,sinapinic acid,sinapinic_acid,S,no  ,637775.png,637775.mol,2009-03-03,pubchem cid sdf file
+syringaldehyde,syringaldehyde,syringaldehyde,S,no  ,8655.png,8655.mol,2009-03-03,pubchem cid sdf file
+trans_3_hexenedioic_acid,trans-3-hexenedioic acid,hexenedioic_acid_trans_3,H,no  ,5351896.png,5351896.mol,2009-03-03,pubchem cid sdf file
+4_isopropylbenzyl_alcohol,4-isopropylbenzyl alcohol,isopropylbenzyl_alcohol_4,I,no  ,325.png,325.mol,2008-08-04,pubchem cid sdf file
+alpha_tocopherol,(+)alpha-tocopherol,alphatocopherol,A,no  ,14985.png,14985.mol,2008-05-07,pubchem cid sdf file
+coniferaldehyde,coniferaldehyde,coniferaldehyde,C,no  ,5280536.png,5280536.mol,2009-03-11,pubchem cid sdf file
+coniferyl_alcohol,coniferyl alcohol,coniferyl_alcohol,C,no  ,1549095.png,1549095.mol,2009-03-11,pubchem cid sdf file
+methyl_4_coumarate,methyl 4-coumarate,methylcoumarate4,M,no  ,5319562.png,5319562.mol,2009-03-11,pubchem cid sdf file
+sinapaldehyde,sinapaldehyde,sinapaldehyde,S,no  ,5280802.png,5280802.mol,2009-03-11,pubchem cid sdf file
+syringic_acid,syringic acid,syringic_acid,S,no  ,10742.png,10742.mol,2009-03-11,pubchem cid sdf file
+coniferin,coniferin,coniferin,C,no  ,5280372.png,5280372.mol,2009-05-26,pubchem cid sdf file
+methyl_ferulate,methyl ferulate,methyl_ferulate,M,no  ,5357283.png,5357283.mol,2009-05-26,pubchem cid sdf file
+n_acetylglycine,n-acetylglycine,acetylglycine_n,A,no  ,10972.png,10972.mol,2009-05-26,pubchem cid sdf file
+p_coumaraldehyde,p-coumaraldehyde,coumaraldehyde_p,C,no  ,641301.png,641301.mol,2009-05-26,pubchem cid sdf file
+sinapyl_alcohol,sinapyl alcohol,sinapyl_alcohol,S,no  ,5280507.png,5280507.mol,2009-05-26,pubchem cid sdf file
+syringin,syringin,syringin,S,no  ,5316860.png,5316860.mol,2009-05-26,pubchem cid sdf file
+2_furoylglycine,2-furoylglycine,furoylglycine2,F,no  ,21863.png,21863.mol,2009-08-13,pubchem cid sdf file
+2_octenoic_acid,2-octenoic acid,octenoicacid2,O,no  ,5282714.png,5282714.mol,2009-08-13,pubchem cid sdf file
+2_phenylbutyric_acid,2-phenylbutyric acid,phenylbutyricacid2,P,no  ,7012.png,7012.mol,2009-08-13,pubchem cid sdf file
+3_hydroxy_4_methoxycinnamic_acid,3-hydroxy-4-methoxycinnamic acid,hydroxymethoxycinnamicacid34,H,no  ,736186.png,736186.mol,2009-08-13,pubchem cid sdf file
+3_methyladipic_acid,3-methyladipic acid,methyladipicacid3,M,no  ,2723701.png,2723701.mol,2009-08-13,pubchem cid sdf file
+3_methylsalicylic_acid,3-methylsalicylic acid,methylsalicylicacid3,M,no  ,6738.png,6738.mol,2009-08-13,pubchem cid sdf file
+3_pyridine_aldoxime,3-pyridine aldoxime,pyridinealdoxime3,P,no  ,5324568.png,5324568.mol,2009-08-13,pubchem cid sdf file
+3_pyridinecarbonitrile,3-pyridinecarbonitrile,pyridinecarbonitrile3,P,no  ,79.png,79.mol,2009-08-13,pubchem cid sdf file
+4_hydroxybenzyl_alcohol,4-hydroxybenzyl alcohol,hydroxybenzylalcohol4,H,no  ,125.png,125.mol,2009-08-13,pubchem cid sdf file
+4_methylsalicylic_acid,4-methylsalicylic acid,methylsalicylicacid4,M,no  ,5788.png,5788.mol,2009-08-13,pubchem cid sdf file
+4_methylvaleric_acid,4-methylvaleric acid,methylvalericacid4,M,no  ,12587.png,12587.mol,2009-08-13,pubchem cid sdf file
+5_methoxytryptamine,5_methoxytryptamine,methoxytryptamine5,M,no  ,1833.png,1833.mol,2009-08-13,pubchem cid sdf file
+bilirubin,bilirubin,bilirubin,B,no  ,5280352.png,5280352.mol,2009-08-13,pubchem cid sdf file
+cis_fenpropimorph,cis-fenpropimorph,fenpropimorphcis,F,no  ,91695.png,91695.mol,2009-08-13,pubchem cid sdf file
+L_4_hydroxyphenylglycine,L-4-hydroxyphenylglycine,hydroxyphenylglycinel4,H,no  ,36143.png,36143.mol,2009-08-13,pubchem cid sdf file
+N_cyclohexylformamide,N-cyclohexylformamide,cyclohexylformamideN,C,no  ,13017.png,13017.mol,2009-08-13,pubchem cid sdf file
+O_phospho_DL_threonine,O-phospho-DL-threonine,phosphothreonineodl,P,no  ,1016.png,1016.mol,2009-08-13,pubchem cid sdf file
+sulfoacetic_acid,sulfoacetic acid,sulfoaceticacid,S,no  ,31257.png,31257.mol,2009-08-13,pubchem cid sdf file
+tetrachloroethylene,tetrachloroethylene,tetrachloroethylene,T,no  ,31373.png,31373.mol,2009-08-13,pubchem cid sdf file
+4_4_DDT,"4,4-DDT",DDT,D,no  ,3036.png,3036.mol,2009-10-19,pubchem cid sdf file
+s_perillaldehyde,(S)-(-)-perillaldehyde,perillaldehydes,P,no  ,2724159.png,2724159.mol,2009-10-20,pubchem cid sdf file
+1_methylnicotinamide,1-methylnicotinamide,methylnicotinamide1,M,no  ,457.png,457.mol,2011-01-21,pubchem cid sdf file
+2_4_5_trichlorophenoxyacetic_acid,"2,4,5-trichlorophenoxyacetic acid",trichlorophenoxyaceticacid245,T,no  ,1480.png,1480.mol,2009-10-21,pubchem cid sdf file
+beta_estradiol,beta-Estradiol,estradiolbeta,E,no  ,5757.png,5757.mol,2009-10-21,pubchem cid sdf file
+elaidic_acid,elaidic acid,elaidicacid,E,no  ,637517.png,637517.mol,2009-10-21,pubchem cid sdf file
+glycodesoxycholic_acid,glycodesoxycholic acid,glycodesoxycholicacid,G,no  ,3035026_3.png,3035026_3.mol,2009-10-21,altered pubchem cid sdf file
+indole_3_carboxaldehyde,indole-3-carboxaldehyde,indole3carboxaldehyde,I,no  ,10256.png,10256.mol,2009-10-21,pubchem cid sdf file
+indole_3_pyruvic_acid,indole-3-pyruvic acid,indole3pyruvicacid,I,no  ,803.png,803.mol,2009-10-21,pubchem cid sdf file
+metaldehyde,metaldehyde,metaldehyde,M,no  ,177.png,177.mol,2009-10-21,pubchem cid sdf file
+rosmarinic_acid,rosmarinic acid,rosmarinicacid,R,no  ,5281792.png,5281792.mol,2009-10-21,pubchem cid sdf file
+atropine,atropine,atropine,A,no  ,174174.png,174174.mol,2009-11-03,pubchem cid sdf file
+cholic_acid,cholic acid,cholicacid,C,no  ,221493.png,221493.mol,2009-11-03,pubchem cid sdf file
+glycocholic_acid,glycocholic acid,glycocholicacid,G,no  ,10140.png,10140.mol,2009-11-03,pubchem cid sdf file
+lactulose,lactulose,lactulose,L,no  ,16217605.png,16217605.mol,2009-11-03,pubchem cid sdf file
+O_O_diethyl_thiophosphate,"O,O-diethyl thiophosphate",diethylthiophosphateOO,D,no  ,23664334.png,23664334.mol,2009-11-03,pubchem cid sdf file
+2_methylglutaric_acid,2-methylglutaric acid,methylglutaricacid2,M,no  ,12046.png,12046.mol,2009-11-06,pubchem cid sdf file
+cis_1_2_dihydronaphthalene_1_2_diol,"cis-1,2-dihydronaphthalene-1,2-diol",dihydronaphthalene12diocis12,D,no  ,440294.png,440294.mol,2009-11-06,pubchem cid sdf file
+cyanamide,cyanamide,cyanamide,C,no  ,9864.png,9864.mol,2009-11-06,pubchem cid sdf file
+N_cyclohexylsulfamic_acid,N-cyclohexylsulfamic acid,cyclohexylsulfamicacidN,C,no  ,7533.png,7533.mol,2009-11-06,pubchem cid sdf file
+phenylacetylglycine,phenylacetylglycine,phenylacetylglycine,P,no  ,68144.png,68144.mol,2009-11-06,pubchem cid sdf file
+2_phenylethanol,2-phenylethanol,phenylethanol2,P,no  ,6054.png,6054.mol,2009-11-09,pubchem cid sdf file
+phosphonoacetic_acid,phosphonoacetic acid,phosphonoaceticacid,P,no  ,546.png,546.mol,2009-11-09,pubchem cid sdf file
+MES,MES,MES,M,no  ,78165.png,78165.mol,2011-03-09,pubchem cid sdf file
+2_5_dichlorohydroquinone,"2,5-dichlorohydroquinone",dichlorohydroquinone25,D,no  ,65.png,65.mol,2009-12-02,pubchem cid sdf file
+4_isopropylbenzoic_acid,4-isopropylbenzoic acid,isopropylbenzoicacid4,I,no  ,10820.png,10820.mol,2009-12-02,pubchem cid sdf file
+cortisone,cortisone,cortisone,C,no  ,222786.png,222786.mol,2009-12-02,pubchem cid sdf file
+erythromycin,erythromycin,erythromycin,E,no  ,16212992.png,16212992.mol,2009-12-02,pubchem cid sdf file
+trans_dehydroandrosterone,trans_dehydroandrosterone,dehydroandrosteronetrans,D,no  ,5881.png,5881.mol,2009-12-02,pubchem cid sdf file
+carbazole,carbazole,carbazole,C,no  ,6854.png,6854.mol,2009-12-23,pubchem cid sdf file
+alpha_terpineol,alpha_terpineol,alphaterpineol,A,no  ,443162.png,443162.mol,2010-01-04,pubchem cid sdf file
+benzamide,benzamide,benzamide,B,no  ,2331.png,2331.mol,2010-01-04,pubchem cid sdf file
+corticosterone,corticosterone,corticosterone,C,no  ,5753.png,5753.mol,2010-01-04,pubchem cid sdf file
+2_2_bis_4_chlorophenyl_ethanol,"2,2-bis(4-chlorophenyl)ethanol",bis4chlorophenyl_ethanol22,B,no  ,17533.png,17533.mol,2010-01-06,pubchem cid sdf file
+2_4_dichlorobenzoic_acid,"2,4-Dichlorobenzoic acid",dichlorobenzoicacid24,D,no  ,5787.png,5787.mol,2010-01-06,pubchem cid sdf file
+2_5_dichlorophenol,"2,5-dichlorophenol",dichlorophenol25,D,no  ,66.png,66.mol,2010-01-06,pubchem cid sdf file
+2_6_dichlorophenol,"2,6-dichlorophenol",dichlorophenol26,D,no  ,6899.png,6899.mol,2010-01-06,pubchem cid sdf file
+hydrocinnamic_acid,hydrocinnamic acid,hydrocinnamicacid,H,no  ,107.png,107.mol,2010-01-06,pubchem cid sdf file
+nitrobenzene,nitrobenzene,nitrobenzine,N,no  ,7416.png,7416.mol,2010-01-06,pubchem cid sdf file
+salicylaldehyde,salicylaldehyde,salicylaldehyde,S,no  ,6998.png,6998.mol,2010-01-06,pubchem cid sdf file
+2_4_6_trichlorophenol,"2,4,6-trichlorophenol",trichlorophenol246,T,no  ,6914.png,6914.mol,2010-01-12,pubchem cid sdf file
+2_naphthaldehyde,2-naphthaldehyde,naphthaldehyde2,N,no  ,6201.png,6201.mol,2010-01-12,pubchem cid sdf file
+3_4_dihydroxyhydrocinnamate,"3,4-dihydroxyhydrocinnamate",dihydroxyhydrocinnamate34,D,no  ,348154.png,348154.mol,2010-01-12,pubchem cid sdf file
+4_ethylphenol,4-ethylphenol,ethylphenol4,E,no  ,31242.png,31242.mol,2010-01-12,pubchem cid sdf file
+homoveratric_acid,homoveratric acid,homoveratricacid,H,no  ,7139.png,7139.mol,2010-01-12,pubchem cid sdf file
+2_naphthalenemethanol,2-naphthalenemethanol,naphthalenemethanol2,N,no  ,74128.png,74128.mol,2010-01-20,pubchem cid sdf file
+DL_3_4_dihydroxymandelic_acid,"DL-3,4-dihydroxymandelic acid",DL34dihydroxymandelicacid,D,no  ,85782.png,85782.mol,2010-01-20,pubchem cid sdf file
+lithocholic_acid,lithocholic acid,lithocholicacid,L,no  ,9903.png,9903.mol,2010-01-20,pubchem cid sdf file
+N_3_indolylacetyl_L_alanine,N-(3-indolylacetyl)-L-alanine,N3indolylacetylLalanine,N,no  ,644225.png,644225.mol,2010-01-20,pubchem cid sdf file
+1_4_dihydroxy_2_naphthoic_acid,"1,4-dihydroxy-2-naphthanoic acid",dihydroxy2naphthoicacid14,D,no  ,671.png,671.mol,2010-01-27,pubchem cid sdf file
+1_hydroxy_2_naphthoic_acid,1-hydroxy-2-naphthoic acid,hydroxy2naphthoicacid1,H,no  ,6844.png,6844.mol,2010-01-27,pubchem cid sdf file
+1_naphthalenemethanol,1_naphthalenemethanol,naphthalenemethanol1,N,no  ,20908.png,20908.mol,2010-01-27,pubchem cid sdf file
+2_4_dichlorophenol,"2,4-dichlorophenol",dichlorophenol24,D,no  ,8449.png,8449.mol,2010-01-27,pubchem cid sdf file
+2_amino_3_methoxybenzoic_acid,2-amino-3-methoxybenzoic acid,amino3methoxybenzoicacid2,A,no  ,255720.png,255720.mol,2010-01-27,pubchem cid sdf file
+2_naphthoic_acid,2-naphthoic acid,naphthoicacid2,N,no  ,7123.png,7123.mol,2010-01-27,pubchem cid sdf file
+5_methoxy_3_indoleacetic_acid,5-methoxy-3-indoleacetic acid,methoxy3indoleaceticacid5,M,no  ,18986.png,18986.mol,2010-01-27,pubchem cid sdf file
+benzylsuccinic_acid,benzylsuccinic acid,benzylsuccinicacid,B,no  ,3858.png,3858.mol,2010-01-27,pubchem cid sdf file
+indole_3_acetamide,indole-3-acetamide,indole3acetamide,I,no  ,397.png,397.mol,2010-01-27,pubchem cid sdf file
+pentachlorophenol,pentachlorophenol,pentachlorophenol,P,no  ,992.png,992.mol,2010-01-27,pubchem cid sdf file
+s_perillic_acid,(S)-(-)-perillic acid,sperillicacid,S,no  ,2724160.png,2724160.mol,2010-01-27,pubchem cid sdf file
+thiamine_monophosphate,thiamine monophosphate,thiaminemonophosphate,T,no  ,1131.png,1131.mol,2011-01-20,pubchem cid sdf file
+16_hydroxyhexadecanoic_acid,16-hydroxyhexadecanoic acid,hydroxyhexadecanoicacid16,H,no  ,10466.png,10466.mol,2010-02-02,pubchem cid sdf file
+4_phenylbutyric_acid,4-phenylbutyric acid,phenylbutyricacid4,P,no  ,4775.png,4775.mol,2010-02-02,pubchem cid sdf file
+hyodeoxycholic_acid,hyodeoxycholic acid,hyodeoxycholicacid,H,no  ,16219478.png,16219478.mol,2010-02-02,pubchem cid sdf file
+4_hydroxy_3_methoxymandelic_acid,4-hydroxy-3-methoxymandelic acid,hydroxy3methoxymandelicacid4,H,no  ,1245.png,1245.mol,2010-03-10,pubchem cid sdf file
+chalcone,chalcone,chalcone,C,no  ,637760.png,637760.mol,2010-03-10,pubchem cid sdf file
+cis_aconitic_acid,cis-aconitic acid,cisaconiticacid,C,no  ,643757.png,643757.mol,2010-03-10,pubchem cid sdf file
+L_cysteinesulfinic_acid,L-cysteinesulfinic acid,Lcysteinesulfinicacid,L,no  ,1549098.png,1549098.mol,2011-01-12,pubchem cid sdf file
+N_acetyl_histidine,N-acetyl-histidine,Nacetylhistidine,N,no  ,273260.png,273260.mol,2010-03-10,pubchem cid sdf file
+nicotinuric_acid,nicotinuric acid,nicotinuricacid,N,no  ,68499.png,68499.mol,2010-03-10,pubchem cid sdf file
+N_N_dimethylformamide,"N,N-dimethylformamide",NNdimethylformamide,N,no  ,6228.png,6228.mol,2010-03-10,pubchem cid sdf file
+2_3_dideoxycytidine,"2,3-dideoxycytidine",dideoxycytidine23,D,no  ,24066.png,24066.mol,2010-03-26,pubchem cid sdf file
+2_amino_3_phosphonopropionic_acid,2-amino-3-phosphonopropionic acid,amino3phosphonopropionicacid2,A,no  ,3857.png,3857.mol,2010-03-26,pubchem cid sdf file
+2_ethylpiperidine,2-ethylpiperidine,ethylpiperidine2,E,no  ,94205.png,94205.mol,2010-03-26,pubchem cid sdf file
+2_hydroxyphenylacetic_acid,2-hydroxyphenylacetic acid,hydroxyphenylaceticacid2,H,no  ,11970.png,11970.mol,2010-03-26,pubchem cid sdf file
+8_anilino_1_naphthalenesulfonic_acid,8-anilino-1-naphthalenesulfonic acid,anilino1naphthalenesulfonicacid8,A,no  ,1369.png,1369.mol,2010-03-26,pubchem cid sdf file
+cetyl_trimethyl_ammonium,cetyl-trimethyl-ammonium,cetyltrimethylammonium,C,no  ,2681.png,2681.mol,2011-01-20,pubchem cid sdf file
+cis_1_3_dichloropropene,"cis-1,3-dichloropropene",dichloropropenecis13,D,no  ,5280970.png,5280970.mol,2010-03-26,pubchem cid sdf file
+decamethonium,decamethonium,decamethonium,D,no  ,2968.png,2968.mol,2010-03-26,pubchem cid sdf file
+dioctyl_sulfosuccinate,dioctyl sulfosuccinate,dioctylsulfosuccinate,D,no  ,11339.png,11339.mol,2011-01-20,pubchem cid sdf file
+diphenylacetic_acid,diphenylacetic acid,diphenylaceticacid,D,no  ,8333.png,8333.mol,2010-03-26,pubchem cid sdf file
+epichlorohydrin,epichlorohydrin,epichlorohydrin,E,no  ,7835.png,7835.mol,2010-03-26,pubchem cid sdf file
+N_2_furoyl_glycine_methyl_ester,N-(2-furoyl)glycine methyl ester,furoylglycinemethylesterN2,F,no  ,518748.png,518748.mol,2010-03-26,pubchem cid sdf file
+o_fluoroaniline,o-fluoroaniline,fluoroanilineo,F,no  ,9584.png,9584.mol,2010-03-26,pubchem cid sdf file
+sec_butylbenzene,sec-butylbenzene,butylbenzenesec,B,no  ,8680.png,8680.mol,2010-03-26,pubchem cid sdf file
+sulfanilic_acid,sulfanilic acid,sulfanilicacid,S,no  ,8479.png,8479.mol,2010-03-26,pubchem cid sdf file
+trans_2_3_dimethylacrylic_acid,"trans-2,3-dimethylacrylic acid",dimethylacrylicacidtrans23,D,no  ,125468.png,125468.mol,2010-03-26,pubchem cid sdf file
+1_amino_1_cyclohexanecarboxylic_acid,1-amino-1-cyclohexanecarboxylic acid,amino1cyclohexanecarboxylicacid1,A,no  ,1366.png,1366.mol,2010-03-31,pubchem cid sdf file
+2_3_difluorobenzyl_alcohol,"2,3-difluorobenzyl alcohol",difluorobenzylalcohol23,D,no  ,447153.png,447153.mol,2010-03-31,pubchem cid sdf file
+2_2_dimethylsuccinic_acid,"2,2-dimethylsuccinic acid",dimethylsuccinicacid22,D,no  ,11701.png,11701.mol,2010-03-31,pubchem cid sdf file
+3_deazauridine,3-deazauridine,deazauridine3,D,no  ,277822.png,277822.mol,2010-03-31,pubchem cid sdf file
+6_ethylmercaptopurine,6-ethylmercaptopurine,ethylmercaptopurine6,E,no  ,94971.png,94971.mol,2010-03-31,pubchem cid sdf file
+apocholic_acid,apocholic acid,apocholicacid,A,no  ,101818.png,101818.mol,2010-03-31,pubchem cid sdf file
+bis_2_butoxyethyl_phthalate,bis(2-butoxyethyl)phthalate,bis2butoxyethylphthalate,B,no  ,8345.png,8345.mol,2010-03-31,pubchem cid sdf file
+digoxigenin,digoxigenin,digoxigenin,D,no  ,15478.png,15478.mol,2011-01-20,pubchem cid sdf file
+myristic_acid,myristic acid,myristicacid,M,no  ,11005.png,11005.mol,2010-04-09,pubchem cid sdf file
+N_methylurea,N-methylurea,methylureaN,M,no  ,11719.png,11719.mol,2010-04-09,pubchem cid sdf file
+p_fluorobenzoic_acid,p-fluorobenzoic acid,fluorobenzoicacidp,F,no  ,9973.png,9973.mol,2010-04-09,pubchem cid sdf file
+D_pinitol,D-pinitol,pinitolD,P,no  ,439990.png,439990.mol,2010-05-03,pubchem cid sdf file
+N_methyl_L_aspartic_acid,N-methyl-L-aspartic acid,methylLasparticacidN,M,no  ,92982.png,92982.mol,2010-05-03,pubchem cid sdf file
+phenoxyacetic_acid,phenoxyacetic acid,phenoxyaceticacid,P,no  ,19188.png,19188.mol,2010-05-03,pubchem cid sdf file
+phenylglyoxylic_acid,phenylglyoxylic acid,phenylglyoxylicacid,P,no  ,11915.png,11915.mol,2010-05-03,pubchem cid sdf file
+histamine,Histamine,histamine,H,no  ,774.png,774.mol,2010-05-19,pubchem cid sdf file
+homoarginine,Homoarginine,homoarginine,H,no  ,9085.png,9085.mol,2010-05-19,pubchem cid sdf file
+mesaconic_acid,Mesaconic acid,mesaconicacid,M,no  ,638129.png,638129.mol,2010-05-19,pubchem cid sdf file
+parabanic_acid,Parabanic acid,parabanicacid,P,no  ,67126.png,67126.mol,2010-05-19,pubchem cid sdf file
+21_hydroxypregnenolone,21-Hydroxypregnenolone,hydroxypregnenolone21,H,no  ,440705.png,440705.mol,2010-10-18,pubchem cid sdf file
+2_hydroxyethyl_salicylate,2-Hydroxyethyl salicylate,hydroxyethylsalicylate2,H,no  ,6880.png,6880.mol,2010-06-22,pubchem cid sdf file
+khellin,khellin,khellin,K,no  ,3828.png,3828.mol,2010-06-22,pubchem cid sdf file
+phenylmethanesulfonyl_fluoride,Phenylmethanesulfonyl fluoride,phenylmethanesulfonylfluoride,P,no  ,4784.png,4784.mol,2010-06-22,pubchem cid sdf file
+polyoxyethylene_23_lauryl_ether,Polyoxyethylene 23 lauryl ether,polyoxyethylene23laurylether,P,no  ,24750.png,24750.mol,2010-06-22,pubchem cid sdf file
+precocene_1,Precocene 1,precocene1,P,no  ,28619.png,28619.mol,2010-06-22,pubchem cid sdf file
+procyclidine,Procyclidine,procyclidine,P,no  ,4919.png,4919.mol,2010-06-22,pubchem cid sdf file
+3_nitrofluoranthene,3-Nitrofluoranthene,nitrofluoranthene3,N,no  ,13462.png,13462.mol,2010-07-19,pubchem cid sdf file
+serotonin,serotonin,serotonin,S,no  ,5202.png,5202.mol,2010-07-19,pubchem cid sdf file
+5_methoxypsoralen,5-Methoxypsoralen,methoxypsoralen5,M,no  ,2355.png,2355.mol,2010-07-19,pubchem cid sdf file
+5_methyluridine,5-methyluridine,methyluridine5,M,no  ,445408.png,445408.mol,2010-07-19,pubchem cid sdf file
+neostigmine,neostigmine,neostigmine,N,no  ,4456.png,4456.mol,2011-01-20,pubchem cid sdf file
+nonactin,nonactin,nonactin,N,no  ,72519.png,72519.mol,2010-07-19,pubchem cid sdf file
+nonadecane,Nonadecane,nonadecane,N,no  ,12401.png,12401.mol,2010-07-19,pubchem cid sdf file
+octamethylcyclotetrasiloxane,octamethylcyclotetrasiloxane,octamethylcyclotetrasiloxane,O,no  ,11169.png,11169.mol,2010-07-19,pubchem cid sdf file
+orthanilic_acid,orthanilic acid,orthanilicacid,O,no  ,6926.png,6926.mol,2010-07-19,pubchem cid sdf file
+saligenin,saligenin,saligenin,S,no  ,5146.png,5146.mol,2010-07-19,pubchem cid sdf file
+alpha_lipoamide,alpha-Lipoamide,alphalipoamide,A,no  ,863.png,863.mol,2010-09-02,pubchem cid sdf file
+phenyl_beta_D_glucoside,Phenyl beta-D-glucoside,phenylbetaDglucoside,P,no  ,65080.png,65080.mol,2010-09-02,pubchem cid sdf file
+pyromellitic_acid,Pyromellitic acid,pyromelliticacid,P,no  ,6961.png,6961.mol,2010-09-02,pubchem cid sdf file
+salicylhydroxamic_acid,Salicylhydroxamic Acid,salicylhydroxamicacid,S,no  ,66644.png,66644.mol,2010-09-02,pubchem cid sdf file
+triethylenetetramine,triethylenetetramine,triethylenetetramine,T,no  ,5565.png,5565.mol,2010-09-02,pubchem cid sdf file
+trimethyl_phosphate,Trimethyl Phosphate,trimethylphosphate,T,no  ,10541.png,10541.mol,2010-09-02,pubchem cid sdf file
+3_methoxybenzamide,3-Methoxybenzamide,methoxybenzamide3,M,no  ,98487.png,98487.mol,2010-09-15,pubchem cid sdf file
+L_anserine,L-Anserine,anserineL,A,no  ,11444.png,11444.mol,2010-09-15,pubchem cid sdf file
+tributyl_phosphate,Tributyl Phosphate,tributylphosphate,T,no  ,31357.png,31357.mol,2010-09-15,pubchem cid sdf file
+gamma_terpinene,gamma-terpinene,gammaterpinene,G,no  ,7461.png,7461.mol,2010-09-21,pubchem cid sdf file
+metoclopramide,Metoclopramide,metoclopramide,M,no  ,4168.png,4168.mol,2011-01-20,pubchem cid sdf file
+tetramethylammonium,Tetramethylammonium ,tetramethylammonium,T,no  ,6380.png,6380.mol,2010-09-21,pubchem cid sdf file
+thioacetamide,thioacetamide,thioacetamide,T,no  ,2723949.png,2723949.mol,2010-09-21,pubchem cid sdf file
+cacodylic_acid,cacodylic acid,cacodylicacid,C,no  ,2513.png,2513.mol,2011-03-09,pubchem cid sdf file
+MOPS,MOPS ,MOPS,M,no  ,70807.png,70807.mol,2011-03-09,pubchem cid sdf file
+1_4_D_xylobiose,"1,4-D-xylobiose",xylobioseD14,X,no  ,439538.png,439538.mol,2011-07-22,pubchem cid sdf file
+3_carboxypropyl_trimethyl_ammonium,3-carboxypropyl-trimethyl-ammonium,carboxypropyltrimethylammonium3,C,no  ,134.png,134.mol,2011-07-22,pubchem cid sdf file
+DSS,DSS,DSS,D,no  ,5167273.png,5167273.mol,2011-07-22,pubchem cid sdf file
+dGMP,2'-Deoxyguanosine 5'-monophosphate,dGMP,D,no  ,65059.png,65059.mol,2011-10-05,pubchem cid sdf file
+acetamide,acetamide,acetamide,A,no  ,178.png,178.mol,2011-10-05,pubchem cid sdf file
+acetonitrile,acetonitrile,acetonitrile,A,no  ,6342.png,6342.mol,2011-10-05,pubchem cid sdf file
+DL_2_aminocaprylic_acid,DL-2-Aminocaprylic acid,aminocaprylicacidDL2,A,no  ,69522.png,69522.mol,2011-10-19,pubchem cid sdf file
+DL_3_aminoisobutyric_acid,DL-3-Aminoisobutyric acid,aminoisobutyricacidDL3,A,no  ,64956.png,64956.mol,2011-10-19,pubchem cid sdf file
+IPTG,IPTG,IPTG,I,no  ,16217509.png,16217509.mol,2011-10-19,pubchem cid sdf file
+N_acetyl_L_lysine,N-alpha-Acetyl-L-lysine,acetylLlysineN,A,no  ,92907.png,92907.mol,2011-10-19,pubchem cid sdf file
+1_2_4_benzenetriol,"1,2,4-Benzenetriol",benzenetriol124,B,no  ,10787.png,10787.mol,2011-10-20,pubchem cid sdf file
+beta_carotene,beta-carotene,betacarotene,B,no  ,5280489.png,5280489.mol,2011-10-20,pubchem cid sdf file
+deoxycholic_acid,deoxycholic acid,deoxycholicacid,D,no  ,222528.png,222528.mol,2011-10-20,pubchem cid sdf file
+p_xylene,p-xylene,xylenep,X,no  ,7809.png,7809.mol,2011-10-20,pubchem cid sdf file
+Atrazine,Atrazine,Atrazine,A,no  ,2256.png,2256.mol,2011-10-28,pubchem cid sdf file
+N_3_Indolylacety_DL_aspartic_acid,N-(3-Indolylacetyl)-DL-aspartic acid,IndolylacetyDLasparticacidN3,I,no  ,4656408.png,4656408.mol,2011-10-28,pubchem cid sdf file
+Pulegone,(+)-Pulegone,Pulegone,P,no  ,442495.png,442495.mol,2011-10-28,pubchem cid sdf file
+rhodanine,rhodanine,rhodanine,R,no  ,1201546.png,1201546.mol,2011-10-28,pubchem cid sdf file
+1_2_4_trichlorobenzene,"1,2,4-Trichlorobenzene",trichlorobenzene124,T,no  ,13.png,13.mol,2011-10-31,pubchem cid sdf file
+3_furoic_acid,3-Furoic acid,furoicacid3,F,no  ,10268.png,10268.mol,2011-10-31,pubchem cid sdf file
+3_methylsalicylaldehyde,3-Methylsalicylaldehyde,methylsalicylaldehyde3,M,no  ,522777.png,522777.mol,2011-10-31,pubchem cid sdf file
+isoprene,Isoprene,isoprene,I,no  ,6557.png,6557.mol,2011-10-31,pubchem cid sdf file
+4_4_DDD,"4,4'-DDD",DDD44,D,no  ,6294.png,6294.mol,2011-10-31,pubchem cid sdf file
+phthalic_acid_diethyl_ester,Phthalic acid diethyl ester,phthalicaciddiethylester,P,no  ,6781.png,6781.mol,2011-10-31,pubchem cid sdf file
+undecanedioic_acid,undecanedioic acid,undecanedioicacid,U,no  ,15816.png,15816.mol,2011-10-31,pubchem cid sdf file
+2_thiophenecarboxylic_acid,2-Thiophenecarboxylic acid,thiophenecarboxylicacid2,T,no  ,10700.png,10700.mol,2011-11-02,pubchem cid sdf file
+cholesteryl_stearate,Cholesteryl stearate,cholesterylstearate,C,no  ,118246.png,118246.mol,2011-11-02,pubchem cid sdf file
+D_sphingosine,D-Sphingosine,sphingosineD,S,no  ,5280335.png,5280335.mol,2011-11-02,pubchem cid sdf file
+octanal,octanal,octanal,O,no  ,454.png,454.mol,2011-11-02,pubchem cid sdf file
+petroselinic_acid,Petroselinic acid,petroselinicacid,P,no  ,5281125.png,5281125.mol,2011-11-02,pubchem cid sdf file
+5_6_dimethylbenzimidazole,"5,6-Dimethylbenzimidazole",dimethylbenzimidazole56,D,no  ,675.png,675.mol,2011-12-05,pubchem cid sdf file
+chenodeoxycholic_acid,Chenodeoxycholic acid,chenodeoxycholicacid,C,no  ,10133.png,10133.mol,2012-02-28,pubchem cid sdf file
+dopamine,Dopamine,dopamine,D,no  ,681.png,681.mol,2012-02-28,pubchem cid sdf file
+mannobiose,2-alpha-Mannobiose,mannobiose,M,no  ,11099946.png,11099946.mol,2012-02-28,pubchem cid sdf file
+tetrahydrobiopterin,tetrahydrobiopterin,tetrahydrobiopterin,T,no  ,44257.png,44257.mol,2012-02-28,pubchem cid sdf file
+L_thyroxine,L-Thyroxine,Lthyroxine,L,no  ,5819.png,5819.mol,2012-02-17,pubchem cid sdf file
+miconazole,Miconazole,miconazole,M,no  ,4189.png,4189.mol,2012-02-17,pubchem cid sdf file
+nitrosobenzene,nitrosobenzene,nitrosobenzene,N,no  ,11473.png,11473.mol,2012-02-17,pubchem cid sdf file
+palmitoleic_acid,Palmitoleic acid,palmitoleicacid,P,no  ,445638.png,445638.mol,2012-02-17,pubchem cid sdf file
+taurocholic_acid,Taurocholic acid,taurocholicacid,T,no  ,6675.png,6675.mol,2012-02-17,pubchem cid sdf file
+thiram,tetramethylthiuram disulfide,thiram,T,no  ,5455.png,5455.mol,2012-02-17,pubchem cid sdf file
+3_methoxytyramine,3-Methoxytyramine,methoxytyramine3,M,no  ,1669.png,1669.mol,2012-03-13,pubchem cid sdf file
+4_pyridoxic_acid,4-Pyridoxic acid,pyridoxicacid4,P,no  ,6723.png,6723.mol,2012-03-13,pubchem cid sdf file
+argininosuccinic_acid,Argininosuccinic acid,argininosuccinicacid,A,no  ,16950.png,16950.mol,2012-03-13,altered from pubchem cid sdf file
+3_Phosphono_alanine,3-Phosphono-DL-alanine,Phosphonoalanine3,P,no  ,3857.png,3857.mol,2012-03-13,pubchem cid sdf file
+boric_acid,Boric acid,boricacid,B,no  ,7628.png,7628.mol,2012-04-10,pubchem cid sdf file
+2_deoxyinosine,2'-Deoxyinosine,deoxyinosine2,D,no  ,65058.png,65058.mol,2012-04-13,pubchem cid sdf file
+5_Methoxy_DL_tryptophan,5-Methoxy-DL-tryptophan,MethoxyDLtryptophan5,M,no  ,119802.png,119802.mol,2012-04-13,pubchem cid sdf file
+ethyl_acetoacetate,Ethyl acetoacetate,ethylacetoacetate,E,no  ,8868.png,8868.mol,2012-04-13,pubchem cid sdf file
+flavone,Flavone,flavone,F,no  ,10680.png,10680.mol,2012-04-13,pubchem cid sdf file
+5_Aminovaleric_acid,5-Aminovaleric acid,aminovaleric_acid_5,A,no  ,138.png,138.mol,2012-04-30,pubchem cid sdf file
+3_acetylphenylboronic_acid,3-Acetylphenylboronic acid,acetylphenylboronicacid3,A,no  ,2734310.png,2734310.mol,2012-05-17,pubchem cid sdf file
+cholesteryl_sulfate,Sodium cholesteryl sulfate,cholesterylsulfate,C,no  ,65076.png,65076.mol,2012-05-17,pubchem cid sdf file
+Gentisaldehyde,Gentisaldehyde,Gentisaldehyde,G,no  ,70949.png,70949.mol,2012-05-17,pubchem cid sdf file
+limonene_oxide,(+)-Limonene oxide,limoneneoxide,L,no  ,441245.png,441245.mol,2012-05-17,pubchem cid sdf file
+ocimene,Ocimene,ocimene,O,no  ,5281553.png,5281553.mol,2012-05-17,pubchem cid sdf file
+1_octanol,1-Octanol,octanol1,O,no  ,957.png,957.mol,2012-06-11,pubchem cid sdf file
+3_morpholinopropylamine,3-Morpholinopropylamine,morpholinopropylamine3,M,no  ,61055.png,61055.mol,2012-06-11,pubchem cid sdf file
+butyraldehyde,Butyraldehyde,butyraldehyde,B,no  ,261.png,261.mol,2012-06-11,pubchem cid sdf file
+ethyl_4_aminobutyrate,Ethyl 4-aminobutyrate,ethyl4aminobutyrate,E,no  ,23365.png,23365.mol,2012-06-11,pubchem cid sdf file
+tropine,Tropine,tropine,T,no  ,8424.png,8424.mol,2012-06-11,pubchem cid sdf file
+2_Isopropylmalic_acid,2-Isopropylmalic acid,Isopropylmalicacid2,I,no  ,77.png,77.mol,2012-08-02,pubchem cid sdf file
+O_acetyl_L_serine,O-Acetyl-L-serine,OacetylLserine,O,no  ,99478.png,99478.mol,2012-08-02,pubchem cid sdf file
+2_amino_6_chloropurine,2-Amino-6-chloropurine,amino6chloropurine2,A,no  ,5360349.png,5360349.mol,2012-08-27,pubchem cid sdf file
+6_hydroxyflavanone,6-Hydroxyflavanone,hydroxyflavanone6,H,no  ,2734580.png,2734580.mol,2012-08-27,pubchem cid sdf file
+esculetin,Esculetin,esculetin,E,no  ,5281416.png,5281416.mol,2012-08-27,pubchem cid sdf file
+fludrocortisone,Fludrocortisone,fludrocortisone,F,no  ,31378.png,31378.mol,2012-08-27,pubchem cid sdf file
+harmalol,Harmalol,harmalol,H,no  ,5353656.png,5353656.mol,2012-08-27,pubchem cid sdf file
+lapachol,lapachol,lapachol,L,no  ,3884.png,3884.mol,2012-08-27,pubchem cid sdf file
+EGTA,EGTA,EGTA,E,no  ,6207.png,6207.mol,2012-10-01,pubchem cid sdf file
+11_ketoetiocholanolone,11-Ketoetiocholanolone,ketoetiocholanolone11,K,no  ,101850.png,101850.mol,2013-01-14,pubchem cid sdf file
+D_glucuronic_acid_gamma_lactone,D-(+)-Glucuronic acid G-lactone,Dglucuronicacidgammalactone,D,no  ,439782.png,439782.mol,2013-01-14,pubchem cid sdf file
+UDP_galactose,UDP Galactose,UDPgalactose,U,no  ,18068.png,18068.mol,2013-01-14,pubchem cid sdf file
+L_alpha_lysophosphatidylcholine,L-alpha-Lysophosphatidylcholine,lalphalysophosphatidylcholine,L,no  ,24798682.png,24798682.mol,2013-02-19,pubchem cid sdf file
+L_alpha_Phosphatidylcholine,L-alpha-Phosphatidylcholine,lalphaPhosphatidylcholine,L,no  ,16213884.png,16213884.mol,2013-02-19,pubchem cid sdf file
+L_alpha_phosphatidyl_DL_glycerol,L-alpha-Phosphatidyl-DL-glycerol,lalphaphosphatidyldlglycerol,L,no  ,bmse001028.png,bmse001028.mol,2013-02-21,generated at BMRB
+4_chlorobenzaldehyde,4-chlorobenzaldehyde,chlorobenzaldehyde4,C,no  ,7726.png,7726.mol,2013-02-25,pubchem cid sdf file
+chlorobenzene,chlorobenzene,chlorobenzene,C,no  ,7964.png,7964.mol,2013-02-25,pubchem cid sdf file
+2_3_dihydro_2_oxofuran_5_acetate,"2,3-dihydro-2-oxofuran-5-acetate",dihydro2oxofuran5acetate23,D,no  ,23615198.png,23615198.mol,2013-02-26,pubchem cid sdf file
+1_4_Hydroxyphenyl_ethanol,1-(4-Hydroxyphenyl)ethanol,hydroxyphenylethanol,H,no  ,jr_10.png,jr_10.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Apocynol,Apocynol,apocynol,A,no  ,jr_11.png,jr_11.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+1_4_Hydroxy_3_5_dimethoxyphenyl_ethanol,"1-(4-Hydroxy-3,5-dimethoxyphenyl)ethanol",hydroxydimethoxyphenylethanol,H,no  ,jr_12.png,jr_12.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+1_3_4_Dimethoxyphenyl_ethanol,"1-(3,4-Dimethoxyphenyl)ethanol",dimethoxyphenylethanol,D,no  ,jr_13.png,jr_13.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Syringyl_alcohol,Syringyl alcohol,syringylalcohol,S,no  ,jr_16.png,jr_16.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Methyl_4_acetoxybenzoate,Methyl 4-acetoxybenzoate,methylacetoxybenzoate,M,no  ,jr_17.png,jr_17.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Methyl_4_hydroxybenzoate,Methyl 4-hydroxybenzoate,methylhydroxybenzoate,M,no  ,jr_18.png,jr_18.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+2_3_Diacetoxypropioveratrone,"2,3-Diacetoxypropioveratrone",diacetoxypropioveratrone,D,no  ,jr_1.png,jr_1_ncbi_withH.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_22,lignin_cw_compound_22,lignincwcompound22,L,no  ,jr_22.png,jr_22.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Hydroxyphenylethanol_diacetate,Hydroxyphenylethanol diacetate,hydroxyphenylethanoldiacetate,H,no  ,jr_23.png,jr_23.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+p-Hydroxybenzyl-alcohol-diacetate,4-acetoxybenzyl acetate,acetoxybenzylacetate,A,no  ,jr_24.png,jr_24.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Methyl_p_anisate,Methyl-p-anisate,methylpanisate,M,no  ,jr_25.png,jr_25.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_26,lignin_cw_compound_26,lignincwcompound26,L,no  ,jr_26.png,jr_26.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_27,lignin_cw_compound_27,lignincwcompound27,L,no  ,jr_27.png,jr_27.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Dehydrodivanillin,Dehydrodivanillin,dehydrodivanillin,D,no  ,jr_28.png,jr_28.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_29,lignin_cw_compound_29,lignincwcompound29,L,no  ,jr_29.png,jr_29.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2,lignin_cw_compound_2,lignincwcompound2,L,no  ,jr_2.png,jr_2.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Xylan,Xylan,xylan,X,no  ,jr_30.png,jr_30.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Dihydroferulic_Acid,Dihydroferulic Acid,dihydroferulicacid,D,no  ,jr_35.png,jr_35.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+4_Methoxyacetophenone,4-Methoxyacetophenone,methoxyacetophenone,M,no  ,jr_36.png,jr_36.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+p_Methoxybenzyl_alcohol,p-Methoxybenzyl alcohol,methoxybenzylalcoholp,M,no  ,jr_37.png,jr_37.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+p_Hydroxybenzyl_alcohol,p-Hydroxybenzyl alcohol,hydroxybenzylalcoholp,H,no  ,jr_4.png,jr_4.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_Dimethoxybenzyl_alcohol,"3,4-Dimethoxybenzyl alcohol",dimethoxybenzylalcohol,D,no  ,jr_5.png,jr_5.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Acetoveratrone,Acetoveratrone,acetoveratrone,A,no  ,jr_9.png,jr_9.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1001,lignin_cw_compound_1001,lignincwcompound1001,L,no  ,jr_1001.png,jr_1001.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1002,lignin_cw_compound_1002,lignincwcompound1002,L,no  ,jr_1002.png,jr_1002.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1003,lignin_cw_compound_1003,lignincwcompound1003,L,no  ,jr_1003.png,jr_1003.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1004,lignin_cw_compound_1004,lignincwcompound1004,L,no  ,jr_1004.png,jr_1004.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1005,lignin_cw_compound_1005,lignincwcompound1005,L,no  ,jr_1005.png,jr_1005.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1006,lignin_cw_compound_1006,lignincwcompound1006,L,no  ,jr_1006.png,jr_1006.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_100,lignin_cw_compound_100,lignincwcompound100,L,no  ,jr_100.png,jr_100.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Guaiacylglycerol_B_guaiacyl_ether,Guaiacylglycerol-B-guaiacyl ether,guaiacylglycerolbguaiacylether,G,no  ,jr_101.png,jr_101.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Acetylated_acetovanillone,Acetylated acetovanillone,acetylatedacetovanillone,A,no  ,jr_103.png,jr_103.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratrylglycerol_B_guaiacyl_ether,Veratrylglycerol-B-guaiacyl ether,veratrylglycerolbguaiacylether,V,no  ,jr_104.png,jr_104.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Erone,Erone,erone,E,no  ,jr_106.png,jr_106.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vanillyl_B_D_Glucoside,Vanillyl-B-D-Glucoside,vanillylbdglucoside,V,no  ,jr_107.png,jr_107.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Acetylated_ferulic_acid,Acetylated ferulic acid,acetylatedferulicacid,A,no  ,jr_108.png,jr_108.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Pinoresinol_diacetate,Pinoresinol diacetate,pinoresinoldiacetate,P,no  ,jr_109.png,jr_109.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratrone,Veratrone,veratrone,V,no  ,jr_110.png,jr_110.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_isoeugenol,acetylated isoeugenol,acetylatedisoeugenol,A,no  ,jr_111.png,jr_111.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Isoeugenol,Isoeugenol,isoeugenol,I,no  ,jr_112.png,jr_112.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Eugenol,Eugenol,eugenol,E,no  ,jr_113.png,jr_113.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_Allyl_2_6_dimethoxyphenol,"4-Allyl-2,6-dimethoxyphenol",allyldimethoxyphenol,A,no  ,jr_114.png,jr_114.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_eugenol,acetylated eugenol,acetylatedeugenol,A,no  ,jr_115.png,jr_115.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_116,lignin_cw_compound_116,lignincwcompound116,L,no  ,jr_116.png,jr_116.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringylresinol,Syringylresinol,syringylresinol,S,no  ,jr_117.png,jr_117.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Coniferin_acetate,Coniferin acetate,coniferinacetate,C,no  ,jr_120.png,jr_120.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringin_acetate,Syringin acetate,syringinacetate,S,no  ,jr_121.png,jr_121.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringylresinol_diacetate,Syringylresinol diacetate,syringylresinoldiacetate,S,no  ,jr_123.png,jr_123.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+cis_Ferulic_Acid,cis-Ferulic Acid,cisferulicacid,C,no  ,jr_124.png,jr_124.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_125,lignin_cw_compound_125,lignincwcompound125,L,no  ,jr_125.png,jr_125.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_126,lignin_cw_compound_126,lignincwcompound126,L,no  ,jr_126.png,jr_126.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Dihydrocoumaric_acid,Dihydrocoumaric acid,dihydrocoumaricacid,D,no  ,jr_127.png,jr_127.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_dihydrocoumaric_acid,acetylated dihydrocoumaric acid,acetylateddihydrocoumaricacid,A,no  ,jr_128.png,jr_128.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_coumaric_acid,acetylated coumaric acid,acetylatedcoumaricacid,A,no  ,jr_129.png,jr_129.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_130,lignin_cw_compound_130,lignincwcompound130,L,no  ,jr_130.png,jr_130.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_132,lignin_cw_compound_132,lignincwcompound132,L,no  ,jr_132.png,jr_132.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_134,lignin_cw_compound_134,lignincwcompound134,L,no  ,jr_134.png,jr_134.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_135,lignin_cw_compound_135,lignincwcompound135,L,no  ,jr_135.png,jr_135.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vinyl_guaiacol,Vinyl guaiacol,vinylguaiacol,V,no  ,jr_136.png,jr_136.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_138,lignin_cw_compound_138,lignincwcompound138,L,no  ,jr_138.png,jr_138.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_coniferylaldehyde,acetylated coniferylaldehyde,acetylatedconiferylaldehyde,A,no  ,jr_141.png,jr_141.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_coniferyl_alcohol,acetylated coniferyl alcohol,acetylatedconiferylalcohol,A,no  ,jr_142.png,jr_142.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Acetylated_veratryl_alcohol,"3,4-dimethoxybenzylacetate",dimethoxybenzylacetate,D,no  ,jr_143.png,jr_143.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_dimethoxycinnamyl_alcohol,"3,4-dimethoxycinnamyl alcohol",dimethoxycinnamylalcohol,D,no  ,jr_145.png,jr_145.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_146,lignin_cw_compound_146,lignincwcompound146,L,no  ,jr_146.png,jr_146.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_147,lignin_cw_compound_147,lignincwcompound147,L,no  ,jr_147.png,jr_147.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_methyl_coumarate,methyl 4-acetoxycinnamate,methylacetoxycinnamate,M,no  ,jr_148.png,jr_148.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_methyl_ferulate,acetylated methyl ferulate,acetylatedmethylferulate,A,no  ,jr_149.png,jr_149.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_dimethoxy_cinnamaldehyde,"3,4-dimethoxy cinnamaldehyde",dimethoxycinnamaldehyde,D,no  ,jr_150.png,jr_150.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_154,lignin_cw_compound_154,lignincwcompound154,L,no  ,jr_154.png,jr_154.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Acetylated_sinapaldehyde,Acetylated sinapaldehyde,acetylatedsinapaldehyde,A,no  ,jr_155.png,jr_155.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_5_Trimethoxyacetophenone,"3,4,5-Trimethoxyacetophenone",trimethoxyacetophenone,T,no  ,jr_156.png,jr_156.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+acetylated_p_gluco_cinnamic_acid,acetylated p-gluco cinnamic acid,acetylatedpglucocinnamicacid,A,no  ,jr_158.png,jr_158.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_dimethoxycinnamyl_acetate,"3,4-dimethoxycinnamyl acetate",dimethoxycinnamylacetate,D,no  ,jr_159.png,jr_159.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratryl_glycerol,Veratryl glycerol,veratrylglycerol,V,no  ,jr_160.png,jr_160.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_161,lignin_cw_compound_161,lignincwcompound161,L,no  ,jr_161.png,jr_161.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Erone_diacetate,Erone diacetate,eronediacetate,E,no  ,jr_162.png,jr_162.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratrone_acetate,Veratrone acetate,veratroneacetate,V,no  ,jr_163.png,jr_163.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Pinoresinol_biphenyl,Pinoresinol biphenyl,pinoresinolbiphenyl,P,no  ,jr_164.png,jr_164.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Pinoresinol_biphenyl_acetate,Pinoresinol biphenyl acetate,pinoresinolbiphenylacetate,P,no  ,jr_165.png,jr_165.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Ethyl_vanillin,Ethyl vanillin,ethylvanillin,E,no  ,jr_167.png,jr_167.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Phenylcoumaran_biphenyl_acetate,Phenylcoumaran biphenyl acetate,phenylcoumaranbiphenylacetate,P,no  ,jr_169.png,jr_169.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Phenyl_coumaran_biphenyl,Phenyl coumaran biphenyl,phenylcoumaranbiphenyl,P,no  ,jr_170.png,jr_170.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+1_2_diguaiacylpropane_1_3_diol,"1,2-diguaiacylpropane-1,3-diol",diguaiacylpropanediol,D,no  ,jr_171.png,jr_171.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_acetoxy_acetophenone,4-acetoxy-acetophenone,acetoxyacetophenone,A,no  ,jr_173.png,jr_173.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vanillin_acetate,Vanillin acetate,vanillinacetate,V,no  ,jr_174.png,jr_174.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringic_Acid_Acetate,Syringic Acid Acetate,syringicacidacetate,S,no  ,jr_175.png,jr_175.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Guaiacol_acetate,Guaiacol acetate,guaiacolacetate,G,no  ,jr_176.png,jr_176.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Acetosyringone_acetate,Acetosyringone acetate,acetosyringoneacetate,A,no  ,jr_177.png,jr_177.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Sinapic_acid_acetate,Sinapic acid acetate,sinapicacidacetate,S,no  ,jr_178.png,jr_178.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_acetoxy_3_methoxy_methyl_benzoate,4-acetoxy-3-methoxy methyl benzoate,acetoxymethoxymethylbenzoate,A,no  ,jr_180.png,jr_180.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_c_CA,G-b-S-c-CA,gbscca,G,no  ,jr_181.png,jr_181.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_c_CA_acetate,G-b-S-c-CA (acetate),gbsccaacetate,G,no  ,jr_182.png,jr_182.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_r_S,G-b-S-r-S,gbsrs,G,no  ,jr_183.png,jr_183.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_r_S_acetate,G-b-S-r-S (acetate),gbsrsacetate,G,no  ,jr_184.png,jr_184.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_SA_acetate,S-b-SA (acetate),sbsaacetate,S,no  ,jr_185.png,jr_185.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_CA_acetate,S-b-CA (acetate),sbcaacetate,S,no  ,jr_186.png,jr_186.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_c_CA_acetate,S-c-CA (acetate),sccaacetate,S,no  ,jr_187.png,jr_187.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_SA_acetate,G-b-SA acetate,gbsaacetate,G,no  ,jr_188.png,jr_188.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+2_6_dimethoxyphenol_acetate,"2,6-dimethoxyphenol acetate",dimethoxyphenolacetate,D,no  ,jr_189.png,jr_189.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+phenol_acetate,phenol acetate,phenolacetate,P,no  ,jr_190.png,jr_190.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_191,lignin_cw_compound_191,lignincwcompound191,L,no  ,jr_191.png,jr_191.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_192,lignin_cw_compound_192,lignincwcompound192,L,no  ,jr_192.png,jr_192.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_193,lignin_cw_compound_193,lignincwcompound193,L,no  ,jr_193.png,jr_193.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_r_S_b_G,G-b-S-r-S-b-G,gbsrsbg,G,no  ,jr_194.png,jr_194.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_195,lignin_cw_compound_195,lignincwcompound195,L,no  ,jr_195.png,jr_195.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_196,lignin_cw_compound_196,lignincwcompound196,L,no  ,jr_196.png,jr_196.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_r_S_b_G_acetate,G-b-S-r-S-b-G (acetate),gbsrsbgacetate,G,no  ,jr_197.png,jr_197.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_S_r_S,S-b-S-r-S,sbsrs,S,no  ,jr_198.png,jr_198.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_S_r_S_acetate,S-b-S-r-S (acetate),sbsrsacetate,S,no  ,jr_199.png,jr_199.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vanillyl_alcohol_diacetate,Vanillyl alcohol diacetate,vanillylalcoholdiacetate,V,no  ,jr_200.png,jr_200.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringyl_alcohol_diacetate,Syringyl alcohol diacetate,syringylalcoholdiacetate,S,no  ,jr_201.png,jr_201.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_202,lignin_cw_compound_202,lignincwcompound202,L,no  ,jr_202.png,jr_202.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_methoxy_benzaldehyde,4-methoxy benzaldehyde,methoxybenzaldehyde,M,no  ,jr_203.png,jr_203.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_H5e,H-b-H5e,hbhe,H,no  ,jr_268.png,jr_268.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_204,lignin_cw_compound_204,lignincwcompound204,L,no  ,jr_204.png,jr_204.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_205,lignin_cw_compound_205,lignincwcompound205,L,no  ,jr_205.png,jr_205.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringaldehyde_acetate,Syringaldehyde acetate,syringaldehydeacetate,S,no  ,jr_206.png,jr_206.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_Acetoxy_benzaldehyde,4-Acetoxy benzaldehyde,acetoxybenzaldehyde,A,no  ,jr_207.png,jr_207.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_Acetoxy_benzoic_acid,4-Acetoxy benzoic acid,acetoxybenzoicacid,A,no  ,jr_208.png,jr_208.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_Methoxy_benzyl_alcohol,4-Methoxy benzyl alcohol,methoxybenzylalcohol,M,no  ,jr_209.png,jr_209.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_210,lignin_cw_compound_210,lignincwcompound210,L,no  ,jr_210.png,jr_210.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Sinapyl_alcohol_diacetate,Sinapyl alcohol diacetate,sinapylalcoholdiacetate,S,no  ,jr_211.png,jr_211.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_212,lignin_cw_compound_212,lignincwcompound212,L,no  ,jr_212.png,jr_212.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_213,lignin_cw_compound_213,lignincwcompound213,L,no  ,jr_213.png,jr_213.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_214,lignin_cw_compound_214,lignincwcompound214,L,no  ,jr_214.png,jr_214.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+p_Methoxy_cinnamaldehyde,p-Methoxy cinnamaldehyde,methoxycinnamaldehydep,M,no  ,jr_215.png,jr_215.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_G_c_CA_acetate,G-b-G-c-CA (acetate),gbgccaacetate,G,no  ,jr_216.png,jr_216.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_217,lignin_cw_compound_217,lignincwcompound217,L,no  ,jr_217.png,jr_217.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_218,lignin_cw_compound_218,lignincwcompound218,L,no  ,jr_218.png,jr_218.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+p_Methoxy_coumaryl_alcohol,p-Methoxy coumaryl alcohol,methoxycoumarylalcoholp,M,no  ,jr_219.png,jr_219.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+p_Methoxy_coumaryl_alcohol_acetate,p-Methoxy coumaryl alcohol acetate,methoxycoumarylalcoholacetatep,M,no  ,jr_220.png,jr_220.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+V_c_CA,V-c-CA,vcca,V,no  ,jr_221.png,jr_221.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_hydroxy_cinnamyl_alcohol_diacetate,Coumaryl alcohol acetate,coumarylalcoholacetate,C,no  ,jr_222.png,jr_222.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_acetoxy_cinnamaldehyde,4-acetoxy cinnamaldehyde,acetoxycinnamaldehyde,A,no  ,jr_223.png,jr_223.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_G_5_5_G_b_S_A_CH2,"S-b-G-5,5-G-b-S (A = CH2)",sbggbsach,S,no  ,jr_224.png,jr_224.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_S,H-b-S,hbs,H,no  ,jr_225.png,jr_225.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_bt_S_bt_G,G-bt-S-bt-G,gbtsbtg,G,no  ,jr_226.png,jr_226.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_S,S-b-S,sbs,S,no  ,jr_228.png,jr_228.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+cis_coniferyl_alcohol,cis-coniferyl alcohol,cisconiferylalcohol,C,no  ,jr_231.png,jr_231.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S,G-b-S,gbs,G,no  ,jr_232.png,jr_232.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b1_G,G-b1-G,gbg,G,no  ,jr_233.png,jr_233.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_c_G,G-c-G,gcg,G,no  ,jr_234.png,jr_234.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_G_b1_G,S-b-G-b1-G,sbgbg,S,no  ,jr_235.png,jr_235.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_a_G_b_G,G-a-G-b-G,gagbg,G,no  ,jr_237.png,jr_237.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+H_c_G,H-c-G,hcg,H,no  ,jr_239.png,jr_239.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_246,lignin_cw_compound_246,lignincwcompound246,L,no  ,jr_246.png,jr_246.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_247,lignin_cw_compound_247,lignincwcompound247,L,no  ,jr_247.png,jr_247.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_b_S,G-b-S-b-S,gbsbs,G,no  ,jr_250.png,jr_250.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_251,lignin_cw_compound_251,lignincwcompound251,L,no  ,jr_251.png,jr_251.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_253,lignin_cw_compound_253,lignincwcompound253,L,no  ,jr_253.png,jr_253.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_255,lignin_cw_compound_255,lignincwcompound255,L,no  ,jr_255.png,jr_255.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_256,lignin_cw_compound_256,lignincwcompound256,L,no  ,jr_256.png,jr_256.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_257,lignin_cw_compound_257,lignincwcompound257,L,no  ,jr_257.png,jr_257.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vanillin_a_G_b_CA,Vanillin-a-G-b-CA,vanillinagbca,V,no  ,jr_258.png,jr_258.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_260,lignin_cw_compound_260,lignincwcompound260,L,no  ,jr_260.png,jr_260.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_t_G_b_e_S5,S-b(t)-G-b(e)-S5,sbtgbes,S,no  ,jr_261.png,jr_261.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_264,lignin_cw_compound_264,lignincwcompound264,L,no  ,jr_264.png,jr_264.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_265,lignin_cw_compound_265,lignincwcompound265,L,no  ,jr_265.png,jr_265.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+S_a_S_b_S,S-a-S-b-S,sasbs,S,no  ,jr_266.png,jr_266.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_267,lignin_cw_compound_267,lignincwcompound267,L,no  ,jr_267.png,jr_267.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_H5t,H-b-H5t,hbht,H,no  ,jr_269.png,jr_269.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_5_O_4_G,G-5-O-4-G,gog,G,no  ,jr_273.png,jr_273.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+G_5_O_4_G_diacetate,G-5-O-4-G diacetate,gogdiacetate,G,no  ,jr_274.png,jr_274.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_275,lignin_cw_compound_275,lignincwcompound275,L,no  ,jr_275.png,jr_275.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_276,lignin_cw_compound_276,lignincwcompound276,L,no  ,jr_276.png,jr_276.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+dihydro_coniferyl_alcohol,dihydro-coniferyl alcohol,dihydroconiferylalcohol,D,no  ,jr_279.png,jr_279.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_280,lignin_cw_compound_280,lignincwcompound280,L,no  ,jr_280.png,jr_280.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_281,lignin_cw_compound_281,lignincwcompound281,L,no  ,jr_281.png,jr_281.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_282,lignin_cw_compound_282,lignincwcompound282,L,no  ,jr_282.png,jr_282.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+biphenyl_methane,biphenyl methane,biphenylmethane,B,no  ,jr_283.png,jr_283.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_284,lignin_cw_compound_284,lignincwcompound284,L,no  ,jr_284.png,jr_284.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_285,lignin_cw_compound_285,lignincwcompound285,L,no  ,jr_285.png,jr_285.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_286,lignin_cw_compound_286,lignincwcompound286,L,no  ,jr_286.png,jr_286.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_287,lignin_cw_compound_287,lignincwcompound287,L,no  ,jr_287.png,jr_287.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_288,lignin_cw_compound_288,lignincwcompound288,L,no  ,jr_288.png,jr_288.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_289,lignin_cw_compound_289,lignincwcompound289,L,no  ,jr_289.png,jr_289.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_290,lignin_cw_compound_290,lignincwcompound290,L,no  ,jr_290.png,jr_290.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_291,lignin_cw_compound_291,lignincwcompound291,L,no  ,jr_291.png,jr_291.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_292,lignin_cw_compound_292,lignincwcompound292,L,no  ,jr_292.png,jr_292.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_294,lignin_cw_compound_294,lignincwcompound294,L,no  ,jr_294.png,jr_294.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_295,lignin_cw_compound_295,lignincwcompound295,L,no  ,jr_295.png,jr_295.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_296,lignin_cw_compound_296,lignincwcompound296,L,no  ,jr_296.png,jr_296.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringol,Syringol,syringol,S,no  ,jr_40.png,jr_40.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratric_acid,Veratric acid,veratricacid,V,no  ,jr_44.png,jr_44.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_Dimethoxycinnamic_acid,"3,4-Dimethoxycinnamic acid",dimethoxycinnamicacid,D,no  ,jr_47.png,jr_47.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+4_Methoxycinnamic_acid,4-Methoxycinnamic acid,methoxycinnamicacid,M,no  ,jr_49.png,jr_49.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_50,lignin_cw_compound_50,lignincwcompound50,L,no  ,jr_50.png,jr_50.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_51,lignin_cw_compound_51,lignincwcompound51,L,no  ,jr_51.png,jr_51.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_52,lignin_cw_compound_52,lignincwcompound52,L,no  ,jr_52.png,jr_52.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_53,lignin_cw_compound_53,lignincwcompound53,L,no  ,jr_53.png,jr_53.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Anisole,Anisole,anisole,A,no  ,jr_54.png,jr_54.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+1_2_3_trimethoxybenzene,"1,2,3-trimethoxybenzene",trimethoxybenzene,T,no  ,jr_55.png,jr_55.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratrole,Veratrole,veratrole,V,no  ,jr_56.png,jr_56.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Veratraldehyde,Veratraldehyde,veratraldehyde,V,no  ,jr_57.png,jr_57.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Methyl_p_Coumarate,Methyl p-Coumarate,methylpcoumarate,M,no  ,jr_61.png,jr_61.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+methyl_3_4_5_trimethoxy_cinnamate,"methyl (3,4,5-trimethoxy)cinnamate",methyltrimethoxycinnamate,M,no  ,jr_62.png,jr_62.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+3_4_5_trimethoxy_cinnamic_acid,"3,4,5-trimethoxy cinnamic acid",trimethoxycinnamicacid,T,no  ,jr_63.png,jr_63.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringic_acid_methyl_ester,Syringic acid methyl ester,syringicacidmethylester,S,no  ,jr_64.png,jr_64.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Vanillic_acid_methyl_ester,Vanillic acid methyl ester,vanillicacidmethylester,V,no  ,jr_65.png,jr_65.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Dihydrodehydrodiisoeugenol,Dihydrodehydrodiisoeugenol,dihydrodehydrodiisoeugenol,D,no  ,jr_66.png,jr_66.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Dehydrodiisoeugenol,Dehydrodiisoeugenol,dehydrodiisoeugenol,D,no  ,jr_67.png,jr_67.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Methylveratrate,Methylveratrate,methylveratrate,M,no  ,jr_69.png,jr_69.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+methyl_3_4_dimethoxycinnamate,"methyl 3,4-dimethoxycinnamate",methyldimethoxycinnamate,M,no  ,jr_70.png,jr_70.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Dehydrodiveratraldehyde,Dehydrodiveratraldehyde,dehydrodiveratraldehyde,D,no  ,jr_71.png,jr_71.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Dehydrodiveratric_acid,Dehydrodiveratric acid,dehydrodiveratricacid,D,no  ,jr_72.png,jr_72.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_73,lignin_cw_compound_73,lignincwcompound73,L,no  ,jr_73.png,jr_73.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_74,lignin_cw_compound_74,lignincwcompound74,L,no  ,jr_74.png,jr_74.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_75,lignin_cw_compound_75,lignincwcompound75,L,no  ,jr_75.png,jr_75.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_76,lignin_cw_compound_76,lignincwcompound76,L,no  ,jr_76.png,jr_76.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_77,lignin_cw_compound_77,lignincwcompound77,L,no  ,jr_77.png,jr_77.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_78,lignin_cw_compound_78,lignincwcompound78,L,no  ,jr_78.png,jr_78.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_79,lignin_cw_compound_79,lignincwcompound79,L,no  ,jr_79.png,jr_79.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_80,lignin_cw_compound_80,lignincwcompound80,L,no  ,jr_80.png,jr_80.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_81,lignin_cw_compound_81,lignincwcompound81,L,no  ,jr_81.png,jr_81.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_82,lignin_cw_compound_82,lignincwcompound82,L,no  ,jr_82.png,jr_82.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_83,lignin_cw_compound_83,lignincwcompound83,L,no  ,jr_83.png,jr_83.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_84,lignin_cw_compound_84,lignincwcompound84,L,no  ,jr_84.png,jr_84.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_85,lignin_cw_compound_85,lignincwcompound85,L,no  ,jr_85.png,jr_85.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_86,lignin_cw_compound_86,lignincwcompound86,L,no  ,jr_86.png,jr_86.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_88,lignin_cw_compound_88,lignincwcompound88,L,no  ,jr_88.png,jr_88.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_89,lignin_cw_compound_89,lignincwcompound89,L,no  ,jr_89.png,jr_89.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Syringylglycerol_B_guaiacyl_ether,Syringylglycerol-B-guaiacyl ether,syringylglycerolbguaiacylether,S,no  ,jr_90.png,jr_90.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_91,lignin_cw_compound_91,lignincwcompound91,L,no  ,jr_91.png,jr_91.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_92,lignin_cw_compound_92,lignincwcompound92,L,no  ,jr_92.png,jr_92.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Phenyl_benzoate,Phenyl benzoate,phenylbenzoate,P,no  ,jr_93.png,jr_93.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Ethyl_4-hydroxybenzoate,Ethyl 4-hydroxybenzoate,ethylhydroxybenzoate,E,no  ,jr_94.png,jr_94.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Cinnamyl_alcohol,Cinnamyl alcohol,cinnamylalcohol,C,no  ,jr_95.png,jr_95.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+Cinnamaldehyde,Cinnamaldehyde,cinnamaldehyde,C,no  ,jr_96.png,jr_96.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_97,lignin_cw_compound_97,lignincwcompound97,L,no  ,jr_97.png,jr_97.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_98,lignin_cw_compound_98,lignincwcompound98,L,no  ,jr_98.png,jr_98.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_99,lignin_cw_compound_99,lignincwcompound99,L,no  ,jr_99.png,jr_99.mol,2009-09-01,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1007,lignin_cw_compound_1007,lignincwcompound1007,L,no  ,jr_1007.png,jr_1007.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1008,lignin_cw_compound_1008,lignincwcompound1008,L,no  ,jr_1008.png,jr_1008.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1009,lignin_cw_compound_1009,lignincwcompound1009,L,no  ,jr_1009.png,jr_1009.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1010,lignin_cw_compound_1010,lignincwcompound1010,L,no  ,jr_1010.png,jr_1010.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1011,lignin_cw_compound_1011,lignincwcompound1011,L,no  ,jr_1011.png,jr_1011.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1012,lignin_cw_compound_1012,lignincwcompound1012,L,no  ,jr_1012.png,jr_1012.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1013,lignin_cw_compound_1013,lignincwcompound1013,L,no  ,jr_1013.png,jr_1013.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1014,lignin_cw_compound_1014,lignincwcompound1014,L,no  ,jr_1014.png,jr_1014.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1015,lignin_cw_compound_1015,lignincwcompound1015,L,no  ,jr_1015.png,jr_1015.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1016,lignin_cw_compound_1016,lignincwcompound1016,L,no  ,jr_1016.png,jr_1016.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1017,lignin_cw_compound_1017,lignincwcompound1017,L,no  ,jr_1017.png,jr_1017.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1018,lignin_cw_compound_1018,lignincwcompound1018,L,no  ,jr_1018.png,jr_1018.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1019,lignin_cw_compound_1019,lignincwcompound1019,L,no  ,jr_1019.png,jr_1019.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1020,lignin_cw_compound_1020,lignincwcompound1020,L,no  ,jr_1020.png,jr_1020.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1021,lignin_cw_compound_1021,lignincwcompound1021,L,no  ,jr_1021.png,jr_1021.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1022,lignin_cw_compound_1022,lignincwcompound1022,L,no  ,jr_1022.png,jr_1022.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1023,lignin_cw_compound_1023,lignincwcompound1023,L,no  ,jr_1023.png,jr_1023.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1024,lignin_cw_compound_1024,lignincwcompound1024,L,no  ,jr_1024.png,jr_1024.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1025,lignin_cw_compound_1025,lignincwcompound1025,L,no  ,jr_1025.png,jr_1025.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1026,lignin_cw_compound_1026,lignincwcompound1026,L,no  ,jr_1026.png,jr_1026.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1027,lignin_cw_compound_1027,lignincwcompound1027,L,no  ,jr_1027.png,jr_1027.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1028,lignin_cw_compound_1028,lignincwcompound1028,L,no  ,jr_1028.png,jr_1028.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1029,lignin_cw_compound_1029,lignincwcompound1029,L,no  ,jr_1029.png,jr_1029.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_1030,lignin_cw_compound_1030,lignincwcompound1030,L,no  ,jr_1030.png,jr_1030.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2005,lignin_cw_compound_2005,lignincwcompound2005,L,no  ,jr_2005.png,jr_2005.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2006,lignin_cw_compound_2006,lignincwcompound2006,L,no  ,jr_2006.png,jr_2006.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2008,lignin_cw_compound_2008,lignincwcompound2008,L,no  ,jr_2008.png,jr_2008.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+coniferyl_p_coumarate,coniferyl p-coumarate,coniferylpcoumarate,C,no  ,jr_2009.png,jr_2009.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2011,lignin_cw_compound_2011,lignincwcompound2011,L,no  ,jr_2011.png,jr_2011.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2012,lignin_cw_compound_2012,lignincwcompound2012,L,no  ,jr_2012.png,jr_2012.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2015,lignin_cw_compound_2015,lignincwcompound2015,L,no  ,jr_2015.png,jr_2015.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2016,lignin_cw_compound_2016,lignincwcompound2016,L,no  ,jr_2016.png,jr_2016.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2018,lignin_cw_compound_2018,lignincwcompound2018,L,no  ,jr_2018.png,jr_2018.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+Pinoresinol,Pinoresinol,pinoresinol,P,no  ,jr_2020.png,jr_2020.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2022,lignin_cw_compound_2022,lignincwcompound2022,L,no  ,jr_2022.png,jr_2022.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2026,lignin_cw_compound_2026,lignincwcompound2026,L,no  ,jr_2026.png,jr_2026.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2031,lignin_cw_compound_2031,lignincwcompound2031,L,no  ,jr_2031.png,jr_2031.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2032,lignin_cw_compound_2032,lignincwcompound2032,L,no  ,jr_2032.png,jr_2032.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2035,lignin_cw_compound_2035,lignincwcompound2035,L,no  ,jr_2035.png,jr_2035.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2036,lignin_cw_compound_2036,lignincwcompound2036,L,no  ,jr_2036.png,jr_2036.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2038,lignin_cw_compound_2038,lignincwcompound2038,L,no  ,jr_2038.png,jr_2038.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2040,lignin_cw_compound_2040,lignincwcompound2040,L,no  ,jr_2040.png,jr_2040.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2041,lignin_cw_compound_2041,lignincwcompound2041,L,no  ,jr_2041.png,jr_2041.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2042,lignin_cw_compound_2042,lignincwcompound2042,L,no  ,jr_2042.png,jr_2042.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2043,lignin_cw_compound_2043,lignincwcompound2043,L,no  ,jr_2043.png,jr_2043.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2049,lignin_cw_compound_2049,lignincwcompound2049,L,no  ,jr_2049.png,jr_2049.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2050,lignin_cw_compound_2050,lignincwcompound2050,L,no  ,jr_2050.png,jr_2050.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2052,lignin_cw_compound_2052,lignincwcompound2052,L,no  ,jr_2052.png,jr_2052.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2053,lignin_cw_compound_2053,lignincwcompound2053,L,no  ,jr_2053.png,jr_2053.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2057,lignin_cw_compound_2057,lignincwcompound2057,L,no  ,jr_2057.png,jr_2057.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2058,lignin_cw_compound_2058,lignincwcompound2058,L,no  ,jr_2058.png,jr_2058.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2062,lignin_cw_compound_2062,lignincwcompound2062,L,no  ,jr_2062.png,jr_2062.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2063,lignin_cw_compound_2063,lignincwcompound2063,L,no  ,jr_2063.png,jr_2063.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2064,lignin_cw_compound_2064,lignincwcompound2064,L,no  ,jr_2064.png,jr_2064.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+Sinapyl_p_coumarate,Sinapyl p-coumarate,sinapylpcoumarate,S,no  ,jr_2065.png,jr_2065.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2066,lignin_cw_compound_2066,lignincwcompound2066,L,no  ,jr_2066.png,jr_2066.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2067,lignin_cw_compound_2067,lignincwcompound2067,L,no  ,jr_2067.png,jr_2067.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2068,lignin_cw_compound_2068,lignincwcompound2068,L,no  ,jr_2068.png,jr_2068.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+Seco_isolariciresinol,Seco-isolariciresinol,isolariciresinolseco,I,no  ,jr_2070.png,jr_2070.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2071,lignin_cw_compound_2071,lignincwcompound2071,L,no  ,jr_2071.png,jr_2071.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2072,lignin_cw_compound_2072,lignincwcompound2072,L,no  ,jr_2072.png,jr_2072.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2073,lignin_cw_compound_2073,lignincwcompound2073,L,no  ,jr_2073.png,jr_2073.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2074,lignin_cw_compound_2074,lignincwcompound2074,L,no  ,jr_2074.png,jr_2074.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2079,lignin_cw_compound_2079,lignincwcompound2079,L,no  ,jr_2079.png,jr_2079.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2080,lignin_cw_compound_2080,lignincwcompound2080,L,no  ,jr_2080.png,jr_2080.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2081,lignin_cw_compound_2081,lignincwcompound2081,L,no  ,jr_2081.png,jr_2081.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3001,lignin_cw_compound_3001,lignincwcompound3001,L,no  ,jr_3001.png,jr_3001.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3002,lignin_cw_compound_3002,lignincwcompound3002,L,no  ,jr_3002.png,jr_3002.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3003,lignin_cw_compound_3003,lignincwcompound3003,L,no  ,jr_3003.png,jr_3003.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3004,lignin_cw_compound_3004,lignincwcompound3004,L,no  ,jr_3004.png,jr_3004.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3005,lignin_cw_compound_3005,lignincwcompound3005,L,no  ,jr_3005.png,jr_3005.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3006,lignin_cw_compound_3006,lignincwcompound3006,L,no  ,jr_3006.png,jr_3006.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3008,lignin_cw_compound_3008,lignincwcompound3008,L,no  ,jr_3008.png,jr_3008.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3010,lignin_cw_compound_3010,lignincwcompound3010,L,no  ,jr_3010.png,jr_3010.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3011,lignin_cw_compound_3011,lignincwcompound3011,L,no  ,jr_3011.png,jr_3011.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3014,lignin_cw_compound_3014,lignincwcompound3014,L,no  ,jr_3014.png,jr_3014.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3015,lignin_cw_compound_3015,lignincwcompound3015,L,no  ,jr_3015.png,jr_3015.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3016,lignin_cw_compound_3016,lignincwcompound3016,L,no  ,jr_3016.png,jr_3016.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3017,lignin_cw_compound_3017,lignincwcompound3017,L,no  ,jr_3017.png,jr_3017.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3018,lignin_cw_compound_3018,lignincwcompound3018,L,no  ,jr_3018.png,jr_3018.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3019,lignin_cw_compound_3019,lignincwcompound3019,L,no  ,jr_3019.png,jr_3019.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3020,lignin_cw_compound_3020,lignincwcompound3020,L,no  ,jr_3020.png,jr_3020.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3021,lignin_cw_compound_3021,lignincwcompound3021,L,no  ,jr_3021.png,jr_3021.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3022,lignin_cw_compound_3022,lignincwcompound3022,L,no  ,jr_3022.png,jr_3022.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3023,lignin_cw_compound_3023,lignincwcompound3023,L,no  ,jr_3023.png,jr_3023.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3025,lignin_cw_compound_3025,lignincwcompound3025,L,no  ,jr_3025.png,jr_3025.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3026,lignin_cw_compound_3026,lignincwcompound3026,L,no  ,jr_3026.png,jr_3026.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3027,lignin_cw_compound_3027,lignincwcompound3027,L,no  ,jr_3027.png,jr_3027.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3028,lignin_cw_compound_3028,lignincwcompound3028,L,no  ,jr_3028.png,jr_3028.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3031,lignin_cw_compound_3031,lignincwcompound3031,L,no  ,jr_3031.png,jr_3031.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3033,lignin_cw_compound_3033,lignincwcompound3033,L,no  ,jr_3033.png,jr_3033.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3034,lignin_cw_compound_3034,lignincwcompound3034,L,no  ,jr_3034.png,jr_3034.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3035,lignin_cw_compound_3035,lignincwcompound3035,L,no  ,jr_3035.png,jr_3035.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3036,lignin_cw_compound_3036,lignincwcompound3036,L,no  ,jr_3036.png,jr_3036.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3037,lignin_cw_compound_3037,lignincwcompound3037,L,no  ,jr_3037.png,jr_3037.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3039,lignin_cw_compound_3039,lignincwcompound3039,L,no  ,jr_3039.png,jr_3039.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3040,lignin_cw_compound_3040,lignincwcompound3040,L,no  ,jr_3040.png,jr_3040.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3041,lignin_cw_compound_3041,lignincwcompound3041,L,no  ,jr_3041.png,jr_3041.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3042,lignin_cw_compound_3042,lignincwcompound3042,L,no  ,jr_3042.png,jr_3042.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3043,lignin_cw_compound_3043,lignincwcompound3043,L,no  ,jr_3043.png,jr_3043.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3044,lignin_cw_compound_3044,lignincwcompound3044,L,no  ,jr_3044.png,jr_3044.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3045,lignin_cw_compound_3045,lignincwcompound3045,L,no  ,jr_3045.png,jr_3045.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3046,lignin_cw_compound_3046,lignincwcompound3046,L,no  ,jr_3046.png,jr_3046.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3047,lignin_cw_compound_3047,lignincwcompound3047,L,no  ,jr_3047.png,jr_3047.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+6_methoxy_indan_5_ol,6-methoxy-indan-5-ol,methoxyindanol,M,no  ,jr_3048.png,jr_3048.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3052,lignin_cw_compound_3052,lignincwcompound3052,L,no  ,jr_3052.png,jr_3052.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3053,lignin_cw_compound_3053,lignincwcompound3053,L,no  ,jr_3053.png,jr_3053.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3056,lignin_cw_compound_3056,lignincwcompound3056,L,no  ,jr_3056.png,jr_3056.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3058,lignin_cw_compound_3058,lignincwcompound3058,L,no  ,jr_3058.png,jr_3058.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3059,lignin_cw_compound_3059,lignincwcompound3059,L,no  ,jr_3059.png,jr_3059.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3061,lignin_cw_compound_3061,lignincwcompound3061,L,no  ,jr_3061.png,jr_3061.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3062,lignin_cw_compound_3062,lignincwcompound3062,L,no  ,jr_3062.png,jr_3062.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+Simulanol,Simulanol,simulanol,S,no  ,jr_3063.png,jr_3063.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+buddlenol_E,buddlenol E,buddlenole,B,no  ,jr_3064.png,jr_3064.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+buddlenol_A,buddlenol A,buddlenola,B,no  ,jr_3065.png,jr_3065.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+SP_8_8_S,SP-(8-8)-S,sps,S,no  ,jr_3066.png,jr_3066.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+G_8_O_4_-S,G-(8-O-4)-S,gos,G,no  ,jr_3067.png,jr_3067.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3068,lignin_cw_compound_3068,lignincwcompound3068,L,no  ,jr_3068.png,jr_3068.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3069,lignin_cw_compound_3069,lignincwcompound3069,L,no  ,jr_3069.png,jr_3069.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3070,lignin_cw_compound_3070,lignincwcompound3070,L,no  ,jr_3070.png,jr_3070.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3071,lignin_cw_compound_3071,lignincwcompound3071,L,no  ,jr_3071.png,jr_3071.mol,2009-09-22,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3,lignin_cw_compound_3,lignincwcompound3,L,no  ,jr_3.png,jr_3.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_21,lignin_cw_compound_21,lignincwcompound21,L,no  ,jr_21.png,jr_21.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_31,lignin_cw_compound_31,lignincwcompound31,L,no  ,jr_31.png,jr_31.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_32,lignin_cw_compound_32,lignincwcompound32,L,no  ,jr_32.png,jr_32.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_33,lignin_cw_compound_33,lignincwcompound33,L,no  ,jr_33.png,jr_33.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_34,lignin_cw_compound_34,lignincwcompound34,L,no  ,jr_34.png,jr_34.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+methyl_4_methoxy_cinnamate_methyl,methyl (4-methoxy)cinnamate,methylmethoxycinnamatemethyl4,M,no  ,jr_59.png,jr_59.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+alpha_beta_Xylose_Acetate,"alpha,beta Xylose Acetate",xyloseacetateab,X,no  ,jr_122.png,jr_122.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_131,lignin_cw_compound_131,lignincwcompound131,L,no  ,jr_131.png,jr_131.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_133,lignin_cw_compound_133,lignincwcompound133,L,no  ,jr_133.png,jr_133.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_137,lignin_cw_compound_137,lignincwcompound137,L,no  ,jr_137.png,jr_137.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_beta_S5,G-beta-S5,GbetaS5,G,no  ,jr_139.png,jr_139.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_140,lignin_cw_compound_140,lignincwcompound140,L,no  ,jr_140.png,jr_140.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+p_Gluco_cinnamyl_alcohol,p-Gluco cinnamyl alcohol,glucocinnamylalcoholp,G,no  ,jr_157.png,jr_157.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_172,lignin_cw_compound_172,lignincwcompound172,L,no  ,jr_172.png,jr_172.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_G_AcO,G-b-G-AcO,GbGaco,G,no  ,jr_227.png,jr_227.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_S_AcO,S-b-S-AcO,sbsaco,S,no  ,jr_230.png,jr_230.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_G_b1_G,G-b-G-b1-G,GbGb1G,G,no  ,jr_236.png,jr_236.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_G_AcO,H-b-G-AcO,hbgaco,H,no  ,jr_238.png,jr_238.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_240,lignin_cw_compound_240,lignincwcompound240,L,no  ,jr_240.png,jr_240.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_G_OH,H-b-G-OH,hbgoh,H,no  ,jr_241.png,jr_241.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_S_OH,G-b-S-OH,gbsoh,G,no  ,jr_242.png,jr_242.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_S_OH,S-b-S-OH,sbsoh,S,no  ,jr_243.png,jr_243.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_H,G-b-H,gbh,G,no  ,jr_244.png,jr_244.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+G_b_G_OH,G-b-G-OH,gbgoh,G,no  ,jr_248.png,jr_248.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+H_b_S_OH,H-b-S-OH,hbsoh,H,no  ,jr_249.png,jr_249.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_252,lignin_cw_compound_252,lignincwcompound252,L,no  ,jr_252.png,jr_252.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_254,lignin_cw_compound_254,lignincwcompound254,L,no  ,jr_254.png,jr_254.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+dihydrodiconiferyl_alcohol,dihydrodiconiferyl alcohol,dihydrodiconiferylalcohol,D,no  ,jr_259.png,jr_259.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_262,lignin_cw_compound_262,lignincwcompound262,L,no  ,jr_262.png,jr_262.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_263,lignin_cw_compound_263,lignincwcompound263,L,no  ,jr_263.png,jr_263.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_272,lignin_cw_compound_272,lignincwcompound272,L,no  ,jr_272.png,jr_272.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+dibenzodioxicin,dibenzodioxicin,dibenzodioxicin,D,no  ,jr_277.png,jr_277.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_278,lignin_cw_compound_278,lignincwcompound278,L,no  ,jr_278.png,jr_278.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_293,lignin_cw_compound_293,lignincwcompound293,L,no  ,jr_293.png,jr_293.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Veratryl_alcohol_methyl_ether,Veratryl alcohol methyl ether,veratrylalcoholmethylether,V,no  ,jr_297.png,jr_297.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Methoxy_hydroxy_stilbene_carboxylic_acid,3-Methoxy-4-hydroxy stilbene carboxylic acid,methoxyhydroxystilbenecarboxylicacid,M,no  ,jr_298.png,jr_298.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_299,lignin_cw_compound_299,lignincwcompound299,L,no  ,jr_299.png,jr_299.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+5_O_4_diacetovanillone,5-O-4 diacetovanillone,diacetovanillone5o4,D,no  ,jr_300.png,jr_300.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+guaiacyl_chalcone,guaiacyl chalcone,guaiacylchalcone,G,no  ,jr_301.png,jr_301.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+345_trimethoxy_cinnamyl_alcohol,"3,4,5-trimethoxy cinnamyl alcohol",trimethoxycinnamylalcohol345,T,no  ,jr_302.png,jr_302.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2004,lignin_cw_compound_2004,lignincwcompound2004,L,no  ,jr_2004.png,jr_2004.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2007,lignin_cw_compound_2007,lignincwcompound2007,L,no  ,jr_2007.png,jr_2007.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+coniferyl_benzoate,coniferyl benzoate,coniferylbenzoate,C,no  ,jr_2010.png,jr_2010.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Guaiacylglycerol_B_coniferyl,Guaiacylglycerol-B-coniferyl ether,guaiacylglycerolconiferylb,G,no  ,jr_2013.png,jr_2013.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2017,lignin_cw_compound_2017,lignincwcompound2017,L,no  ,jr_2017.png,jr_2017.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2019,lignin_cw_compound_2019,lignincwcompound2019,L,no  ,jr_2019.png,jr_2019.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2021,lignin_cw_compound_2021,lignincwcompound2021,L,no  ,jr_2021.png,jr_2021.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2023,lignin_cw_compound_2023,lignincwcompound2023,L,no  ,jr_2023.png,jr_2023.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2024,lignin_cw_compound_2024,lignincwcompound2024,L,no  ,jr_2024.png,jr_2024.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2025,lignin_cw_compound_2025,lignincwcompound2025,L,no  ,jr_2025.png,jr_2025.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2027,lignin_cw_compound_2027,lignincwcompound2027,L,no  ,jr_2027.png,jr_2027.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2028,lignin_cw_compound_2028,lignincwcompound2028,L,no  ,jr_2028.png,jr_2028.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2029,lignin_cw_compound_2029,lignincwcompound2029,L,no  ,jr_2029.png,jr_2029.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2030,lignin_cw_compound_2030,lignincwcompound2030,L,no  ,jr_2030.png,jr_2030.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2033,lignin_cw_compound_2033,lignincwcompound2033,L,no  ,jr_2033.png,jr_2033.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2034,lignin_cw_compound_2034,lignincwcompound2034,L,no  ,jr_2034.png,jr_2034.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2037,lignin_cw_compound_2037,lignincwcompound2037,L,no  ,jr_2037.png,jr_2037.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2039,lignin_cw_compound_2039,lignincwcompound2039,L,no  ,jr_2039.png,jr_2039.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2044,lignin_cw_compound_2044,lignincwcompound2044,L,no  ,jr_2044.png,jr_2044.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2045,lignin_cw_compound_2045,lignincwcompound2045,L,no  ,jr_2045.png,jr_2045.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2046,lignin_cw_compound_2046,lignincwcompound2046,L,no  ,jr_2046.png,jr_2046.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2047,lignin_cw_compound_2047,lignincwcompound2047,L,no  ,jr_2047.png,jr_2047.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2048,lignin_cw_compound_2048,lignincwcompound2048,L,no  ,jr_2048.png,jr_2048.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2051,lignin_cw_compound_2051,lignincwcompound2051,L,no  ,jr_2051.png,jr_2051.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2054,lignin_cw_compound_2054,lignincwcompound2054,L,no  ,jr_2054.png,jr_2054.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2055,lignin_cw_compound_2055,lignincwcompound2055,L,no  ,jr_2055.png,jr_2055.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+5_5_Dehydrodiferulic_Acid,"5-5, Dehydrodiferulic Acid",dehydrodiferulicAcid,D,no  ,jr_2056.png,jr_2056.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2059,lignin_cw_compound_2059,lignincwcompound2059,L,no  ,jr_2059.png,jr_2059.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2060,lignin_cw_compound_2060,lignincwcompound2060,L,no  ,jr_2060.png,jr_2060.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2061,lignin_cw_compound_2061,lignincwcompound2061,L,no  ,jr_2061.png,jr_2061.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Isotaxiresinol,Isotaxiresinol,isotaxiresinol,I,no  ,jr_2069.png,jr_2069.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2075,lignin_cw_compound_2075,lignincwcompound2075,L,no  ,jr_2075.png,jr_2075.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2076,lignin_cw_compound_2076,lignincwcompound2076,L,no  ,jr_2076.png,jr_2076.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2077,lignin_cw_compound_2077,lignincwcompound2077,L,no  ,jr_2077.png,jr_2077.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2078,lignin_cw_compound_2078,lignincwcompound2078,L,no  ,jr_2078.png,jr_2078.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_2082,lignin_cw_compound_2082,lignincwcompound2082,L,no  ,jr_2082.png,jr_2082.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3007,lignin_cw_compound_3007,lignincwcompound3007,L,no  ,jr_3007.png,jr_3007.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3009,lignin_cw_compound_3009,lignincwcompound3009,L,no  ,jr_3009.png,jr_3009.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3013,lignin_cw_compound_3013,lignincwcompound3013,L,no  ,jr_3013.png,jr_3013.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3024,lignin_cw_compound_3024,lignincwcompound3024,L,no  ,jr_3024.png,jr_3024.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3029,lignin_cw_compound_3029,lignincwcompound3029,L,no  ,jr_3029.png,jr_3029.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3030,lignin_cw_compound_3030,lignincwcompound3030,L,no  ,jr_3030.png,jr_3030.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3032,lignin_cw_compound_3032,lignincwcompound3032,L,no  ,jr_3032.png,jr_3032.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3038,lignin_cw_compound_3038,lignincwcompound3038,L,no  ,jr_3038.png,jr_3038.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3049,lignin_cw_compound_3049,lignincwcompound3049,L,no  ,jr_3049.png,jr_3049.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3050,lignin_cw_compound_3050,lignincwcompound3050,L,no  ,jr_3050.png,jr_3050.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3051,lignin_cw_compound_3051,lignincwcompound3051,L,no  ,jr_3051.png,jr_3051.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3054,lignin_cw_compound_3054,lignincwcompound3054,L,no  ,jr_3054.png,jr_3054.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3055,lignin_cw_compound_3055,lignincwcompound3055,L,no  ,jr_3055.png,jr_3055.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3057,lignin_cw_compound_3057,lignincwcompound3057,L,no  ,jr_3057.png,jr_3057.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3060,lignin_cw_compound_3060,lignincwcompound3060,L,no  ,jr_3060.png,jr_3060.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+S_8_O_4_G_8_5_G,S-(8-O-4)-G-(8-5)-G,s8o4g85g,S,no  ,jr_3072.png,jr_3072.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_3012,lignin_cw_compound_3012,lignincwcompound3012,L,no  ,jr_3012.png,jr_3012.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_166,lignin_cw_compound_166,lignincwcompound166,L,no  ,jr_166.png,jr_166.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+lignin_cw_compound_168,lignin_cw_compound_168,lignincwcompound168,L,no  ,jr_168.png,jr_168.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+Guaiacylglycerol_B_syringyl_ether,Guaiacylglycerol-B-syringyl ether,guaiacylglycerolBsyringylether,G,no  ,jr_179.png,jr_179.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds
+S_b_G,S-b-G,sbg,S,no  ,jr_245.png,jr_245.mol,2009-07-02,NMR Database of Lignin and Cell Wall Model Compounds

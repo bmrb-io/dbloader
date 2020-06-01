@@ -1,0 +1,96 @@
+id,accnum,mfg,exptype,dimension,file,name
+1,1,Bruker,HomoCS,Three,tochsqc.cgh,TOCSY-HSQC 3D experiment
+2,2,Bruker,HomoCS,Three,nsyhsqc.cgh,NOESY-HSQC 3D experiment
+3,3,Bruker,HetCS,Two,pep_z_hsqc.bv,Bruker DMX 15N-1H 2D HSQC with Sensitivity-enhanced
+4,4,Bruker,HetCS,Two,pep_z_hsqcamx.bv,Bruker AMX 15N-1H 2D HSQC with Sensitivity-enhanced
+5,5,Bruker,HetCS,Two,gradhmbc,HMBC with gradient selection of echo and antiecho in t1 for suppression of t1-noise
+6,6,Bruker,HetCS,Two,jshsqce,hsqc employing gradients for coherence selection. Phase sensitive by sampling +/- coherence in alternate scans.
+7,7,Bruker,HetCS,Two,real.sel2hmbc_gs.kaf.html,selective hmbc with gradients; used when the selective 180 is greater than approx 1.5 ms
+8,,Bruker,HetCS,Two,sel1hmbc_gs.kaf,selective hmbc with gradients; used when the selective 180 is less than approx 1.5 ms
+9,8,Bruker,HetCS,Two,hsqclr.abx,hsqc with selective 180(1H) pulses for high S/N
+10,9,Bruker,HetCS,Three,hncacbse,3D HNCaCb - Gradient enhanced
+11,10,Bruker,HetCS,Three,hncacbse_fb.bv,3D HNCaCb - Gradient enhanced with minimal H2O saturation
+12,11,Bruker,HetCS,Three,hnca_sefb.al,3D HNCA with Gradient sensitivity enhancement with minimal H2O saturation
+13,12,Bruker,HetCS,Three,hnco_sefb.al,3D HNCO with Gradient sensitivity enhancement with minimal H2O saturation
+14,13,Bruker,HetCS,Three,hncoca_sefb.al,3D HN(CO)CA with gradient sensitivity enhancement and minimal H2O saturation
+15,14,Bruker,HetCS,Three,hcan-ge.mo,"3D HCAN, gradient enhanced, deuterium decoupled"
+16,,Bruker,HetCS,Three,hcacon-ge.r,"- gradient program for 3D HCAN, gradient enhanced, deuterium decoupled"
+17,,Bruker,HetCS,Three,bits.mo,"- include file for 3D HCAN, gradient enhanced, deuterium decoupled"
+18,15,Bruker,HetCS,Three,hcacon-ge.mo,"3D HCA(CO)N, gradient enhanced, deuterium decoupled"
+19,,Bruker,HetCS,Three,hcacon-ge.r,"- gradient program for 3D HCA(CO)N, gradient enhanced, deuterium decoupled"
+20,,Bruker,HetCS,Three,bits.mo,"- include file for 3D HCA(CO)N, gradient enhanced, deuterium decoupled"
+21,16,Bruker,HomoXchng,One,hmqcnoejr1d.wmw,13C edited (HMQC) 1D NOE difference JR for water suppression (9/27/95)
+22,17,Bruker,HomoXchng,Three,bdnhsqc.cgh,Block-decoupled diagonal elements with spin diffusion eliminated 3D NOESY
+23,18,Bruker,HomoXchng,Three,cbdhsqc.cgh,Block-decoupled off-diagonal elements with spin diffusion eliminated 3D NOESY
+24,19,Bruker,HomoXchng,Four,ccnoesy4d,"4D (13C,13C)-HMQC-NOESY-HSQC"
+25,65,Bruker,HomoXchng,Two,jsRoesy,"symmetrized CW-ROESY, program for DMX hardware, tested on DMX 500i and DMX750"
+26,20,Bruker,HetXchng,Two,sehetnoe_fb.al,2D 1H/15N heteronuclear NOE with water along +Z
+27,21,Bruker,HetXchng,Three,nopephs3d.bv,Bruker AMX 15N-1H 3D NOESY-HSQC with Sensitivity-enhanced
+28,22,Bruker,T1,Three,invT1.cgh,DMX using States-TPPI
+29,,Bruker,T1rho,Any,commentfile,Off-resonance T1rho experiment - general comment file
+30,,Bruker,T1rho,Any,T1RO_10_F2.fm,Off-resonance T1rho experiment - pulse sequence
+31,,Bruker,T1rho,Any,param.list,Off-resonance T1rho experiment - parameter list
+32,,Bruker,T1rho,Any,gradientfile,Off-resonance T1rho experiment - README file for the gradients
+33,,Bruker,T1rho,Any,gradients.def,Off-resonance T1rho experiment - gradient include file
+34,,Bruker,T1rho,Any,N_8shape8.r,Off-resonance T1rho experiment - example gradient file
+35,,Bruker,T1rho,Any,makeT1R_bruker.c,Off-resonance T1rho experiment - C source code for shaped pulses
+36,23,Bruker,T1rho,Any,invT1rho.cgh,DMX using States-TPPI
+37,24,Bruker,HomoJC,Two,jcc.bv,"2D difference 13C CT-HSQC for determination of J3(C'Cb) in Val, Ile, and Thr residues for the determination of X1 angle"
+38,25,Bruker,HetJC,Two,hnhbref.bv,Bruker DMX non-gradient 2D CT-HSQC; reference for 3D HNHB
+39,26,Bruker,HetJC,Two,hnhbrefgr.bv,Bruker DMX gradient 2D CT-HSQC; reference for 3D gradient HNHB
+40,,Bruker,HetJC,Two,bvhnhb.r,Auxiliary program needed by gradient 2D CT-HSQC
+41,27,Bruker,HetJC,Two,CT_HMQC_J.acw,Measurement of 3J(HnHa) from a set of 2D J-modulated HMQC spectra.
+42,28,Bruker,HetJC,Two,jnc.bv,"2D difference 13C CT-HSQC for determination of J3(NC) in Val, Ile, and Thr residues for the determination of X1 angle"
+43,29,Bruker,HetJC,Three,hnhb.bv,Bruker DMX non-gradient 3D HNHB
+44,30,Bruker,HetJC,Three,hnhbgr.bv,Bruker DMX gradient 3D HNHB
+45,,Bruker,HetJC,Three,bvhnhb.r,Auxiliary program needed by gradient 3D HNHB
+46,31,Bruker,HetJC,Three,HCAN_CO_ecosy.acw,Measurement of 3J(HaC') from E.COSY splitting.
+47,32,Bruker,HetJC,Three,HNCA_CB_ecosy.acw,Measurement of 3J(HnCb) from E.COSY splitting.
+48,33,Bruker,HetJC,Three,HNCA_HA_ecosy.acw,Measurement of 3J(HnHa) from E.COSY splitting.
+49,34,Bruker,HetJC,Three,HNCOHB.acw,Measurement of C' to H J couplings from quantitative-type measurement.
+50,61,Varian,HetCS,Two,hsqc_pfg_sel_500.c,1H-15N HSQC with enhanced sensitivity PFG and minimal perturbation of water.
+51,62,Varian,HetCS,Two,hbcbcgcdcehe_aro_pfg_500.c,"CB - aromatic Hd,He correlation."
+52,63,Varian,HetCS,Two,hbcbcgcdhd_aro_pfg_500.c,CB - aromatic Hd correlation.
+53,,Varian,HetCS,Two,CT_cpmghsqc_fm_500.c,Constant time CPMG-HSQC.
+54,,Varian,HetCS,Two,README,Constant time CPMG-HSQC. - description
+55,,Varian,HetCS,Two,CT_cpmghsqc_fm_500.par/procpar,Constant time CPMG-HSQC. - parameters
+56,,Varian,HetCS,Two,fmcpmghsqc.c,CPMG-HSQC.
+57,,Varian,HetCS,Two,README,CPMG-HSQC - pulse sequence description.
+58,,Varian,HetCS,Two,fmcpmghsqc.par/procpar,CPMG-HSQC -parameters.
+59,,Varian,HetCS,Two,fmcpmghsqc_ref.c,CPMG-HSQC - reference pulse sequence.
+60,,Varian,HetCS,Two,fmcpmghsqc_ref.par/procpar,CPMG-HSQC - reference pulse sequence parameters.
+61,35,Varian,HetCS,Three,hnco_3c_pfg_lek+_sel11_500.c,HNCO
+62,36,Varian,HetCS,Three,hbcbcaconnh_3c_pfg1_sel_500.c,CBCA(CO)NH
+63,37,Varian,HetCS,Three,hbcbcacocaha_3c_pfg1+_500.c,CBCACO(CA)HA
+64,38,Varian,HetCS,Three,hncacb_3c_pfg_sel_500.c,HNCACB
+65,39,Varian,HetCS,Three,hcctocsy_nnh_3c_pfg1_sel_500.c,H(CC-tocsy)-NNH
+66,40,Varian,HetCS,Three,ccctocsy_nnh_3c_pfg1_sel_500.c,C(CC-tocsy)-NNH
+67,41,Varian,HetCS,Three,hcchtocsy_3c_pfg_500.c,HCCH-TOCSY
+68,42,Varian,HetCS,Three,dipsi3dn_pfg_enhanced_sel_v1_500.c,15N-edited TOCSY-HSQC
+69,43,Varian,HetCS,Three,hnhacoupl.readme.html,(1H-15N-1H) shift correlation double resonance experiment to measure 3J(HN-HA) coupling constants
+70,44,Varian,HetXchng,Two,N15NOE_lek_pfg_sel_enh_500.c,1H->15N NOE
+71,45,Varian,HetXchng,Two,waterNOE.readme.html,1H-15N HSQC to detect amide proton exchange rates and NOE's to water
+72,46,Varian,HetXchng,Two,waterROE.readme.html,1H-15N HSQC to detect amide proton exchange rates and ROE's to water for above experiment
+73,47,Varian,HetXchng,Three,noesy3dn_pfg_enhanced+_sel_500.c,15N-edited NOESY-HSQC
+74,48,Varian,HetXchng,Three,noesyc_pfg_h2o_NC+_500.c,"15N,13C-edited NOESY"
+75,49,Varian,HetXchng,Three,cnoesy_3c_sed_pfg_purge+_500.c,13C-filtered NOESY
+76,50,Varian,HetXchng,Three,noesyc_pfg_h2o_NC+_purge_500.c,"15N,13C-selected NOESY"
+77,51,Varian,HetXchng,Four,c4Dnoesy_d2o_pfg_500.c,"13C,13C-edited NOESY"
+78,52,Varian,HetXchng,Four,cn4Dnoesy_pfg_sel_500.c,"15N,13C-edited NOESY"
+79,53,Varian,T1,Any,N15T1_lek_pfg_sel_enh_500.c,2D 15N T1
+80,54,Varian,T2,Any,N15T2_lek_pfg_sel_enh_500.c,2D 15N T2
+81,55,Varian,HetJC,Two,hmqcj_lek_500_v2.c,1H/15N HMQCJ
+82,,Varian,HetJC,Three,cgh_sed_ctHCcHcosy_0997.c,spin-echo difference constant-time HCCH-COSY (C1' frequency labeled)
+83,,Varian,HetJC,Three,cgh_sed_ctHcCHcosy_0997.c,spin-echo difference constant-time HCCH-COSY (C2' frequency labeled)
+84,56,Varian,Cal,Any,t2pul_lek_500.c,1D 1H
+85,57,Varian,Cal,Any,t2pul_lek_sel3_500.c,1H selective pulse calibration
+86,58,Varian,Cal,Any,hetcal_echorm_500.c,Calibration of nucleus pulse on channel 2
+87,59,Varian,Cal,Any,hetcal_echolek_shape_500.c,Calibration of X nucleus shaped pulse on channel 2
+88,60,Varian,Cal,Any,hetcal_echolek2_500.c,Calibration of X nucleus pulse on channel 3
+89,61,Varian,T1rho,Two,README.txt,13C' T1rho README
+90,,Varian,T1rho,Two,hacaco_co_T1R_500_fm_v3.c,13C' T1rho hacaco_co_T1R c file
+91,,Varian,T1rho,Two,hacaco_co_T1R_500_fm_v3.par/procpar,13C' T1rho - HACACO_CO parameters
+92,,Varian,T1rho,Two,hacaco_co_T1R_500_fm_v3.par/text,13C' T1rho - HACACO_CO parameters text
+93,,Varian,T1rho,Two,RF.c,13C' T1rho - waveform generator
+94,,Varian,T1rho,Two,make_T1R_DEC_v2.c,13C' T1rho - make file
+95,,Varian,T1rho,Two,co_off_0ms.DEC,13C' T1rho - co_off_0ms.DEC

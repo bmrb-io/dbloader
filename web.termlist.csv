@@ -1,0 +1,212 @@
+term,expansion,description,isprimary
+ACCORDION,, A simultaneous incrementing of evolution and mixing times. - 2D,y
+ADA,<strong>A</strong>lternated <strong>D</strong>elay <strong>A</strong>cquisition,,y
+ADRF,<strong>A</strong>diabatic <strong>D</strong>emagnetization in the <strong>R</strong>otating <strong>F</strong>rame,,y
+AHT,<strong>A</strong>verage-<strong>H</strong>amiltonian <strong>T</strong>heory,,y
+APHH-CP,<strong>A</strong>diabatic-<strong>P</strong>assage <strong>H</strong>artmann-<strong>H</strong>ahn <strong>C</strong>ross <strong>P</strong>olarization,,y
+APT,<strong>A</strong>ttached <strong>P</strong>roton <strong>T</strong>est,,y
+ARP,<strong>A</strong>diabatic <strong>R</strong>apid <strong>P</strong>assage,,y
+ASIS,<strong>A</strong>romatic <strong>S</strong>olvent-<strong>I</strong>nduced <strong>S</strong>hift,,y
+BB,<strong>B</strong>road<strong>b</strong>and,,y
+BIRD,<strong>Bi</strong>linear <strong>R</strong>otation <strong>D</strong>ecoupling,,y
+BLEW,,A windowless multiple-pulse decoupling sequence,y
+BR-24,<strong>B</strong>urum and <strong>R</strong>him pulse sequence,,y
+CAMELSPIN,<strong>C</strong>ross-relaxation <strong>A</strong>ppropriate for <strong>M</strong>inimolecules <strong>E</strong>mulated by <strong>L</strong>ocked <strong>SPIN</strong>s,,y
+CHESS,<strong>Che</strong>mical <strong>S</strong>hift <strong>S</strong>elective Imaging Sequence,,y
+CHIRP,,"a quick, frequency modulated 'chirp' pulse used for broadband decoupling",y
+CIDNP,<strong>C</strong>hemically <strong>I</strong>nduced <strong>D</strong>ynamic <strong>N</strong>uclear <strong>P</strong>olarization,,y
+COCONOESY,<strong>C</strong>ombined <strong>COSY</strong>/<strong>NOESY</strong>,,y
+COLOC,<strong>Co</strong>rrelatied <strong>S</strong>pectroscopy for <strong>Lo</strong>ng Range <strong>C</strong>oupling,,y
+CONOESY,Combined <strong>CO</strong>SY/<strong>NOESY</strong>,same thing as COCONOESY,y
+COSY,<strong>Co</strong>rrelation <strong>S</strong>pectroscop<strong>y</strong>,Scalar J coupling - usually 2D,y
+COSY-45,<strong>COSY</strong> with  <strong>45</strong>&deg; mixing pulse,,y
+COSYDEC,<strong>COSY</strong> with  F1 <strong>De</strong>coupling,,y
+COSYLR,<strong>COSY</strong> for <strong>L</strong>ong <strong>R</strong>ange Couplings,,y
+CP,<strong>C</strong>ross <strong>P</strong>olarization,,y
+CPD,<strong>C</strong>omposite-<strong>P</strong>ulse <strong>D</strong>ecoupling,,y
+CPMAS,<strong>C</strong>ross <strong>P</strong>olarization <strong>M</strong>agic-<strong>A</strong>ngle <strong>S</strong>pinning,,y
+CPMG,<strong>C</strong>arr-<strong>P</strong>urcell-<strong>M</strong>eiboom <strong>G</strong>ill Sequence,,y
+CRAMPS,<strong>C</strong>ombined <strong>R</strong>otational <strong>a</strong>nd <strong>M</strong>ultiple <strong>P</strong>ulse <strong>S</strong>pectroscopy,,y
+CRINEPT,<strong>C</strong>ross-correlated <strong>R</strong>elaxat<strong>i</strong>o<strong>n</strong>-<strong>e</strong>nhanced <strong>P</strong>olariza<strong>t</strong>ion,A combination of INEPT with cross-correlated relaxation-induced polarization transfer,y
+CSA,<strong>C</strong>hemical <strong>S</strong>hift <strong>A</strong>nisotropy,,y
+CSCM,<strong>C</strong>hemical <strong>S</strong>hift <strong>C</strong>orrelation <strong>M</strong>ap,,y
+CT,<strong>C</strong>onstant <strong>T</strong>ime,,y
+CT-HSQC,<strong>C</strong>onstant <strong>T</strong>ime - <strong>H</strong>eteronuclear <strong>S</strong>ingle <strong>Q</strong>uantum <strong>C</strong>orrelation,Scalar J coupling - usually 2D,y
+CW,<strong>C</strong>ontinuous <strong>W</strong>ave,Scalar J coupling - usually 2D,y
+CYCLOPS,<strong>Cycl</strong>ically <strong>O</strong>rdered <strong>P</strong>hase <strong>S</strong>equence,Scalar J coupling - usually 2D,y
+DANTE,<strong>D</strong>elay <strong>A</strong>lternating with <strong>N</strong>utation for <strong>T</strong>ailored <strong>E</strong>xcitation,,y
+DAS,<strong>D</strong>ynamic <strong>A</strong>ngle <strong>S</strong>pinning,,y
+DCNMR,<strong>D</strong>irect <strong>C</strong>urrent <strong>NMR</strong>,NMR performed in the presence of a direct electric current,y
+DD,<strong>D</strong>ipole-<strong>D</strong>ipole,,y
+DECSY,<strong>D</strong>ouble-quantum <strong>E</strong>cho <strong>C</strong>orrelated <strong>S</strong>pectroscop<strong>y</strong>,,y
+DEFT,<strong>D</strong>riven <strong>E</strong>quilibrium <strong>F</strong>ourier <strong>T</strong>ransform,,y
+DENA,<strong>D</strong>fferential <strong>Ev</strong>olution for <strong>N</strong>on-ambiguous <strong>A</strong>liasing,"A fast method for increasing the resolution of a 1H-13C HSQC in the indirect dimension.<br/>Ref: 
+     M. Foroozandeh D. Jeannerat \“Deciphered Chemical Shifts in Aliased Spectra recorded with two Slightly Different Narrow Windows or Differential Chemical Shift Evolution\” <i><A href=\http://dx.doi.org/10.1002/cphc.201000421\>ChemPhysChem 2010, 11, 2503-2505</a></i>",y
+DEPT,<strong>D</strong>istortionless <strong>E</strong>nhanced <strong>P</strong>olarization <strong>T</strong>ransfer,,y
+DEPTH,, A spin-echo sequence of pulses to select for spatial location within the static field,y
+DIGGER,<strong>D</strong>iscrete <strong>I</strong>solation from <strong>G</strong>radient <strong>G</strong>overned <strong>E</strong>limination of <strong>R</strong>esonances,  ,y
+DIPSI,<strong>D</strong>ecoupling <strong>I</strong>n the <strong>P</strong>resence of <strong>S</strong>calar <strong>I</strong>nteractions,,y
+DISCO,<strong>Di</strong>fference and <strong>S</strong>ums within <strong>CO</strong>SY,,y
+DNMR,<strong>D</strong>ynamic <strong>NMR</strong>,,y
+DOUBTFUL,<strong>Doub</strong>le Quantum <strong>T</strong>ransitions for <strong>F</strong>inding <strong>U</strong>nresolved <strong>L</strong>ines,,y
+DQ,<strong>D</strong>ouble <strong>Q</strong>uantum,,y
+DQC,<strong>D</strong>ouble <strong>Q</strong>uantum <strong>C</strong>oherence,,y
+DQF,<strong>D</strong>ouble <strong>Q</strong>uantum <strong>F</strong>ilter,,y
+DQF-COSY,<strong>D</strong>ouble <strong>Q</strong>uantum <strong>Filtered</strong> - <strong>Co</strong>rrelation <strong>S</strong>pectroscop<strong>y</strong>,,y
+DRAMA,<strong>D</strong>ipolar <strong>R</strong>ecovery <strong>a</strong>t the <strong>M</strong>agic <strong>A</strong>ngle,A solid-state NMR recoupling technique.,y
+DRESS,<strong>D</strong>epth <strong>Res</strong>olved <strong>S</strong>pectroscopy,,y
+DSA,<strong>D</strong>ata-<strong>S</strong>hift <strong>A</strong>cquisition,,y
+DUMBO,,a numerically optimized sequence (see <A HREF=\http://www.ens-lyon.fr/STIM/NMR/Dumbo1.html\>Homonuclear dipolar decoupling in solid-state NMR using continuous phase modulation</A>),y
+E.COSY,<strong>E</strong>xclusive <strong>Co</strong>rrelation <strong>S</strong>pectroscop<strong>y</strong>,,y
+EFG,<strong>E</strong>lectric <strong>F</strong>ield <strong>G</strong>radient,,y
+ELD,<strong>E</strong>nergy <strong>L</strong>evel <strong>D</strong>iagram,,y
+ENDOR,<strong>E</strong>lectron-<strong>n</strong>uclear <strong>Do</strong>uble <strong>R</strong>esonance,,y
+ENMR,<strong>E</strong>lectrophonetic <strong>NMR</strong>,,y
+EPI,<strong>E</strong>cho <strong>P</strong>lanar <strong>I</strong>maging,,y
+ESR,<strong>E</strong>lectron <strong>S</strong>pin <strong>R</strong>esonance,,y
+EXORCYCLE,,4-step phase cycle for spin echoes,y
+FFT,<strong>F</strong>ast <strong>F</strong>ourier <strong>T</strong>ransform,,y
+FID,<strong>F</strong>ree <strong>I</strong>nduction <strong>D</strong>ecay,,y
+FIRFT,<strong>F</strong>ast <strong>I</strong>nversion-<strong>R</strong>ecovery <strong>F</strong>ourier <strong>T</strong>ransform,,y
+FLASH,<strong>F</strong>ast <strong>L</strong>ow-<strong>a</strong>ngle <strong>S</strong>hot Imaging,,y
+FLOPSY,<strong>Fl</strong>ip-Fl<strong>op</strong> <strong>S</strong>pectroscop<strong>y</strong>,A decoupling scheme,y
+FOCSY,<strong>Fo</strong>ldover-<strong>C</strong>orrected <strong>S</strong>pectroscop<strong>y</strong>,A decoupling scheme,y
+FOV,<strong>F</strong>ield <strong>o</strong>f <strong>V</strong>iew,,y
+FSLG,<strong>F</strong>requency <strong>S</strong>witched <strong>L</strong>ee-<strong>G</strong>oldburg,a decoupling scheme - (see <A HREF=\http://www.ens-lyon.fr/STIM/NMR/Dumbo1.html\>Homonuclear dipolar decoupling in solid-state NMR using continuous phase modulation</A>),y
+FT,<strong>F</strong>ourier <strong>T</strong>ransform,,y
+FUCOUP,<strong>Fu</strong>lly <strong>Coup</strong>led Spectroscopy,,y
+GARP,<strong>G</strong>lobally Optimized <strong>A</strong>lternating Phase <strong>R</strong>ectangular <strong>P</strong>ulse,A decoupling scheme,y
+GE,<strong>G</strong>radient <strong>E</strong>cho,,y
+GES,<strong>G</strong>radient <strong>E</strong>cho <strong>S</strong>pectroscopy,,y
+GRASP,<strong>G</strong>radient-<strong>A</strong>ccelerated <strong>S</strong>pectroscopy,,y
+GRASS,<strong>G</strong>radient-<strong>R</strong>ecalled <strong>A</strong>cquisition the <strong>S</strong>teady <strong>S</strong>tate,,y
+GROPE,<strong>G</strong>eneralized compensation for <strong>R</strong>esonance <strong>O</strong>ffset and <strong>P</strong>ulse Length <strong>E</strong>rrors,,y
+GS,<strong>G</strong>radient <strong>S</strong>pectroscopy,,y
+"H, C-COSY","1<strong>H</strong>, 13<strong>C</strong> Chemical-Shift <strong>Co</strong>rrelation <strong>S</strong>pectroscop<strong>y</strong>",,y
+HETCOR,<strong>Het</strong>eronuclear <strong>Cor</strong>relation Spectroscopy,,y
+HMBC,<strong>H</strong>eteronuclear <strong>M</strong>ultiple <strong>B</strong>ond <strong>C</strong>oherence,,y
+HMQC,<strong>H</strong>eteronuclear <strong>M</strong>ultiple <strong>Q</strong>uantum <strong>C</strong>oherence,,y
+HOESY,<strong>H</strong>eteronuclear <strong>O</strong>verhauser <strong>E</strong>ffect <strong>S</strong>pectroscop<strong>y</strong>,,y
+HOHAHA,<strong>Ho</strong>monuclear <strong>Ha</strong>rtmann-<strong>Ha</strong>hn Spectroscopy,,y
+HR,<strong>H</strong>igh <strong>R</strong>esolution,,y
+HSQC,<strong>H</strong>eteronuclear <strong>S</strong>ingle <strong>Q</strong>uantum <strong>C</strong>orrelation,xxx,y
+"H, X-COSY","1<strong>H</strong>, <strong>X</strong>-nucleus chemical-shift <strong>C</strong>orrelation <strong>S</strong>pectroscop<strong>y</strong>",,y
+INADEQUATE,<strong>I</strong>ncredible <strong>N</strong>atural <strong>A</strong>bundance <strong>D</strong>oubl<strong>e</strong> <strong>Qua</strong>ntum <strong>T</strong>ransfer <strong>E</strong>xperiment,,y
+INDOR,<strong>In</strong>ternuclear <strong>Do</strong>uble <strong>R</strong>esonance,,y
+INEPT,<strong>I</strong>nsensitive <strong>N</strong>uclei <strong>E</strong>nhanced by <strong>P</strong>olariza<strong>t</strong>ion,,y
+INVERSE,,"H, X correlation via 1H detection",y
+IPAP,<strong>I</strong>n<strong>p</strong>hase <strong>A</strong>nti<strong>p</strong>hase (HSQC),,y
+IR,<strong>I</strong>nversion-<strong>R</strong>ecovery,,y
+ISIS,<strong>I</strong>mage-<strong>S</strong>elected <strong>I</strong>n Vivo <strong>S</strong>pectroscopy,,y
+JR,<strong>J</strong>ump - and - <strong>R</strong>eturn sequence,90<sub>y</sub> - tau - 90<sub>-y</sub> ,y
+LIS,<strong>L</strong>anthanid <strong>I</strong>nduced <strong>S</strong>hift,,y
+LP,<strong>L</strong>inear <strong>P</strong>rediction,,y
+LSR,<strong>L</strong>anthanide <strong>S</strong>hift <strong>R</strong>eagent,,y
+MARF,<strong>M</strong>agic <strong>A</strong>ngle in the <strong>R</strong>otating <strong>F</strong>rame,,y
+MAS,<strong>M</strong>agic <strong>A</strong>ngle <strong>S</strong>pinning,,y
+MASS,<strong>M</strong>agic <strong>A</strong>ngle <strong>S</strong>ample <strong>S</strong>pinning,,y
+MEDUSA,,A technique for the determination of Dynamic Structures,y
+MEM,<strong>M</strong>aximum <strong>E</strong>ntropy <strong>M</strong>ethod,,y
+MLEV,<strong>M</strong>alcolm <strong>Lev</strong>itt's CPD sequence,A decoupling scheme,y
+MP,<strong>M</strong>ulti <strong>P</strong>ulse,,y
+MQ,<strong>M</strong>ultiple-<strong>Q</strong>uantum,,y
+MQC,<strong>M</strong>ultiple-<strong>Q</strong>uantum <strong>C</strong>oherence,,y
+MQF,<strong>M</strong>ultiple-<strong>Q</strong>uantum <strong>F</strong>ilter,,y
+MQS,<strong>M</strong>ultiple-<strong>Q</strong>uantum <strong>S</strong>pectroscopy,,y
+MREV,<strong>M</strong>ansfield-<strong>R</strong>him-<strong>E</strong>lleman-<strong>V</strong>aughn sequence for dipolar line narrowing,,y
+MRI,<strong>M</strong>agnetic <strong>R</strong>esonance <strong>I</strong>maging,,y
+MRS,<strong>M</strong>agnetic <strong>R</strong>esonance <strong>S</strong>pectroscopy,,y
+MRSI,<strong>M</strong>agnetic <strong>R</strong>esonance <strong>S</strong>pectroscopic <strong>I</strong>maging,,y
+MSHOT-3,<strong>M</strong>agic <strong>S</strong>andwich <strong>H</strong>igh <strong>O</strong>rder <strong>T</strong>runcation,"a method based on z-rotational decoupling <BR>N. C. Nielsen and co-workers, J. Chem. Phys. 106, 7571(1997); <BR>Chem. Phys. Lett. 273, 297 (1997)",y
+MSPGSE,<strong>M</strong>ultiply-<strong>S</strong>tepped <strong>PGSE</strong>,,y
+NMR,<strong>N</strong>uclear <strong>M</strong>agnetic <strong>R</strong>esonance,,y
+NOE,<strong>N</strong>uclear <strong>O</strong>verhauser <strong>E</strong>ffect,,y
+NOESY,<strong>N</strong>uclear <strong>O</strong>verhauser <strong>E</strong>ffect <strong>S</strong>pectroscop<strong>y</strong>,Internuclear cross relaxation - usually 2D,y
+NQCC,<strong>N</strong>uclear <strong>Q</strong>uadrupole <strong>C</strong>oupling <strong>C</strong>onstant,,y
+NQR,<strong>N</strong>uclear <strong>Q</strong>uadrupole <strong>R</strong>esonance,,y
+ODMR,<strong>O</strong>ptically <strong>D</strong>etected <strong>M</strong>agnetic <strong>R</strong>esonance,,y
+OSIRIS,,a modified version of ISIS,y
+PAR,<strong>P</strong>hase-<strong>a</strong>lternated <strong>R</strong>otation of Magnetization,,y
+P.E.COSY,<strong>P</strong>rimitive <strong>E</strong>.<strong>COSY</strong>,,y
+PELF,<strong>P</strong>roton-<strong>E</strong>ncoded <strong>L</strong>ocal <strong>F</strong>ield spectroscopy,a 2D method,y
+PFG,<strong>P</strong>ulse <strong>F</strong>ield <strong>G</strong>radient,,y
+PFGSE,<strong>P</strong>ulse <strong>F</strong>ield <strong>G</strong>radient <strong>S</strong>pin <strong>E</strong>cho,,y
+PGSE,<strong>P</strong>ulsed <strong>G</strong>radient <strong>S</strong>pin <strong>E</strong>cho,,y
+PMFG,<strong>P</strong>ulsed <strong>M</strong>agnetic <strong>F</strong>ield <strong>G</strong>radient,,y
+POST,<strong>P</strong>ermutationally <strong>O</strong>ffset <strong>St</strong>abilized,,y
+ppm,<strong>p</strong>arts <strong>p</strong>er <strong>m</strong>illion,The prefered way of describing chemical shift offsets. (e.g a 100 Hz shift in a 100 MHz field is 1 ppm) ,y
+PRESS,<strong>P</strong>oint <strong>R</strong>esolved <strong>S</strong>pectroscopy,,y
+PRFT,<strong>P</strong>artially <strong>R</strong>elaxed <strong>F</strong>ourier <strong>T</strong>ransform,,y
+PSD,<strong>P</strong>hase-<strong>S</strong>ensitive <strong>D</strong>etection,,y
+PW,<strong>P</strong>ulse <strong>W</strong>idth,,y
+QF,<strong>Q</strong>uantum Moment/<strong>F</strong>ield Gradient,interaction or relaxation mechanism,y
+QPD,<strong>Q</strong>uadrature <strong>P</strong>hase <strong>D</strong>etection,,y
+RARE,<strong>R</strong>apid <strong>A</strong>cquisition <strong>R</strong>elaxation <strong>E</strong>nhanced,,y
+RCT,<strong>R</strong>elayed <strong>C</strong>oherence <strong>T</strong>ransfer,,y
+RD,<strong>R</strong>educed <strong>D</strong>imensionality,,y
+RECSY,Multistep <strong>R</strong>elayed <strong>C</strong>oherence <strong>S</strong>pectroscop<strong>y</strong>,,y
+REDOR,<strong>R</strong>otational <strong>E</strong>cho <strong>Do</strong>uble <strong>R</strong>esonace,,y
+RELAY,<strong>Relay</strong>ed Correlation Spectroscopy,,y
+RF,<strong>R</strong>adio <strong>F</strong>requency,,y
+ROESY,<strong>R</strong>otational nuclear <strong>O</strong>verhauser <strong>E</strong>ffect <strong>S</strong>pectroscop<strong>y</strong>,,y
+ROTO,<strong>RO</strong>ESY-<strong>TO</strong>CSY Relay,,y
+SA,<strong>S</strong>hielding <strong>A</strong>nisotropy,,y
+SC,<strong>S</strong>calar <strong>C</strong>oupling,,y
+SD,<strong>S</strong>pin <strong>D</strong>iffusion,,y
+SDDS,<strong>S</strong>pin <strong>D</strong>ecopling <strong>D</strong>ifference <strong>S</strong>pectroscopy,,y
+SE,<strong>S</strong>pin <strong>E</strong>cho,,y
+SECSY,<strong>S</strong>pin <strong>E</strong>cho <strong>C</strong>orrelated <strong>S</strong>pectroscop<strong>y</strong>,,y
+SEDOR,<strong>S</strong>pin <strong>E</strong>cho <strong>Do</strong>uble <strong>R</strong>esonace,,y
+SEFT,<strong>S</strong>pin <strong>E</strong>cho <strong>F</strong>ourier <strong>T</strong>ransform Spectroscopy,with J modulation,y
+SELINCOR,<strong>Sel</strong>ective <strong>In</strong>verse <strong>Cor</strong>relation,,y
+SELINQUATE,<strong>Sel</strong>ective <strong>IN</strong>ADE<strong>QUATE</strong>,,y
+SEMUT,<strong>S</strong>ubspectral <strong>E</strong>diting <strong>U</strong>sing a <strong>Mu</strong>ltiple-Quantum <strong>T</strong>rap,,y
+SFORD,<strong>S</strong>ingle <strong>F</strong>requency <strong>O</strong>ff-<strong>R</strong>esonance <strong>D</strong>ecoupling,,y
+SKEWSY,<strong>Skew</strong>ed Exchange <strong>Sp</strong>ectroscop<strong>y</strong>,,y
+SNR (S/N),<strong>S</strong>ignal to <strong>N</strong>oise <strong>R</strong>atio,,y
+SPACE,<strong>Spa</strong>tial and <strong>C</strong>hemical-Shift Encoded <strong>E</strong>xcitation,,y
+SPECIFIC-CP,<strong>Spec</strong>trally <strong>I</strong>nduced <strong>F</strong>iltering <strong>I</strong>n <strong>C</strong>ombination with <strong>C</strong>ross <strong>P</strong>olarization,,y
+SPI,<strong>S</strong>elective <strong>P</strong>opulation <strong>I</strong>nversion,,y
+SPT,<strong>S</strong>elective <strong>P</strong>opulation <strong>T</strong>ransfer,,y
+SQ,<strong>S</strong>ingle <strong>Q</strong>uantum,,y
+SQF,<strong>S</strong>ingle <strong>Q</strong>uantum <strong>F</strong>ilter,  ,y
+SR,<strong>S</strong>aturation <strong>R</strong>ecovery,,y
+SSFP,<strong>S</strong>teady-<strong>S</strong>tate <strong>F</strong>ree <strong>P</strong>recision,,y
+SSI,<strong>S</strong>olid <strong>S</strong>tate <strong>I</strong>maging,,y
+ssNMR,<strong>S</strong>olid <strong>S</strong>tate <strong>NMR</strong>,,y
+STE,<strong>St</strong>imulated <strong>E</strong>cho,,y
+STEAM,<strong>St</strong>imulated <strong>E</strong>cho <strong>A</strong>cquisition <strong>M</strong>ode for imageing,,y
+STUD,,"Adiabatic decoupling method<BR> M.R. Bendall and T.E. Skinner. \Calibration of STUD decoupling to achieve selected sideband amplitudes.\ J. Magn. Reson., A120, 77-87 (1996).",y
+SUSAN,<strong>S</strong>pin Decoupling Employing <strong>U</strong>ltra-broadband-inversion Sequences Generated via <strong>S</strong>imulated <strong>An</strong>nealing,,y
+TCF,<strong>T</strong>ime <strong>C</strong>orrelation <strong>F</strong>unction,,y
+TE,<strong>T</strong>ime delay between excitation and <strong>E</strong>cho maximum,,y
+TMR,<strong>T</strong>opical <strong>M</strong>agnetic <strong>R</strong>esonance,,y
+TOCSY,<strong>To</strong>tal <strong>C</strong>orrelated <strong>S</strong>pectroscop<strong>y</strong>,,y
+TOE,<strong>T</strong>runcated N<strong>OE</strong>,,y
+TORO,<strong>TO</strong>CSY-<strong>RO</strong>ESY Relay,,y
+TOSS,<strong>T</strong>otal <strong>S</strong>upression of <strong>S</strong>idebands,,y
+TPPI,<strong>T</strong>ime-<strong>P</strong>roportional <strong>P</strong>hase <strong>I</strong>ncrementation,,y
+TPPM,<strong>T</strong>wo <strong>P</strong>ulse <strong>P</strong>hase <strong>M</strong>odulation,,y
+TQ,<strong>T</strong>riple <strong>Q</strong>uantum,,y
+TQF,<strong>T</strong>riple <strong>Q</strong>uantum <strong>F</strong>ilter,,y
+TR,<strong>T</strong>ime for <strong>R</strong>epitition of excitation,,y
+TRCF,<strong>T</strong>ilted <strong>R</strong>otating <strong>C</strong>oordinate <strong>F</strong>rame,,y
+TROSY,<strong>T</strong>ransverse <strong>R</strong>elaxation-<strong>O</strong>ptimized NMR <strong>S</strong>pectroscop<strong>y</strong>,,y
+UE,<strong>U</strong>npaired <strong>E</strong>lectron,A relaxation mechanism,y
+VAS,<strong>V</strong>ariable <strong>A</strong>ngle <strong>S</strong>pinning,,y
+VOSY,<strong>V</strong>olume-Selective <strong>S</strong>pectroscop<strong>y</strong>,,y
+WAHUHA,<strong>Wa</strong>ugh-<strong>Hu</strong>ber-<strong>Ha</strong>berlen Sequence,,y
+WALTZ,,A broad-band composite pulse decoupling scheme,y
+WATERGATE,,Water Supression Pulse Sequence,y
+WEFT,<strong>W</strong>ater <strong>E</strong>liminated <strong>F</strong>ourier <strong>T</strong>ransform,,y
+WURST,"<strong>W</strong>ideband, <strong>U</strong>niform <strong>R</strong>ate, and <strong>S</strong>mooth <strong>T</strong>runcation","an adiabatic decoupling method<BR> Kupce, E., Freeman, R.<i>Adiabatic pulses for wideband inversion and broadband decoupling</i> A 115 273-276. <i>J. Magn. Reson.</i>",y
+XCORFE,"H, <strong>X</strong> <strong>Cor</strong>relation Using a <strong>F</strong>ixed <strong>E</strong>volution Time",,y
+X-Filter,,Selection of 1H - 1H correlations when both protons are coupled to X,y
+X-Half-Filter,,Selection of 1H - 1H correlations when one proton is coupled to X,y
+Z-COSY,,COSY with Z-filter,y
+ZECSY,<strong>Z</strong>ero-Quantum <strong>E</strong>cho-<strong>C</strong>orrelated <strong>S</strong>pectroscop<strong>y</strong>,,y
+Z-Filter,,pulse sandwich for elimination of signal components with dispersive phase,y
+ZQ,<strong>Z</strong>ero <strong>Q</strong>uantum,,y
+ZQC,<strong>Z</strong>ero <strong>Q</strong>uantum <strong>C</strong>oherence,,y
+ZQF,<strong>Z</strong>ero <strong>Q</strong>uantum <strong>F</strong>ilter,,y
+ZZ-Spectroscopy,,Selection of coherences invloving ZZ or longitudinal two-spin order,y

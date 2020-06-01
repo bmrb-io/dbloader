@@ -1,0 +1,30 @@
+#
+# /share/dmaziuk/projects/dbloader/__main__.py -c /share/dmaziuk/projects/dbloader/loader.properties --load-only --no-dict --drop-tables --no-chemcomps --no-metabolomics
+#
+# this should probably run on the database server but it needs python 2.7 and DB host is 2.6
+# run on the master webserver instead
+# TODO dockerize it sometime?
+#
+
+universe = LOCAL
+executable   = /usr/bin/python
+arguments    = "/websites/_updaters.prod/dbloader-1.0-py2.7.egg -c /websites/_updaters.prod/dbloader.properties --no-dump --no-dict --drop-tables --no-chemcomps --no-metabolomics"
+request_memory = 0
+priority     = 0
+output       = $(STDOUTFILE)
+error        = $(STDERRFILE)
+log          = $(LOGFILE)
+notification = Always
+notify_user  = web@bmrb.wisc.edu
+coresize     = 1
+transfer_executable = FALSE
+should_transfer_files = NO
+
+periodic_remove = (time() - QDate) > 500000
+
++DBLoaderJob = TRUE
++AccountingGroup = "bmrb"
+
+queue
+
+
