@@ -69,7 +69,7 @@ def dump_and_load( config, verbose = False ) :
     wd = tempfile.mkdtemp()
     try :
         dump( config, where = wd, verbose = verbose )
-        fix_inchi_column( where = wd, verbose = verbose )
+#        fix_inchi_column( where = wd, verbose = verbose )
         load( config, where = wd, verbose = verbose )
         fix_entry_id( config, verbose = verbose )
         if config.has_option( DB, "rouser" ) :
@@ -346,14 +346,14 @@ def fix_entry_id( config, verbose = False ) :
             if scam is None : tbl2 = '"Entity_comp_index"'
             else : tbl2 = '%s."Entity_comp_index"' % (scam,)
             sql = 'update %s e set "%s"=(select "Comp_ID" from %s where "Entity_ID"=e."ID")' % (tbl,column,tbl2,)
-      
+
         elif table in ("Entity_atom_list","Entity_biological_function","Entity_bond","Entity_chem_comp_deleted_atom",
                 "Entity_chimera_segment","Entity_citation","Entity_common_name","Entity_comp_index_alt",
                 "Entity_db_link","Entity_keyword","Entity_poly_seq","Entity_systematic_name") :
             if scam is None : tbl2 = '"Entity_comp_index"'
             else : tbl2 = '%s."Entity_comp_index"' % (scam,)
             sql = 'update %s e set "%s"=(select "Comp_ID" from %s where "Entity_ID"=e."Entity_ID")' % (tbl,column,tbl2)
-        
+
         if verbose : sys.stdout.write( sql )
         rc = se.execute( sql, commit = True )
         if verbose : sys.stdout.write( ": %d rows updated\n" % (rc.rowcount,) )
