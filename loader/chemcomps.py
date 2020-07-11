@@ -145,14 +145,17 @@ def dump( config, where = None, verbose = False ) :
 # unreleased chem comps/entities
 #
             cids = set()
-            eids = set()
-            sql = 'select c."ID",e."ID",c."Release_status" from chem_comp."Chem_comp" c ' \
-                + 'join chem_comp."Entity" e on e."Nonpolymer_comp_ID"=c."ID" ' \
-                + """where c."Release_status"<>'REL'"""
+
+# can't join if entity table's empty
+#
+#            sql = 'select c."ID",e."ID",c."Release_status" from chem_comp."Chem_comp" c ' \
+#                + 'join chem_comp."Entity" e on e."Nonpolymer_comp_ID"=c."ID" ' \
+#                + """where c."Release_status"<>'REL'"""
+
+            sql = """select "ID" from chem_comp."Chem_comp" where "Release_status"<>'REL'"""
             curs.execute( sql )
             for row in curs :
                 cids.add( row[0] )
-                eids.add( row[1] )
 
     cidstr = ""
     cidstr1 = ""
@@ -160,11 +163,19 @@ def dump( config, where = None, verbose = False ) :
         cidstr = """ where "ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
         cidstr1 = """ where "Comp_ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
 
+# entities only have unique Sf_ID
+#
+            eids = set()
+            sql = 'select "Sf_ID" from chem_comp."Entity"' \
+                + ' where "Nonpolymer_comp_ID" not in (%s)' % (",".join( str( i ) for i in cids ),)
+            curs.execute( sql )
+            for row in curs :
+                eids.add( row[0] )
+
     eidstr = ""
     eidstr1 = ""
     if len( eids ) > 0 :
-        eidstr = ' where "ID" not in (%s)' % (",".join( str( i ) for i in eids ),)
-        eidstr1 = ' where "Entity_ID" not in (%s)' % (",".join( str( i ) for i in eids ),)
+        eidstr = ' where "Sf_ID" not in (%s)' % (",".join( str( i ) for i in eids ),)
 
 # clean up
 #
@@ -181,10 +192,8 @@ def dump( config, where = None, verbose = False ) :
         elif table.startswith( "Chem_comp" ) or (table in ("Atom_nomenclature","Characteristic",
                 "Chem_struct_descriptor","PDBX_chem_comp_feature")) :
             sql = ('select * from chem_comp."%s"' % (table,)) + cidstr1
-        elif table == "Entity" :
-            sql = 'select * from chem_comp."Entity"' + eidstr
         else :
-            sql = ('select * from chem_comp."%s"' % (table,)) + eidstr1
+            sql = ('select * from chem_comp."%s"' % (table,)) + eidstr
 
         if where is None : outfile = table + ".csv"
         else : outfile = os.path.join( where, table + ".csv" )

@@ -30,8 +30,10 @@ from .webextras import load as load_web_schema
 from .csvdump import dump_new, dump_macromolecules, dump_metabolomics
 from .csvdump_better import Dumper
 
-PSQL = "/usr/pgsql-10/bin/psql"
-PGDUMP = "/usr/pgsql-10/bin/pg_dump"
+#PSQL = "/usr/pgsql-10/bin/psql"
+#PGDUMP = "/usr/pgsql-10/bin/pg_dump"
+PSQL = "/bin/psql"
+PGDUMP = "/bin/pg_dump"
 
 #######################################
 
