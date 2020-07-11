@@ -169,7 +169,7 @@ def dump( config, where = None, verbose = False ) :
 #
             eids = set()
             sql = 'select "Sf_ID" from chem_comp."Entity"' \
-                + ' where "Nonpolymer_comp_ID" not in (%s)' % (",".join( str( i ) for i in cids ),)
+                + ' where "Nonpolymer_comp_ID" not in (%s)' % ("','".join( str( i ) for i in cids ),)
             curs.execute( sql )
             for row in curs :
                 eids.add( row[0] )
