@@ -102,7 +102,7 @@ def dump( config, where = None, verbose = False ) :
     if where is not None : assert os.path.isdir( where )
 
     global DB
-    global TABLES
+#    global TABLES
 
     assert isinstance( config, ConfigParser.SafeConfigParser )
     if not config.has_section( DB ) :
@@ -134,6 +134,7 @@ def dump( config, where = None, verbose = False ) :
 
     if verbose : pprint.pprint( dsn )
 
+    tables = None
     with pgdb.connect( **dsn ) as conn :
         with conn.cursor() as curs :
 
@@ -173,7 +174,7 @@ def dump( config, where = None, verbose = False ) :
 
 # make queries for writecsv()
 #
-    for table in TABLES :
+    for table in tables : # TABLES :
 
         if table == "Chem_comp" :
             sql = 'select * from chem_comp."Chem_comp"' + cidstr
