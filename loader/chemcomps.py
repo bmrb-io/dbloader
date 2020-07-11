@@ -135,6 +135,10 @@ def dump( config, where = None, verbose = False ) :
     if verbose : pprint.pprint( dsn )
 
     tables = None
+    cidstr = ""
+    cidstr1 = ""
+    eidstr = ""
+
     with pgdb.connect( **dsn ) as conn :
         with conn.cursor() as curs :
 
@@ -157,11 +161,9 @@ def dump( config, where = None, verbose = False ) :
             for row in curs :
                 cids.add( row[0] )
 
-    cidstr = ""
-    cidstr1 = ""
-    if len( cids ) > 0 :
-        cidstr = """ where "ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
-        cidstr1 = """ where "Comp_ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
+            if len( cids ) > 0 :
+                cidstr = """ where "ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
+                cidstr1 = """ where "Comp_ID" not in ('%s')""" % ("','".join( str( i ) for i in cids ),)
 
 # entities only have unique Sf_ID
 #
@@ -172,10 +174,8 @@ def dump( config, where = None, verbose = False ) :
             for row in curs :
                 eids.add( row[0] )
 
-    eidstr = ""
-    eidstr1 = ""
-    if len( eids ) > 0 :
-        eidstr = ' where "Sf_ID" not in (%s)' % (",".join( str( i ) for i in eids ),)
+            if len( eids ) > 0 :
+                eidstr = ' where "Sf_ID" not in (%s)' % (",".join( str( i ) for i in eids ),)
 
 # clean up
 #
