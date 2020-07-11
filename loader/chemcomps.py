@@ -61,6 +61,20 @@ TABLES = ( "Atom_nomenclature",
 
 ############################################################################################
 
+#FIXME!! put scrschema in the config file
+#
+def list_tables( curs, verbose = False ) :
+    rc = []
+    sql = "select table_name from information_schema.tables where table_schema='chem_comp'"
+    if verbose : sys.stdout.write( "%s\n" % (sql,) )
+    curs.execute( sql )
+    for row in curs :
+        rc.append( row[0] )
+        if verbose : sys.stdout.write( "%s\n" % (row[0],) )
+    if len( rc ) < 1 : 
+        return None
+    return rc
+
 # main
 #
 def dump_and_load( config, verbose = False ) :
@@ -122,6 +136,10 @@ def dump( config, where = None, verbose = False ) :
 
     with pgdb.connect( **dsn ) as conn :
         with conn.cursor() as curs :
+
+            tables = list_tables( curs, verbose = verbose )
+            if tables is None :
+                raise Exception( "no tables to dump in chem_comp" )
 
 # unreleased chem comps/entities
 #
@@ -389,7 +407,7 @@ if __name__ == "__main__" :
 
     if args.load :
         with loader.timer( label = "load chemcomps", silent = not args.time ) :
-            fix_inchi_column( where = args.outdir, verbose = args.verbose )
+#            fix_inchi_column( where = args.outdir, verbose = args.verbose )
             load( config = cp, where = args.outdir, verbose = args.verbose )
             fix_entry_id( config = cp, verbose = args.verbose )
 
