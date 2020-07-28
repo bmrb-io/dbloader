@@ -13,7 +13,7 @@ import subprocess
 import ConfigParser
 
 #STAROBJ_PATH = "/bmrb/lib/python27"
-STAROBJ_PATH = "/share/dmaziuk/projects/starobj"
+STAROBJ_PATH = "/share/dmaziuk/projects/github/starobj"
 sys.path.append( STAROBJ_PATH )
 import starobj
 

@@ -214,7 +214,8 @@ def dump_ddl( dsn, schemata, outfile, old = None, verbose = False ) :
 #
     assert old in ("macromolecules", "metabolomics")
 
-    drop_pat = re.compile( r"^drop\s+(\S+)\s+(\S+);$", re.IGNORECASE )
+    drop_pat = re.compile( r"^drop\s+(?:\S+\s+)?(\S+)\s+(\S+);$", re.IGNORECASE )
+#                              DROP MATERIALIZED VIEW web.hupo_psi_id;
     create_pat = re.compile( r"^create\s+(\S+)\s+(\S+)", re.IGNORECASE )
 
     with open( outfile, "w" ) as fout :
@@ -434,7 +435,7 @@ def tocsv( dsn, table, outfile, verbose = False ) :
 #
 if __name__ == "__main__" :
 
-    ap = argparse.ArgumentParser( description = "load NMR-STAR dictionary into PostgreSQL database" )
+    ap = argparse.ArgumentParser( description = "Dump NMR-STAR PostgreSQL database" )
     ap.add_argument( "-v", "--verbose", help = "print lots of messages to stdout", dest = "verbose",
         action = "store_true", default = False )
     ap.add_argument( "-t", "--time", help = "time the operatons", dest = "time",
