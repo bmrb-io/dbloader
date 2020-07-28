@@ -28,6 +28,7 @@ for i in ("build","dist","validate.egg-info") :
 
 srcdir = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "..", "loader" ) )
 dstdir = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "loader" ) )
+if not os.path.isdir( dstdir ) : os.makedirs( dstdir )
 for f in glob.glob( os.path.join( srcdir, "*.py" ) ) :
     dstfile = os.path.join( dstdir, os.path.split( f )[1] )
     if os.path.exists( dstfile ) and cmpfiles( f, dstfile ) :
