@@ -372,11 +372,15 @@ def tocsv( dsn, table, outfile, verbose = False ) :
     conn = pgdb.connect( **dsn )
     curs = conn.cursor()
     if verbose : sys.stdout.write( ">%s\n" % (sql,) )
-    curs.execute( sql )
-    row = curs.fetchone()
-    numrows = row[0]
-    curs.close()
-    conn.close()
+    try :
+        curs.execute( sql )
+        row = curs.fetchone()
+        numrows = row[0]
+        curs.close()
+        conn.close()
+    except :
+        sys.stderr.write( ">> %s <<\n" % (sql,) )
+        raise
 
     if numrows < 1 :
         if verbose : sys.stdout.write( "No rows to dump: %s\n" % (numrows,) )

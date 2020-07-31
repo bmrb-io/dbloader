@@ -83,7 +83,7 @@ def dump_and_load( config, verbose = False ) :
     wd = tempfile.mkdtemp()
     try :
         dump( config, where = wd, verbose = verbose )
-#        fix_inchi_column( where = wd, verbose = verbose )
+        fix_inchi_column( where = wd, verbose = verbose )
         load( config, where = wd, verbose = verbose )
         fix_entry_id( config, verbose = verbose )
         if config.has_option( DB, "rouser" ) :
@@ -185,15 +185,17 @@ def dump( config, where = None, verbose = False ) :
 
 # make queries for writecsv()
 #
+    cidstr = """(select "ID" from chem_comp."Chem_comp" where "Release_status"<>'REL')"""
+    eidstr = """(select "Sf_ID" from chem_comp."Entity" where "Nonpolymer_comp_ID" in %s)""" % (cidstr,)
     for table in tables : # TABLES :
 
         if table == "Chem_comp" :
-            sql = 'select * from chem_comp."Chem_comp"' + cidstr
+            sql = 'select * from chem_comp."Chem_comp" where "ID" not in %s' % (cidstr,)
         elif table.startswith( "Chem_comp" ) or (table in ("Atom_nomenclature","Characteristic",
                 "Chem_struct_descriptor","PDBX_chem_comp_feature")) :
-            sql = ('select * from chem_comp."%s"' % (table,)) + cidstr1
+            sql = 'select * from chem_comp."%s" where "Comp_ID" not in %s' % (table,cidstr,)
         else :
-            sql = ('select * from chem_comp."%s"' % (table,)) + eidstr
+            sql = 'select * from chem_comp."%s" where "Sf_ID" not in %s' % (table,eidstr,)
 
         if where is None : outfile = table + ".csv"
         else : outfile = os.path.join( where, table + ".csv" )
