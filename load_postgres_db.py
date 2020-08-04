@@ -12,8 +12,8 @@ import glob
 import subprocess
 import pprint
 
-import smtplib
-from email import MIMEText
+#import smtplib
+#from email import MIMEText
 
 import argparse
 
@@ -22,7 +22,6 @@ import argparse
 #
 class PgLoader( object ) :
 
-    OUTDIR = "/websites/www/ftp/pub/bmrb/relational_tables"
     CONF = {
         "psql" : "/usr/bin/psql",
         "rwuser" : "bmrb",
@@ -31,12 +30,12 @@ class PgLoader( object ) :
         "mailfrom" : "web@bmrb.wisc.edu",
         "databases" : {
             "bmrb" : {
-                "dir" : "%s/nmr-star3.1 " % (PgLoader.OUTDIR,),
+                "dir" : "/websites/www/ftp/pub/bmrb/relational_tables/nmr-star3.1",
             },
             "metabolomics" : {
-                "dir" : "%s/metabolomics" % (PgLoader.OUTDIR,),
+                "dir" : "/websites/www/ftp/pub/bmrb/relational_tables/metabolomics",
             },
-            "everything" : {
+            "bmrbeverything" : {
                 "dir" : "/websites/webapi/admin/dbdump",
 #               "schemata" : (
 #                   "dict",
@@ -208,7 +207,7 @@ class PgLoader( object ) :
     # glob files and decide which to load where
     #
     @staticmethod
-    def update_db( db = "bmrb", create = False, schema = "all", path = None, verbose = False ) :
+    def update_db( db = "bmrb", create = False, schema = "any", path = None, verbose = False ) :
 
         assert db in PgLoader.CONF["databases"].keys()
         if path is not None :
@@ -231,11 +230,22 @@ class PgLoader( object ) :
             if m :
                 files.append( f )
 
+#        pprint.pprint( files )
         if len( files ) < 1 :
             rc += "No input files for %s - %s\n" % (db,schema,)
             return rc
 
-        pprint.pprint( files )
+        for f in files :
+            m = pat.search( os.path.split( f )[1] )
+            if not m : continue # can never happen
+
+# skip schema?
+#
+            if (schema is not None) and (schema != "any") :
+                if schema != m.group( 1 ) :
+                    continue
+
+            print "PgLoader.fromcsv( filename=", f, ",database=", db, ",schema=", m.group( 1 ), "table=", m.group( 2 ), ")"
 
 #    psql = PSQL[:]
     # if verbose : psql.append( "-a" )
@@ -291,14 +301,14 @@ class PgLoader( object ) :
             # rc += "%s returned %d\n" % ( " ".join( i for i in cmd2 ), p.returncode,)
 # #            continue
 
-    # return rc
+        return rc
 
 
 
 
 
 
-
+########################################################################################
 DIR = "/websites/www/ftp/pub/bmrb/relational_tables"
 METABOLOMICS ="%s/metabolomics" % (DIR)
 STAR31 = "%s/nmr-star3.1" % (DIR)
@@ -461,25 +471,37 @@ if __name__ == "__main__" :
     ap.add_argument( "-d", "--database", dest = "db", default = "all",
         help = "DB to load: bmrb, metabolomics, or bmrbeverything",
         required = True )
-    ap.add_argument( "-s", "--schema", dest = "schema", default = "all",
+    ap.add_argument( "-s", "--schema", dest = "schema", default = "any",
         help = "load only given schema (e.g. dict)" )
     ap.add_argument( "-c", "--create", default = False, action = "store_true",
         help = "run schema.sql first to drop and re-create all objects",
         dest = "create" )
-    ap.add_argument( "-i", "--input", dest = filedir,
+    ap.add_argument( "-i", "--input", dest = "filedir",
         help = "directory with input files" )
-#    ap.add_argument( "-g", "--grants", default = False, action = "store_true",
-#        help = "add read-only grants for web user",
-#        dest = "grant" )
+    ap.add_argument( "-g", "--grants", default = False, action = "store_true",
+        help = "add read-only grants for web user",
+        dest = "grant" )
     ap.add_argument( "-m", "--mail", dest = "email",
         help = "e-mail to send errors/output" )
 
     args = ap.parse_args()
     messages = ""
 
-    if (args.db.lower() == "bmrb") or (options.db.lower() == "all") :
-        messages += PgLoader.update_db( db = "bmrb", create = args.create,
+    if (args.db.lower() == "bmrb") or (args.db.lower() == "all") :
+        PgLoader.update_db( db = "bmrb", create = args.create,
             schema = args.schema, path = args.filedir, verbose = args.verbose )
+        if args.grant :
+            PgLoader.add_ro_grants( db = "bmrb", verbose = args.verbose )
+    if (args.db.lower() == "bmrbeverything") or (args.db.lower() == "all") :
+        PgLoader.update_db( db = "bmrbeverything", create = args.create,
+            schema = args.schema, path = args.filedir, verbose = args.verbose )
+        if args.grant :
+            PgLoader.add_ro_grants( db = "bmrbeverything", verbose = args.verbose )
+    if (args.db.lower() == "metabolomics") or (args.db.lower() == "all") :
+        PgLoader.update_db( db = "metabolomics", create = args.create,
+            schema = args.schema, path = args.filedir, verbose = args.verbose )
+        if args.grant :
+            PgLoader.add_ro_grants( db = "metabolomics", verbose = args.verbose )
 
 
 
