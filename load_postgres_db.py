@@ -17,6 +17,19 @@ import pprint
 
 import argparse
 
+from contextlib import contextmanager
+import time
+
+@contextmanager
+def timer( label, verbose = True ) :
+    start = time.time()
+    try :
+        yield
+    finally :
+        end = time.time()
+        if verbose :
+            sys.stdout.write( "%s: %0.3f\n" % (label,(end - start)) )
+
 #
 #
 #
@@ -26,6 +39,7 @@ class PgLoader( object ) :
         "psql" : "/usr/bin/psql",
         "rwuser" : "bmrb",
         "rouser" : "web",
+        "host": "bmrb-staging.cam.uchc.edu",
         "ddlfile" : "schema.sql",
         "mailfrom" : "web@bmrb.wisc.edu",
         "databases" : {
@@ -57,6 +71,8 @@ class PgLoader( object ) :
         cmd = [PgLoader.CONF["psql"]]
         cmd.extend( ["-U", PgLoader.CONF["rwuser"]] )
         cmd.extend( ["-d", database] )
+        if "host" in PgLoader.CONF.keys() :
+            cmd.extend( ["-h", PgLoader.CONF["host"]] )
 
         if not verbose : cmd.append( "-q" )
 
@@ -285,27 +301,30 @@ if __name__ == "__main__" :
     ap.add_argument( "-g", "--grants", default = False, action = "store_true",
         help = "add read-only grants for web user",
         dest = "grant" )
-    ap.add_argument( "-m", "--mail", dest = "email",
-        help = "e-mail to send errors/output" )
+#    ap.add_argument( "-m", "--mail", dest = "email",
+#        help = "e-mail to send errors/output" )
 
     args = ap.parse_args()
     messages = ""
 
     if (args.db.lower() == "bmrb") or (args.db.lower() == "all") :
-        PgLoader.update_db( db = "bmrb", create = args.create,
-            schema = args.schema, path = args.filedir, verbose = args.verbose )
-        if args.grant :
-            PgLoader.add_ro_grants( db = "bmrb", verbose = args.verbose )
+        with timer( "Load BMRB", verbose = True ) :
+            PgLoader.update_db( db = "bmrb", create = args.create,
+                schema = args.schema, path = args.filedir, verbose = args.verbose )
+            if args.grant :
+                PgLoader.add_ro_grants( db = "bmrb", verbose = args.verbose )
     if (args.db.lower() == "bmrbeverything") or (args.db.lower() == "all") :
-        PgLoader.update_db( db = "bmrbeverything", create = args.create,
-            schema = args.schema, path = args.filedir, verbose = args.verbose )
-        if args.grant :
-            PgLoader.add_ro_grants( db = "bmrbeverything", verbose = args.verbose )
+        with timer( "Load API", verbose = True ) :
+            PgLoader.update_db( db = "bmrbeverything", create = args.create,
+                schema = args.schema, path = args.filedir, verbose = args.verbose )
+            if args.grant :
+                PgLoader.add_ro_grants( db = "bmrbeverything", verbose = args.verbose )
     if (args.db.lower() == "metabolomics") or (args.db.lower() == "all") :
-        PgLoader.update_db( db = "metabolomics", create = args.create,
-            schema = args.schema, path = args.filedir, verbose = args.verbose )
-        if args.grant :
-            PgLoader.add_ro_grants( db = "metabolomics", verbose = args.verbose )
+        with timer( "Load metabolomics", verbose = True ) :
+            PgLoader.update_db( db = "metabolomics", create = args.create,
+                schema = args.schema, path = args.filedir, verbose = args.verbose )
+            if args.grant :
+                PgLoader.add_ro_grants( db = "metabolomics", verbose = args.verbose )
 
 #
 # eof
