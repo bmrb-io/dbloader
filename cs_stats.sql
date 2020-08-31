@@ -25,6 +25,18 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
     macromolecules."Atom_chem_shift" where "Comp_ID" in ('A','C','G','U')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
+-- add outlier count
+
+alter table web.cs_stat_rna_full
+  add column num_outliers integer;
+
+update web.cs_stat_rna_full set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_rna_full.comp_id and
+  "Atom_ID"=web.cs_stat_rna_full.atom_id and
+  (cast( "Val" as float ) > web.cs_stat_rna_full.avg + 3 * web.cs_stat_rna_full.std
+  or cast( "Val" as float ) < web.cs_stat_rna_full.avg - 3 * web.cs_stat_rna_full.std));
+
 --
 -- RNA exclusion list
 --
@@ -46,6 +58,18 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
     macromolecules."Atom_chem_shift" where "Comp_ID" in ('A','C','G','U') and "Entry_ID" not in 
     (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_rna)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
+
+-- add outlier count
+
+alter table web.cs_stat_rna_filt
+  add column num_outliers integer;
+
+update web.cs_stat_rna_filt set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_rna_filt.comp_id and
+  "Atom_ID"=web.cs_stat_rna_filt.atom_id and
+  (cast( "Val" as float ) > web.cs_stat_rna_filt.avg + 3 * web.cs_stat_rna_filt.std
+  or cast( "Val" as float ) < web.cs_stat_rna_filt.avg - 3 * web.cs_stat_rna_filt.std));
 
 --
 --
@@ -85,16 +109,29 @@ select distinct comp_id,atom_id,count(val), min(val) as min,max(val) as max,roun
 -- (collapsing methyls after calculating statistics produces multiple rows due to round-off error)
 --
 drop table if exists web.cs_stat_dna_full;
-select distinct comp_id,atom_id,case when comp_id='DT' and atom_id='M7' then count(val)/3 else count(val) end as count,
+select distinct comp_id,atom_id,
+  case when comp_id='DT' and atom_id='M7' then count(val)/3 else count(val) end as count,
   min(val) as min,max(val) as max,round(avg(val),3) as avg,round(stddev(val),3) as std
   into table web.cs_stat_dna_full
   from
     (select "Comp_ID" as comp_id,
     case when "Comp_ID"='DT' and "Atom_ID" similar to 'H7[123]' then 'M7' else "Atom_ID" end as atom_id,
-    cast("Val" as numeric) as val 
+    cast("Val" as numeric) as val,
     from macromolecules."Atom_chem_shift" 
     where "Comp_ID" in ('DA','DC','DG','DT')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
+
+-- add outlier count
+
+alter table web.cs_stat_dna_full
+  add column num_outliers integer;
+
+update web.cs_stat_dna_full set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_dna_full.comp_id and
+  "Atom_ID"=(case when web.cs_stat_dna_full.atom_id='M7' then 'H71' else web.cs_stat_dna_full.atom_id end) and
+  (cast( "Val" as float ) > web.cs_stat_dna_full.avg + 3 * web.cs_stat_dna_full.std
+  or cast( "Val" as float ) < web.cs_stat_dna_full.avg - 3 * web.cs_stat_dna_full.std));
 
 --
 -- DNA restricted set with methyls collapsed
@@ -111,6 +148,18 @@ select distinct comp_id,atom_id,case when comp_id='DT' and atom_id='M7' then cou
     where "Comp_ID" in ('DA','DC','DG','DT') and "Entry_ID" not in
     (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_dna)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
+
+-- add outlier count
+
+alter table web.cs_stat_dna_filt
+  add column num_outliers integer;
+
+update web.cs_stat_dna_filt set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_dna_filt.comp_id and
+  "Atom_ID"=(case when web.cs_stat_dna_filt.atom_id='M7' then 'H71' else web.cs_stat_dna_filt.atom_id end) and
+  (cast( "Val" as float ) > web.cs_stat_dna_filt.avg + 3 * web.cs_stat_dna_filt.std
+  or cast( "Val" as float ) < web.cs_stat_dna_filt.avg - 3 * web.cs_stat_dna_filt.std));
 
 --
 -- peptide full set
@@ -220,6 +269,27 @@ select distinct comp_id,atom_id,
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
+-- add outlier count
+
+alter table web.cs_stat_aa_full
+  add column num_outliers integer;
+
+update web.cs_stat_aa_full set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_aa_full.comp_id and
+  "Atom_ID"=(case when web.cs_stat_aa_full.atom_id='MB' then 'HB1'
+    when web.cs_stat_aa_full.atom_id='MG1' then 'HG11'
+    when web.cs_stat_aa_full.atom_id='MG2' then 'HG21'
+    when web.cs_stat_aa_full.atom_id='MG' then 'HG21'
+    when web.cs_stat_aa_full.atom_id='MD' then 'HD11'
+    when web.cs_stat_aa_full.atom_id='MD1' then 'HD11'
+    when web.cs_stat_aa_full.atom_id='MD2' then 'HD21'
+    when web.cs_stat_aa_full.atom_id='ME' then 'HE1'
+    when web.cs_stat_aa_full.atom_id='QZ' then 'HZ1'
+    else web.cs_stat_aa_full.atom_id end) and
+  (cast( "Val" as float ) > web.cs_stat_aa_full.avg + 3 * web.cs_stat_aa_full.std
+  or cast( "Val" as float ) < web.cs_stat_aa_full.avg - 3 * web.cs_stat_aa_full.std));
+
 --
 -- peptide restricted set
 --
@@ -255,6 +325,27 @@ select distinct comp_id,atom_id,
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
     and "Entry_ID" not in (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_aa)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
+
+-- add outlier count
+
+alter table web.cs_stat_aa_filt
+  add column num_outliers integer;
+
+update web.cs_stat_aa_filt set num_outliers=
+  (select count(*) from macromolecules."Atom_chem_shift" where
+  "Comp_ID"=web.cs_stat_aa_filt.comp_id and
+  "Atom_ID"=(case when web.cs_stat_aa_filt.atom_id='MB' then 'HB1'
+    when web.cs_stat_aa_filt.atom_id='MG1' then 'HG11'
+    when web.cs_stat_aa_filt.atom_id='MG2' then 'HG21'
+    when web.cs_stat_aa_filt.atom_id='MG' then 'HG21'
+    when web.cs_stat_aa_filt.atom_id='MD' then 'HD11'
+    when web.cs_stat_aa_filt.atom_id='MD1' then 'HD11'
+    when web.cs_stat_aa_filt.atom_id='MD2' then 'HD21'
+    when web.cs_stat_aa_filt.atom_id='ME' then 'HE1'
+    when web.cs_stat_aa_filt.atom_id='QZ' then 'HZ1'
+    else web.cs_stat_aa_filt.atom_id end) and
+  (cast( "Val" as float ) > web.cs_stat_aa_filt.avg + 3 * web.cs_stat_aa_filt.std
+  or cast( "Val" as float ) < web.cs_stat_aa_filt.avg - 3 * web.cs_stat_aa_filt.std));
 
 --
 -- everything else
