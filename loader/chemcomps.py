@@ -373,16 +373,17 @@ def fix_entry_id( config, verbose = False ) :
             sql = 'update %s e set "%s"="Comp_ID"' % (tbl,column)
 
         elif table == "Entity" :
-            if scam is None : tbl2 = '"Entity_comp_index"'
-            else : tbl2 = '%s."Entity_comp_index"' % (scam,)
-            sql = 'update %s e set "%s"=(select "Comp_ID" from %s where "Entity_ID"=e."ID")' % (tbl,column,tbl2,)
+            sql = 'update %s e set "%s"="Nonpolymer_comp_ID"' % (tbl,column,)
 
         elif table in ("Entity_atom_list","Entity_biological_function","Entity_bond","Entity_chem_comp_deleted_atom",
                 "Entity_chimera_segment","Entity_citation","Entity_common_name","Entity_comp_index_alt",
                 "Entity_db_link","Entity_keyword","Entity_poly_seq","Entity_systematic_name") :
-            if scam is None : tbl2 = '"Entity_comp_index"'
-            else : tbl2 = '%s."Entity_comp_index"' % (scam,)
-            sql = 'update %s e set "%s"=(select "Comp_ID" from %s where "Entity_ID"=e."Entity_ID")' % (tbl,column,tbl2)
+            if scam is None :
+                sql = 'update %s e set "%s"=(select "Nonpolymer_comp_ID" from "Entity" where "Sf_ID"=e."Sf_ID")' \
+                    % (tbl,column,)
+            else :
+                sql = 'update %s e set "%s"=(select "Nonpolymer_comp_ID" from %s."Entity" where "Sf_ID"=e."Sf_ID")' \
+                    % (tbl,column,scam)
 
         if verbose : sys.stdout.write( sql )
         rc = se.execute( sql, commit = True )
