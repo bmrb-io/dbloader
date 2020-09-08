@@ -13,6 +13,8 @@ import pgdb
 import ConfigParser
 import argparse
 
+import pprint
+
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
 import loader
@@ -212,6 +214,35 @@ class removed_ids_itr( object ) :
         if not self._conn.closed : self._conn.close()
 
 #
+# matching BMRB ID, PDB ID pairs from ETS.
+#
+def bmrb_pdb_ids_itr( config, start = 11000 ) :
+    """iterator for BMRB - PDB ID pairs"""
+
+    sql = "select bmrbnum,pdb_code from entrylog where status like 'rel%%' " \
+        + "and bmrbnum>%s and pdb_code is not null and trim(pdb_code)<>'?' " \
+        + "and trim(pdb_code)<>'' and trim(pdb_code)<>'.' " \
+        + "order by cast(bmrbnum as integer)"
+
+    assert int( start ) > 0
+
+    with pgdb.connect( **(loader.dsn( config, "ets" )) ) as conn :
+        with conn.cursor() as curs :
+            curs.execute( sql, (start,) )
+            for row in curs :
+                if row[1] is None : continue
+                pdbids = str( row[1] ).strip()
+                if len( pdbids ) < 1 : continue
+                bmrbid = str( row[0] )
+
+# SMSDep numbers have pdb id = bmrb id
+#
+                if bmrbid == pdbids : continue
+                tmp = pdbids.upper().replace( ",", " " ).split()
+                for pdbid in tmp :
+                    yield (bmrbid,pdbid)
+
+#
 #
 #
 if __name__ == "__main__" :
@@ -231,16 +262,19 @@ if __name__ == "__main__" :
     cp.read( f )
 
     for i in released_ids_itr( cp ) :
-        print i
+        pprint.pprint( i )
 
     for i in depids_itr( cp ) :
-        print i
+        pprint.pprint( i )
 
     for i in processing_queue_itr( cp ) :
-        print i
+        pprint.pprint( i )
 
     for i in removed_ids_itr( cp ) :
-        print i
+        pprint.pprint( i )
+
+    for i in  bmrb_pdb_ids_itr( cp ) :
+        pprint.pprint( i )
 
 #
 # eof

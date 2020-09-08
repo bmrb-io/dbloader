@@ -33,11 +33,12 @@ def load( config, verbose = False ) :
     load_procq( config, verbose )
     load_depids( config, verbose )
     load_extras( config, verbose )
+    load_bmrb_pdb_map( config, verbose )
     generate_stats( config, verbose )
     if config.has_option( DB, "rouser" ) :
         loader.add_ro_grants( dsn = loader.dsn( config, DB ), schema = config.get( DB, "schema" ),
                 user = config.get( DB, "rouser" ), verbose = verbose )  
-    
+
 #
 #
 #
@@ -166,7 +167,7 @@ def load_extras( config, verbose = False ) :
     global DB
 
     assert isinstance( config, ConfigParser.SafeConfigParser )
-    
+
     pat = re.compile( r"([^.]+)\.([^.]+)\.csv$" )
     extras = config.get( DB, "csvfiles" )
     for name in extras.split() :
@@ -177,6 +178,44 @@ def load_extras( config, verbose = False ) :
             continue
         loader.fromcsv( loader.dsn( config, DB ), filename = f, schema = m.group( 1 ),
                 table = m.group( 2 ), verbose = verbose )
+
+# BMRB-PDB ID map
+#
+def load_bmrb_pdb_map( config, verbose = False ) :
+    if verbose :
+        sys.stdout.write( "load_bmrb_pdb_map()\n" )
+
+    assert isinstance( config, ConfigParser.SafeConfigParser )
+
+    global DB
+
+    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
+        conn.autocommit = False
+        with conn.cursor() as curs :
+
+            try :
+
+                sql = "delete from web.db_links where upper(db_code)='PDB' and upper(link_type)='ETS'"
+                curs.execute( sql )
+
+                sql = "insert into web.db_links (bmrb_id,db_code,db_id,link_type) " \
+                    + "values (%(bmrbid)s,'PDB',%(pdbid)s,'ETS')"
+                for row in loader.bmrb_pdb_ids_itr( config ) :
+
+# tuples: deposition id, bmrb id
+#
+                    vals = { "bmrbid" : row[0], "pdbid" : row[1] }
+                    if verbose :
+                        sys.stdout.write( ",".join( str( i ) for i in row ) )
+                        sys.stdout.write( "\n" )
+                    curs.execute( sql, vals )
+                    if verbose : sys.stdout.write( ": inserted %d\n" % (curs.rowcount,) )
+
+                conn.commit()
+
+            except :
+                conn.rollback()
+                raise
 
 #
 #

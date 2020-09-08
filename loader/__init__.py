@@ -12,12 +12,11 @@ import subprocess
 #import re
 import ConfigParser
 
-#STAROBJ_PATH = "/bmrb/lib/python27"
-STAROBJ_PATH = "/share/dmaziuk/projects/github/starobj"
+STAROBJ_PATH = "/projects/BMRB/software/starobj"
 sys.path.append( STAROBJ_PATH )
 import starobj
 
-from .ets import released_ids_itr, depids_itr, processing_queue_itr, removed_ids_itr
+from .ets import released_ids_itr, depids_itr, processing_queue_itr, removed_ids_itr, bmrb_pdb_ids_itr
 from .csvdump import tocsv
 from .csvload import fromcsv
 
@@ -227,3 +226,4 @@ __all__ = [ "starobj",
 
 #
 # eof
+

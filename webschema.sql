@@ -43,3 +43,51 @@ create table termlist (
     description text,
     isprimary text
 );
+
+-- related_entries: database_name, database_accession_code, relationship
+--
+-- assembly_db_link: author_supplied, database_code, accession_code,
+--    entry_mol_code, entry_mol_name, entry_experimental_method, entry_structure_resolution,
+--    entry_relationship_type, entry_details
+--
+-- entity_db_link: author_supplied, database_code, accession_code,
+--    entry_mol_code, entry_mol_name, entry_experimental_method, entry_structure_resolution,
+--    entry_relationship_type, entry_details,
+--    [...BLAST fields...]
+--
+-- chem_comp_db_link: author_supplied, database_code, accession_code, accession_code_type,
+--    entry_mol_code, entry_mol_name,
+--    entry_relationship_type, entry_details
+--
+-- pdb_link: bmrb_id, pdb_id
+--
+-- uniprot_mappings: id, bmrb_id, entity_id, pdb_chain_id, pdb_id,
+--     link_type: (author, blast, pdb),
+--     uniprot_id, protein_sequence,details
+--
+-- web.related_entries (?)
+--    bmrb_id
+--    entity_id
+--    link_type
+--    db_name
+--    db_id
+--    db_subid
+--    protein_sequence
+--    exptl_method
+--    quality_factor (?)
+--    details
+--
+-- for now however just add pdb_link
+--
+create table db_links (
+    bmrb_id text not null,
+    db_code text not null,
+    db_id text not null,
+    link_type text
+);
+
+create view pdb_link as
+    select bmrb_id, db_id as pdb_id
+    from db_links
+    where upper(db_code)='PDB' and upper(link_type)='ETS'
+);
