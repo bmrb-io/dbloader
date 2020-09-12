@@ -194,12 +194,14 @@ def load_bmrb_pdb_map( config, verbose = False ) :
         with conn.cursor() as curs :
 
             try :
+#                sql = "delete from web.db_links where upper(db_code)='PDB' and upper(link_type)='ETS'"
+                sql = "truncate web.pdb_link"
 
-                sql = "delete from web.db_links where upper(db_code)='PDB' and upper(link_type)='ETS'"
                 curs.execute( sql )
 
-                sql = "insert into web.db_links (bmrb_id,db_code,db_id,link_type) " \
-                    + "values (%(bmrbid)s,'PDB',%(pdbid)s,'ETS')"
+#                sql = "insert into web.db_links (bmrb_id,db_code,db_id,link_type) " \
+#                    + "values (%(bmrbid)s,'PDB',%(pdbid)s,'ETS')"
+                sql = "insert into web.pdb_link (bmrb_id, pdb_id) values (%(bmrbid)s,%(pdbid)s)"
                 for row in loader.bmrb_pdb_ids_itr( config ) :
 
 # tuples: deposition id, bmrb id

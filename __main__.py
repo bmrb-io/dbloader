@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
             if args.load_web :
                 with loader.timer( label = "load web extras", silent = args.time ) :
-                    loader.load_web_schema( config = cp, verbose = args.verbose )
+                    loader.load_web_schema( config = cp, verbose = True ) # args.verbose )
 
         if args.dump :
             if args.dump_macro :

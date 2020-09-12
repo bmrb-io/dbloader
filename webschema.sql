@@ -79,15 +79,7 @@ create table termlist (
 --
 -- for now however just add pdb_link
 --
-create table db_links (
+create table pdb_link (
     bmrb_id text not null,
-    db_code text not null,
-    db_id text not null,
-    link_type text
-);
-
-create view pdb_link as
-    select bmrb_id, db_id as pdb_id
-    from db_links
-    where upper(db_code)='PDB' and upper(link_type)='ETS'
+    pdb_id text not null
 );
