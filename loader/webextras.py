@@ -33,7 +33,7 @@ def load( config, verbose = False ) :
     load_procq( config, verbose )
     load_depids( config, verbose )
     load_extras( config, verbose )
-    load_bmrb_pdb_map( config, verbose )
+    load_bmrb_pdb_map( config, start = 1, verbose )
     generate_stats( config, verbose )
     if config.has_option( DB, "rouser" ) :
         loader.add_ro_grants( dsn = loader.dsn( config, DB ), schema = config.get( DB, "schema" ),
@@ -181,7 +181,7 @@ def load_extras( config, verbose = False ) :
 
 # BMRB-PDB ID map
 #
-def load_bmrb_pdb_map( config, verbose = False ) :
+def load_bmrb_pdb_map( config, start, verbose = False ) :
     if verbose :
         sys.stdout.write( "load_bmrb_pdb_map()\n" )
 
@@ -202,7 +202,7 @@ def load_bmrb_pdb_map( config, verbose = False ) :
 #                sql = "insert into web.db_links (bmrb_id,db_code,db_id,link_type) " \
 #                    + "values (%(bmrbid)s,'PDB',%(pdbid)s,'ETS')"
                 sql = "insert into web.pdb_link (bmrb_id, pdb_id) values (%(bmrbid)s,%(pdbid)s)"
-                for row in loader.bmrb_pdb_ids_itr( config ) :
+                for row in loader.bmrb_pdb_ids_itr( config, start ) :
 
 # tuples: deposition id, bmrb id
 #

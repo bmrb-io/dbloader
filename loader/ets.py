@@ -273,7 +273,7 @@ if __name__ == "__main__" :
     for i in removed_ids_itr( cp ) :
         pprint.pprint( i )
 
-    for i in  bmrb_pdb_ids_itr( cp ) :
+    for i in  bmrb_pdb_ids_itr( cp, start = 1 ) :
         pprint.pprint( i )
 
 #
