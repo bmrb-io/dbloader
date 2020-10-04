@@ -103,7 +103,7 @@ def runscript( dsn, script, verbose = False ) :
             port = None
         cmd.extend( ["-h", host] )
         if port is not None : cmd.extend( ["-p", port] )
-    if not verbose : cmd.append( "-q" )
+    if not verbose : cmd.extend( ["--quiet", "--echo-errors"] )
 
     f = os.path.realpath( script )
     if not os.path.exists( f ) : raise IOError( "File not found: %s" % (f,) )
