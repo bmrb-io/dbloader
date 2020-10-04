@@ -116,7 +116,7 @@ select distinct comp_id,atom_id,
   from
     (select "Comp_ID" as comp_id,
     case when "Comp_ID"='DT' and "Atom_ID" similar to 'H7[123]' then 'M7' else "Atom_ID" end as atom_id,
-    cast("Val" as numeric) as val,
+    cast("Val" as numeric) as val
     from macromolecules."Atom_chem_shift" 
     where "Comp_ID" in ('DA','DC','DG','DT')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;

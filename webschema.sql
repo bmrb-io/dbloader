@@ -83,3 +83,5 @@ create table pdb_link (
     bmrb_id text not null,
     pdb_id text not null
 );
+
+-- eof

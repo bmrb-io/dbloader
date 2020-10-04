@@ -33,7 +33,7 @@ def load( config, verbose = False ) :
     load_procq( config, verbose )
     load_depids( config, verbose )
     load_extras( config, verbose )
-    load_bmrb_pdb_map( config, start = 1, verbose )
+    load_bmrb_pdb_map( config, start = 1, verbose = verbose )
     generate_stats( config, verbose )
     if config.has_option( DB, "rouser" ) :
         loader.add_ro_grants( dsn = loader.dsn( config, DB ), schema = config.get( DB, "schema" ),
