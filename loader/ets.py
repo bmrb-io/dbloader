@@ -48,9 +48,6 @@ class released_ids_itr( object ) :
             if len( str( row[0] ).strip() ) < 1 : continue
             return str( row[0] ).strip()
 
-    def __next__( self ) :
-        return self.__next__()
-
     def __del__( self ) :
         self._curs = None
         if not self._conn.closed : self._conn.close()
@@ -87,9 +84,6 @@ class depids_itr( object ) :
             if str( row[0] ).lower().find( "based_on_existing" ) != -1 : continue
 #            return (str( row[0] ).strip(),str( row[1] ).strip())
             return ("",str( row[1] ).strip())
-
-    def __next__( self ) :
-        return self.__next__()
 
     def __del__( self ) :
         self._curs = None
@@ -169,9 +163,6 @@ class processing_queue_itr( object ) :
 
             return (bmrbid,row[1],hold,rel,when)
 
-    def __next__( self ) :
-        return self.__next__()
-
     def __del__( self ) :
         self._curs = None
         if not self._conn.closed : self._conn.close()
@@ -205,9 +196,6 @@ class removed_ids_itr( object ) :
             if row[0] is None : continue
             if len( str( row[0] ).strip() ) < 1 : continue
             return (str( row[0] ).strip(),row[1],)
-
-    def __next__( self ) :
-        return self.__next__()
 
     def __del__( self ) :
         self._curs = None
