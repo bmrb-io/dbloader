@@ -77,6 +77,8 @@ def _fromcsv( filename, dsn, schema, table, verbose = False ) :
 
     p = subprocess.Popen( cmd, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
     (out, err) = p.communicate()
+    out = out.decode()
+    err = err.decode()
     if p.returncode != 0 :
         sys.stderr.write( "ERR: psql returned %d\n" % (p.returncode,))
         sys.stderr.write( " ".join( j for j in cmd ) )

@@ -84,6 +84,8 @@ class PgLoader( object ) :
 
         p = subprocess.Popen( cmd, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
         (out, err) = p.communicate()
+        out = out.decode()
+        err = err.decode()
         if p.returncode != 0 :
             sys.stderr.write( "ERR: psql returned %d\n" % (p.returncode,))
             sys.stderr.write( " ".join( i for i in cmd ) )
@@ -186,6 +188,8 @@ class PgLoader( object ) :
 
         p = subprocess.Popen( cmd, stdout = subprocess.PIPE, stderr = subprocess.PIPE )
         (out, err) = p.communicate()
+        out = out.decode()
+        err = err.decode()
         if p.returncode != 0 :
             rc += "%s: psql -c \dn returned %d\n" % (db,p.returncode,)
             return rc
