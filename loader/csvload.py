@@ -152,7 +152,7 @@ if __name__ == "__main__" :
         sys.stderr.write( "Not a directory: %s\n", (wd,) )
         sys.exit( 1 )
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

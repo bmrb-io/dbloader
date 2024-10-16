@@ -34,7 +34,7 @@ def create_schema( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "create_schema()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -52,7 +52,7 @@ def load_files( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "load_files()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -77,7 +77,7 @@ def add_grants( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "add_grants()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -100,7 +100,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

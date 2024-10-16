@@ -75,7 +75,7 @@ def list_tables( curs, verbose = False ) :
 # main
 #
 def dump_and_load( config, verbose = False ) :
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
     global DB
     wd = tempfile.mkdtemp()
     try :
@@ -101,7 +101,7 @@ def dump( config, where = None, verbose = False ) :
     global DB
 #    global TABLES
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
     if not config.has_section( DB ) :
         sys.stderr.write( "No [%s] section in config file\n" % (DB,) )
         return False
@@ -407,7 +407,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

@@ -21,7 +21,7 @@ import loader
 # main
 #
 def load( config, path, verbose = False ) :
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     if not config.has_section( "dictionary" ) :
         raise Exception( "No [dictionary] section in config file\n" )
@@ -88,7 +88,7 @@ if __name__ == "__main__" :
         sys.stderr.write( "Not a directory: %s\n", (wd,) )
         sys.exit( 1 )
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

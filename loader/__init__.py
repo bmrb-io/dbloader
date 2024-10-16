@@ -54,7 +54,7 @@ def timer( label, silent = False ) :
 #
 def dsn( config, section ) :
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
     rc = {}
     if not config.has_section( section ) :
         sys.stderr.write( "No [%s] section in config file\n" % (section,) )

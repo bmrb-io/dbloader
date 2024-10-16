@@ -47,7 +47,7 @@ def create_schema( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "create_schema()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -66,7 +66,7 @@ def generate_stats( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "generate_stats()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -85,7 +85,7 @@ def load_procq( config, verbose = False ) :
 
     global DB
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     sql = "insert into web.procque (accno,received,onhold,status,released)" \
         + " values (%(id)s,%(recv)s,%(hld)s,%(st)s,%(rel)s)"
@@ -128,7 +128,7 @@ def load_depids( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "load_depids()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -167,7 +167,7 @@ def load_extras( config, verbose = False ) :
 
     global DB
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     pat = re.compile( r"([^.]+)\.([^.]+)\.csv$" )
     extras = config.get( DB, "csvfiles" )
@@ -186,7 +186,7 @@ def load_bmrb_pdb_map( config, start, verbose = False ) :
     if verbose :
         sys.stdout.write( "load_bmrb_pdb_map()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -242,7 +242,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

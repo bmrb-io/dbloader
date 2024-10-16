@@ -72,7 +72,7 @@ def dump( config, path, sections, verbose = False ) :
     global MACROSECTIONS
     global METASECTIONS
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
     assert sections in (ALLSECTIONS,MACROSECTIONS,METASECTIONS)
 
     if not os.path.exists( os.path.realpath( loader.PGDUMP ) ) :
@@ -454,7 +454,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

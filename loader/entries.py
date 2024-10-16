@@ -256,7 +256,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

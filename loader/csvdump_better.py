@@ -44,7 +44,7 @@ class Dumper( object ) :
     #
     def __init__( self, config, outdir, verbose = False ) :
 
-        assert isinstance( config, configparser.SafeConfigParser )
+        assert isinstance( config, configparser.ConfigParser )
 
         if (not os.path.exists( os.path.realpath( loader.PGDUMP ) )) \
         or (not os.path.exists( os.path.realpath( loader.PSQL ) )) :
@@ -353,7 +353,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

@@ -27,7 +27,7 @@ def fixup( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "fixup()\n" )
 
-    assert isinstance( config, configparser.SafeConfigParser )
+    assert isinstance( config, configparser.ConfigParser )
 
     global DB
 
@@ -240,7 +240,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = configparser.SafeConfigParser()
+    cp = configparser.ConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 
