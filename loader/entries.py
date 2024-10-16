@@ -122,13 +122,13 @@ def load_entries( db, config, drop_tables = False, verbose = False ) :
         pprint.pprint( files )
 
 # starobj needs [entry] section with 
-# engine = pgdb
+# engine = psycopg2
 # database = <dbname>
 # schema = <db>
 # user and host
 #
     if not config.has_section( "entry" ) : config.add_section( "entry" )
-    config.set( "entry", "engine", "pgdb" )
+    config.set( "entry", "engine", "psycopg2" )
     config.set( "entry", "database", dbname )
     config.set( "entry", "schema", db )
     if duser is not None : config.set( "entry", "user", duser )

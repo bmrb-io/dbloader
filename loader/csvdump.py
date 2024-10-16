@@ -10,16 +10,15 @@
 # for "new" we just dump everything as <schema>.<table>.csv
 #
 
-
-import os
-import sys
-import subprocess
-import pgdb
-import configparser
 import argparse
+import configparser
 import glob
-#import pprint
+import os
 import re
+import subprocess
+import sys
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -326,7 +325,7 @@ def list_tables( dsn, schema, verbose = False ) :
 
     tables = []
     rc = []
-    with pgdb.connect( **dsn ) as conn :
+    with psycopg2.connect( **dsn ) as conn :
         sql = "select table_name from information_schema.tables where table_schema=%s" \
             + " and table_type='BASE TABLE' order by table_name"
         with conn.cursor() as curs :
@@ -369,7 +368,7 @@ def tocsv( dsn, table, outfile, verbose = False ) :
 
 # skip empty tables
 #
-    conn = pgdb.connect( **dsn )
+    conn = psycopg2.connect( **dsn )
     curs = conn.cursor()
     if verbose : sys.stdout.write( ">%s\n" % (sql,) )
     try :

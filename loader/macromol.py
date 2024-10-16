@@ -6,12 +6,13 @@
 #
 
 
-import os
-import sys
-import json
-import pgdb
 import argparse
 import configparser
+import json
+import os
+import sys
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -30,7 +31,7 @@ def fixup( config, verbose = False ) :
 
     global DB
 
-    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
+    with psycopg2.connect( **(loader.dsn( config, DB )) ) as conn :
         conn.autocommit = False
         with conn.cursor() as curs :
             try :

@@ -9,12 +9,13 @@
 #
 
 
-import os
-import sys
-import pgdb
-import re
-import configparser
 import argparse
+import configparser
+import os
+import re
+import sys
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -89,7 +90,7 @@ def load_procq( config, verbose = False ) :
     sql = "insert into web.procque (accno,received,onhold,status,released)" \
         + " values (%(id)s,%(recv)s,%(hld)s,%(st)s,%(rel)s)"
 
-    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
+    with psycopg2.connect( **(loader.dsn( config, DB )) ) as conn :
         conn.autocommit = False
         with conn.cursor() as curs :
 
@@ -131,7 +132,7 @@ def load_depids( config, verbose = False ) :
 
     global DB
 
-    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
+    with psycopg2.connect( **(loader.dsn( config, DB )) ) as conn :
         conn.autocommit = False
         with conn.cursor() as curs :
 
@@ -189,7 +190,7 @@ def load_bmrb_pdb_map( config, start, verbose = False ) :
 
     global DB
 
-    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
+    with psycopg2.connect( **(loader.dsn( config, DB )) ) as conn :
         conn.autocommit = False
         with conn.cursor() as curs :
 

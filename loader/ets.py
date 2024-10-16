@@ -7,13 +7,13 @@
 #
 
 
-import os
-import sys
-import psycopg2
-import configparser
 import argparse
-
+import configparser
+import os
 import pprint
+import sys
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -30,7 +30,7 @@ class released_ids_itr( object ) :
     _curs = None
 
     def __init__( self, config ) :
-        self._conn = pgdb.connect( **(loader.dsn( config, "ets" )) )
+        self._conn = psycopg2.connect( **(loader.dsn( config, "ets" )) )
         self._curs = self._conn.cursor()
         self._curs.execute( self.sql )
 
@@ -68,7 +68,7 @@ class depids_itr( object ) :
     _curs = None
 
     def __init__( self, config ) :
-        self._conn = pgdb.connect( **(loader.dsn( config, "ets" )) )
+        self._conn = psycopg2.connect( **(loader.dsn( config, "ets" )) )
         self._curs = self._conn.cursor()
         self._curs.execute( self.sql )
 

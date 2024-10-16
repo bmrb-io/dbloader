@@ -11,17 +11,15 @@
 #
 
 
-import os
-import sys
-import subprocess
-import pgdb
-import configparser
 import argparse
-import shutil
-
-import glob
+import configparser
+import os
 import pprint
-import re
+import shutil
+import subprocess
+import sys
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -128,7 +126,7 @@ class Dumper( object ) :
             + " and table_type='BASE TABLE' order by table_name"
         colqry = "select column_name from information_schema.columns" \
             + " where table_schema=%s and table_name=%s order by ordinal_position"
-        with pgdb.connect( **dsn ) as conn :
+        with psycopg2.connect( **dsn ) as conn :
             with conn.cursor() as curs :
                 for schema in list(self._tables.keys()) :
                     del tmp[:]
@@ -273,7 +271,7 @@ def tocsv( dsn, table, outfile, verbose = False ) :
 
 # skip empty tables
 #
-    conn = pgdb.connect( **dsn )
+    conn = psycopg2.connect( **dsn )
     curs = conn.cursor()
     if verbose : sys.stdout.write( ">%s\n" % (sql,) )
     curs.execute( sql )

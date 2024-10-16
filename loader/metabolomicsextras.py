@@ -7,7 +7,6 @@
 
 import os
 import sys
-#import pgdb
 import configparser
 import argparse
 import glob

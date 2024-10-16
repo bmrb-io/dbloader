@@ -50,7 +50,7 @@ def timer( label, silent = False ) :
 
 #######################################
 
-# read config file into pgdb connection kwargs
+# read config file into psycopg2 connection kwargs
 #
 def dsn( config, section ) :
 

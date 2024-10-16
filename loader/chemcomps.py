@@ -5,19 +5,16 @@
 # 2. load from those CSVs into bmrbeverything DB
 #
 
-
-
-import sys
-assert ((sys.version_info[0] == 2) and (sys.version_info[1] > 6))
-
-import os
 import argparse
 import configparser
-import pgdb
-import pprint
 import glob
-import tempfile
+import os
+import pprint
 import shutil
+import sys
+import tempfile
+
+import psycopg2
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -139,7 +136,7 @@ def dump( config, where = None, verbose = False ) :
     cidstr1 = ""
     eidstr = ""
 
-    with pgdb.connect( **dsn ) as conn :
+    with psycopg2.connect( **dsn ) as conn :
         with conn.cursor() as curs :
 
             tables = list_tables( curs, verbose = verbose )
@@ -246,13 +243,13 @@ def load( config, where, verbose = False ) :
     dsn = loader.dsn( config, DB )
 
 # starobj needs [entry] section with
-# engine = pgdb
+# engine = psycopg2
 # database = <dbname>
 # schema = <db>
 # user and host
 #
     if not config.has_section( "entry" ) : config.add_section( "entry" )
-    config.set( "entry", "engine", "pgdb" )
+    config.set( "entry", "engine", "psycopg2" )
     config.set( "entry", "database", dsn["database"] )
     config.set( "entry", "schema", DB )
     if ("user" in dsn) and (dsn["user"] is not None) : 
@@ -318,13 +315,13 @@ def fix_entry_id( config, verbose = False ) :
     dsn = loader.dsn( config, DB )
 
 # starobj needs [entry] section with
-# engine = pgdb
+# engine = psycopg2
 # database = <dbname>
 # schema = <db>
 # user and host
 #
     if not config.has_section( "entry" ) : config.add_section( "entry" )
-    config.set( "entry", "engine", "pgdb" )
+    config.set( "entry", "engine", "psycopg2" )
     config.set( "entry", "database", dsn["database"] )
     config.set( "entry", "schema", DB )
     if ("user" in dsn) and (dsn["user"] is not None) : 
