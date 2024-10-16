@@ -65,9 +65,6 @@ def dsn( config, section ) :
 
     rc["database"] = config.get( section, "database" )
 
-# for psql
-#
-    rc["dbname"] = rc["database"]
     if config.has_option( section, "user" ) :
         rc["user"] = config.get( section, "user" )
     if config.has_option( section, "password" ) :
