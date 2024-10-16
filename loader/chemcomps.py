@@ -114,7 +114,6 @@ def dump( config, where = None, verbose = False ) :
 
 # for psql
 #
-    dsn["dbname"] = dsn["database"]
     if config.has_option( DB, "srcuser" ) :
         dsn["user"] = config.get( DB, "srcuser" )
     if config.has_option( DB, "srcpassword" ) :

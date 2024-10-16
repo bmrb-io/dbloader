@@ -30,7 +30,6 @@ def _fromcsv( filename, dsn, schema, table, verbose = False ) :
 # pgdb vs psycopg2
 #
     if "database" in list(dsn.keys()) : cmd = [ loader.PSQL, "-d", dsn["database"] ]
-    else : cmd = [ loader.PSQL, "-d", dsn["dbname"] ]
     if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
     if "host" in list(dsn.keys()) : cmd.extend( ["-h", dsn["host"]] )
     if "port" in list(dsn.keys()) : cmd.extend( ["-p", dsn["port"]] )
