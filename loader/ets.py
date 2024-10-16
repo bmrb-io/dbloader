@@ -6,11 +6,11 @@
 # NOTE that this only works if "web" is a schema in the same DB as "macromolecules"
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import pgdb
-import ConfigParser
+import configparser
 import argparse
 
 import pprint
@@ -48,7 +48,7 @@ class released_ids_itr( object ) :
             if len( str( row[0] ).strip() ) < 1 : continue
             return str( row[0] ).strip()
 
-    def next( self ) :
+    def __next__( self ) :
         return self.__next__()
 
     def __del__( self ) :
@@ -88,7 +88,7 @@ class depids_itr( object ) :
 #            return (str( row[0] ).strip(),str( row[1] ).strip())
             return ("",str( row[1] ).strip())
 
-    def next( self ) :
+    def __next__( self ) :
         return self.__next__()
 
     def __del__( self ) :
@@ -169,7 +169,7 @@ class processing_queue_itr( object ) :
 
             return (bmrbid,row[1],hold,rel,when)
 
-    def next( self ) :
+    def __next__( self ) :
         return self.__next__()
 
     def __del__( self ) :
@@ -206,7 +206,7 @@ class removed_ids_itr( object ) :
             if len( str( row[0] ).strip() ) < 1 : continue
             return (str( row[0] ).strip(),row[1],)
 
-    def next( self ) :
+    def __next__( self ) :
         return self.__next__()
 
     def __del__( self ) :
@@ -257,7 +257,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

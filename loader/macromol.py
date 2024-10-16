@@ -5,13 +5,13 @@
 #  statistics
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import json
 import pgdb
 import argparse
-import ConfigParser
+import configparser
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
 sys.path.append( _UP )
@@ -26,7 +26,7 @@ def fixup( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "fixup()\n" )
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
 
     global DB
 
@@ -52,33 +52,33 @@ def fix_entry( curs, verbose = False ) :
     global DB
 
     sql = """update %s."Entry" set "Type"='small molecule structure' where "ID"='15443' and "Type" is null""" % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
     sql = """update %s."Entry" set "Type"='small molecule structure' where "ID"='16041' and "Type" is null""" % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
     sql = """update %s."Entry" set "Type"='small molecule structure' where cast("ID" as integer)>=20000 and cast("ID" as integer)<25000 and "Type" is null""" % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
     sql = """update %s."Entry" set "Type"='macromolecule' where cast("ID" as integer)<20000 and "Type" is null""" % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
 
 # these are non-public and shouldn't be there
 # wipe them out just in case
 #
     sql = 'truncate %s."Contact_person"' % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
     sql = 'truncate %s."Upload_data"' % (DB,)
-    if verbose : print (sql),
+    if verbose : print((sql), end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
 
 # this one takes a dictionary "map" and reduces to the key
 #  to normalize all different spellings etc.
@@ -94,15 +94,15 @@ def _fix_map( curs, table = None, column = None, which = None, verbose = False )
         % (DB,table, column, column)
 
     for i in sorted( which.keys() ) :
-        if verbose : print (sql % (i, i.lower()) ),
+        if verbose : print((sql % (i, i.lower()) ), end=' ')
         curs.execute( sql, (i, i.lower()) )
-        if verbose : print curs.rowcount
+        if verbose : print(curs.rowcount)
         if which[i] != None :
             for j in which[i] :
                 task = j.lower()
-                if verbose : print (sql % (i,task)),
+                if verbose : print((sql % (i,task)), end=' ')
                 curs.execute( sql, (i,task) )
-                if verbose : print curs.rowcount
+                if verbose : print(curs.rowcount)
 
 # names don't need to be barewords,
 # sequences are line-wrapped in the entries
@@ -113,16 +113,16 @@ def fix_entities( curs, verbose = False ) :
 
     for table in ( "Entity", "Assembly", "Chem_comp" ) :
         sql = """update %s."%s" set "Name"=regexp_replace("Name", '_+', ' ', 'g')""" % (DB,table,)
-        if verbose : print sql,
+        if verbose : print(sql, end=' ')
         curs.execute( sql )
-        if verbose : print curs.rowcount
+        if verbose : print(curs.rowcount)
 
     sql = 'update %s."Entity"'  % (DB,)
     sql += """  set "Polymer_seq_one_letter_code_can"=regexp_replace( "Polymer_seq_one_letter_code_can",'\n','','g'),
           "Polymer_seq_one_letter_code"=regexp_replace( "Polymer_seq_one_letter_code",'\n','','g')"""
-    if verbose : print sql,
+    if verbose : print(sql, end=' ')
     curs.execute( sql )
-    if verbose : print curs.rowcount
+    if verbose : print(curs.rowcount)
 
 #
 #
@@ -183,7 +183,7 @@ def fix_software_authors( curs, config, verbose = False ) :
     upd += ' set "Name"=%s where "Sf_ID"=%s and "Entry_ID"=%s'
 
     entries = {}
-    for (sw, vend) in dat.iteritems() :
+    for (sw, vend) in dat.items() :
         entries.clear()
         if verbose :
             sys.stdout.write( qry % (sw,) )
@@ -194,7 +194,7 @@ def fix_software_authors( curs, config, verbose = False ) :
             if row == None : break
             entries[row[1]] = row[0]
 
-        for (eid, sfid) in entries.iteritems() :
+        for (eid, sfid) in entries.items() :
             if verbose :
                 sys.stdout.write( upd % (vend, sfid, eid) )
             curs.execute( upd, (vend, sfid, eid) )
@@ -215,7 +215,7 @@ def fix_software_authors( curs, config, verbose = False ) :
     up1 += """ set "Name"='DeLano Scientific LLC.' where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%delano%%'"""
     up2 = 'update %s."Vendor"' % (DB,)
     up2 += """ set "Name"='Schrodinger, LLC' where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%dinger%%'"""
-    for (eid, sfid) in entries.iteritems() :
+    for (eid, sfid) in entries.items() :
         if verbose : sys.stdout.write( up1 % (sfid,eid) )
         curs.execute( up1, (sfid,eid) )
         if verbose : sys.stdout.write( " : %d\n" % (curs.rowcount,) )
@@ -239,7 +239,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

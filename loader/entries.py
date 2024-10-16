@@ -2,13 +2,13 @@
 #
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import re
 import glob
 #import subprocess
-import ConfigParser
+import configparser
 import argparse
 import pprint
 import traceback
@@ -256,7 +256,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

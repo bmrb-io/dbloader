@@ -10,12 +10,12 @@
 # for "new" we just dump everything as <schema>.<table>.csv
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import subprocess
 import pgdb
-import ConfigParser
+import configparser
 import argparse
 import glob
 #import pprint
@@ -73,7 +73,7 @@ def dump( config, path, sections, verbose = False ) :
     global MACROSECTIONS
     global METASECTIONS
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
     assert sections in (ALLSECTIONS,MACROSECTIONS,METASECTIONS)
 
     if not os.path.exists( os.path.realpath( loader.PGDUMP ) ) :
@@ -123,7 +123,7 @@ def dump( config, path, sections, verbose = False ) :
 
 # dump
 #
-    for scam in tables.keys() :
+    for scam in list(tables.keys()) :
         for table in tables[scam] :
             if table.islower() :
                 tbl = "%s.%s" % (scam,table,)
@@ -159,8 +159,8 @@ def dump_ddl( dsn, schemata, outfile, old = None, verbose = False ) :
 
 # it'll fail if there is a password
 #
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() :
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) :
         if ":" in dsn["host"] :
             (host,port) = dsn["host"].split( ":" )
         else :
@@ -387,8 +387,8 @@ def tocsv( dsn, table, outfile, verbose = False ) :
         return
 
     cmd = [ loader.PSQL, "-d", dsn["database"] ]
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() :
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) :
         if ":" in dsn["host"] :
             (host,port) = dsn["host"].split( ":" )
         else :
@@ -455,7 +455,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

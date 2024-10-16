@@ -4,11 +4,11 @@
 #  - until we replace that old setup with something better.
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 #import pgdb
-import ConfigParser
+import configparser
 import argparse
 import glob
 import re
@@ -35,7 +35,7 @@ def create_schema( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "create_schema()\n" )
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
 
     global DB
 
@@ -53,7 +53,7 @@ def load_files( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "load_files()\n" )
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
 
     global DB
 
@@ -78,7 +78,7 @@ def add_grants( config, verbose = False ) :
     if verbose :
         sys.stdout.write( "add_grants()\n" )
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
 
     global DB
 
@@ -101,7 +101,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

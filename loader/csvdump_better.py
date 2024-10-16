@@ -10,12 +10,12 @@
 # for "new" we just dump everything as <schema>.<table>.csv
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import subprocess
 import pgdb
-import ConfigParser
+import configparser
 import argparse
 import shutil
 
@@ -46,7 +46,7 @@ class Dumper( object ) :
     #
     def __init__( self, config, outdir, verbose = False ) :
 
-        assert isinstance( config, ConfigParser.SafeConfigParser )
+        assert isinstance( config, configparser.SafeConfigParser )
 
         if (not os.path.exists( os.path.realpath( loader.PGDUMP ) )) \
         or (not os.path.exists( os.path.realpath( loader.PSQL ) )) :
@@ -92,7 +92,7 @@ class Dumper( object ) :
         ddlfile = os.path.join( self._outdir, self.DDLFILE )
         sqlfile = os.path.join( self._outdir, self.SQLFILE )
 
-        lines = self._read_ddl( dsn, self._tables.keys() )
+        lines = self._read_ddl( dsn, list(self._tables.keys()) )
         if lines is None :
             raise Exception( "No output from pg_dump" )
         if len( lines ) < 1 :
@@ -130,7 +130,7 @@ class Dumper( object ) :
             + " where table_schema=%s and table_name=%s order by ordinal_position"
         with pgdb.connect( **dsn ) as conn :
             with conn.cursor() as curs :
-                for schema in self._tables.keys() :
+                for schema in list(self._tables.keys()) :
                     del tmp[:]
                     curs.execute( tblqry, (schema,) )
                     for row in curs :
@@ -167,11 +167,11 @@ class Dumper( object ) :
 
 # it'll fail if there is a password
 #
-        if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
+        if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
 
 # pygresql-style is host:port
 #
-        if "host" in dsn.keys() :
+        if "host" in list(dsn.keys()) :
             if ":" in dsn["host"] :
                 (host,port) = dsn["host"].split( ":" )
             else :
@@ -223,8 +223,8 @@ class Dumper( object ) :
 
         ldr = []
         colstr = ""
-        for schema in self._tables.keys() :
-            for table in self._tables[schema].keys() :
+        for schema in list(self._tables.keys()) :
+            for table in list(self._tables[schema].keys()) :
                 if schema in self.STRSECTIONS :
                     colstr = '("%s")' % ('","'.join( c for c in self._tables[schema][table] ),)
                 else :
@@ -287,8 +287,8 @@ def tocsv( dsn, table, outfile, verbose = False ) :
         return
 
     cmd = [ loader.PSQL, "-d", dsn["database"] ]
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() :
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) :
         if ":" in dsn["host"] :
             (host,port) = dsn["host"].split( ":" )
         else :
@@ -355,7 +355,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

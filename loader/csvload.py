@@ -4,13 +4,13 @@
 #  copy from/to don't work without root permissions but psql's \copy does.
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import re
 import glob
 import subprocess
-import ConfigParser
+import configparser
 import argparse
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
@@ -29,11 +29,11 @@ def _fromcsv( filename, dsn, schema, table, verbose = False ) :
 
 # pgdb vs psycopg2
 #
-    if "database" in dsn.keys() : cmd = [ loader.PSQL, "-d", dsn["database"] ]
+    if "database" in list(dsn.keys()) : cmd = [ loader.PSQL, "-d", dsn["database"] ]
     else : cmd = [ loader.PSQL, "-d", dsn["dbname"] ]
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() : cmd.extend( ["-h", dsn["host"]] )
-    if "port" in dsn.keys() : cmd.extend( ["-p", dsn["port"]] )
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) : cmd.extend( ["-h", dsn["host"]] )
+    if "port" in list(dsn.keys()) : cmd.extend( ["-p", dsn["port"]] )
     if not verbose : cmd.append( "-q" )
 
     infile = os.path.realpath( filename )
@@ -42,7 +42,7 @@ def _fromcsv( filename, dsn, schema, table, verbose = False ) :
 # column names
 #
     cols = []
-    with open( infile, "rU" ) as f :
+    with open( infile, "r" ) as f :
         l = f.readline()
         for col in l.split( "," ) :
             cols.append( col.strip().strip( "'\"" ) )
@@ -152,7 +152,7 @@ if __name__ == "__main__" :
         sys.stderr.write( "Not a directory: %s\n", (wd,) )
         sys.exit( 1 )
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

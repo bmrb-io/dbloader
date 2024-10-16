@@ -2,7 +2,7 @@
 #
 #
 
-from __future__ import absolute_import
+
 
 from contextlib import contextmanager
 import time
@@ -10,7 +10,7 @@ import sys
 import os
 import subprocess
 #import re
-import ConfigParser
+import configparser
 
 STAROBJ_PATH = "/projects/BMRB/software/starobj"
 sys.path.append( STAROBJ_PATH )
@@ -54,7 +54,7 @@ def timer( label, silent = False ) :
 #
 def dsn( config, section ) :
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
     rc = {}
     if not config.has_section( section ) :
         sys.stderr.write( "No [%s] section in config file\n" % (section,) )
@@ -94,8 +94,8 @@ def runscript( dsn, script, verbose = False ) :
 
     global PSQL
     cmd = [ PSQL, "-d", dsn["database"] ]
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() :
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) :
         if ":" in dsn["host"] :
             (host,port) = dsn["host"].split( ":" )
         else :
@@ -156,8 +156,8 @@ def add_ro_grants( dsn, schema, user, verbose = False ) :
 
     global PSQL
     cmd = [ PSQL, "-d", dsn["database"] ]
-    if "user" in dsn.keys() : cmd.extend( ["-U", dsn["user"]] )
-    if "host" in dsn.keys() :
+    if "user" in list(dsn.keys()) : cmd.extend( ["-U", dsn["user"]] )
+    if "host" in list(dsn.keys()) :
         if ":" in dsn["host"] :
             (host,port) = dsn["host"].split( ":" )
         else :

@@ -5,14 +5,14 @@
 # 2. load from those CSVs into bmrbeverything DB
 #
 
-from __future__ import absolute_import
+
 
 import sys
 assert ((sys.version_info[0] == 2) and (sys.version_info[1] > 6))
 
 import os
 import argparse
-import ConfigParser
+import configparser
 import pgdb
 import pprint
 import glob
@@ -78,7 +78,7 @@ def list_tables( curs, verbose = False ) :
 # main
 #
 def dump_and_load( config, verbose = False ) :
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
     global DB
     wd = tempfile.mkdtemp()
     try :
@@ -104,7 +104,7 @@ def dump( config, where = None, verbose = False ) :
     global DB
 #    global TABLES
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
     if not config.has_section( DB ) :
         sys.stderr.write( "No [%s] section in config file\n" % (DB,) )
         return False
@@ -215,8 +215,8 @@ def fix_inchi_column( where, verbose = False ) :
         sys.stderr.write( "File not found: %s\n" % (infile,) )
         return False
     outfile = infile + ".tmp"
-    with open( outfile, "wb" ) as out :
-        with open( infile, "rU" ) as f :
+    with open( outfile, "w" ) as out :
+        with open( infile, "r" ) as f :
             for line in f :
                 out.write( line.replace( "InCHi_code", "InChI_code" ) )
     os.rename( outfile, infile )
@@ -410,7 +410,7 @@ if __name__ == "__main__" :
 
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

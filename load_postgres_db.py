@@ -71,7 +71,7 @@ class PgLoader( object ) :
         cmd = [PgLoader.CONF["psql"]]
         cmd.extend( ["-U", PgLoader.CONF["rwuser"]] )
         cmd.extend( ["-d", database] )
-        if "host" in PgLoader.CONF.keys() :
+        if "host" in list(PgLoader.CONF.keys()) :
             cmd.extend( ["-h", PgLoader.CONF["host"]] )
 
         if not verbose : cmd.append( "-q" )
@@ -108,7 +108,7 @@ class PgLoader( object ) :
     @staticmethod
     def fromcsv( filename, database, schema, table, verbose = False ) :
 
-        assert database in PgLoader.CONF["databases"].keys()
+        assert database in list(PgLoader.CONF["databases"].keys())
 
         infile = os.path.realpath( filename )
         if not os.path.exists( infile ) :
@@ -117,7 +117,7 @@ class PgLoader( object ) :
 # column names
 #
         cols = []
-        with open( infile, "rU" ) as f :
+        with open( infile, "r" ) as f :
             l = f.readline()
             for col in l.split( "," ) :
                 cols.append( col.strip().strip( "'\"" ) )
@@ -160,7 +160,7 @@ class PgLoader( object ) :
     @staticmethod
     def add_ro_grants( db = "bmrb", verbose = False ) :
 
-        assert db in PgLoader.CONF["databases"].keys()
+        assert db in list(PgLoader.CONF["databases"].keys())
 
         sqls = ("grant usage on schema %s to %s",
             "grant select on all tables in schema %s to %s",
@@ -211,7 +211,7 @@ class PgLoader( object ) :
     @staticmethod
     def runscript( scriptfile, db = "bmrb", verbose = False ) :
 
-        assert db in PgLoader.CONF["databases"].keys()
+        assert db in list(PgLoader.CONF["databases"].keys())
         script = os.path.realpath( scriptfile )
         if not os.path.exists( script ) :
             raise IOError( "Not found: %s" % (script,) )
@@ -225,7 +225,7 @@ class PgLoader( object ) :
     @staticmethod
     def update_db( db = "bmrb", create = False, schema = "any", path = None, verbose = False ) :
 
-        assert db in PgLoader.CONF["databases"].keys()
+        assert db in list(PgLoader.CONF["databases"].keys())
         if path is not None :
             inputdir = os.path.realpath( path )
         else :

@@ -20,7 +20,7 @@ import subprocess
 def coroutine( func ) :
     def start( *args, **kwargs ) :
         cr = func( *args, **kwargs )
-        cr.next()
+        next(cr)
         return cr
     return start
 
@@ -75,7 +75,7 @@ def list_files( config ) :
 
         if len( files ) < 1 :
             logging.info( "No FASTA file in %s", bmrbid )
-        for j in files.keys() :
+        for j in list(files.keys()) :
             yield (bmrbid, j, files[j])
 
 # "targets" can be multiple to write to differens destinations in one run

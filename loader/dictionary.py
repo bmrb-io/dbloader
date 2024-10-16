@@ -4,13 +4,13 @@
 #  copy from/to don't work without root permissions but psql's \copy does.
 #
 
-from __future__ import absolute_import
+
 import os
 import sys
 import re
 import glob
 #import subprocess
-import ConfigParser
+import configparser
 import argparse
 
 _UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
@@ -21,7 +21,7 @@ import loader
 # main
 #
 def load( config, path, verbose = False ) :
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    assert isinstance( config, configparser.SafeConfigParser )
 
     if not config.has_section( "dictionary" ) :
         raise Exception( "No [dictionary] section in config file\n" )
@@ -88,7 +88,7 @@ if __name__ == "__main__" :
         sys.stderr.write( "Not a directory: %s\n", (wd,) )
         sys.exit( 1 )
 
-    cp = ConfigParser.SafeConfigParser()
+    cp = configparser.SafeConfigParser()
     f = os.path.realpath( args.conffile )
     cp.read( f )
 

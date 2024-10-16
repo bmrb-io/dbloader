@@ -13,11 +13,11 @@ import glob
 
 def cmpfiles( f1, f2 ) :
     h1 = hashlib.md5()
-    with open( f1, "rU" ) as f :
+    with open( f1, "r" ) as f :
         for line in f :
             h1.update( line )
     h2 = hashlib.md5()
-    with open( f2, "rU" ) as f :
+    with open( f2, "r" ) as f :
         for line in f :
             h2.update( line )
     return h1.hexdigest() == h2.hexdigest()
