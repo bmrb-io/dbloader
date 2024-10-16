@@ -191,7 +191,7 @@ class PgLoader( object ) :
         out = out.decode()
         err = err.decode()
         if p.returncode != 0 :
-            rc += "%s: psql -c \dn returned %d\n" % (db,p.returncode,)
+            rc += "%s: psql -c \\dn returned %d\n" % (db,p.returncode,)
             return rc
 
         for i in out.splitlines() :
