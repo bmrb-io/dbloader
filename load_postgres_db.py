@@ -190,6 +190,7 @@ class PgLoader( object ) :
         (out, err) = p.communicate()
         out = out.decode()
         err = err.decode()
+        sys.stdout.write(err)
         if p.returncode != 0 :
             rc += "%s: psql -c \\dn returned %d\n" % (db,p.returncode,)
             return rc
