@@ -9,7 +9,7 @@
 
 import os
 import sys
-import pgdb
+import psycopg2
 import configparser
 import argparse
 
@@ -126,7 +126,7 @@ class processing_queue_itr( object ) :
     _hold = True
 
     def __init__( self, config ) :
-        self._conn = pgdb.connect( **(loader.dsn( config, "ets" )) )
+        self._conn = psycopg2.connect( **(loader.dsn( config, "ets" )) )
         self._curs = self._conn.cursor()
         self._curs.execute( self.sql )
 
@@ -188,7 +188,7 @@ class removed_ids_itr( object ) :
     _curs = None
 
     def __init__( self, config ) :
-        self._conn = pgdb.connect( **(loader.dsn( config, "ets" )) )
+        self._conn = psycopg2.connect( **(loader.dsn( config, "ets" )) )
         self._curs = self._conn.cursor()
         self._curs.execute( self.sql )
 
@@ -226,7 +226,7 @@ def bmrb_pdb_ids_itr( config, start = 11000 ) :
 
     assert int( start ) > 0
 
-    with pgdb.connect( **(loader.dsn( config, "ets" )) ) as conn :
+    with psycopg2.connect( **(loader.dsn( config, "ets" )) ) as conn :
         with conn.cursor() as curs :
             curs.execute( sql, (start,) )
             for row in curs :
