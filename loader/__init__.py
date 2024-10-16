@@ -12,7 +12,7 @@ import subprocess
 #import re
 import configparser
 
-STAROBJ_PATH = "/projects/BMRB/software/starobj"
+STAROBJ_PATH = "/projects/BMRB/software/starobj3"
 sys.path.append( STAROBJ_PATH )
 import starobj
 
