@@ -121,22 +121,22 @@ def runscript( dsn, script, verbose = False ) :
         sys.stderr.write( "\n" )
         sys.stderr.write( "** STDERR **\n" )
         for i in err.splitlines() :
-            sys.stderr.write( i.decode() )
+            sys.stderr.write( i )
             sys.stderr.write( "\n" )
         sys.stderr.write( "** STDOUT **\n" )
         for i in out.splitlines() :
-            sys.stderr.write( i.decode() )
+            sys.stderr.write( i )
             sys.stderr.write( "\n" )
         return False
 
     if verbose :
         sys.stderr.write( "** STDERR **\n" )
         for i in err.splitlines() :
-            sys.stderr.write( i.decode() )
+            sys.stderr.write( i )
             sys.stderr.write( "\n" )
         sys.stderr.write( "** STDOUT **\n" )
         for i in out.splitlines() :
-            sys.stderr.write( i.decode() )
+            sys.stderr.write( i )
             sys.stderr.write( "\n" )
 
     return True
@@ -185,22 +185,22 @@ def add_ro_grants( dsn, schema, user, verbose = False ) :
             sys.stderr.write( "\n" )
             sys.stderr.write( "** STDERR **\n" )
             for i in err.splitlines() :
-                sys.stderr.write( i.decode() )
+                sys.stderr.write( i )
                 sys.stderr.write( "\n" )
             sys.stderr.write( "** STDOUT **\n" )
             for i in out.splitlines() :
-                sys.stderr.write( i.decode() )
+                sys.stderr.write( i )
                 sys.stderr.write( "\n" )
             return False
 
         if verbose :
             sys.stderr.write( "** STDERR **\n" )
             for i in err.splitlines() :
-                sys.stderr.write( i.decode() )
+                sys.stderr.write( i )
                 sys.stderr.write( "\n" )
             sys.stderr.write( "** STDOUT **\n" )
             for i in out.splitlines() :
-                sys.stderr.write( i.decode() )
+                sys.stderr.write( i )
                 sys.stderr.write( "\n" )
 
     return True
