@@ -324,12 +324,12 @@ if __name__ == "__main__" :
                 schema = args.schema, path = args.filedir, verbose = args.verbose )
             if args.grant :
                 PgLoader.add_ro_grants( db = "bmrbeverything", verbose = args.verbose )
-    if (args.db.lower() == "metabolomics") or (args.db.lower() == "all") :
-        with timer( "Load metabolomics", verbose = True ) :
-            PgLoader.update_db( db = "metabolomics", create = args.create,
-                schema = args.schema, path = args.filedir, verbose = args.verbose )
-            if args.grant :
-                PgLoader.add_ro_grants( db = "metabolomics", verbose = args.verbose )
+    # if (args.db.lower() == "metabolomics") or (args.db.lower() == "all") :
+    #     with timer( "Load metabolomics", verbose = True ) :
+    #         PgLoader.update_db( db = "metabolomics", create = args.create,
+    #             schema = args.schema, path = args.filedir, verbose = args.verbose )
+    #         if args.grant :
+    #             PgLoader.add_ro_grants( db = "metabolomics", verbose = args.verbose )
 
 #
 # eof
