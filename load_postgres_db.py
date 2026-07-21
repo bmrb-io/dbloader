@@ -8,20 +8,23 @@
 #   __main__.py  builds the schemas in the build database, then dumps them
 #                to /projects/BMRB/staging/dbdump/{bmrb,metabolomics,bmrbeverything}
 #   this script  loads those CSVs into the staging/serving host and grants
-#                select to the read-only web user.  Two ways:
+#                select to the read-only web user
 #
-#                  --shadow  build <schema>_new from the dump's own schema.sql,
-#                            load into that, then swap it in with renames.  The
-#                            swap is one transaction that touches no rows, so
-#                            readers are blocked for about a millisecond
-#                            instead of for the length of the reload, and a
-#                            failure leaves the live database untouched.
-#                            Because schema.sql comes from the build database,
-#                            whose schema dbloader generates from the
-#                            dictionary, this also rebuilds the serving schema
-#                            from the dictionary -- a dictionary change no
-#                            longer has to be applied by hand.
-#                  default   truncate and refill the live tables in place.
+# By default it does that as a *swap*: build <schema>_new from the dump's own
+# schema.sql, load into that, then rename it into place.  The rename is one
+# transaction that touches no rows, so readers are blocked for about a
+# millisecond rather than for the length of the reload, and a load that fails
+# part way leaves the live database untouched.  And because schema.sql comes
+# from the build database, whose schema dbloader generates from the dictionary,
+# the swap rebuilds the serving schema from the dictionary -- a dictionary
+# change no longer has to be applied to the serving database by hand.
+#
+# A dump that cannot be swapped falls back to truncating and refilling the live
+# tables in place, with a line in the log saying why.  That is the old-style
+# layouts, whose entry tables are unqualified (`-d bmrb`), and any load of a
+# single schema (`-s`), where swapping would take the other schemas of the dump
+# live *empty*.  `--shadow` demands a swap and fails instead of falling back;
+# `--no-shadow` forces the in-place load.
 #
 # Files are `[<schema>.]<table>.csv`; the column order comes from the first
 # line, since it need not match the database.  Mixed-case names are quoted.
@@ -257,6 +260,35 @@ class PgLoader(object):
     RETIRING = "_old"
 
     @staticmethod
+    def can_shadow(script, files, pat, schema_filter):
+        """Can this load be done as a shadow swap? Returns (yes, why not).
+
+        The swap replaces every schema in the dump's DDL at once, so it is only
+        correct when the load fills every one of them.
+        """
+
+        if not os.path.exists(script):
+            return (False, "the dump has no %s to build the schema from"
+                    % (PgLoader.CONF["ddlfile"],))
+
+        unqualified = sorted(set(os.path.split(f)[1] for f in files
+                                 if pat.search(os.path.split(f)[1]).group(1) is None))
+        if unqualified:
+            return (False, "%d of the CSVs have no schema prefix (e.g. %s) -- the"
+                           " old-style layouts put entry tables in the search_path"
+                           % (len(unqualified), unqualified[0],))
+
+        if schema_filter is not None and schema_filter != "any":
+            # loading one schema would swap the rest in empty
+            return (False, "only the %s schema is being loaded, and a swap replaces"
+                           " every schema in the dump at once" % (schema_filter,))
+
+        if len(PgLoader.schemas_in_ddl(script)) < 1:
+            return (False, "no CREATE SCHEMA in %s -- nothing to swap" % (script,))
+
+        return (True, "")
+
+    @staticmethod
     def schemas_in_ddl(script):
         """Schema names the dump's DDL creates, in the order it creates them."""
 
@@ -377,7 +409,13 @@ class PgLoader(object):
     #
     @staticmethod
     def update_db(db="bmrb", create=False, schema="any", path=None, verbose=False,
-                  shadow=False, rouser=None):
+                  shadow=None, rouser=None):
+        """Load a dump into `db`.
+
+        `shadow`: None decides per dump -- swap where that is possible, which
+        is the good path and wants no thinking about; True demands it and fails
+        if the dump cannot be swapped; False forces truncate-in-place.
+        """
 
         if path is not None:
             inputdir = os.path.realpath(path)
@@ -402,27 +440,19 @@ class PgLoader(object):
             rc += "No input files for %s - %s\n" % (db, schema,)
             return rc
 
+        (possible, why) = PgLoader.can_shadow(script, files, pat, schema)
+        if shadow is None:
+            shadow = possible
+            if not possible:
+                sys.stdout.write("%s: loading in place, not swapping -- %s\n" % (db, why,))
+        elif shadow and not possible:
+            raise ValueError("--shadow was asked for but %s" % (why,))
+
         shadow_schemas = []
         if shadow:
-            if not os.path.exists(script):
-                raise IOError("--shadow needs the dump's DDL: %s not found" % (script,))
-
-            unqualified = sorted(set(os.path.split(f)[1] for f in files
-                                     if pat.search(os.path.split(f)[1]).group(1) is None))
-            if unqualified:
-                raise ValueError(
-                    "--shadow needs a schema-qualified dump; %d of these files have no"
-                    " schema prefix (e.g. %s). The old-style layouts (-d bmrb,"
-                    " --dump-macromolecule-db) put entry tables in the search_path"
-                    " instead, and cannot be swapped this way."
-                    % (len(unqualified), unqualified[0],))
-
             shadow_schemas = PgLoader.schemas_in_ddl(script)
-            if len(shadow_schemas) < 1:
-                raise ValueError("no CREATE SCHEMA in %s -- nothing to swap" % (script,))
-            if verbose:
-                sys.stdout.write("shadow schemas: %s\n"
-                                 % (", ".join(s + PgLoader.SHADOW for s in shadow_schemas),))
+            sys.stdout.write("%s: building %s and swapping it in\n"
+                             % (db, ", ".join(s + PgLoader.SHADOW for s in shadow_schemas),))
 
             x = PgLoader.create_shadow(db=db, script=script, schemas=shadow_schemas,
                                        verbose=verbose)
@@ -459,22 +489,26 @@ class PgLoader(object):
             if x != 0:
                 rc += "\npsql load of %s returned %s\n" % (f, x,)
 
-        if shadow:
-            if rc != "":
-                # nothing has been swapped in, so the live database is untouched
-                return rc + ("\nNOT swapping %s in: the shadow load failed. The live"
-                             " database is unchanged.\n" % (db,))
-
-            # grant before the swap, not after: privileges follow the objects
-            # through a rename, so the read-only user never sees a gap
+        if not shadow:
             if rouser is not None:
-                rc += PgLoader.add_ro_grants(db=db, verbose=verbose,
-                                             schemas=[s + PgLoader.SHADOW
-                                                      for s in shadow_schemas]) or ""
+                rc += PgLoader.add_ro_grants(db=db, verbose=verbose) or ""
+            return rc
 
-            x = PgLoader.swap_shadow(db=db, schemas=shadow_schemas, verbose=verbose)
-            if x != 0:
-                rc += "swapping the shadow schemas in returned %s\n" % (x,)
+        if rc != "":
+            # nothing has been swapped in, so the live database is untouched
+            return rc + ("\nNOT swapping %s in: the shadow load failed. The live"
+                         " database is unchanged.\n" % (db,))
+
+        # grant before the swap, not after: privileges follow the objects
+        # through a rename, so the read-only user never sees a gap
+        if rouser is not None:
+            rc += PgLoader.add_ro_grants(db=db, verbose=verbose,
+                                         schemas=[s + PgLoader.SHADOW
+                                                  for s in shadow_schemas]) or ""
+
+        x = PgLoader.swap_shadow(db=db, schemas=shadow_schemas, verbose=verbose)
+        if x != 0:
+            rc += "swapping the shadow schemas in returned %s\n" % (x,)
 
         return rc
 
@@ -498,10 +532,12 @@ if __name__ == "__main__":
                     help="directory with input files")
     ap.add_argument("-g", "--grants", default=False, action="store_true",
                     help="add read-only grants for web user", dest="grant")
-    ap.add_argument("--shadow", default=False, action="store_true", dest="shadow",
-                    help="build <schema>_new from the dump's schema.sql, load into that,"
-                         " and swap it in with renames -- atomic, and rebuilds the schema"
-                         " from the dictionary. Needs a schema-qualified dump.")
+    # the swap is the default wherever it is possible; these are the overrides
+    ap.add_argument("--shadow", default=None, action="store_true", dest="shadow",
+                    help="require the shadow swap, and fail if this dump cannot be"
+                         " swapped (rather than quietly loading in place)")
+    ap.add_argument("--no-shadow", action="store_false", dest="shadow",
+                    help="load in place even when the dump could be swapped")
     # the server was hard-coded; it still defaults to the same one
     ap.add_argument("-H", "--host", dest="host", default=PgLoader.CONF["host"],
                     help="database server (default: %(default)s)")
@@ -541,14 +577,12 @@ if __name__ == "__main__":
                              " its data is in bmrbeverything\n" % (db,))
             continue
         with timer("Load " + db, verbose=True):
+            # update_db does the grants: a swap has to grant *before* it swaps,
+            # so that the read-only user never sees a window without them
             messages += PgLoader.update_db(db=db, create=args.create, schema=args.schema,
                                            path=args.filedir, verbose=args.verbose,
                                            shadow=args.shadow,
                                            rouser=args.rouser if args.grant else None) or ""
-            # --shadow grants before the swap, so there is no window in which
-            # the read-only user cannot read
-            if args.grant and not args.shadow:
-                messages += PgLoader.add_ro_grants(db=db, verbose=args.verbose) or ""
 
     if messages.strip() != "":
         sys.stderr.write("%s\n" % (messages,))

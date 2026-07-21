@@ -277,10 +277,12 @@ that are worth acting on independently of this port:
      leaves the old rows in place.
    - **`--shadow`** (item 3) for the atomic version.
 
-3. **`--shadow`: swap the database in, and rebuild its schema from the
+3. **The reload is a schema swap now, and rebuilds the schema from the
    dictionary.** Instead of truncating the live tables, build `<schema>_new`
    from the dump's own `schema.sql`, load into that, and swap with
-   `ALTER SCHEMA ... RENAME` in one transaction.
+   `ALTER SCHEMA ... RENAME` in one transaction. **This is the default**, with
+   no flag: a dump that cannot be swapped falls back to loading in place and
+   says why in the log.
 
    - **Atomic.** The swap transaction touches no rows: measured at **~1 ms**
      per schema, against a reload that takes minutes. Readers see the old
@@ -300,23 +302,30 @@ that are worth acting on independently of this port:
    or triggers**, and no view crossing a schema. And PostgreSQL tracks view
    dependencies by OID, so renaming a schema does not disturb them.
 
-   Two constraints worth knowing. It needs a **schema-qualified** dump, so
-   `bmrbeverything` only -- the old-style layouts put entry tables in the
-   search_path and cannot be swapped this way (they are being retired). And
-   the DDL is rewritten textually: `<schema>.` becomes `<schema>_new.`
+   A swap replaces every schema in the dump at once, so it is only correct
+   when the load fills every one of them. `can_shadow()` is where that is
+   decided, and it declines in three cases -- no `schema.sql`; unqualified
+   CSVs (the old-style layouts put entry tables in the search_path); or a
+   `-s` single-schema load, **which would otherwise take the dump's other
+   schemas live empty**. That last one was a real bug in the first cut of
+   this, when the swap was opt-in and did not check.
+
+   The DDL is rewritten textually: `<schema>.` becomes `<schema>_new.`
    everywhere including inside view bodies, and the `-c` clean section is
    dropped by position (everything between the `SET` header and the first
    `CREATE`) rather than by enumerating `DROP ...`,
    `ALTER TABLE ... DROP CONSTRAINT` and
-   `ALTER TABLE ... ALTER COLUMN ... DROP DEFAULT`.
+   `ALTER TABLE ... ALTER COLUMN ... DROP DEFAULT`. That holds for this dump
+   because it has no function bodies and no string literal containing a
+   schema-qualified name; adding a stored function would break the assumption.
 
    `tests/shadow_swap.sh` covers all of it: first load, reload over a live
-   database, a failed shadow load, a failed truncate load, and a good truncate
-   load.
+   database, a failed shadow load, a failed truncate load, a good truncate
+   load, and the three fallback decisions.
 
-   **Not yet turned on in production**: `410_load_staging_everything.sub` needs
-   `--shadow` adding to its arguments. That is a one-word change to
-   `updater_dag`, deliberately left to whoever deploys this.
+   No change to `updater_dag` is needed -- job 410 gets the swap because it is
+   the default, and job 260 (old-style `bmrb`) keeps loading in place because
+   its dump cannot be swapped.
 
 ## Follow-on work
 

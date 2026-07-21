@@ -3,11 +3,11 @@
 # Test the publish step: load_postgres_db.py loading a dbloader CSV dump into a
 # serving database, both ways round.
 #
-#   --shadow   build <schema>_new from the dump's schema.sql, load into that,
-#              swap it in with renames.  Atomic, and rebuilds the schema from
-#              the dictionary (schema.sql came from the build database, whose
-#              schema dbloader generated from the dictionary).
-#   default    truncate and refill the live tables in place.
+# The swap -- build <schema>_new from the dump's schema.sql, load into that,
+# then swap it in with renames -- is the default wherever it is possible, so
+# most of what is tested here is that it *decides* correctly: a dump it cannot
+# swap has to fall back to truncate-in-place rather than swap half a database
+# in.
 #
 # The cases that matter are the failures: neither mode may leave the serving
 # database emptier than it found it.  Before ON_ERROR_STOP was added, a failed
@@ -82,8 +82,31 @@ check "live entries untouched" "$(rows 'select count(*) from macromolecules."Ent
 
 echo "== truncate-in-place with a good dump still loads =="
 psql -q -d "$db" -c 'delete from macromolecules."Entry"'
-$loader -i "$dump" > "$out/shadow5.log" 2>&1
+$loader --no-shadow -i "$dump" > "$out/shadow5.log" 2>&1
 check "entries reloaded" "$(rows 'select count(*) from macromolecules."Entry"')" 300
+
+echo "== it decides for itself =="
+# a schema-qualified dump: swap
+$loader -i "$dump" > "$out/decide1.log" 2>&1
+check "qualified dump is swapped" "$(grep -c 'swapping it in' "$out/decide1.log")" 1
+
+# one schema only: swapping would take the *other* schemas live empty
+$loader -s dict -i "$dump" > "$out/decide2.log" 2>&1
+check "single-schema load is not swapped" \
+    "$(grep -c 'loading in place' "$out/decide2.log")" 1
+check "the other schemas survived it" "$(rows 'select count(*) from macromolecules."Entry"')" 300
+
+# an old-style dump has unqualified CSVs and cannot be swapped
+old=$here/build/test/dump--macromol.py3
+if [ -d "$old" ]; then
+    set +e
+    $loader -i "$old" > "$out/decide3.log" 2>&1
+    $loader --shadow -i "$old" > "$out/decide4.log" 2>&1
+    set -e
+    check "old-style dump falls back" "$(grep -c 'no schema prefix' "$out/decide3.log")" 1
+    check "--shadow on an old-style dump fails loudly" \
+        "$(grep -c 'no schema prefix' "$out/decide4.log")" 1
+fi
 
 dropdb "$db"
 exit $rc
