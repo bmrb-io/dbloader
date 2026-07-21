@@ -46,6 +46,18 @@ def timer(label, verbose=True):
 #
 class PgLoader(object):
 
+    # The separate `metabolomics` serving database was retired in October 2024
+    # (commit 0d68fd1 on the `python3` branch, "No more metabolomics db"); that
+    # data is served from `bmrbeverything` now.  updater_dag job 160 still runs
+    # `-d metabolomics`, so this has to stay a no-op rather than an error --
+    # but a *loud* one.  It was previously done by commenting the branch out,
+    # which left a job that looked like it was loading a database and was not.
+    #
+    # Job 151 still dumps to /projects/BMRB/staging/dbdump/metabolomics and
+    # nothing reads it; 160 and 151 can both go when updater_dag is next
+    # touched.
+    RETIRED = ("metabolomics",)
+
     CONF = {
         "psql": "/usr/bin/psql",
         "rwuser": "bmrb",
@@ -309,6 +321,10 @@ if __name__ == "__main__":
     messages = ""
     for db in ("bmrb", "bmrbeverything", "metabolomics"):
         if wanted not in (db, "all"):
+            continue
+        if db in PgLoader.RETIRED:
+            sys.stdout.write("Skipping %s: that serving database was retired,"
+                             " its data is in bmrbeverything\n" % (db,))
             continue
         with timer("Load " + db, verbose=True):
             messages += PgLoader.update_db(db=db, create=args.create, schema=args.schema,

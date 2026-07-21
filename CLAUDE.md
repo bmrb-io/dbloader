@@ -116,11 +116,21 @@ Things to know before changing any of this:
 - **The DAG never passes `-c/--create`**, so `schema.sql` is dumped but never
   used: the serving tables must already exist. The load truncates and refills
   them, so a schema change has to be applied there by hand.
-- **Each table is truncated and copied by a separate `psql -c`**, so the
-  TRUNCATE commits before the `\copy` runs. A copy that fails leaves that
-  table **empty** on the live server until the next run (verified), and there
-  is no transaction spanning the ~250 tables — readers can see a partly
-  reloaded database.
+- **The reload is not atomic.** Each table is `truncate table only` + `\copy`
+  in one `psql` call with no transaction, so the TRUNCATE commits before the
+  `\copy` runs: a copy that fails leaves that table **empty** on the live
+  server until the next run (verified). Nothing spans the ~250 tables either,
+  so readers can see a partly reloaded database. There is a commented-out
+  `-c begin ... -c commit` in `fromcsv` which does not work as written -- see
+  `PORT_NOTES.md`.
+- **`-d metabolomics` loads nothing.** That serving database was retired in
+  October 2024; the data is served from `bmrbeverything`. Job 160 still calls
+  it and job 151 still dumps to `dbdump/metabolomics`, which nothing reads --
+  both can go when updater_dag is next touched.
+- **`origin/python3` is the deployed branch** (`dbloader3`): a mechanical
+  py2->py3 + pgdb->psycopg2 port of the same base commit this branch forked
+  from. Everything in it is superseded here except the metabolomics
+  retirement, which has been carried across.
 - `--no-web` on job 100 is redundant (the web stage only runs inside the
   macromolecules branch) but harmless.
 
