@@ -19,10 +19,12 @@ See [`../ORGANIZATION.md`](../ORGANIZATION.md) for the whole pipeline.
 
 > **Python 3, psycopg2, pynmrstar.** Ported from Python 2.7/`pgdb`, and the
 > BMRB `starobj`/`sas` libraries have been removed — see
-> [`PORT_NOTES.md`](PORT_NOTES.md) for what changed and what is verified, and
+> [`PORT_NOTES.md`](PORT_NOTES.md) for what changed and what is verified,
 > [`tests/README.md`](tests/README.md) for how to run the regression against
-> the Python 2 golden. It shells out to `psql`/`pg_dump` for `COPY` (server
-> `copy` needs superuser; `psql \copy` does not).
+> the Python 2 golden, and [`DATA_REMEDIATION.md`](DATA_REMEDIATION.md) for
+> defects in the deposited entries that the old loader used to hide. It shells
+> out to `psql`/`pg_dump` for `COPY` (server `copy` needs superuser; `psql
+> \copy` does not).
 
 ## How to run it
 

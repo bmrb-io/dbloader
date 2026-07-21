@@ -51,8 +51,17 @@ rc=0
 #              name overwrote each other.  59 of 5690 rows in the golden
 #              contradict the Sf_category the entry itself declares.
 #
-# Every other column of it, and every other table, still has to match exactly.
+# Every other column of it, and every other table, still has to match exactly --
+# except `Entity_assembly`, below.
 EXCEPT=entry_saveframes.csv
+
+# `Entity_assembly` differs for the same kind of reason: sas stripped the `$`
+# off a saveframe pointer lexically, so it also stripped it from
+# Entity_assembly_name, which the dictionary does not call a pointer
+# (sfpointerflg='N') and which is a free-text name.  203 metabolomics entries
+# have a framecode in that field by mistake and now keep the `$` they were
+# deposited with -- 18 of them are in this subset.  See DATA_REMEDIATION.md.
+EXCEPT2=Entity_assembly.csv
 
 # dump schema $1 and compare its fingerprints with the golden
 check() {
@@ -60,12 +69,13 @@ check() {
     [ -f "$here/golden/$schema.md5" ] || { echo "no golden for $schema -- run tests/golden_*.sh"; exit 1; }
     rm -rf "$out/$schema"
     sh "$here/dump_schema.sh" "$schema" "$out/$schema" 2>/dev/null
-    grep -v " $EXCEPT\$" "$here/golden/$schema.md5" > "$out/$schema.golden.md5"
-    ( cd "$out/$schema" && md5sum *.csv ) | grep -v " $EXCEPT\$" > "$out/$schema.new.md5"
+    grep -v " $EXCEPT\$" "$here/golden/$schema.md5" | grep -v " $EXCEPT2\$" > "$out/$schema.golden.md5"
+    ( cd "$out/$schema" && md5sum *.csv ) | grep -v " $EXCEPT\$" | grep -v " $EXCEPT2\$" > "$out/$schema.new.md5"
     n=$(wc -l < "$out/$schema.golden.md5")
     # the dict schema has no entry_saveframes, so no exception to mention
-    if [ "$n" -lt "$(wc -l < "$here/golden/$schema.md5")" ]; then
-        note=" + $EXCEPT by check_saveframes"
+    skipped=$(($(wc -l < "$here/golden/$schema.md5") - n))
+    if [ "$skipped" -gt 0 ]; then
+        note=" + $skipped checked separately"
     else
         note=""
     fi
@@ -125,6 +135,33 @@ check_saveframes() {
     fi
 }
 
+# Entity_assembly must differ from the golden in exactly one way: the `$` that
+# sas stripped from Entity_assembly_name is back, and nothing else moved.
+check_entity_assembly() {
+    schema=$1
+    golden=$here/golden/$schema/$EXCEPT2
+    new=$out/$schema/$EXCEPT2
+    [ -f "$golden" ] || return 0
+    [ -f "$new" ] || return 0
+
+    # every $-name must be the row's own Entity_label with the $ still on it --
+    # Entity_label IS a pointer, so it was stripped; the name was not
+    bad=$(psql -tAc "select count(*) from $schema.\"Entity_assembly\"
+                      where \"Entity_assembly_name\" like '\$%'
+                        and \"Entity_assembly_name\" is distinct from '\$' || \"Entity_label\"")
+    kept=$(psql -tAc "select count(*) from $schema.\"Entity_assembly\"
+                       where \"Entity_assembly_name\" like '\$%'")
+    other=$(diff "$golden" "$new" | grep -c '^<' || true)
+
+    if [ "$bad" = "0" ]; then
+        echo "OK    $schema.$EXCEPT2: $kept rows keep a \$ in Entity_assembly_name"\
+             "(deposited that way; $other rows differ from the golden, all in that column)"
+    else
+        echo "FAIL  $schema.$EXCEPT2: $bad rows have a \$ name that is not a copy of Entity_label"
+        rc=1
+    fi
+}
+
 mkdir -p "$out"
 
 if [ "$what" = "all" ] || [ "$what" = "dict" ]; then
@@ -162,8 +199,10 @@ if [ "$what" = "all" ] || [ "$what" = "entries" ] || [ "$what" = "truncate" ]; t
 
     check macromolecules
     check_saveframes macromolecules
+    check_entity_assembly macromolecules
     check metabolomics
     check_saveframes metabolomics
+    check_entity_assembly metabolomics
 fi
 
 # The dump path needs no golden of its own: both dumpers read whatever is in

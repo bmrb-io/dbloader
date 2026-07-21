@@ -78,6 +78,19 @@ def saveframe_categories(conn, schema="dict"):
         return dict(curs.fetchall())
 
 
+def pointer_tags(conn, schema="dict"):
+    """{(table, column), ...} for every tag the dictionary calls a saveframe pointer.
+
+    These are the values written `$framecode`; the `$` is not part of the value
+    and is stripped on load.  322 tags carry the flag.
+    """
+
+    with conn.cursor() as curs:
+        curs.execute("select tagcategory, tagfield from %s.adit_item_tbl"
+                     " where sfpointerflg = 'Y'" % (schema,))
+        return set(curs.fetchall())
+
+
 def entryid_columns(conn, schema="dict", only=None):
     """[(table, column), ...] for every tag flagged as the entry ID."""
 

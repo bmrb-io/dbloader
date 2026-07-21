@@ -12,14 +12,15 @@ tests/golden_entries.sh   py2 -> macromolecules,       -> golden/*.md5
 tests/regression.sh       py3 -> the same schemas      -> diff vs golden
 ```
 
-Status: **944 of 946 tables match byte for byte** (16 `dict`, 464+1
-`macromolecules`, 464+1 `metabolomics`), over a 300+300 entry subset, with the
-same 0 entries failing to load on both sides. The two exceptions are the
-`entry_saveframes` table of each schema, which the rewrite deliberately does
-not reproduce — `check_saveframes` in `regression.sh` tests it against the
-entries themselves instead, and `../PORT_NOTES.md` explains why. `chemcomps`
-and most of `web` are not covered — they need ccdb and the ETS tracking
-database, deferred by design.
+Status: **942 of 946 tables match byte for byte** (16 `dict`, 463
+`macromolecules`, 463 `metabolomics`), over a 300+300 entry subset, with the
+same 0 entries failing to load on both sides. Four tables are checked
+separately because the rewrite deliberately does not reproduce them —
+`entry_saveframes` and `Entity_assembly` in each schema, by `check_saveframes`
+and `check_entity_assembly`. Both are cases where the old loader hid a defect:
+see `../PORT_NOTES.md` and `../DATA_REMEDIATION.md`. `chemcomps` and most of
+`web` are not covered — they need ccdb and the ETS tracking database, deferred
+by design.
 
 ## Setup
 

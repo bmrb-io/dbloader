@@ -11,5 +11,6 @@ python __main__.py -c loader.properties --dictdir <dictdir> -d <outdir>
 ```
 
 Start from `loader.example.properties`. See `CLAUDE.md` for what each stage
-does, `PORT_NOTES.md` for the Python 3 port and the starobj removal, and
-`tests/README.md` for the regression harness.
+does, `PORT_NOTES.md` for the Python 3 port and the starobj removal,
+`tests/README.md` for the regression harness, and `DATA_REMEDIATION.md` for
+defects in the deposited entries that need fixing at source.

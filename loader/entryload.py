@@ -35,21 +35,22 @@ PAGESIZE = 500
 _SPACE = re.compile(r"\s")
 
 
-def _value(value):
+def _value(value, pointer=False):
     """Normalize one STAR value, as starobj's InsertStatement did.
 
     Blank, `?` and `.` are the STAR null markers and become SQL NULL.
 
-    The `$` is stripped off saveframe pointers -- `$sample_1` is stored as
-    `sample_1`, which is what joins to Saveframe.Name.  sas did this in the
-    lexer, to any bare token matching `\\$\\S+` (`t_FRAMECODE`), so it cannot be
-    driven off the dictionary's `sfpointerflg`: only 322 tags carry that flag
-    and the archive has pointers in columns without it.  pynmrstar does not
-    report whether a value was quoted, so the test here is "starts with $ and
-    has no whitespace", which is what an unquoted token looks like.  A *quoted*
-    value beginning with $ would be stripped where sas would have kept it --
-    there are none in either archive, and a value like '$5.00' is what it would
-    take to hit it.
+    On a saveframe pointer the leading `$` is stripped -- `$sample_1` is stored
+    as `sample_1`, which is what joins to Saveframe.Name.  Which tags are
+    pointers comes from the dictionary (`sfpointerflg`), not from the shape of
+    the value: sas stripped `$` lexically, off any bare `\\$\\S+` token, so it
+    also stripped it from tags that are not pointers at all.  Across both
+    archives that is one tag, `Entity_assembly.Entity_assembly_name`, where 203
+    entries carry a framecode in a free-text name field by mistake -- those now
+    keep the `$` they were deposited with.  See DATA_REMEDIATION.md.
+
+    The no-whitespace test remains because pynmrstar does not report whether a
+    value was quoted, and a quoted value is not a framecode token.
     """
 
     if value is None:
@@ -57,7 +58,7 @@ def _value(value):
     val = str(value).strip()
     if val == "" or val == "?" or val == ".":
         return None
-    if val.startswith("$") and not _SPACE.search(val):
+    if pointer and val.startswith("$") and not _SPACE.search(val):
         return val.lstrip("$")
     return val
 
@@ -77,6 +78,19 @@ class EntryLoader(object):
         self._verbose = bool(verbose)
         # tagcategory -> saveframe category, for the entry_saveframes index
         self._categories = starschema.saveframe_categories(conn, dict_schema)
+        # (table, column) of every tag whose value is a `$framecode`
+        self._pointers = starschema.pointer_tags(conn, dict_schema)
+        # loop tag lists repeat across entries, so the per-column pointer mask
+        # is worth caching: (table, tags) -> tuple of bools
+        self._masks = {}
+
+    def _mask(self, table, tags):
+        key = (table, tags)
+        mask = self._masks.get(key)
+        if mask is None:
+            mask = tuple((table, t) in self._pointers for t in tags)
+            self._masks[key] = mask
+        return mask
 
     #
     # the schema
@@ -125,7 +139,8 @@ class EntryLoader(object):
 
             # the saveframe's own tags are its "free table" row
             free_table = _category(frame.tag_prefix)
-            row = dict((tag, _value(val)) for (tag, val) in frame.tags)
+            row = dict((tag, _value(val, (free_table, tag) in self._pointers))
+                       for (tag, val) in frame.tags)
             if row.get("Sf_ID") is None:
                 row["Sf_ID"] = sfid
             add(free_table, row)
@@ -140,10 +155,11 @@ class EntryLoader(object):
 
             for loop in frame.loops:
                 table = _category(loop.category)
-                cols = [t for t in loop.tags]
+                cols = tuple(loop.tags)
+                mask = self._mask(table, cols)
                 has_sfid = "Sf_ID" in cols
                 for data in loop.data:
-                    row = dict(zip(cols, (_value(v) for v in data)))
+                    row = dict(zip(cols, (_value(v, p) for (v, p) in zip(data, mask))))
                     if not has_sfid or row.get("Sf_ID") is None:
                         row["Sf_ID"] = sfid
                     add(table, row)

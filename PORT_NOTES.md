@@ -278,11 +278,13 @@ Extrapolating to the full archives (14,772 macromolecule + 3,629 metabolomics
 entries), the entry load goes from about **68 minutes to about 13** — or from
 90 minutes, if you start from where this began, Python 2.
 
-## The two differences from the golden
+## The three differences from the golden
 
-929 of 930 tables are still byte-identical. The exception is
-`entry_saveframes`, in two columns, and `tests/regression.sh` checks it
-separately (`check_saveframes`) rather than by fingerprint.
+928 of 930 tables are still byte-identical. The exceptions are
+`entry_saveframes` (two columns) and `metabolomics.Entity_assembly` (one
+column, 18 rows in the test subset); `tests/regression.sh` checks both
+separately — `check_saveframes` and `check_entity_assembly` — rather than by
+fingerprint.
 
 **`line` is NULL** (owner's decision). pynmrstar reports no source line
 numbers. They could be recovered by scanning the file for `save_` — but the
@@ -313,31 +315,35 @@ the strong version of that: every `entry_saveframes.category` must equal the
 have one. New: 0 mismatches of 5690 (macromolecules) and 0 of 4838
 (metabolomics). Golden: 59 and 0.
 
+**`Entity_assembly.Entity_assembly_name` keeps its `$`.** The dictionary says
+that tag is not a saveframe pointer, so the `$` is no longer stripped from it;
+`sas` stripped it lexically and hid the fact that 203 metabolomics entries have
+a framecode in a free-text name field. The regression asserts that every
+`$`-prefixed name is exactly the row's own `Entity_label` with the `$` still
+attached — i.e. that nothing but this known defect is involved.
+[`DATA_REMEDIATION.md`](DATA_REMEDIATION.md) lists the 203 entries and the
+one-character edit each needs.
+
 ## Risks this takes on
 
 - **Quoted values beginning with `$`.** `sas` stripped the `$` off saveframe
-  pointers in the lexer, from any bare `\$\S+` token. pynmrstar does not report
-  whether a value was quoted, so `entryload._value` strips `$` from any value
-  that starts with one and contains no whitespace. A *quoted* `'$5.00'` would be
-  stripped where sas would have kept it; there are none in either archive
-  (checked).
+  pointers in the lexer, from any bare `\$\S+` token, whatever tag it was in.
+  This strips it only from tags the dictionary marks `sfpointerflg='Y'`, which
+  is the narrower and better-defined rule — a value is a pointer because the
+  dictionary says the *tag* is one, not because the value happens to start with
+  a `$`. (The no-whitespace test is still applied on top, since pynmrstar does
+  not report whether a value was quoted and a quoted value is not a framecode
+  token.)
 
-  Driving this off the dictionary's `sfpointerflg` instead would be *almost*
-  equivalent, and would remove that risk. Across all 18,401 entries, 121 tags
-  carry a `$`-value (536,427 values in total) and 120 of them are flagged
-  `sfpointerflg='Y'`. The single exception is
-  **`Entity_assembly.Entity_assembly_name`** — a `VARCHAR(127)` free-text name,
-  correctly flagged `'N'` — which carries 203 `$`-values, all in metabolomics
-  `bmse` entries, and in all 203 the value is character-for-character the same
-  framecode as the row's own `Entity_label`. That is a deposition error, not a
-  gap in the dictionary: someone filled the name field with the pointer.
+  Across all 18,401 entries the two rules disagree on exactly one tag:
+  **`Entity_assembly.Entity_assembly_name`**, a `VARCHAR(127)` free-text name
+  correctly flagged `'N'`, where 203 metabolomics entries carry a framecode by
+  mistake. `sas` stripped those silently; they now load with the `$` as
+  deposited. That is a deliberate change — the loader stopped hiding a data
+  error — and it is the third documented difference from the golden, checked by
+  `check_entity_assembly` in `regression.sh`. The fix belongs in the source
+  files: see [`DATA_REMEDIATION.md`](DATA_REMEDIATION.md).
 
-  So the choice is: strip lexically (what `sas` did, what this does, bit-compatible
-  with the golden, carries the quoted-`$` risk) or strip only where
-  `sfpointerflg='Y'` (no risk, but 203 values in 203 metabolomics entries would
-  keep a leading `$` that the old loader removed). Lexical was chosen to keep
-  golden parity; the dictionary rule is a one-line change in `_value` if the
-  203 are judged better left as deposited.
 - **Empty loops.** starobj treated a loop with no rows as an insert error and
   failed the whole entry; `entryload.py` inserts nothing and carries on. No
   entry in either archive has one, so the corpus cannot tell them apart.
