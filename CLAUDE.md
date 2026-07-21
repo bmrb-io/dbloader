@@ -98,12 +98,12 @@ another**, and both halves live here:
         ftp/pub/bmrb/relational_tables/nmr-star3.1/   (the public dump)
 ```
 
-Three dumps, three target databases, two layouts (see `loader/csvio.py`):
-`bmrb` and `metabolomics` are the **"old-style"** website databases — entry
-tables unqualified, each with its own copy of `dict` — while `bmrbeverything`
-is **"new-style"**, every file `<schema>.<table>.csv`. That is why the dump
-code has both layouts and why `load_postgres_db.py` handles a missing schema
-prefix.
+Three dumps, two layouts (see `loader/csvio.py`). `bmrbeverything` is
+**"new-style"**: every file `<schema>.<table>.csv`. The `bmrb` and
+`metabolomics` dumps are **"old-style"**: entry tables unqualified, each with
+its own copy of `dict`. That layout was shaped by the separate website
+databases, which are retired — but it is *also* the format published on the
+FTP site, which is why it stays.
 
 Things to know before changing any of this:
 
@@ -113,30 +113,37 @@ Things to know before changing any of this:
   must not import `loader` (which needs psycopg2).
 - **The serving host is hard-coded** in its `CONF`, not read from a properties
   file. `-H/--host`, `-U/--user` and `--psql` can override it.
-- **The reload is a schema swap, by default and with no flag.** It builds
+- **The reload is a schema swap, and that is the only path.** It builds
   `<schema>_new` from the dump's `schema.sql`, loads into that, and renames it
   into place: atomic (~1 ms of locking instead of a whole reload), a failure
   leaves the live database untouched, and since `schema.sql` comes from the
   build database — whose schema dbloader generates from the dictionary — it
   rebuilds the serving schema from the dictionary as a side effect, so a
   dictionary change no longer has to be applied by hand. Job 410 gets this
-  with no change to `updater_dag`.
-- **There is only the one path.** The truncate-and-refill path is gone with
-  the old-style serving databases it existed for; a dump that cannot be
-  swapped (unqualified CSVs) is now an error, not a fallback.
-- **The reload is not atomic.** Each table is `truncate table only` + `\copy`
-  in one `psql` call with no transaction, so the TRUNCATE commits before the
-  `\copy` runs: a copy that fails leaves that table **empty** on the live
-  server until the next run (verified). Nothing spans the ~250 tables either,
-  so readers can see a partly reloaded database. There is a commented-out
-  `-c begin ... -c commit` in `fromcsv` which does not work as written -- see
-  `PORT_NOTES.md`.
-- **`-d metabolomics` loads nothing.** That serving database was retired in
-  October 2024; the data is served from `bmrbeverything`. Job 160 still calls
-  it and job 151 still dumps to `dbdump/metabolomics`, which nothing reads --
-  both can go when updater_dag is next touched.
+  with no change to `updater_dag`. A dump that cannot be swapped (unqualified
+  CSVs) is an error, not a fallback to something weaker.
+- **`-d bmrb` and `-d metabolomics` load nothing.** Both serving databases are
+  retired; everything is served from `bmrbeverything`. Jobs 160 and 260 still
+  call them and stay green no-ops that say so.
+- **Job 251 must stay: it feeds the public FTP relational tables.** It dumps
+  the *build* database — `csvio.dump()` connects via `[dictionary]` and reads
+  the `dict`/`macromolecules`/`web` schemas out of it — so it never touched
+  the retired `bmrb` serving database. Verified by renaming that database out
+  of existence and re-running the dump: byte-identical, 159 files.
+
+      251 → staging/dbdump/bmrb → 602 rsync → ftp/…/relational_tables/nmr-star3.1
+                                            → rsync_to_library.sh → /librarym/BMRB
+
+- **The metabolomics relational tables have no publication step.** The old
+  condor jobs in `condor/` dumped *straight* to the FTP directories
+  (`relational_tables/nmr-star3.1` and `relational_tables/metabolomics`). When
+  updater_dag moved to dump-to-staging-then-rsync, job 602 was added for the
+  macromolecule dump and nothing was added for the metabolomics one — so job
+  151 writes `staging/dbdump/metabolomics` and no job copies it anywhere.
+  Either add an rsync alongside 602 or point 151 at the FTP directory the way
+  the old job did; until then `relational_tables/metabolomics` is frozen.
 - **`origin/python3` is the deployed branch** (`dbloader3`): a mechanical
-  py2->py3 + pgdb->psycopg2 port of the same base commit this branch forked
+  py2→py3 + pgdb→psycopg2 port of the same base commit this branch forked
   from. Everything in it is superseded here except the metabolomics
   retirement, which has been carried across.
 - `--no-web` on job 100 is redundant (the web stage only runs inside the

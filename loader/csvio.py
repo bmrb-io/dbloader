@@ -12,10 +12,16 @@
 #
 #  "new"  everything in one database, one file per table, <schema>.<table>.csv.
 #         This is what the `bmrbeverything` dump uses.
-#  "old"  separate website databases for macromolecules+web and
-#         metabolomics+meta, each with its own copy of `dict`; the entry tables
-#         are unqualified, so their CSVs have no schema prefix and the DDL has
-#         the schema stripped out of it.
+#  "old"  what the separate website databases used to want: entry tables
+#         unqualified, so their CSVs have no schema prefix and the DDL has the
+#         schema stripped out of it.  Those databases are retired -- but this
+#         layout is *also* the format published on the FTP site
+#         (pub/bmrb/relational_tables), so it stays.  Do not remove it with
+#         the databases that originally motivated it.
+#
+# Both are dumped from the build database: `dump()` connects via the
+# `[dictionary]` section and reads the other sections' *schemas* out of it, so
+# no dump depends on any serving database existing.
 #
 
 import argparse
