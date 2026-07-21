@@ -319,9 +319,25 @@ have one. New: 0 mismatches of 5690 (macromolecules) and 0 of 4838
   pointers in the lexer, from any bare `\$\S+` token. pynmrstar does not report
   whether a value was quoted, so `entryload._value` strips `$` from any value
   that starts with one and contains no whitespace. A *quoted* `'$5.00'` would be
-  stripped where sas would have kept it. There are none in either archive
-  (checked), and the dictionary's `sfpointerflg` is not an alternative — only
-  322 tags carry it and the archive has pointers in columns without it.
+  stripped where sas would have kept it; there are none in either archive
+  (checked).
+
+  Driving this off the dictionary's `sfpointerflg` instead would be *almost*
+  equivalent, and would remove that risk. Across all 18,401 entries, 121 tags
+  carry a `$`-value (536,427 values in total) and 120 of them are flagged
+  `sfpointerflg='Y'`. The single exception is
+  **`Entity_assembly.Entity_assembly_name`** — a `VARCHAR(127)` free-text name,
+  correctly flagged `'N'` — which carries 203 `$`-values, all in metabolomics
+  `bmse` entries, and in all 203 the value is character-for-character the same
+  framecode as the row's own `Entity_label`. That is a deposition error, not a
+  gap in the dictionary: someone filled the name field with the pointer.
+
+  So the choice is: strip lexically (what `sas` did, what this does, bit-compatible
+  with the golden, carries the quoted-`$` risk) or strip only where
+  `sfpointerflg='Y'` (no risk, but 203 values in 203 metabolomics entries would
+  keep a leading `$` that the old loader removed). Lexical was chosen to keep
+  golden parity; the dictionary rule is a one-line change in `_value` if the
+  203 are judged better left as deposited.
 - **Empty loops.** starobj treated a loop with no rows as an insert error and
   failed the whole entry; `entryload.py` inserts nothing and carries on. No
   entry in either archive has one, so the corpus cannot tell them apart.
