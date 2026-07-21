@@ -19,12 +19,16 @@
 # the swap rebuilds the serving schema from the dictionary -- a dictionary
 # change no longer has to be applied to the serving database by hand.
 #
-# A dump that cannot be swapped falls back to truncating and refilling the live
-# tables in place, with a line in the log saying why.  That is the old-style
-# layouts, whose entry tables are unqualified (`-d bmrb`), and any load of a
-# single schema (`-s`), where swapping would take the other schemas of the dump
-# live *empty*.  `--shadow` demands a swap and fails instead of falling back;
-# `--no-shadow` forces the in-place load.
+# One thing cannot be swapped: a dump whose CSVs are not schema-qualified, i.e.
+# the old-style layouts (`-d bmrb`), whose entry tables go in the search_path.
+# Swapping those would mean renaming `public`, which would take anything else
+# living there out of the live database with it.  Those fall back to truncating
+# and refilling in place, with a line in the log saying why -- and that is the
+# only reason the in-place path still exists.  When the old-style serving
+# databases are retired it can go, and the swap becomes the only path.
+#
+# `--shadow` demands a swap and fails instead of falling back; `--no-shadow`
+# forces the in-place load.
 #
 # Files are `[<schema>.]<table>.csv`; the column order comes from the first
 # line, since it need not match the database.  Mixed-case names are quoted.
@@ -278,13 +282,15 @@ class PgLoader(object):
                            " old-style layouts put entry tables in the search_path"
                            % (len(unqualified), unqualified[0],))
 
-        if schema_filter is not None and schema_filter != "any":
-            # loading one schema would swap the rest in empty
-            return (False, "only the %s schema is being loaded, and a swap replaces"
-                           " every schema in the dump at once" % (schema_filter,))
-
-        if len(PgLoader.schemas_in_ddl(script)) < 1:
+        in_ddl = PgLoader.schemas_in_ddl(script)
+        if len(in_ddl) < 1:
             return (False, "no CREATE SCHEMA in %s -- nothing to swap" % (script,))
+
+        if schema_filter is not None and schema_filter != "any":
+            # only the schemas being filled may be swapped in; the rest of the
+            # shadow schemas are built (the DDL is one script) and thrown away
+            if schema_filter not in in_ddl:
+                return (False, "%s is not one of the schemas in %s" % (schema_filter, script,))
 
         return (True, "")
 
@@ -361,8 +367,12 @@ class PgLoader(object):
         return PgLoader.psql(database=db, command=["-f", ddl], verbose=verbose)
 
     @staticmethod
-    def swap_shadow(db, schemas, verbose=False):
-        """Swap every shadow schema in, in one transaction, then drop the old.
+    def swap_shadow(db, schemas, discard=None, verbose=False):
+        """Swap the shadow schemas in, in one transaction, then drop the old.
+
+        `discard`: shadow schemas that were built but not filled -- a load of
+        one schema still runs the whole DDL, since it is one script -- and so
+        must be thrown away rather than swapped in empty.
 
         The renames are what the readers see: one transaction that touches no
         rows, so the exclusive locks are held for microseconds rather than for
@@ -392,6 +402,8 @@ class PgLoader(object):
         cmd = []
         for s in schemas:
             cmd.extend(["-c", "drop schema if exists %s%s cascade" % (s, PgLoader.RETIRING,)])
+        for s in (discard or []):
+            cmd.extend(["-c", "drop schema if exists %s%s cascade" % (s, PgLoader.SHADOW,)])
         return PgLoader.psql(database=db, command=cmd, verbose=verbose)
 
     # run schema.sql to drop and recreate tables
@@ -448,11 +460,16 @@ class PgLoader(object):
         elif shadow and not possible:
             raise ValueError("--shadow was asked for but %s" % (why,))
 
-        shadow_schemas = []
+        shadow_schemas = []   # everything the DDL builds
+        swap_schemas = []     # the subset this load fills, so the subset to swap in
         if shadow:
             shadow_schemas = PgLoader.schemas_in_ddl(script)
+            if schema is not None and schema != "any":
+                swap_schemas = [schema]
+            else:
+                swap_schemas = shadow_schemas[:]
             sys.stdout.write("%s: building %s and swapping it in\n"
-                             % (db, ", ".join(s + PgLoader.SHADOW for s in shadow_schemas),))
+                             % (db, ", ".join(s + PgLoader.SHADOW for s in swap_schemas),))
 
             x = PgLoader.create_shadow(db=db, script=script, schemas=shadow_schemas,
                                        verbose=verbose)
@@ -506,7 +523,10 @@ class PgLoader(object):
                                          schemas=[s + PgLoader.SHADOW
                                                   for s in shadow_schemas]) or ""
 
-        x = PgLoader.swap_shadow(db=db, schemas=shadow_schemas, verbose=verbose)
+        x = PgLoader.swap_shadow(db=db, schemas=swap_schemas,
+                                 discard=[s for s in shadow_schemas
+                                          if s not in swap_schemas],
+                                 verbose=verbose)
         if x != 0:
             rc += "swapping the shadow schemas in returned %s\n" % (x,)
 

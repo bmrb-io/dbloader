@@ -302,13 +302,18 @@ that are worth acting on independently of this port:
    or triggers**, and no view crossing a schema. And PostgreSQL tracks view
    dependencies by OID, so renaming a schema does not disturb them.
 
-   A swap replaces every schema in the dump at once, so it is only correct
-   when the load fills every one of them. `can_shadow()` is where that is
-   decided, and it declines in three cases -- no `schema.sql`; unqualified
-   CSVs (the old-style layouts put entry tables in the search_path); or a
-   `-s` single-schema load, **which would otherwise take the dump's other
-   schemas live empty**. That last one was a real bug in the first cut of
-   this, when the swap was opt-in and did not check.
+   A swap must only bring in schemas the load actually filled. `-s dict`
+   therefore swaps `dict` alone and throws the other shadow schemas away —
+   in the first, opt-in cut of this it swapped all six, **taking the other
+   five live empty**, which is the bug that made auto-detection worth having.
+
+   `can_shadow()` declines in two cases now: a dump with no `schema.sql`, and
+   one whose CSVs are not schema-qualified. The second is the old-style
+   layouts, whose entry tables live in the search_path — swapping those would
+   mean renaming `public` and taking anything else in it out of the live
+   database. **That is the only remaining reason the in-place path exists**;
+   when the old-style serving databases are retired it can be deleted and the
+   swap becomes the only path.
 
    The DDL is rewritten textually: `<schema>.` becomes `<schema>_new.`
    everywhere including inside view bodies, and the `-c` clean section is

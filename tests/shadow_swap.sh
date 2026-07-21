@@ -90,11 +90,15 @@ echo "== it decides for itself =="
 $loader -i "$dump" > "$out/decide1.log" 2>&1
 check "qualified dump is swapped" "$(grep -c 'swapping it in' "$out/decide1.log")" 1
 
-# one schema only: swapping would take the *other* schemas live empty
+# one schema only: swap just that one, and throw the other shadows away
 $loader -s dict -i "$dump" > "$out/decide2.log" 2>&1
-check "single-schema load is not swapped" \
-    "$(grep -c 'loading in place' "$out/decide2.log")" 1
-check "the other schemas survived it" "$(rows 'select count(*) from macromolecules."Entry"')" 300
+check "single-schema load swaps only that schema" \
+    "$(grep -c 'building dict_new and swapping it in' "$out/decide2.log")" 1
+check "the other schemas were not swapped in empty" \
+    "$(rows 'select count(*) from macromolecules."Entry"')" 300
+check "dict is still there" "$(rows 'select count(*) from dict.adit_item_tbl')" 6760
+check "no shadow schemas left over" \
+    "$(rows "select count(*) from pg_namespace where nspname like '%\\_new'")" 0
 
 # an old-style dump has unqualified CSVs and cannot be swapped
 old=$here/build/test/dump--macromol.py3
