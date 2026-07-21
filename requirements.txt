@@ -1,7 +1,9 @@
 # Python 3 dependencies.
 #
-# starobj is not on PyPI: check it out (branch `dbloader-py3-fixes`) and point
-# $STAROBJ_PATH or $PYTHONPATH at it, along with sas/python.  It pulls in `ply`.
+# `pynmrstar` parses the NMR-STAR entry files; its parser is a C extension, so
+# there is nothing else to build.  It replaced the BMRB `starobj`/`sas` pair,
+# which are no longer needed at runtime -- only by tests/golden_*.sh, which
+# runs the legacy Python 2 loader to produce the comparison golden.
 #
 psycopg2-binary
-ply
+pynmrstar

@@ -3,10 +3,10 @@
 # Parse NMR-STAR entry files into the `macromolecules` and `metabolomics`
 # schemas.
 #
-# The tables are not defined here: `starobj` generates them from the `dict`
-# schema (loaded by dictionary.py), then SAX-parses each entry and inserts its
-# rows.  This module finds the files, decides which ones to load, prepares the
-# schema, and keeps score.
+# The tables are not defined here: they are generated from the `dict` schema
+# (loaded by dictionary.py) -- see loader/starschema.py -- and the entries are
+# parsed and inserted by loader/entryload.py.  This module finds the files,
+# decides which ones to load, prepares the schema, and keeps score.
 #
 # The two archives differ in one respect: macromolecule tables are all `text`
 # (use_types = False) while metabolomics tables get real column types from the
@@ -26,8 +26,12 @@ _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 import loader
 from loader import db
+from loader.entryload import EntryLoader
 
 DATABASES = ("macromolecules", "metabolomics")
+
+# the dictionary schema the entry tables are generated from
+DICT_SCHEMA = "dict"
 
 
 # wrappers
@@ -69,8 +73,8 @@ def load_entries(dbname, config, drop_tables=False, verbose=False):
 
     assert dbname in DATABASES
 
-    # the dictionary section is needed too: starobj reads the `dict` schema
-    # through it to find out what tables to create
+    # the dictionary section is needed too: the `dict` schema is what says
+    # which tables to create
     for (section, what) in ((dbname, "database"), ("dictionary", "database"),
                             (dbname, "entrydir")):
         if not config.has_section(section):
@@ -90,18 +94,7 @@ def load_entries(dbname, config, drop_tables=False, verbose=False):
         sys.stdout.write("*********\nFiles to load:\n")
         pprint.pprint(files)
 
-    # starobj wants its own config section for the connection it inserts through
-    #
-    if not config.has_section("entry"):
-        config.add_section("entry")
-    config.set("entry", "engine", "psycopg2")
-    config.set("entry", "database", config.get(dbname, "database"))
-    config.set("entry", "schema", dbname)
-    for opt in ("user", "host", "password"):
-        if config.has_option(dbname, opt):
-            config.set("entry", opt, config.get(dbname, opt))
-
-    return _load_entries(config, files, drop_tables, verbose=verbose)
+    return _load_entries(config, dbname, files, drop_tables, verbose=verbose)
 
 
 # cross-check the files on the website against ETS: everything released should
@@ -181,84 +174,74 @@ def _gen_file_list(dbname, directory, verbose=False):
 # dictionary; it used to be `raise Exception( "FIXME!!!! Not implemented" )`,
 # which meant the *documented default* aborted every time.
 #
-# Either way every table ends up empty, entry_saveframes included -- starobj
-# takes the next Sf_ID from max(sfid) there, so both paths number from 1.
+# Either way every table ends up empty, entry_saveframes included -- the next
+# Sf_ID comes from max(sfid) there, so both paths number from 1.
 #
-def _prepare_schema(config, dbname, se, sd, dbwrapper, use_types, drop_tables, verbose=False):
+def _prepare_schema(conn, schema, use_types, drop_tables, verbose=False):
 
-    schema = dbwrapper.schema(se.CONNECTION)
-    conn = dbwrapper._connections[se.CONNECTION]["conn"]
-
-    # DDL gets its own transaction; the parse loop below runs with autocommit off.
-    # (Under pgdb this assignment did nothing at all -- see STAROBJ_PY3_REVIEW.md
-    # finding 7 -- so the legacy DDL rode along in the first entry's transaction.)
-    conn.autocommit = True
-    try:
-        se.execute("set client_min_messages=WARNING")
+    with conn.cursor() as curs:
+        curs.execute("set client_min_messages=WARNING")
 
         if not drop_tables:
-            tables = db.list_tables(db.dsn(config, dbname), schema)
+            tables = _tables_in(conn, schema)
             if len(tables) > 0:
                 if verbose:
                     sys.stdout.write("truncating %d tables in %s\n" % (len(tables), schema,))
-                se.execute("truncate %s"
-                           % (",".join(db.qualified(schema, t) for t in tables),))
-                return
+                curs.execute("truncate %s"
+                             % (",".join(db.qualified(schema, t) for t in tables),))
+                return False
             sys.stderr.write("%s: nothing to truncate, creating the tables\n" % (schema,))
 
-        se.execute("drop schema if exists %s cascade" % (schema,))
-        se.execute("create schema %s" % (schema,))
-        se.create_tables(dictionary=sd, db=dbwrapper, use_types=use_types, verbose=verbose)
-    finally:
+        curs.execute("drop schema if exists %s cascade" % (schema,))
+        curs.execute("create schema %s" % (schema,))
+    return True
+
+
+def _tables_in(conn, schema):
+    with conn.cursor() as curs:
+        curs.execute("select table_name from information_schema.tables"
+                     " where table_schema = %s and table_type = 'BASE TABLE'", (schema,))
+        return [row[0] for row in curs.fetchall()]
+
+
+#
+#
+#
+def _load_entries(config, dbname, filelist, drop_tables=False, verbose=False):
+
+    # macromolecules load as all-text, metabolomics with types from the dictionary
+    use_types = (dbname != "macromolecules")
+    schema = config.get(dbname, "schema")
+
+    conn = db.connect(db.dsn(config, dbname))
+    try:
+        # DDL in its own transaction, then one transaction per entry
+        conn.autocommit = True
+        if _prepare_schema(conn, schema, use_types, drop_tables, verbose):
+            loader_ = EntryLoader(conn, schema, DICT_SCHEMA, verbose=verbose)
+            n = loader_.create_tables(DICT_SCHEMA, use_types=use_types)
+            if verbose:
+                sys.stdout.write("created %d tables in %s\n" % (n, schema,))
+        else:
+            loader_ = EntryLoader(conn, schema, DICT_SCHEMA, verbose=verbose)
         conn.autocommit = False
 
-
-#
-#
-#
-def _load_entries(config, filelist, drop_tables=False, verbose=False):
-
-    dbname = config.get("entry", "schema")
-    use_types = (dbname != "macromolecules")
-
-    dbwrapper = loader.starobj.DbWrapper(config, verbose=False)
-    dbwrapper.connect()
-
-    sd = loader.starobj.StarDictionary(dbwrapper, verbose=False)
-    se = loader.starobj.NMRSTAREntry(dbwrapper, verbose=False)
-
-    try:
-        return _parse_all(config, dbname, filelist, use_types, drop_tables,
-                          dbwrapper, sd, se, verbose)
+        return _parse_all(conn, loader_, filelist, verbose)
     finally:
-        dbwrapper.close()
+        conn.close()
 
 
-def _parse_all(config, dbname, filelist, use_types, drop_tables,
-               dbwrapper, sd, se, verbose=False):
+def _parse_all(conn, entryloader, filelist, verbose=False):
 
-    _prepare_schema(config, dbname, se, sd, dbwrapper, use_types, drop_tables, verbose)
-
-    conn = dbwrapper._connections[se.CONNECTION]["conn"]
     failed = []
-    errs = []
     for f in filelist:
-        del errs[:]
         if verbose:
             sys.stdout.write("> %s\n" % (f,))
         try:
-            if loader.starobj.StarParser.parse_file(db=dbwrapper, dictionary=sd, filename=f,
-                                                    errlist=errs, types=use_types,
-                                                    create_tables=False, verbose=False):
-                conn.commit()
-            else:
-                sys.stderr.write("** Errors parsing %s\n" % (f,))
-                conn.rollback()
-                failed.append(f)
-            if len(errs) > 0:
-                sys.stderr.write("** Parser output for %s\n" % (f,))
-                for e in errs:
-                    sys.stderr.write("%s\n" % (e,))
+            rows = entryloader.load_file(f)
+            conn.commit()
+            if verbose:
+                sys.stdout.write("  %d rows\n" % (rows,))
 
         # One bad entry must not abort the archive load -- but it must be
         # counted.  The legacy bare `except:` also caught KeyboardInterrupt and

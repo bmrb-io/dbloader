@@ -12,11 +12,14 @@ tests/golden_entries.sh   py2 -> macromolecules,       -> golden/*.md5
 tests/regression.sh       py3 -> the same schemas      -> diff vs golden
 ```
 
-Status: **all three schemas match, 946 tables** (16 `dict`, 465
-`macromolecules`, 465 `metabolomics`), over a 300+300 entry subset, with the
-same 0 entries failing to load on both sides. `chemcomps` and most of `web`
-are not covered — they need ccdb and the ETS tracking database, deferred by
-design.
+Status: **944 of 946 tables match byte for byte** (16 `dict`, 464+1
+`macromolecules`, 464+1 `metabolomics`), over a 300+300 entry subset, with the
+same 0 entries failing to load on both sides. The two exceptions are the
+`entry_saveframes` table of each schema, which the rewrite deliberately does
+not reproduce — `check_saveframes` in `regression.sh` tests it against the
+entries themselves instead, and `../PORT_NOTES.md` explains why. `chemcomps`
+and most of `web` are not covered — they need ccdb and the ETS tracking
+database, deferred by design.
 
 ## Setup
 
@@ -57,16 +60,10 @@ python2.7 headers.
 
 ### The Python 3 side
 
-`../venv/` (gitignored) has `psycopg2-binary` and `ply`; py3 `starobj` and
-`sas` come off `PYTHONPATH`:
-
-```sh
-export PYTHONPATH=~/git/starobj:~/git/sas/python
-```
-
-with `starobj` on branch **`dbloader-py3-fixes`** — `master`'s py3 conversion
-cannot load entries at all (see [`../STAROBJ_PY3_REVIEW.md`](../STAROBJ_PY3_REVIEW.md)).
-`regression.sh` sets both of these itself if they are not already set.
+`../venv/` (gitignored) needs `psycopg2-binary` and `pynmrstar`
+(`pip install -r ../requirements.txt`). Nothing else — the rewrite has no
+dependency on `starobj` or `sas`; those are only needed by the golden runs
+above, under Python 2.
 
 ### Config
 
@@ -81,8 +78,17 @@ paths throughout, because the golden runs out of a different checkout.
 ```sh
 sh tests/golden_dict.sh            # build inputs + golden dict   (~2 min)
 sh tests/golden_entries.sh         # golden entry schemas         (~3 min)
-sh tests/regression.sh             # the rewrite, diffed          (~4 min)
-sh tests/regression.sh truncate    # again, via the truncate path (~4 min)
+sh tests/regression.sh             # the rewrite, diffed          (~3 min)
+sh tests/regression.sh truncate    # again, via the truncate path (~3 min)
+sh tests/regression.sh dumps       # the CSV dump path            (~1 min)
+```
+
+`tests/bench.py` times the entry load on its own, and `--parse-only` times just
+the parser:
+
+```sh
+venv/bin/python tests/bench.py -c tests/build/loader.properties -s macromolecules
+venv/bin/python tests/bench.py -c tests/build/loader.properties --parse-only pynmrstar
 ```
 
 `golden_dict.sh --no-build` reuses `tests/build/csv` instead of rebuilding the
@@ -198,5 +204,7 @@ is the only thing stubbed; everything else is the real code path.
 
 - **ccdb / ETS access** for the chemcomps and ETS/web stages, and the
   behaviour changes that depend on them (PORT_NOTES.md items 3–6).
-- **A golden for the CSV dump path** (`csvio.dump_new`) and for
-  `macromol.fixup`.
+- **A golden for `macromol.fixup`** — the one stage that runs here but is not
+  diffed. (The CSV dump path is covered: `regression.sh dumps`.)
+- **A corpus with non-ASCII bytes.** Both archives are pure ASCII, so nothing
+  here exercises the `iso8859-15` decode the entry reader does.

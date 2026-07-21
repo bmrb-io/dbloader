@@ -8,9 +8,9 @@
 # so a match means the two loaders produce the same rows, not merely the same
 # row counts.
 #
-# Prerequisites: the goldens exist (tests/golden_dict.sh, tests/golden_entries.sh),
-# pg-tmp is running with roles `bmrb`/`web` and database `bmrb`, and the py3
-# starobj + sas are importable.  See tests/README.md.
+# Prerequisites: the goldens exist (tests/golden_dict.sh, tests/golden_entries.sh)
+# and pg-tmp is running with roles `bmrb`/`web` and database `bmrb`.  See
+# tests/README.md.
 #
 #     sh tests/regression.sh [dict|entries|truncate|dumps]  # default: dict + entries
 #
@@ -33,15 +33,26 @@ what=${1:-all}
 : "${PGHOST:=/tmp}" ; : "${PGUSER:=bmrb}" ; : "${PGDATABASE:=bmrb}"
 export PGHOST PGUSER PGDATABASE
 
-# python3 with psycopg2, and the py3 starobj/sas
+# python3 with psycopg2 and pynmrstar
 python=${PYTHON:-$repo/venv/bin/python}
-gitdir=$(cd "$repo/../.." && pwd)
-PYTHONPATH=${PYTHONPATH:-$gitdir/starobj:$gitdir/sas/python}
-export PYTHONPATH
 
 conf=$(sh "$here/render_config.sh")
 out=$here/build/test
 rc=0
+
+# `entry_saveframes` is the one table the rewrite deliberately does not
+# reproduce, so it is compared by check_saveframes() instead of by fingerprint:
+#
+#   `line`     NULL now.  pynmrstar reports no line numbers, and the ones sas
+#              reported were wrong anyway -- off by one per preceding saveframe.
+#   `category` fixed.  starobj set it with `update entry_saveframes set
+#              category=... where name=...`, which matches by saveframe NAME
+#              across every entry loaded so far, so entries sharing a saveframe
+#              name overwrote each other.  59 of 5690 rows in the golden
+#              contradict the Sf_category the entry itself declares.
+#
+# Every other column of it, and every other table, still has to match exactly.
+EXCEPT=entry_saveframes.csv
 
 # dump schema $1 and compare its fingerprints with the golden
 check() {
@@ -49,8 +60,17 @@ check() {
     [ -f "$here/golden/$schema.md5" ] || { echo "no golden for $schema -- run tests/golden_*.sh"; exit 1; }
     rm -rf "$out/$schema"
     sh "$here/dump_schema.sh" "$schema" "$out/$schema" 2>/dev/null
-    if ( cd "$out/$schema" && md5sum *.csv ) | diff -u "$here/golden/$schema.md5" - > "$out/$schema.diff"; then
-        echo "OK    $schema matches golden ($(wc -l < "$here/golden/$schema.md5") tables)"
+    grep -v " $EXCEPT\$" "$here/golden/$schema.md5" > "$out/$schema.golden.md5"
+    ( cd "$out/$schema" && md5sum *.csv ) | grep -v " $EXCEPT\$" > "$out/$schema.new.md5"
+    n=$(wc -l < "$out/$schema.golden.md5")
+    # the dict schema has no entry_saveframes, so no exception to mention
+    if [ "$n" -lt "$(wc -l < "$here/golden/$schema.md5")" ]; then
+        note=" + $EXCEPT by check_saveframes"
+    else
+        note=""
+    fi
+    if diff -u "$out/$schema.golden.md5" "$out/$schema.new.md5" > "$out/$schema.diff"; then
+        echo "OK    $schema matches golden ($n tables$note)"
     else
         echo "FAIL  $schema differs from golden:"
         # the md5 diff names the tables; show the first rows that actually
@@ -60,6 +80,47 @@ check() {
             [ -f "$here/golden/$schema/$t" ] || { echo "      (no golden dump -- rerun tests/golden_*.sh)"; continue; }
             diff -u "$here/golden/$schema/$t" "$out/$schema/$t" | sed -n '3,8p' | sed 's/^/      /'
         done
+        rc=1
+    fi
+}
+
+# the two assertions that replace a golden comparison for entry_saveframes
+check_saveframes() {
+    schema=$1
+    golden=$here/golden/$schema/entry_saveframes.csv
+    new=$out/$schema/entry_saveframes.csv
+
+    # 1. same rows as the golden, ignoring `line`.  Differences are expected --
+    #    but only in `category`, and only where the golden is wrong; check 2 is
+    #    what decides.
+    if [ -f "$golden" ]; then
+        sed 's/,[^,]*$//' "$golden" > "$out/$schema.sf.golden"
+        sed 's/,[^,]*$//' "$new"    > "$out/$schema.sf.new"
+        if ! diff -q "$out/$schema.sf.golden" "$out/$schema.sf.new" > /dev/null; then
+            echo "      $(diff "$out/$schema.sf.golden" "$out/$schema.sf.new" | grep -c '^<') rows differ from the golden (excluding line):"
+            diff "$out/$schema.sf.golden" "$out/$schema.sf.new" | head -4 | sed 's/^/      /'
+        fi
+    fi
+
+    # 2. every category agrees with the Sf_category the entry itself declares --
+    #    which is the thing the golden gets wrong, so this is the real check
+    union=$(psql -tAc "select string_agg(format('select \"Sf_ID\"::int, \"Sf_category\" from $schema.%I',
+                                               table_name), ' union all ')
+                        from information_schema.columns
+                       where table_schema = '$schema' and column_name = 'Sf_category'")
+    bad=$(psql -tAc "select count(*) from $schema.entry_saveframes s
+                       join ($union) t(sfid, cat) on t.sfid = s.sfid
+                      where s.category is distinct from t.cat")
+    total=$(psql -tAc "select count(*) from $schema.entry_saveframes")
+    if [ "$bad" = "0" ]; then
+        echo "OK    $schema.entry_saveframes: all $total categories agree with the entries' own Sf_category"
+    else
+        echo "FAIL  $schema.entry_saveframes: $bad of $total categories contradict the entry's Sf_category"
+        rc=1
+    fi
+
+    if [ "$(awk -F, '{print $NF}' "$new" | grep -c .)" != "0" ]; then
+        echo "FAIL  $schema.entry_saveframes: expected the line column to be NULL"
         rc=1
     fi
 }
@@ -75,12 +136,20 @@ fi
 if [ "$what" = "all" ] || [ "$what" = "entries" ] || [ "$what" = "truncate" ]; then
     if [ "$what" = "truncate" ]; then
         echo "== reloading entries into the existing tables (python3, --truncate) =="
-        "$python" "$here/load_entries.py" -c "$conf" --truncate > "$out/entries.log" 2>&1 || true
+        "$python" "$here/load_entries.py" -c "$conf" --truncate > "$out/entries.log" 2>&1 && loadrc=0 || loadrc=$?
     else
         echo "== loading entries (python3) =="
-        "$python" "$here/load_entries.py" -c "$conf" > "$out/entries.log" 2>&1 || true
+        "$python" "$here/load_entries.py" -c "$conf" > "$out/entries.log" 2>&1 && loadrc=0 || loadrc=$?
     fi
     tail -2 "$out/entries.log"
+
+    # a crash in the loader must not read as "0 entries failed" further down:
+    # per-entry failures are counted, anything else kills the run
+    if [ "$loadrc" -ne 0 ]; then
+        echo "FAIL  the loader exited $loadrc:"
+        tail -20 "$out/entries.log" | sed 's/^/      /'
+        exit 1
+    fi
 
     grep '^Exception on ' "$out/entries.log" | sed 's|.*/||' | sort > "$out/entries.failed"
     if diff -u "$here/golden/entries.failed" "$out/entries.failed" > /dev/null; then
@@ -92,7 +161,9 @@ if [ "$what" = "all" ] || [ "$what" = "entries" ] || [ "$what" = "truncate" ]; t
     fi
 
     check macromolecules
+    check_saveframes macromolecules
     check metabolomics
+    check_saveframes metabolomics
 fi
 
 # The dump path needs no golden of its own: both dumpers read whatever is in

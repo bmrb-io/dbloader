@@ -5,8 +5,9 @@
 #  1. dump the released ones to CSV,
 #  2. load those CSVs into the bmrbeverything database.
 #
-# The target tables are generated from the dictionary by starobj, the same way
-# entry tables are -- but only the subset in TABLES below, and always typed.
+# The target tables are generated from the dictionary the same way entry tables
+# are (see loader/starschema.py) -- but only the subset in TABLES below, and
+# always typed.
 #
 
 import argparse
@@ -20,10 +21,12 @@ from configparser import ConfigParser
 
 _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
-import loader
-from loader import db
+from loader import csvio, db, starschema
 
 DB = "chemcomps"
+
+# the dictionary schema the chem-comp tables are generated from
+DICT_SCHEMA = "dict"
 
 # schema the chem comps are dumped from, in the source database
 SRCSCHEMA = "chem_comp"
@@ -159,8 +162,8 @@ def dump(config, where=None, verbose=False):
             sql = 'select * from %s where "Sf_ID" not in %s' % (tbl, unreleased_sfids,)
 
         outfile = table + ".csv" if where is None else os.path.join(where, table + ".csv")
-        loader.tocsv(dsn, table="(%s)" % (sql,), outfile=outfile,
-                     config=config, verbose=verbose)
+        csvio.tocsv(dsn, table="(%s)" % (sql,), outfile=outfile,
+                    config=config, verbose=verbose)
 
     return True
 
@@ -182,10 +185,8 @@ def fix_inchi_column(where, verbose=False):
     return True
 
 
-# starobj inserts through its own connection, configured from an [entry]
-# section; point that at the chemcomps schema.
-#
-def _starobj(config, verbose=False):
+def _target(config):
+    """Connection parameters for the database being loaded into."""
 
     if not config.has_section("dictionary"):
         raise Exception("No [dictionary] section in config file")
@@ -196,24 +197,7 @@ def _starobj(config, verbose=False):
     if "host" not in dsn:
         pprint.pprint(dsn)
         raise Exception("No host in DSN")
-
-    if not config.has_section("entry"):
-        config.add_section("entry")
-    config.set("entry", "engine", "psycopg2")
-    config.set("entry", "database", dsn["dbname"])
-    config.set("entry", "schema", DB)
-    for key in ("user", "host", "password"):
-        if key in dsn:
-            config.set("entry", key, dsn[key])
-
-    if verbose:
-        pprint.pprint(config.items("entry"))
-
-    wrapper = loader.starobj.DbWrapper(config, verbose=verbose)
-    wrapper.connect()
-    sd = loader.starobj.StarDictionary(wrapper, verbose=verbose)
-    se = loader.starobj.NMRSTAREntry(wrapper, verbose=verbose)
-    return (dsn, wrapper, sd, se)
+    return dsn
 
 
 # load (previously dumped) chem comps from CSV files
@@ -225,20 +209,20 @@ def load(config, where, verbose=False):
     indir = os.path.realpath(where)
     assert os.path.isdir(indir)
 
-    (dsn, wrapper, sd, se) = _starobj(config, verbose)
-    try:
-        # the tables are in sub-schemas, just drop and re-create the whole thing.
-        # no other option for now
-        #
-        wrapper._connections[se.CONNECTION]["conn"].autocommit = True
-        schema = wrapper.schema(se.CONNECTION)
-        se.execute("set client_min_messages=WARNING")
-        se.execute("drop schema if exists %s cascade" % (schema,))
-        se.execute("create schema %s" % (schema,))
-        se.create_tables(dictionary=sd, db=wrapper, use_types=True, tables=TABLES,
-                         verbose=verbose)
-    finally:
-        wrapper.close()
+    dsn = _target(config)
+    schema = config.get(DB, "schema")
+
+    # the tables are in sub-schemas, just drop and re-create the whole thing.
+    # no other option for now
+    #
+    with db.connection(dsn, autocommit=True) as conn:
+        with conn.cursor() as curs:
+            curs.execute("set client_min_messages=WARNING")
+            curs.execute("drop schema if exists %s cascade" % (schema,))
+            curs.execute("create schema %s" % (schema,))
+        # only the chem-comp subset of the dictionary, and always typed
+        starschema.create_tables(conn, schema, DICT_SCHEMA, use_types=True,
+                                 only=TABLES, verbose=verbose)
 
     for f in sorted(glob.glob(os.path.join(indir, "*.csv"))):
         table = os.path.splitext(os.path.split(f)[1])[0]
@@ -258,49 +242,45 @@ def fix_entry_id(config, verbose=False):
     if verbose:
         sys.stdout.write("fix_entry_id()\n")
 
-    (dsn, wrapper, sd, se) = _starobj(config, verbose)
-    try:
-        _fix_entry_id(wrapper, sd, se, verbose)
-    finally:
-        wrapper.close()
+    dsn = _target(config)
+    scam = config.get(DB, "schema")
 
+    with db.connection(dsn) as conn:
+        # ugh
+        #
+        for (table, column) in starschema.entryid_columns(conn, DICT_SCHEMA, only=TABLES):
 
-def _fix_entry_id(wrapper, sd, se, verbose=False):
+            tbl = db.qualified(scam, table)
+            col = db.quote(column)
 
-    scam = wrapper.schema(se.CONNECTION)
+            # in chem_comp it's id
+            if table == "Chem_comp":
+                sql = 'update %s set %s="ID"' % (tbl, col,)
 
-    # ugh
-    #
-    for (table, column) in sd.iter_tags(which=("entryid",), tables=TABLES):
+            # in other chem_comp tables it's comp_id
+            elif table in COMP_ID_TABLES:
+                sql = 'update %s set %s="Comp_ID"' % (tbl, col,)
 
-        tbl = db.qualified(scam, table)
-        col = db.quote(column)
+            # in entity tables it's entity_comp_index.comp_id -> entity_comp_index.entity_id,
+            # except in entity itself, where it's the id
+            elif table == "Entity_comp_index":
+                sql = 'update %s e set %s="Comp_ID"' % (tbl, col,)
 
-        # in chem_comp it's id
-        if table == "Chem_comp":
-            sql = 'update %s set %s="ID"' % (tbl, col,)
+            elif table == "Entity":
+                sql = 'update %s e set %s="Nonpolymer_comp_ID"' % (tbl, col,)
 
-        # in other chem_comp tables it's comp_id
-        elif table in COMP_ID_TABLES:
-            sql = 'update %s set %s="Comp_ID"' % (tbl, col,)
+            else:
+                sql = 'update %s e set %s=' % (tbl, col,) \
+                    + '(select "Nonpolymer_comp_ID" from %s where "Sf_ID"=e."Sf_ID")' \
+                    % (db.qualified(scam, "Entity"),)
 
-        # in entity tables it's entity_comp_index.comp_id -> entity_comp_index.entity_id,
-        # except in entity itself, where it's the id
-        elif table == "Entity_comp_index":
-            sql = 'update %s e set %s="Comp_ID"' % (tbl, col,)
-
-        elif table == "Entity":
-            sql = 'update %s e set %s="Nonpolymer_comp_ID"' % (tbl, col,)
-
-        else:
-            sql = 'update %s e set %s=(select "Nonpolymer_comp_ID" from %s where "Sf_ID"=e."Sf_ID")' \
-                % (tbl, col, db.qualified(scam, "Entity"),)
-
-        if verbose:
-            sys.stdout.write(sql)
-        rc = se.execute(sql, commit=True)
-        if verbose:
-            sys.stdout.write(": %d rows updated\n" % (rc.rowcount,))
+            if verbose:
+                sys.stdout.write(sql)
+            with conn.cursor() as curs:
+                curs.execute(sql)
+                if verbose:
+                    sys.stdout.write(": %d rows updated\n" % (curs.rowcount,))
+        conn.commit()
 
 
 ####################################################################################################
@@ -324,6 +304,7 @@ if __name__ == "__main__":
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
 
+    import loader
     if args.dump:
         with loader.timer(label="dump chemcomps", silent=not args.time):
             dump(config=cp, where=args.outdir, verbose=args.verbose)

@@ -17,13 +17,12 @@ into (see "How the dictionary is interpreted" below).
 
 See [`../ORGANIZATION.md`](../ORGANIZATION.md) for the whole pipeline.
 
-> **Python 3 + psycopg2.** Ported from Python 2.7/`pgdb` — see
+> **Python 3, psycopg2, pynmrstar.** Ported from Python 2.7/`pgdb`, and the
+> BMRB `starobj`/`sas` libraries have been removed — see
 > [`PORT_NOTES.md`](PORT_NOTES.md) for what changed and what is verified, and
 > [`tests/README.md`](tests/README.md) for how to run the regression against
-> the Python 2 golden. Needs the BMRB **`starobj`** library (Python 3, branch
-> `dbloader-py3-fixes`; `$STAROBJ_PATH` or `PYTHONPATH`, falling back to
-> `/projects/BMRB/software/starobj`). It shells out to `psql`/`pg_dump` for
-> `COPY` (server `copy` needs superuser; `psql \copy` does not).
+> the Python 2 golden. It shells out to `psql`/`pg_dump` for `COPY` (server
+> `copy` needs superuser; `psql \copy` does not).
 
 ## How to run it
 
@@ -49,20 +48,19 @@ Connection details (host, db, user, schema) per stage come from
 
 ## How the dictionary is interpreted (the important bit)
 
-Entry loading is dictionary-driven via `starobj` (`loader/entries.py`):
+Entry loading is dictionary-driven (`loader/starschema.py`, `loader/entryload.py`):
 
 ```python
-sd = starobj.StarDictionary(db)          # reads the `dict` schema loaded above
-se = starobj.NMRSTAREntry(db)
-se.create_tables(dictionary=sd, ...)     # entry tables come FROM the dictionary
-starobj.StarParser.parse_file(db, dictionary=sd, filename=f, ...)  # parse + insert
+starschema.create_tables(conn, "macromolecules")   # tables come FROM the dictionary
+EntryLoader(conn, "macromolecules").load_file(f)   # pynmrstar parse + batched insert
 ```
 
-So the dictionary defines table/column names and types (`adit_item_tbl`'s
-`dbtablemanual`/`dbcolumnmanual`/`dbtype`, materialized by
-`nmr-star-dictionary-scripts` into the `dict` schema), and `starobj` uses it to
-(a) create the per-archive entry tables and (b) validate/route each STAR
-tag-value into the right column. Change the dictionary → change the schema.
+`dict.adit_item_tbl` is one row per tag: the table it maps to (`tagcategory`),
+the column (`tagfield`), the SQL type (`dbtype`) and the order tags are defined
+in (`dictionaryseq`, which is the column order). That is the whole schema
+definition — change the dictionary → change the schema. Each saveframe takes
+the next `Sf_ID` from `max(sfid)` in `entry_saveframes`, and every row of that
+saveframe inherits it.
 
 ## Layout
 
@@ -70,9 +68,11 @@ tag-value into the right column. Change the dictionary → change the schema.
 |------|------|
 | `__main__.py` | CLI switchboard; sequences the load/dump stages. |
 | `loader/db.py` | **The only module that talks to PostgreSQL**: `dsn()`, `connect()`, `run_sql_file()`, `copy_from_csv()`/`copy_to_csv()` (via `psql \copy`), `add_ro_grants()`, identifier quoting. |
-| `loader/__init__.py` | `timer`; imports `starobj`; re-exports every stage. |
+| `loader/__init__.py` | `timer`; re-exports every stage. |
 | `loader/dictionary.py` | Load `dictionary.sql` + `dict.*.csv` into the `dict` schema. |
-| `loader/entries.py` | Parse NMR-STAR entry files into `macromolecules`/`metabolomics` via `starobj`. |
+| `loader/entries.py` | Find entry files, prepare the schema, keep score. |
+| `loader/starschema.py` | The dictionary read as a schema definition: type mapping, `create_tables`. |
+| `loader/entryload.py` | pynmrstar parse + batched insert of one entry. |
 | `loader/chemcomps.py` | Dump-and-load chem comps from `ccdb`. |
 | `loader/macromol.py` | Post-load fixups for macromolecule entries. |
 | `loader/metabolomicsextras.py`, `webextras.py` | `meta` and `web` schema extras (CS stats, term/pulse lists). |

@@ -5,8 +5,7 @@
 # Two ways in, for two different reasons:
 #
 #  * psycopg2, for ordinary queries and inserts.  This replaces `pgdb`
-#    (PyGreSQL), which is Python 2 only; psycopg2 is also what `starobj` uses,
-#    so the whole loader now has a single driver.
+#    (PyGreSQL), which is Python 2 only.
 #
 #  * `psql`, for running DDL scripts and for COPY.  Server-side COPY needs
 #    superuser (or pg_read_server_files) and reads files on the *server*;

@@ -1,5 +1,12 @@
 # dbloader Python 3 port — what changed and why
 
+> **Part two: `starobj` and `sas` are gone.** The port first moved to
+> Python 3 keeping `starobj` (§0.4 of the plan). That decision was then
+> reversed: entry loading is now `pynmrstar` + `psycopg2` directly, and neither
+> BMRB library is a runtime dependency any more. See
+> [The starobj removal](#the-starobj-removal) at the end — everything above it
+> describes the port and still holds.
+
 Companion to [`MODERNIZATION_PLAN.md`](MODERNIZATION_PLAN.md) (the brief) and
 [`STAROBJ_PY3_REVIEW.md`](STAROBJ_PY3_REVIEW.md) (the starobj defects this port
 depends on being fixed). This is the record of the port itself: the shape of
@@ -213,11 +220,113 @@ Deliberate, in the order they matter.
 - The production `loader.properties` still carries live hosts,
   `/share/dmaziuk/...` paths and a plaintext ETS password;
   `loader.example.properties` is the annotated version to deploy from.
-- `starobj`'s `dbloader-py3-fixes` branch is what this runs against and is
-  explicitly not for merging to `master` (other projects use `master` as
-  coded). That needs resolving before deployment.
-- `psycopg2.extras.execute_values` for the entry insert path (starobj inserts
-  row by row) — worth doing now that parity is proven, but it is a change to
-  starobj, not to dbloader. For scale: 300 macromolecule entries take 83 s,
-  down from 110 s under Python 2, so a full 14,772-entry archive is roughly
-  70 minutes either way.
+- ~~`starobj`'s `dbloader-py3-fixes` branch~~ — moot: starobj is gone.
+- ~~`execute_values` for the entry insert path~~ — done, see below.
+
+---
+
+# The starobj removal
+
+The port above kept `starobj` (plan §0.4). That was then reversed: entry
+loading is `pynmrstar` + `psycopg2` directly, and `starobj` and `sas` are no
+longer dependencies of anything dbloader runs. They are still needed by
+`tests/golden_*.sh`, which runs the *legacy Python 2 loader* to produce the
+comparison golden — that is the only place they appear now.
+
+## What replaced what
+
+| starobj | replacement |
+|---|---|
+| `StarDictionary.iter_tables` / `iter_tags` / `get_saveframe_category` | `loader/starschema.py` — queries over `dict.adit_item_tbl` |
+| `NMRSTAREntry.create_tables` (the type mapping) | `starschema.create_tables` / `starschema.sqltype` |
+| `NMRSTAREntry.last_sfid` / `insert_saveframe` | `EntryLoader.last_sfid` + the `entry_saveframes` batch |
+| `StarParser` (SAX over `sas`) + `DbWrapper.InsertStatement` | `loader/entryload.py` — `pynmrstar.Entry` walked, rows batched |
+| `DbWrapper` (connections, the `[entry]` config section) | `loader/db.py`, which was already there |
+
+The `[entry]` section the loader used to synthesize for starobj is gone, and so
+is the `engine` option — there is one driver now and it is not configurable.
+
+`float → varchar(63)`, `use_types` (macromolecules all-text, metabolomics
+typed), the `entry_saveframes` DDL, `Sf_ID` inheritance and the `?`/`.`/blank
+null handling are all reproduced exactly; `loader/starschema.py` cites the
+starobj source each rule came from.
+
+## Speed
+
+Same driver, same corpus, same database, back to back — the 300-entry
+macromolecule subset (52 MB) and the 300-entry metabolomics subset (13.7 MB):
+
+| | macromolecules | metabolomics |
+|---|---|---|
+| Python 2 + starobj + pgdb | 110 s | 19 s |
+| Python 3 + starobj + psycopg2 | 79 s | 15 s |
+| Python 3 + pynmrstar, batched | **15 s** | **3.2 s** |
+| | **5.3x** faster | **4.6x** faster |
+
+Two things were slow, and only one of them was the parser:
+
+- **Parsing.** `sas`/`ply` manages 2.6 MB/s; pynmrstar's C extension manages
+  32 MB/s, about **12x**. But parsing was only ~17% of the old load, so on its
+  own that is worth ~1.2x.
+- **Inserts.** starobj issued one `INSERT` per row — 115,579 statements for 50
+  macromolecule entries, ~2,300 per entry — and a profile put
+  `cursor.execute` at the top by a wide margin. `entryload.py` groups every row
+  of a table that shares a column set and sends it in one `execute_values`.
+  That is where the rest of the factor comes from.
+
+Extrapolating to the full archives (14,772 macromolecule + 3,629 metabolomics
+entries), the entry load goes from about **68 minutes to about 13** — or from
+90 minutes, if you start from where this began, Python 2.
+
+## The two differences from the golden
+
+929 of 930 tables are still byte-identical. The exception is
+`entry_saveframes`, in two columns, and `tests/regression.sh` checks it
+separately (`check_saveframes`) rather than by fingerprint.
+
+**`line` is NULL** (owner's decision). pynmrstar reports no source line
+numbers. They could be recovered by scanning the file for `save_` — but the
+numbers in the golden are not the true ones anyway: `sas` under-counts by one
+line per preceding saveframe, exactly and reproducibly (420/420 saveframes
+checked), so `save_system_insulin_A_chain`, really on line 173 of
+`bmr1000_3.str`, is recorded as 171. Rather than carry a deleted lexer's
+off-by-N forward or silently change the numbers, the column is now empty.
+
+**`category` is fixed.** starobj set it in `endSaveframe` with
+
+```sql
+update entry_saveframes set category = :cat where name = :nip
+```
+
+which matches by saveframe **name across every entry loaded so far** — so two
+entries with a saveframe of the same name overwrite each other's category, and
+the last one loaded wins for both. In the 300-entry macromolecule golden that
+is wrong for **59 of 5690** rows: 58 saveframes whose free table is
+`NMR_spectrometer_list` are labelled `NMR_spectrometer`, and one `method` is
+labelled `software`. Entry 4054's `save_spectrometer_list` declares
+`_NMR_spectrometer_list.Sf_category NMR_spectrometer_list` in the file and the
+golden contradicts it.
+
+The new loader writes each saveframe's own category, and the regression asserts
+the strong version of that: every `entry_saveframes.category` must equal the
+`Sf_category` the entry itself declares, joined over all 109 free tables that
+have one. New: 0 mismatches of 5690 (macromolecules) and 0 of 4838
+(metabolomics). Golden: 59 and 0.
+
+## Risks this takes on
+
+- **Quoted values beginning with `$`.** `sas` stripped the `$` off saveframe
+  pointers in the lexer, from any bare `\$\S+` token. pynmrstar does not report
+  whether a value was quoted, so `entryload._value` strips `$` from any value
+  that starts with one and contains no whitespace. A *quoted* `'$5.00'` would be
+  stripped where sas would have kept it. There are none in either archive
+  (checked), and the dictionary's `sfpointerflg` is not an alternative — only
+  322 tags carry it and the archive has pointers in columns without it.
+- **Empty loops.** starobj treated a loop with no rows as an insert error and
+  failed the whole entry; `entryload.py` inserts nothing and carries on. No
+  entry in either archive has one, so the corpus cannot tell them apart.
+- **Encoding.** Entry files are read as `iso8859-15`, the codec starobj used,
+  so no byte sequence can fail to decode. Both corpora are pure ASCII, so this
+  is untested by the golden either way.
+- **pynmrstar is now a hard dependency** of the entry load, and its parser is a
+  C extension — a wheel per platform rather than pure Python.

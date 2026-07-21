@@ -4,7 +4,7 @@
 #
 # Inputs are produced by ../nmr-star-dictionary-scripts: dictionary.sql (the
 # DDL) plus one dict.<table>.csv per table.  This schema is not just reference
-# data -- starobj reads it to build the entry tables, so it has to be loaded
+# data -- the entry tables are generated from it, so it has to be loaded
 # before any entries are.
 #
 

@@ -66,7 +66,6 @@ def main():
     import loader
     loader.released_ids_itr = released_ids_stub
     sys.stderr.write("loader from %s\n" % (os.path.dirname(loader.__file__),))
-    sys.stderr.write("starobj from %s\n" % (os.path.dirname(loader.starobj.__file__),))
 
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
