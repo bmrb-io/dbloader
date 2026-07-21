@@ -7,9 +7,21 @@
 #
 #   __main__.py  builds the schemas in the build database, then dumps them
 #                to /projects/BMRB/staging/dbdump/{bmrb,metabolomics,bmrbeverything}
-#   this script  truncates and re-fills the corresponding tables on the
-#                staging/serving host from those CSVs, then re-grants select
-#                to the read-only web user
+#   this script  loads those CSVs into the staging/serving host and grants
+#                select to the read-only web user.  Two ways:
+#
+#                  --shadow  build <schema>_new from the dump's own schema.sql,
+#                            load into that, then swap it in with renames.  The
+#                            swap is one transaction that touches no rows, so
+#                            readers are blocked for about a millisecond
+#                            instead of for the length of the reload, and a
+#                            failure leaves the live database untouched.
+#                            Because schema.sql comes from the build database,
+#                            whose schema dbloader generates from the
+#                            dictionary, this also rebuilds the serving schema
+#                            from the dictionary -- a dictionary change no
+#                            longer has to be applied by hand.
+#                  default   truncate and refill the live tables in place.
 #
 # Files are `[<schema>.]<table>.csv`; the column order comes from the first
 # line, since it need not match the database.  Mixed-case names are quoted.
@@ -81,9 +93,15 @@ class PgLoader(object):
     # wrapper for subprocess call
     #
     @staticmethod
-    def psql(database, command, verbose=False):
+    def psql(database, command, verbose=False, stop_on_error=True):
 
         cmd = [PgLoader.CONF["psql"]]
+        # Without this psql carries on after a failed statement and still exits
+        # 0 -- which is why the `-c begin ... -c commit` that used to be in
+        # fromcsv() was useless: the \copy failed, psql went on to the commit,
+        # and the TRUNCATE was committed anyway.
+        if stop_on_error:
+            cmd.extend(["-v", "ON_ERROR_STOP=1"])
         cmd.extend(["-U", PgLoader.CONF["rwuser"]])
         cmd.extend(["-d", database])
         if PgLoader.CONF.get("host"):
@@ -117,7 +135,7 @@ class PgLoader(object):
     # truncate table before load: it's 0-cost if it's empty
     #
     @staticmethod
-    def fromcsv(filename, database, schema, table, verbose=False):
+    def fromcsv(filename, database, schema, table, verbose=False, truncate=True):
 
         infile = os.path.realpath(filename)
         if not os.path.exists(infile):
@@ -143,21 +161,30 @@ class PgLoader(object):
         else:
             tbl = '"%s"' % (table,)
 
-        # `only`: never cascade to inherited tables
-        trunc = "truncate table only %s%s" % (scam, tbl,)
         stmt = "\\copy %s%s (%s) from '%s' csv header" % (scam, tbl, colstr, infile,)
 
-        if verbose:
-            cmd = ["-c", "\\timing on", "-c", trunc, "-c", stmt]
+        cmd = ["-c", "\\timing on"] if verbose else []
+        if truncate:
+            # In one transaction, so a failed \copy leaves the old rows in
+            # place instead of an empty table.  Multiple -c options share a
+            # session, and ON_ERROR_STOP (see psql()) makes psql exit before
+            # the commit, which rolls the truncate back.
+            #
+            # `only`: never cascade to inherited tables.
+            cmd.extend(["-c", "begin",
+                        "-c", "truncate table only %s%s" % (scam, tbl,),
+                        "-c", stmt,
+                        "-c", "commit"])
         else:
-            cmd = ["-c", trunc, "-c", stmt]
+            # loading a freshly created shadow table: nothing to truncate
+            cmd.extend(["-c", stmt])
 
         return PgLoader.psql(database=database, command=cmd, verbose=verbose)
 
     # add read-only grants for RO user
     #
     @staticmethod
-    def add_ro_grants(db="bmrb", verbose=False):
+    def add_ro_grants(db="bmrb", verbose=False, schemas=None):
 
         sqls = ("grant usage on schema %s to %s",
                 "grant select on all tables in schema %s to %s",
@@ -179,24 +206,25 @@ class PgLoader(object):
         if PgLoader.CONF.get("port"):
             psql.extend(["-p", str(PgLoader.CONF["port"])])
 
-        cmd = psql[:]
-        cmd.extend(["-A", "-t", "-F,"])  # CSV output, tuples only
-        cmd.extend(["-c", r"\dn"])
-        if verbose:
-            sys.stdout.write("%s\n" % (" ".join(cmd),))
+        # `schemas`: grant on exactly these (the shadow schemas, before they
+        # are swapped in).  Otherwise ask the server what is there.
+        if schemas is None:
+            cmd = psql[:]
+            cmd.extend(["-A", "-t", "-F,"])  # CSV output, tuples only
+            cmd.extend(["-c", r"\dn"])
+            if verbose:
+                sys.stdout.write("%s\n" % (" ".join(cmd),))
 
-        p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                             universal_newlines=True)
-        (out, err) = p.communicate()
-        if p.returncode != 0:
-            rc += "%s: psql -c %s returned %d\n" % (db, r"\dn", p.returncode,)
-            sys.stderr.write("%s%s\n" % (rc, err,))
-            return rc
+            p = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 universal_newlines=True)
+            (out, err) = p.communicate()
+            if p.returncode != 0:
+                rc += "%s: psql -c %s returned %d\n" % (db, r"\dn", p.returncode,)
+                sys.stderr.write("%s%s\n" % (rc, err,))
+                return rc
+            schemas = [line.split(",")[0] for line in out.splitlines() if line.strip() != ""]
 
-        for line in out.splitlines():
-            if line.strip() == "":
-                continue
-            schema = line.split(",")[0]
+        for schema in schemas:
             for sql in sqls:
                 cmd = psql[:]
                 cmd.extend(["-c", sql % (schema, PgLoader.CONF["rouser"],)])
@@ -208,6 +236,131 @@ class PgLoader(object):
                     rc += "%s: psql -c 'grant r/o privs' returned %d\n" % (db, p.returncode,)
 
         return rc
+
+    ####################################################################
+    # shadow schemas
+    #
+    # Instead of truncating the live tables and refilling them -- which leaves
+    # readers looking at a half-loaded database, and an empty table if a copy
+    # fails -- build the whole thing alongside as <schema>_new and swap it in
+    # with renames, which are atomic and take a lock for the length of one
+    # transaction that does no work.
+    #
+    # This also answers "rebuild the serving schema from the dictionary on
+    # reload": the DDL comes from the dump's own schema.sql, which pg_dump took
+    # from the build database, whose schema dbloader generated from the
+    # dictionary (see loader/starschema.py).  Creating the shadow schema from
+    # it *is* the dictionary-driven rebuild -- so a dictionary change no longer
+    # has to be applied to the serving database by hand.
+
+    SHADOW = "_new"
+    RETIRING = "_old"
+
+    @staticmethod
+    def schemas_in_ddl(script):
+        """Schema names the dump's DDL creates, in the order it creates them."""
+
+        pat = re.compile(r"^CREATE SCHEMA (?:IF NOT EXISTS )?([A-Za-z_][A-Za-z_0-9]*)\s*;",
+                         re.IGNORECASE)
+        out = []
+        with open(script) as f:
+            for line in f:
+                m = pat.match(line.strip())
+                if m and m.group(1) not in out:
+                    out.append(m.group(1))
+        return out
+
+    @staticmethod
+    def shadow_ddl(script, schemas, outfile):
+        """Rewrite schema.sql to build <schema>_new instead of <schema>.
+
+        pg_dump was run with `-c`, so the script starts by dropping what it is
+        about to create; none of that applies to a schema we just created
+        empty, and with ON_ERROR_STOP the first one aborts the run.  That
+        clean section is everything between the `SET` header and the first
+        `CREATE` -- DROP statements, but also `ALTER TABLE ... DROP CONSTRAINT`
+        and `ALTER TABLE ... ALTER COLUMN ... DROP DEFAULT` -- so it is skipped
+        by position rather than by trying to enumerate the forms.  The ALTERs
+        *after* the first CREATE define constraints and defaults and are kept.
+
+        Every reference is schema-qualified (checked: the views are too, and
+        none of them crosses a schema), so renaming is a matter of rewriting
+        `<schema>.` -- which has to happen inside view bodies as well, or a
+        view in dict_new would read from the live dict.
+        """
+
+        subs = [(re.compile(r"\b%s\." % (re.escape(s),)), "%s%s." % (s, PgLoader.SHADOW,))
+                for s in schemas]
+        create = re.compile(r"^(CREATE SCHEMA (?:IF NOT EXISTS )?)(%s)\b"
+                            % ("|".join(re.escape(s) for s in schemas),), re.IGNORECASE)
+        clean = re.compile(r"^\s*(DROP|ALTER)\s", re.IGNORECASE)
+
+        kept = 0
+        seen_create = False
+        with open(script) as f, open(outfile, "w") as out:
+            for line in f:
+                if not seen_create:
+                    if line.upper().startswith("CREATE "):
+                        seen_create = True
+                    elif clean.match(line):
+                        continue
+                line = create.sub(lambda m: m.group(1) + m.group(2) + PgLoader.SHADOW, line)
+                for (pat, rep) in subs:
+                    line = pat.sub(rep, line)
+                out.write(line)
+                kept += 1
+        return kept
+
+    @staticmethod
+    def create_shadow(db, script, schemas, verbose=False):
+        """Drop any leftover shadow schemas and build them from the dump's DDL."""
+
+        cmd = []
+        for s in schemas:
+            cmd.extend(["-c", "drop schema if exists %s%s cascade" % (s, PgLoader.SHADOW,)])
+        rc = PgLoader.psql(database=db, command=cmd, verbose=verbose)
+        if rc != 0:
+            return rc
+
+        ddl = script + PgLoader.SHADOW
+        PgLoader.shadow_ddl(script, schemas, ddl)
+        if verbose:
+            sys.stdout.write("shadow DDL: %s\n" % (ddl,))
+        return PgLoader.psql(database=db, command=["-f", ddl], verbose=verbose)
+
+    @staticmethod
+    def swap_shadow(db, schemas, verbose=False):
+        """Swap every shadow schema in, in one transaction, then drop the old.
+
+        The renames are what the readers see: one transaction that touches no
+        rows, so the exclusive locks are held for microseconds rather than for
+        the length of a reload.  Dropping the old schemas afterwards is done
+        outside that transaction so it cannot hold them.
+        """
+
+        stmts = ["begin"]
+        for s in schemas:
+            # first run: there may be nothing to rename out of the way
+            stmts.append(
+                "do $swap$ begin"
+                " if exists (select 1 from pg_namespace where nspname = '%s') then"
+                "   execute 'alter schema %s rename to %s%s';"
+                " end if;"
+                " execute 'alter schema %s%s rename to %s';"
+                " end $swap$" % (s, s, s, PgLoader.RETIRING, s, PgLoader.SHADOW, s,))
+        stmts.append("commit")
+
+        cmd = []
+        for s in stmts:
+            cmd.extend(["-c", s])
+        rc = PgLoader.psql(database=db, command=cmd, verbose=verbose)
+        if rc != 0:
+            return rc
+
+        cmd = []
+        for s in schemas:
+            cmd.extend(["-c", "drop schema if exists %s%s cascade" % (s, PgLoader.RETIRING,)])
+        return PgLoader.psql(database=db, command=cmd, verbose=verbose)
 
     # run schema.sql to drop and recreate tables
     #
@@ -223,7 +376,8 @@ class PgLoader(object):
     # glob files and decide which to load where
     #
     @staticmethod
-    def update_db(db="bmrb", create=False, schema="any", path=None, verbose=False):
+    def update_db(db="bmrb", create=False, schema="any", path=None, verbose=False,
+                  shadow=False, rouser=None):
 
         if path is not None:
             inputdir = os.path.realpath(path)
@@ -235,18 +389,7 @@ class PgLoader(object):
             raise IOError("Not a directory: %s" % (inputdir,))
 
         rc = ""
-
-        # -c: drop and re-create everything from the dump's own DDL first.
-        # The updater does NOT do this -- it truncates and re-fills, so the
-        # target keeps its schema (and anything else living in it).
-        #
-        if create:
-            script = os.path.join(inputdir, PgLoader.CONF["ddlfile"])
-            if not os.path.exists(script):
-                raise IOError("Not found: %s" % (script,))
-            x = PgLoader.runscript(scriptfile=script, db=db, verbose=verbose)
-            if x != 0:
-                sys.stderr.write("runscript %s returned %s\n" % (script, x,))
+        script = os.path.join(inputdir, PgLoader.CONF["ddlfile"])
 
         # could be table.csv or schema.table.csv
         #
@@ -259,6 +402,44 @@ class PgLoader(object):
             rc += "No input files for %s - %s\n" % (db, schema,)
             return rc
 
+        shadow_schemas = []
+        if shadow:
+            if not os.path.exists(script):
+                raise IOError("--shadow needs the dump's DDL: %s not found" % (script,))
+
+            unqualified = sorted(set(os.path.split(f)[1] for f in files
+                                     if pat.search(os.path.split(f)[1]).group(1) is None))
+            if unqualified:
+                raise ValueError(
+                    "--shadow needs a schema-qualified dump; %d of these files have no"
+                    " schema prefix (e.g. %s). The old-style layouts (-d bmrb,"
+                    " --dump-macromolecule-db) put entry tables in the search_path"
+                    " instead, and cannot be swapped this way."
+                    % (len(unqualified), unqualified[0],))
+
+            shadow_schemas = PgLoader.schemas_in_ddl(script)
+            if len(shadow_schemas) < 1:
+                raise ValueError("no CREATE SCHEMA in %s -- nothing to swap" % (script,))
+            if verbose:
+                sys.stdout.write("shadow schemas: %s\n"
+                                 % (", ".join(s + PgLoader.SHADOW for s in shadow_schemas),))
+
+            x = PgLoader.create_shadow(db=db, script=script, schemas=shadow_schemas,
+                                       verbose=verbose)
+            if x != 0:
+                return "building the shadow schemas from %s returned %s\n" % (script, x,)
+
+        # -c: drop and re-create everything from the dump's own DDL first.
+        # Without --shadow the updater does NOT do this -- it truncates and
+        # re-fills, so the target keeps its schema (and anything else in it).
+        #
+        elif create:
+            if not os.path.exists(script):
+                raise IOError("Not found: %s" % (script,))
+            x = PgLoader.runscript(scriptfile=script, db=db, verbose=verbose)
+            if x != 0:
+                sys.stderr.write("runscript %s returned %s\n" % (script, x,))
+
         for f in files:
             m = pat.search(os.path.split(f)[1])
 
@@ -268,10 +449,32 @@ class PgLoader(object):
                 if schema != m.group(1):
                     continue
 
-            x = PgLoader.fromcsv(filename=f, database=db, schema=m.group(1),
-                                 table=m.group(2), verbose=verbose)
+            target = m.group(1)
+            if shadow:
+                target += PgLoader.SHADOW
+
+            x = PgLoader.fromcsv(filename=f, database=db, schema=target,
+                                 table=m.group(2), verbose=verbose,
+                                 truncate=not shadow)
             if x != 0:
                 rc += "\npsql load of %s returned %s\n" % (f, x,)
+
+        if shadow:
+            if rc != "":
+                # nothing has been swapped in, so the live database is untouched
+                return rc + ("\nNOT swapping %s in: the shadow load failed. The live"
+                             " database is unchanged.\n" % (db,))
+
+            # grant before the swap, not after: privileges follow the objects
+            # through a rename, so the read-only user never sees a gap
+            if rouser is not None:
+                rc += PgLoader.add_ro_grants(db=db, verbose=verbose,
+                                             schemas=[s + PgLoader.SHADOW
+                                                      for s in shadow_schemas]) or ""
+
+            x = PgLoader.swap_shadow(db=db, schemas=shadow_schemas, verbose=verbose)
+            if x != 0:
+                rc += "swapping the shadow schemas in returned %s\n" % (x,)
 
         return rc
 
@@ -295,6 +498,10 @@ if __name__ == "__main__":
                     help="directory with input files")
     ap.add_argument("-g", "--grants", default=False, action="store_true",
                     help="add read-only grants for web user", dest="grant")
+    ap.add_argument("--shadow", default=False, action="store_true", dest="shadow",
+                    help="build <schema>_new from the dump's schema.sql, load into that,"
+                         " and swap it in with renames -- atomic, and rebuilds the schema"
+                         " from the dictionary. Needs a schema-qualified dump.")
     # the server was hard-coded; it still defaults to the same one
     ap.add_argument("-H", "--host", dest="host", default=PgLoader.CONF["host"],
                     help="database server (default: %(default)s)")
@@ -314,22 +521,33 @@ if __name__ == "__main__":
     PgLoader.CONF["rouser"] = args.rouser
     PgLoader.CONF["psql"] = args.psql
 
+    # the three known databases have a default input directory; anything else
+    # is fine too as long as -i says where to read it from
+    known = ("bmrb", "bmrbeverything", "metabolomics")
     wanted = args.db.lower()
-    if wanted not in list(PgLoader.CONF["databases"].keys()) + ["all"]:
-        ap.error("don't know how to load %s" % (args.db,))
+    if wanted == "all":
+        targets = known
+    elif wanted in known:
+        targets = (wanted,)
+    elif args.filedir:
+        targets = (args.db,)
+    else:
+        ap.error("don't know where to load %s from -- pass -i" % (args.db,))
 
     messages = ""
-    for db in ("bmrb", "bmrbeverything", "metabolomics"):
-        if wanted not in (db, "all"):
-            continue
+    for db in targets:
         if db in PgLoader.RETIRED:
             sys.stdout.write("Skipping %s: that serving database was retired,"
                              " its data is in bmrbeverything\n" % (db,))
             continue
         with timer("Load " + db, verbose=True):
             messages += PgLoader.update_db(db=db, create=args.create, schema=args.schema,
-                                           path=args.filedir, verbose=args.verbose) or ""
-            if args.grant:
+                                           path=args.filedir, verbose=args.verbose,
+                                           shadow=args.shadow,
+                                           rouser=args.rouser if args.grant else None) or ""
+            # --shadow grants before the swap, so there is no window in which
+            # the read-only user cannot read
+            if args.grant and not args.shadow:
                 messages += PgLoader.add_ro_grants(db=db, verbose=args.verbose) or ""
 
     if messages.strip() != "":

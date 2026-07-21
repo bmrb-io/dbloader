@@ -113,9 +113,17 @@ Things to know before changing any of this:
   must not import `loader` (which needs psycopg2).
 - **The serving host is hard-coded** in its `CONF`, not read from a properties
   file. `-H/--host`, `-U/--user` and `--psql` can override it.
-- **The DAG never passes `-c/--create`**, so `schema.sql` is dumped but never
-  used: the serving tables must already exist. The load truncates and refills
-  them, so a schema change has to be applied there by hand.
+- **`--shadow` is the good path, and the DAG does not use it yet.** It builds
+  `<schema>_new` from the dump's `schema.sql`, loads into that, and swaps it in
+  with renames: atomic (~1 ms of locking instead of a whole reload), a failure
+  leaves the live database untouched, and since `schema.sql` comes from the
+  build database — whose schema dbloader generates from the dictionary — it
+  rebuilds the serving schema from the dictionary as a side effect. Turning it
+  on is one word in `410_load_staging_everything.sub`. Needs a
+  schema-qualified dump, so `bmrbeverything` only.
+- **Without `--shadow` the DAG never passes `-c/--create`** either, so
+  `schema.sql` is dumped but unused: the serving tables must already exist and
+  a schema change has to be applied there by hand.
 - **The reload is not atomic.** Each table is `truncate table only` + `\copy`
   in one `psql` call with no transaction, so the TRUNCATE commits before the
   `\copy` runs: a copy that fails leaves that table **empty** on the live

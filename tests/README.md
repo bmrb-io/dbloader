@@ -82,7 +82,14 @@ sh tests/golden_entries.sh         # golden entry schemas         (~3 min)
 sh tests/regression.sh             # the rewrite, diffed          (~3 min)
 sh tests/regression.sh truncate    # again, via the truncate path (~3 min)
 sh tests/regression.sh dumps       # the CSV dump path            (~1 min)
+sh tests/shadow_swap.sh            # the publish step             (~1 min)
 ```
+
+`shadow_swap.sh` tests `load_postgres_db.py`, the half of the pipeline that
+loads a dump into the serving database: the `--shadow` swap, the
+truncate-in-place path, and -- the cases that matter -- that neither leaves the
+serving database emptier than it found it when a copy fails. It needs a dump,
+so run `regression.sh dumps` first.
 
 `tests/bench.py` times the entry load on its own, and `--parse-only` times just
 the parser:
