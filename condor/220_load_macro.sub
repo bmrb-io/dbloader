@@ -1,14 +1,15 @@
 #
 # /share/dmaziuk/projects/dbloader/__main__.py -c /share/dmaziuk/projects/dbloader/loader.properties --load-only --no-dict --drop-tables --no-chemcomps --no-metabolomics
 #
-# this should probably run on the database server but it needs python 2.7 and DB host is 2.6
-# run on the master webserver instead
+# runs on the master webserver rather than the database server.
+# `dbloader.egg` is a symlink to the current build (packaging/setup.py names
+# the egg after the python it was built with, e.g. dbloader-2.0-py3.12.egg).
 # TODO dockerize it sometime?
 #
 
 universe = LOCAL
-executable   = /usr/bin/python
-arguments    = "/websites/_updaters.prod/dbloader-1.0-py2.7.egg -c /websites/_updaters.prod/dbloader.properties --no-dump --no-dict --drop-tables --no-chemcomps --no-metabolomics"
+executable   = /usr/bin/python3
+arguments    = "/websites/_updaters.prod/dbloader.egg -c /websites/_updaters.prod/dbloader.properties --no-dump --no-dict --drop-tables --no-chemcomps --no-metabolomics"
 request_memory = 0
 priority     = 0
 output       = $(STDOUTFILE)

@@ -1,0 +1,90 @@
+#
+# Template for the local test config (see MODERNIZATION_PLAN.md §6).
+#
+# Same shape as the production loader.properties, but pointed at the throwaway
+# PostgreSQL started by `pg-tmp` (unix socket in /tmp, trust auth) and at
+# generated inputs under tests/build/.  Production hosts/paths (irukandji,
+# octopus, /share/dmaziuk/...) are deliberately absent.
+#
+# Rendered to tests/build/loader.properties by tests/render_config.sh, which
+# substitutes:
+#   @REPO@   the dbloader checkout holding the data files (*.sql, *.js, *.csv)
+#   @TESTS@  the tests/ directory holding the generated build/ tree
+#   @ENGINE@ the database driver starobj should use: psycopg2, or pgdb for the
+#            Python 2 golden run
+# The paths must be absolute: the golden runs out of a separate py2 worktree,
+# so nothing here can be relative to the current directory.
+#
+
+[dictionary]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = dict
+
+# file path is relative to the directory given with -d
+#
+ddlfile = dictionary.sql
+
+[macromolecules]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = macromolecules
+# stride sample of the released archive -- see tests/make_subset.sh
+entrydir = @TESTS@/build/entries/macromolecules
+csstats = @REPO@/cs_stats.sql
+software_mapfile = @REPO@/software.js
+software_authors_mapfile = @REPO@/swauthors.js
+task_mapfile = @REPO@/task.js
+
+[metabolomics]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = metabolomics
+entrydir = @TESTS@/build/entries/metabolomics
+
+# the ccdb source database is not reachable from here, so this section exists
+# only so the `bmrbeverything` dump (which covers every schema) can run
+#
+[chemcomps]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = chemcomps
+
+[web]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = web
+ddlfile = @REPO@/webschema.sql
+csvfiles = @REPO@/web.pulsefilelist.csv
+    @REPO@/web.termlist.csv
+
+[meta]
+engine = @ENGINE@
+database = bmrb
+host = /tmp
+user = bmrb
+rouser = web
+password =
+schema = meta
+csvdir = @REPO@/metabolomics_meta_files
+ddlfile = @REPO@/metabolomics_meta_schema.sql

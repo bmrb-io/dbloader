@@ -1,0 +1,7 @@
+# Python 3 dependencies.
+#
+# starobj is not on PyPI: check it out (branch `dbloader-py3-fixes`) and point
+# $STAROBJ_PATH or $PYTHONPATH at it, along with sas/python.  It pulls in `ply`.
+#
+psycopg2-binary
+ply

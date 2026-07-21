@@ -366,7 +366,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 \copy web.cs_stat_rna_full to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/rna_full.csv' csv header
 \copy web.cs_stat_rna_filt to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/rna_filt.csv' csv header
 \copy web.cs_stat_dna_full to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/dna_full.csv' csv header
-\copy web.cs_stat_dna_filt to '/projects/BMRB/public/pub/bmrb/statistics/chem_shifts/dna_filt.csv' csv header
+\copy web.cs_stat_dna_filt to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/dna_filt.csv' csv header
 \copy web.cs_stat_aa_full to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/aa_full.csv' csv header
 \copy web.cs_stat_aa_filt to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/aa_filt.csv' csv header
 \copy web.cs_stat_nstd to '/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/others.csv' csv header

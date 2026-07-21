@@ -1,247 +1,215 @@
-#!/usr/bin/python -u
+#!/usr/bin/env python3
 #
-# stuff specific to macromolecule entries:
-#  table cleanups,
-#  statistics
+# Post-load cleanups for macromolecule entries.
+#
+# These normalize values the depositors typed in freely -- software names,
+# task names, vendor names -- against hand-maintained maps (software.js,
+# task.js, swauthors.js), and patch up a few entries by hand.  All of it runs
+# in one transaction: either the archive is fixed up or it is left as loaded.
 #
 
-from __future__ import absolute_import
+import argparse
+import json
 import os
 import sys
-import json
-import pgdb
-import argparse
-import ConfigParser
+from configparser import ConfigParser
 
-_UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
-sys.path.append( _UP )
-import loader
+_UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
+sys.path.append(_UP)
+from loader import db
 
 DB = "macromolecules"
+
+
+def _table(name):
+    return db.qualified(DB, name)
+
+
+def _log(verbose, sql, curs=None):
+    if not verbose:
+        return
+    sys.stdout.write(sql if curs is None else "%s : %d\n" % (sql, curs.rowcount,))
+
 
 # wrapper for misc. fixes
 #
 #
-def fixup( config, verbose = False ) :
-    if verbose :
-        sys.stdout.write( "fixup()\n" )
+def fixup(config, verbose=False):
+    if verbose:
+        sys.stdout.write("fixup()\n")
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    conn = db.connect(db.dsn(config, DB))
+    try:
+        with conn.cursor() as curs:
+            fix_software(curs, config, verbose=verbose)
+            fix_task(curs, config, verbose=verbose)
+            fix_software_authors(curs, config, verbose=verbose)
+            fix_entry(curs, verbose=verbose)
+            fix_entities(curs, verbose=verbose)
+            fix_csref(curs, verbose=verbose)
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
-    global DB
 
-    with pgdb.connect( **(loader.dsn( config, DB )) ) as conn :
-        conn.autocommit = False
-        with conn.cursor() as curs :
-            try :
-                fix_software( curs, config, verbose = verbose )
-                fix_task( curs, config, verbose = verbose )
-                fix_software_authors( curs, config, verbose = verbose )
-                fix_entry( curs, verbose = verbose )
-                fix_entities( curs, verbose = verbose )
-                fix_csref( curs, verbose = verbose )
-                conn.commit()
-            except :
-                conn.rollback()
-                raise
-    
 #
 #
-def fix_entry( curs, verbose = False ) :
+def fix_entry(curs, verbose=False):
 
-    global DB
+    entry = _table("Entry")
+    small = """update %s set "Type"='small molecule structure' where """ % (entry,)
 
-    sql = """update %s."Entry" set "Type"='small molecule structure' where "ID"='15443' and "Type" is null""" % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
-    sql = """update %s."Entry" set "Type"='small molecule structure' where "ID"='16041' and "Type" is null""" % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
-    sql = """update %s."Entry" set "Type"='small molecule structure' where cast("ID" as integer)>=20000 and cast("ID" as integer)<25000 and "Type" is null""" % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
-    sql = """update %s."Entry" set "Type"='macromolecule' where cast("ID" as integer)<20000 and "Type" is null""" % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
+    for sql in (small + """"ID"='15443' and "Type" is null""",
+                small + """"ID"='16041' and "Type" is null""",
+                small + """cast("ID" as integer)>=20000 and cast("ID" as integer)<25000"""
+                        """ and "Type" is null""",
+                """update %s set "Type"='macromolecule'"""
+                """ where cast("ID" as integer)<20000 and "Type" is null""" % (entry,),
+                # these are non-public and shouldn't be there; wipe them just in case
+                "truncate %s" % (_table("Contact_person"),),
+                "truncate %s" % (_table("Upload_data"),)):
+        _log(verbose, sql)
+        curs.execute(sql)
+        _log(verbose, sql, curs)
 
-# these are non-public and shouldn't be there
-# wipe them out just in case
-#
-    sql = 'truncate %s."Contact_person"' % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
-    sql = 'truncate %s."Upload_data"' % (DB,)
-    if verbose : print (sql),
-    curs.execute( sql )
-    if verbose : print curs.rowcount
 
 # this one takes a dictionary "map" and reduces to the key
 #  to normalize all different spellings etc.
-# If map is empty, just fixes the case.
+# If the map's value list is empty, this just fixes the case.
 #
-def _fix_map( curs, table = None, column = None, which = None, verbose = False ) :
+def _fix_map(curs, table, column, which, verbose=False):
 
-    assert table is not None
+    sql = """update %s set %s=%%s where regexp_replace( trim( lower( %s ) ), '[[:space:]]+', ' ' )=%%s""" \
+        % (_table(table), db.quote(column), db.quote(column))
 
-    global DB
+    for name in sorted(which.keys()):
+        for spelling in [name] + list(which[name] or []):
+            _log(verbose, sql % (name, spelling.lower()))
+            curs.execute(sql, (name, spelling.lower()))
+            _log(verbose, sql, curs)
 
-    sql = """update %s."%s" set "%s"=%%s where regexp_replace( trim( lower( "%s" ) ), '[[:space:]]+', ' ' )=%%s""" \
-        % (DB,table, column, column)
-
-    for i in sorted( which.keys() ) :
-        if verbose : print (sql % (i, i.lower()) ),
-        curs.execute( sql, (i, i.lower()) )
-        if verbose : print curs.rowcount
-        if which[i] != None :
-            for j in which[i] :
-                task = j.lower()
-                if verbose : print (sql % (i,task)),
-                curs.execute( sql, (i,task) )
-                if verbose : print curs.rowcount
 
 # names don't need to be barewords,
 # sequences are line-wrapped in the entries
 #
-def fix_entities( curs, verbose = False ) :
+def fix_entities(curs, verbose=False):
 
-    global DB
+    for table in ("Entity", "Assembly", "Chem_comp"):
+        sql = """update %s set "Name"=regexp_replace("Name", '_+', ' ', 'g')""" % (_table(table),)
+        _log(verbose, sql)
+        curs.execute(sql)
+        _log(verbose, sql, curs)
 
-    for table in ( "Entity", "Assembly", "Chem_comp" ) :
-        sql = """update %s."%s" set "Name"=regexp_replace("Name", '_+', ' ', 'g')""" % (DB,table,)
-        if verbose : print sql,
-        curs.execute( sql )
-        if verbose : print curs.rowcount
+    sql = """update %s set "Polymer_seq_one_letter_code_can"=regexp_replace( "Polymer_seq_one_letter_code_can",'\n','','g'),
+          "Polymer_seq_one_letter_code"=regexp_replace( "Polymer_seq_one_letter_code",'\n','','g')""" \
+        % (_table("Entity"),)
+    _log(verbose, sql)
+    curs.execute(sql)
+    _log(verbose, sql, curs)
 
-    sql = 'update %s."Entity"'  % (DB,)
-    sql += """  set "Polymer_seq_one_letter_code_can"=regexp_replace( "Polymer_seq_one_letter_code_can",'\n','','g'),
-          "Polymer_seq_one_letter_code"=regexp_replace( "Polymer_seq_one_letter_code",'\n','','g')"""
-    if verbose : print sql,
-    curs.execute( sql )
-    if verbose : print curs.rowcount
 
 #
 #
-def fix_csref( curs, verbose = False ) :
+def fix_csref(curs, verbose=False):
 
-# TODO!
-#    with open( "chem_shift_ref_todo.csv", "rU" ) as f :
-#        cs = csv.DictReader( f )
-#        for row in cs :
-#            if verbose : print row
+    # TODO!
+    #    with open( "chem_shift_ref_todo.csv" ) as f :
+    #        cs = csv.DictReader( f )
+    #        for row in cs :
+    #            if verbose : print( row )
     pass
 
-# softwre/task fixup originally done for nmrbox
+
+def _mapfile(config, option, verbose=False):
+    """Read one of the hand-maintained JSON maps; None if it isn't there."""
+
+    f = os.path.realpath(config.get(DB, option))
+    if not os.path.exists(f):
+        if verbose:
+            sys.stderr.write("File not found: %s\n" % (f,))
+        return None
+    with open(f) as inf:
+        return json.load(inf)
+
+
+# software/task fixup originally done for nmrbox
 #
-def fix_software( curs, config, verbose = False ) :
-    if verbose : sys.stdout.write( "fix_software()\n" )
+def fix_software(curs, config, verbose=False):
+    if verbose:
+        sys.stdout.write("fix_software()\n")
 
-    global DB
+    dat = _mapfile(config, "software_mapfile", verbose)
+    if dat is not None:
+        _fix_map(curs, table="Software", column="Name", which=dat, verbose=verbose)
 
-    infile = config.get( DB, "software_mapfile" )
-    f = os.path.realpath( infile )
-    if not os.path.exists( f ) :
-        if verbose : sys.stderr.write( "File not found: %s\n" % (f,) )
+
+def fix_task(curs, config, verbose=False):
+    if verbose:
+        sys.stdout.write("fix_task()\n")
+
+    dat = _mapfile(config, "task_mapfile", verbose)
+    if dat is not None:
+        _fix_map(curs, table="Task", column="Task", which=dat, verbose=verbose)
+
+
+def fix_software_authors(curs, config, verbose=False):
+    if verbose:
+        sys.stdout.write("fix_software_authors()\n")
+
+    dat = _mapfile(config, "software_authors_mapfile", verbose)
+    if dat is None:
         return
-    with open( f ) as inf : dat = json.load( inf )
-    _fix_map( curs, table = "Software", column = "Name", which = dat, verbose = verbose )
 
-def fix_task( curs, config, verbose = False ) :
-    if verbose : sys.stdout.write( "fix_task()\n" )
+    qry = 'select "Sf_ID","Entry_ID" from %s where "Name"=%%s' % (_table("Software"),)
+    upd = 'update %s set "Name"=%%s where "Sf_ID"=%%s and "Entry_ID"=%%s' % (_table("Vendor"),)
 
-    global DB
+    for (sw, vendor) in sorted(dat.items()):
+        _log(verbose, qry % (sw,) + "\n")
+        curs.execute(qry, (sw,))
+        for (sfid, entryid) in curs.fetchall():
+            curs.execute(upd, (vendor, sfid, entryid))
+            _log(verbose, upd % (vendor, sfid, entryid), curs)
 
-    infile = config.get( DB, "task_mapfile" )
-    f = os.path.realpath( infile )
-    if not os.path.exists( f ) :
-        if verbose : sys.stderr.write( "File not found: %s\n" % (f,) )
-        return
-    with open( f ) as inf : dat = json.load( inf )
-    _fix_map( curs, table = "Task", column = "Task", which = dat, verbose = verbose )
+    # special
+    #
+    qry = """select "Sf_ID","Entry_ID" from %s where "Name"='PyMol'""" % (_table("Software"),)
+    curs.execute(qry)
+    pymol = curs.fetchall()
 
-def fix_software_authors( curs, config, verbose = False ) :
-    if verbose : sys.stdout.write( "fix_software_authors()\n" )
+    vendor = _table("Vendor")
+    up1 = """update %s set "Name"='DeLano Scientific LLC.'""" % (vendor,) \
+        + """ where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%delano%%'"""
+    up2 = """update %s set "Name"='Schrodinger, LLC'""" % (vendor,) \
+        + """ where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%dinger%%'"""
 
-    global DB
+    for (sfid, entryid) in pymol:
+        for sql in (up1, up2):
+            curs.execute(sql, (sfid, entryid))
+            _log(verbose, sql % (sfid, entryid), curs)
 
-    infile = config.get( DB, "software_authors_mapfile" )
-    f = os.path.realpath( infile )
-    if not os.path.exists( f ) :
-        if verbose : sys.stderr.write( "File not found: %s\n" % (f,) )
-        return
-    with open( f ) as inf : dat = json.load( inf )
-
-# redundant
-#
-    qry = 'select "Sf_ID","Entry_ID" from %s."Software"' % (DB,)
-    qry += ' where "Name"=%s'
-    upd = 'update %s."Vendor"' % (DB,)
-    upd += ' set "Name"=%s where "Sf_ID"=%s and "Entry_ID"=%s'
-
-    entries = {}
-    for (sw, vend) in dat.iteritems() :
-        entries.clear()
-        if verbose :
-            sys.stdout.write( qry % (sw,) )
-            sys.stdout.write( "\n" )
-        curs.execute( qry, (sw,) )
-        while True :
-            row = curs.fetchone()
-            if row == None : break
-            entries[row[1]] = row[0]
-
-        for (eid, sfid) in entries.iteritems() :
-            if verbose :
-                sys.stdout.write( upd % (vend, sfid, eid) )
-            curs.execute( upd, (vend, sfid, eid) )
-            if verbose :
-                sys.stdout.write( " : %d\n" % (curs.rowcount,) )
-
-# special
-#
-    qry = """select "Sf_ID","Entry_ID" from %s."Software" where "Name"='PyMol'""" % (DB,)
-    entries.clear()
-    curs.execute( qry )
-    while True :
-        row = curs.fetchone()
-        if row == None : break
-        entries[row[1]] = row[0]
-
-    up1 = 'update %s."Vendor"' % (DB,)
-    up1 += """ set "Name"='DeLano Scientific LLC.' where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%delano%%'"""
-    up2 = 'update %s."Vendor"' % (DB,)
-    up2 += """ set "Name"='Schrodinger, LLC' where "Sf_ID"=%s and "Entry_ID"=%s and "Name" like '%%dinger%%'"""
-    for (eid, sfid) in entries.iteritems() :
-        if verbose : sys.stdout.write( up1 % (sfid,eid) )
-        curs.execute( up1, (sfid,eid) )
-        if verbose : sys.stdout.write( " : %d\n" % (curs.rowcount,) )
-
-        if verbose : sys.stdout.write( up2 % (sfid,eid) )
-        curs.execute( up2, (sfid,eid) )
-        if verbose : sys.stdout.write( " : %d\n" % (curs.rowcount,) )
 
 #
 #
 #
-if __name__ == "__main__" :
+if __name__ == "__main__":
 
-    ap = argparse.ArgumentParser( description = "load NMR-STAR files into PostgreSQL database" )
-    ap.add_argument( "-t", "--time", help = "print out timings", dest = "time", action = "store_true",
-        default = False )
-    ap.add_argument( "-v", "--verbose", help = "print lots of messages to stdout", dest = "verbose",
-        action = "store_true", default = False )
-
-    ap.add_argument( "-c", "--config", help = "config file", dest = "conffile", required = True )
-
+    ap = argparse.ArgumentParser(description="post-load fixups for macromolecule entries")
+    ap.add_argument("-t", "--time", help="print out timings", dest="time", action="store_true",
+                    default=False)
+    ap.add_argument("-v", "--verbose", help="print lots of messages to stdout", dest="verbose",
+                    action="store_true", default=False)
+    ap.add_argument("-c", "--config", help="config file", dest="conffile", required=True)
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
-    f = os.path.realpath( args.conffile )
-    cp.read( f )
+    cp = ConfigParser()
+    cp.read(os.path.realpath(args.conffile))
 
-    with loader.timer( label = "Macromolecule fixup", silent = args.time ) :
-        fixup( config = cp, verbose = args.verbose )
+    import loader
+    with loader.timer(label="Macromolecule fixup", silent=not args.time):
+        fixup(config=cp, verbose=args.verbose)
+
+#
+# eof

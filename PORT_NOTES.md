@@ -1,0 +1,223 @@
+# dbloader Python 3 port — what changed and why
+
+Companion to [`MODERNIZATION_PLAN.md`](MODERNIZATION_PLAN.md) (the brief) and
+[`STAROBJ_PY3_REVIEW.md`](STAROBJ_PY3_REVIEW.md) (the starobj defects this port
+depends on being fixed). This is the record of the port itself: the shape of
+the result, every behaviour change, and exactly what has and has not been
+proven against the golden.
+
+## What the port is
+
+Python 2.7 + `pgdb` (PyGreSQL) → Python 3 + `psycopg2`, keeping `starobj` and
+moving it to its Python 3 branch. No functional redesign: the stages, the
+config file, the command line and the resulting database are the same.
+
+```
+__main__.py            switchboard, argparse
+loader/
+  db.py         NEW    the only module that talks to PostgreSQL
+  csvio.py      NEW    csvdump.py + csvdump_better.py + csvload.py, merged
+  dictionary.py        load dict schema
+  entries.py           entry discovery + load (via starobj)
+  chemcomps.py         ccdb dump-and-load (via starobj)
+  macromol.py          post-load fixups
+  webextras.py         web schema + CS stats
+  metabolomicsextras.py  meta schema
+  ets.py               ETS tracking-DB readers
+fastalib.py            standalone FASTA library generator
+```
+
+Deleted: `loader/csvdump.py`, `loader/csvdump_better.py`, `loader/csvload.py`
+(merged into `csvio.py`), `load_postgres_db.py` (331 lines, imported by
+nothing), `pacsy_schema.sql` (byte-identical to
+`nmr-star-dictionary-scripts/conf/sql_pacsy_schema.sql` and referenced by
+neither repo).
+
+Requires: `psycopg2`, `starobj` (Python 3, branch `dbloader-py3-fixes`, which
+pulls in `sas` + `ply`), and a `psql`/`pg_dump` client.
+
+## Verified against the golden
+
+`tests/regression.sh` loads the same inputs with the rewritten code and diffs
+every table of every schema, ordered by every column, against the golden built
+by the unmodified Python 2 loader (`tests/golden_*.sh`). See `tests/README.md`.
+
+| what | scale | result |
+|---|---|---|
+| `dict` schema | 16 tables | identical |
+| `macromolecules` schema | 465 tables | identical |
+| `metabolomics` schema | 465 tables | identical |
+| same, via the **new truncate path** | 930 tables | identical |
+| `bmrbeverything` CSV dump | 247 files | identical |
+| "old-style" macromolecule dump | 159 files | identical |
+| "old-style" metabolomics dump | 105 files | identical |
+
+Corpus: 300 macromolecule + 300 metabolomics entries, a stride sample across
+both archives (`tests/subset.*.txt`), NMR-STAR v3.2.14.0 built from
+`internal_106_source`. 0 entries failed to load on either side.
+
+The dumps are compared by pointing the old dumper and the new one at the same
+database (`sh tests/regression.sh dumps`); the only difference in any of the
+three layouts is the random `\restrict` token pg_dump stamps into `schema.sql`.
+
+That covers the `dict` stage, both entry stages, both schema-preparation
+paths, the connection layer, the CSV loader, the three dump layouts, and
+starobj's own Python 3 conversion.
+
+**Not covered, because the external systems are not reachable from here**
+(deferred by design, MODERNIZATION_PLAN.md §6): `chemcomps.py` needs the ccdb
+database on `octopus`; `ets.py`, and with it the three ETS-fed tables in
+`webextras.py`, needs the tracking database on `ets.bmrb.wisc.edu`. The rest of
+the web schema, the `meta` schema and `macromol.fixup` are exercised (they run
+clean and load the expected row counts) but not diffed against a golden.
+Anything below marked **unverified** falls in that gap and should be
+re-checked on a host that has those systems.
+
+## Behaviour changes
+
+Deliberate, in the order they matter.
+
+1. **`entries.py`: the truncate path exists now.** The non-`--drop-tables`
+   branch was `raise Exception( "FIXME!!!! Not implemented" )`, so the
+   documented default aborted every run and only `--drop-tables` worked. It now
+   truncates every table in the schema in one statement, and falls back to
+   creating them if the schema is empty. Both paths leave `entry_saveframes`
+   empty, and starobj takes the next `Sf_ID` from `max(sfid)` there, so both
+   number from 1 — the truncate path produces the same database as the drop
+   path against an unchanged dictionary. Dropping is still the right choice
+   when the dictionary has changed, since only a re-create picks up added or
+   removed tables.
+
+2. **`entries.py`: failures are counted instead of swallowed.** The per-file
+   handler was a bare `except:` that logged a traceback and continued — which
+   also caught `KeyboardInterrupt`, and left a run that loaded nothing looking
+   successful. It now catches `Exception`, collects the failed files, and
+   returns them; `__main__` prints them and exits non-zero.
+
+3. **`ets.py`: `processing_queue_itr` no longer writes the string `"None"`.**
+   For an on-hold entry with a NULL `onhold_status`, the old code set
+   `rel = None` and then fell through a second, non-`elif` `if` into
+   `rel = str( row[3] ).strip()` — i.e. the four characters `None` — and
+   inserted that into `web.procque.status`. Now such rows get a real NULL.
+   **Unverified** (needs ETS).
+
+4. **`macromol.py`: `fix_software_authors` updates every matching row.** It
+   collected `Sf_ID`s into a dict keyed by `Entry_ID`, so when one entry had
+   two `Software` saveframes with the same name, only the last one's `Vendor`
+   row was normalized and the other kept the raw value. It now updates all of
+   them. **Unverified** — the golden does not include the fixup stage.
+
+5. **`chemcomps.py`: CSVs for unknown tables are skipped, not loaded.** `load()`
+   warned `"%s.csv not in tables, skipping"` and then loaded the file anyway.
+   No table had been created for it (`create_tables` is called with
+   `tables = TABLES`), so the `\copy` could only fail. **Unverified** (needs ccdb).
+
+6. **`chemcomps.py`: `fix_entry_id` no longer re-runs a stale statement.** The
+   `if/elif` chain assigning `sql` had no final `else`; a table outside every
+   listed group would have re-executed the previous table's `UPDATE` against
+   itself. In practice `iter_tags` only yields tables in `TABLES`, so the chain
+   was exhaustive — the last branch is now `else` so it stays that way.
+   **Unverified** (needs ccdb).
+
+7. **`psql` and `pg_dump` are configurable.** They were hard-coded to
+   `/bin/psql` and `/bin/pg_dump`, with the real production paths
+   (`/usr/pgsql-10/bin/...`) commented out just above. Now: `[tools] psql` /
+   `[tools] pg_dump` in the properties file, else `$PSQL` / `$PG_DUMP`, else
+   `PATH`.
+
+8. **`starobj`'s location is no longer hard-coded.** `loader/__init__.py` did
+   `sys.path.append( "/projects/BMRB/software/starobj" )` unconditionally, so
+   the package could not be imported anywhere else. That path is now the
+   fallback, after `$STAROBJ_PATH` and whatever is already importable.
+
+9. **Host and port are no longer packed into one string.** `dsn()` built a
+   pgdb-style `"host:port"` that every caller then re-split — and
+   `csvload._fromcsv` did not, passing `-h host:port` to `psql`, which cannot
+   work. `db.dsn()` returns psycopg2 keyword arguments with `host` and `port`
+   separate, and every consumer takes them as such.
+
+10. **Errors from `psql -f` are surfaced.** `psql -f` keeps going after a
+    failed statement and still exits 0, so `runscript()`'s return value was
+    close to meaningless and the DDL's stderr was discarded. `db.run_command()`
+    now prints any `ERROR`/`FATAL`/`PANIC`/`WARNING` lines even on success
+    (`NOTICE`s, which every drop-then-create script produces by the dozen, are
+    filtered out).
+
+11. **`__main__.py`: `--no-web` is honoured and verbosity is not forced.**
+    `load_web_schema` was called with a hard-coded `verbose = True`. The `--no-*`
+    flags are now generated from one list of stages rather than repeated five
+    times, and the required-argument combinations (`--dictdir` when loading the
+    dictionary, `-d` when dumping) are checked up front instead of raising an
+    `AttributeError` half way through a run.
+
+12. **`fastalib.py`: the checksums work now.** The comment said md5s came out
+    wrong "no matter how many flush()es and os.fsync()s I add", and the code was
+    left commented out. The cause was that each writer coroutine holds its
+    `with open(...)` across the `yield`, so its output file is still open — and
+    partly unwritten — when the checksum is taken. Closing the coroutines first
+    fixes it, and the `.md5` files are written again.
+
+13. **Iteration order is now deterministic** where it was arbitrary: files are
+    globbed in sorted order and dict iteration in `macromol.py`/`csvio.py` is
+    sorted. No effect on the loaded rows, but two runs now produce identical
+    logs.
+
+14. **`cs_stats.sql`: one output path was missing `ftp/`.** Six of the seven
+    statistics files are written to
+    `/projects/BMRB/public/ftp/pub/bmrb/statistics/chem_shifts/`; `dna_filt.csv`
+    went to `/projects/BMRB/public/pub/bmrb/...`. Item 10 above is what made it
+    visible — under the old code that `\copy` failed silently on every run, so
+    `dna_filt.csv` has presumably been missing from the FTP site all along.
+    **Unverified**: whether the wrong directory exists on production is worth a
+    look before the next run.
+
+15. **A misconfigured entry load fails instead of doing nothing.** Missing
+    config sections, a missing `entrydir`, or an `entrydir` with no entries in
+    it made `load_entries` write a line to stderr and return `False`, which
+    nobody checked — so the run carried on and reported success having loaded
+    an empty schema. Those are exceptions now.
+
+16. **Connections are closed.** `list_tables`/`tocsv` opened one connection per
+    table and relied on `with conn:`, which in both pgdb and psycopg2 ends the
+    transaction but leaves the connection open — a couple of hundred of them
+    per dump. `db.connection()` is a context manager that actually closes, and
+    the starobj wrappers are closed in a `finally`.
+
+17. **Packaging and the condor jobs run Python 3.** `packaging/setup.py` is
+    version 2.0, declares `psycopg2`, and no longer needs the sources edited
+    before building (its instruction to comment out every `sys.path.append`
+    first is obsolete — those lines are harmless inside an egg). The submit
+    files call `/usr/bin/python3` and a stable `dbloader.egg` symlink rather
+    than the literal `dbloader-1.0-py2.7.egg`, since setuptools names the egg
+    after the interpreter it was built with.
+
+## Things left alone on purpose
+
+- **`float → varchar(63)`** in starobj's type mapping. It looks wrong and it is
+  deliberate: it preserves trailing zeros as deposited.
+- **Macromolecules load as all-`text`, metabolomics as typed.** Reproduced
+  exactly (`use_types`).
+- **Shelling out to `psql` for `COPY`.** Server-side `COPY` needs superuser and
+  reads files on the server; `\copy` needs neither. `psycopg2.copy_expert`
+  would work, but changing it is a separate decision from this port.
+- **`entries.py` cross-checks the file list against ETS.** Loud, and it does not
+  stop the load, but it is how a withdrawn entry left on the website gets
+  noticed.
+
+## Follow-on work
+
+- Run the regression on a host with ccdb and ETS to close items 3–6 and 14.
+- A golden for `macromol.fixup` — the one stage that runs here but is not
+  diffed. It needs the fixup added to `tests/load_entries.py` and the entry
+  goldens rebuilt.
+- The production `loader.properties` still carries live hosts,
+  `/share/dmaziuk/...` paths and a plaintext ETS password;
+  `loader.example.properties` is the annotated version to deploy from.
+- `starobj`'s `dbloader-py3-fixes` branch is what this runs against and is
+  explicitly not for merging to `master` (other projects use `master` as
+  coded). That needs resolving before deployment.
+- `psycopg2.extras.execute_values` for the entry insert path (starobj inserts
+  row by row) — worth doing now that parity is proven, but it is a change to
+  starobj, not to dbloader. For scale: 300 macromolecule entries take 83 s,
+  down from 110 s under Python 2, so a full 14,772-entry archive is roughly
+  70 minutes either way.

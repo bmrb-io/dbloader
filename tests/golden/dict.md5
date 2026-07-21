@@ -1,0 +1,16 @@
+0fc63f84b296214d9c3927f37629613d  adit_item_tbl.csv
+d669ee62c4f28213d1da6a7c0b838496  aditcatgrp.csv
+adc5612dd7d7a523e08f24efc963d7fc  aditenumdtl.csv
+fc486ef3bfd8afc62026ce900647c199  aditenumhdr.csv
+ab611fd37420148ad4962dbcbaf75036  aditenumtie.csv
+9ed626d5b3a077d2602185306836619c  aditmanoverride.csv
+9f6e667b04dd7e776d18a5b974bb55b3  aditsupergrp.csv
+cfffcad8ee1e59fd7dcd5bc66a9d535b  comments.csv
+40e638b154a19c3fc339336674e73a03  ddltypes.csv
+763788385666c240a7a4cbf070c64643  extra_enums.csv
+afd150dcf8f43ec0b8028740fa0feb6e  nmrcifmatch.csv
+13d86551e69e63b06e41924669746f2c  query_interface.csv
+15cf6a92a2a572627a255e02814c7adb  validationlinks.csv
+9f52dc2467c8877d334577ac0c1a9e7c  validationoverrides.csv
+ff1bb1fb0732f7f4fe7928f17361fe97  validator_printflags.csv
+985533bd89b55f15ad000d24c6f3ef6a  validator_sfcats.csv

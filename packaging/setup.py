@@ -1,53 +1,54 @@
-#!/usr/bin/python -u
+#!/usr/bin/env python3
 #
-# NOTE: if you want "installable" egg, edit the sources and comment out every
-#   sys.path.append( ... __file__ ...
-# before building
+# Build the deployable egg.
 #
+# setuptools packages what is next to setup.py, so the sources are copied in
+# here first (unchanged ones are skipped, to keep timestamps stable).
+#
+#     cd packaging && python3 setup.py bdist_egg
+#
+# Copy `sas` and `starobj` in here before building to make a complete package
+# -- see README.md.
+#
+# NOTE: the modules append their own parent directory to sys.path so they can
+# be run as scripts out of a checkout.  That is harmless inside the egg (the
+# path does not exist), so unlike the Python 2 version of this file, nothing
+# needs commenting out before building.
+#
+import filecmp
+import glob
 import os
 import shutil
-import setuptools
 import sys
-import hashlib
-import glob
 
-def cmpfiles( f1, f2 ) :
-    h1 = hashlib.md5()
-    with open( f1, "rU" ) as f :
-        for line in f :
-            h1.update( line )
-    h2 = hashlib.md5()
-    with open( f2, "rU" ) as f :
-        for line in f :
-            h2.update( line )
-    return h1.hexdigest() == h2.hexdigest()
+import setuptools
 
-for i in ("build","dist","validate.egg-info") :
-    if os.path.isdir( i ) :
-        shutil.rmtree( i )
+_HERE = os.path.realpath(os.path.split(__file__)[0])
 
-srcdir = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "..", "loader" ) )
-dstdir = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "loader" ) )
-if not os.path.isdir( dstdir ) : os.makedirs( dstdir )
-for f in glob.glob( os.path.join( srcdir, "*.py" ) ) :
-    dstfile = os.path.join( dstdir, os.path.split( f )[1] )
-    if os.path.exists( dstfile ) and cmpfiles( f, dstfile ) :
-        continue
-    sys.stdout.write( "* copying %s to %s\n" % (f, dstfile,) )
-    shutil.copy2( f, dstfile )
 
-srcfile = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "..", "__main__.py" ) )
-dstfile = os.path.realpath( os.path.join( os.path.split( __file__ )[0], "__main__.py" ) )
-if os.path.exists( dstfile ) and cmpfiles( srcfile, dstfile ) :
-        pass
-else :
-    sys.stdout.write( "* copying %s to %s\n" % (srcfile, dstfile,) )
-    shutil.copy2( srcfile, dstfile )
+def sync(srcfile, dstfile):
+    """Copy into the packaging directory, unless it is already the same file."""
 
-for i in ("build","dist","dbloader.egg-info") :
-    if os.path.isdir( i ) :
-        shutil.rmtree( i )
+    if os.path.exists(dstfile) and filecmp.cmp(srcfile, dstfile, shallow=False):
+        return
+    sys.stdout.write("* copying %s to %s\n" % (srcfile, dstfile,))
+    shutil.copy2(srcfile, dstfile)
 
-setuptools.setup( name = "dbloader", version = "1.0", 
-        packages = setuptools.find_packages(),
-        py_modules = ["__main__"] )
+
+srcdir = os.path.join(_HERE, "..", "loader")
+dstdir = os.path.join(_HERE, "loader")
+os.makedirs(dstdir, exist_ok=True)
+for f in glob.glob(os.path.join(srcdir, "*.py")):
+    sync(f, os.path.join(dstdir, os.path.split(f)[1]))
+
+sync(os.path.join(_HERE, "..", "__main__.py"), os.path.join(_HERE, "__main__.py"))
+
+for i in ("build", "dist", "dbloader.egg-info"):
+    if os.path.isdir(os.path.join(_HERE, i)):
+        shutil.rmtree(os.path.join(_HERE, i))
+
+setuptools.setup(name="dbloader", version="2.0",
+                 python_requires=">=3.6",
+                 install_requires=["psycopg2"],
+                 packages=setuptools.find_packages(),
+                 py_modules=["__main__"])

@@ -1,110 +1,101 @@
-#!/usr/bin/python -u
+#!/usr/bin/env python3
 #
-# stuff that goes into metabolomics "meta" schema
+# The metabolomics "meta" schema -- hand-maintained CSVs that predate the
+# dictionary-driven tables and have no other home.
 #  - until we replace that old setup with something better.
 #
 
-from __future__ import absolute_import
-import os
-import sys
-#import pgdb
-import ConfigParser
 import argparse
 import glob
+import os
 import re
+import sys
+from configparser import ConfigParser
 
-_UP = os.path.abspath( os.path.join( os.path.split( __file__ )[0], ".." ) )
-sys.path.append( _UP )
-import loader
+_UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
+sys.path.append(_UP)
+from loader import db
 
 DB = "meta"
+
 
 # main
 #
 #
-def load( config, verbose = False ) :
-    create_schema( config, verbose )
-    add_grants( config, verbose )
-    load_files( config, verbose )
+def load(config, verbose=False):
+    create_schema(config, verbose)
+    add_grants(config, verbose)
+    load_files(config, verbose)
+
 
 #######################################
 # run DDL script
 #
 #
-def create_schema( config, verbose = False ) :
-    if verbose :
-        sys.stdout.write( "create_schema()\n" )
+def create_schema(config, verbose=False):
+    if verbose:
+        sys.stdout.write("create_schema()\n")
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    script = os.path.realpath(config.get(DB, "ddlfile"))
+    if not os.path.exists(script):
+        raise IOError("File not found: %s" % (script,))
 
-    global DB
+    return db.run_sql_file(db.dsn(config, DB), script, config=config, verbose=verbose)
 
-    script = config.get( DB, "ddlfile" )
-    script = os.path.realpath( script )
-    if not os.path.exists( script ) :
-        raise IOError( "File not found: %s" % (script,) )
-
-    return loader.runscript( loader.dsn( config, section = DB ), script, verbose = verbose )
 
 # these files are named meta.tablename.csv
 #
 #
-def load_files( config, verbose = False ) :
-    if verbose :
-        sys.stdout.write( "load_files()\n" )
+def load_files(config, verbose=False):
+    if verbose:
+        sys.stdout.write("load_files()\n")
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    datadir = os.path.realpath(config.get(DB, "csvdir"))
+    if not os.path.isdir(datadir):
+        raise IOError("Not a directory: %s" % (datadir,))
 
-    global DB
-
-    d = config.get( DB, "csvdir" )
-    datadir = os.path.realpath( d )
-    if not os.path.isdir( datadir ) :
-        raise IOError( "Not a directory: %s" % (datadir,) )
-
-    pat = re.compile( r"([^.]+)\.([^.]+)\.csv$" )
-    for name in glob.glob( os.path.join( datadir, "meta.*.csv" ) ) :
-        m = pat.search( os.path.split( name )[1] )
-        if not m :
-            sys.stderr.write( "%s does not match pattern, skipping\n" % (name,) )
+    pat = re.compile(r"([^.]+)\.([^.]+)\.csv$")
+    dsn = db.dsn(config, DB)
+    for name in sorted(glob.glob(os.path.join(datadir, "meta.*.csv"))):
+        m = pat.search(os.path.split(name)[1])
+        if not m:
+            sys.stderr.write("%s does not match pattern, skipping\n" % (name,))
             continue
-        loader.fromcsv( loader.dsn( config, section = DB ), filename = name, schema = m.group( 1 ),
-                table = m.group( 2 ), verbose = verbose )
+        db.copy_from_csv(dsn, filename=name, schema=m.group(1), table=m.group(2),
+                         config=config, verbose=verbose)
+
 
 # add grants
 #
 #
-def add_grants( config, verbose = False ) :
-    if verbose :
-        sys.stdout.write( "add_grants()\n" )
+def add_grants(config, verbose=False):
+    if verbose:
+        sys.stdout.write("add_grants()\n")
 
-    assert isinstance( config, ConfigParser.SafeConfigParser )
+    if config.has_option(DB, "rouser"):
+        db.add_ro_grants(db.dsn(config, DB), schema=config.get(DB, "schema"),
+                         user=config.get(DB, "rouser"), config=config, verbose=verbose)
 
-    global DB
-
-    if config.has_option( DB, "rouser" ) :
-        loader.add_ro_grants( dsn = loader.dsn( config, DB ), schema = config.get( DB, "schema" ),
-                user = config.get( DB, "rouser" ),  verbose = verbose )
 
 #
 #
 #
-if __name__ == "__main__" :
+if __name__ == "__main__":
 
-    ap = argparse.ArgumentParser( description = "load NMR-STAR dictionary into PostgreSQL database" )
-    ap.add_argument( "-v", "--verbose", help = "print lots of messages to stdout", dest = "verbose",
-        action = "store_true", default = False )
-    ap.add_argument( "-t", "--time", help = "time the operatons", dest = "time",
-        action = "store_true", default = False )
-
-    ap.add_argument( "-c", "--config", help = "config file", dest = "conffile", required = True )
-
+    ap = argparse.ArgumentParser(description="load the metabolomics meta schema")
+    ap.add_argument("-v", "--verbose", help="print lots of messages to stdout", dest="verbose",
+                    action="store_true", default=False)
+    ap.add_argument("-t", "--time", help="time the operatons", dest="time",
+                    action="store_true", default=False)
+    ap.add_argument("-c", "--config", help="config file", dest="conffile", required=True)
     args = ap.parse_args()
 
-    cp = ConfigParser.SafeConfigParser()
-    f = os.path.realpath( args.conffile )
-    cp.read( f )
+    cp = ConfigParser()
+    cp.read(os.path.realpath(args.conffile))
 
-    with loader.timer( label = "load additional metabolomics CSVs", silent = not args.time ) :
-        load( config = cp, verbose = args.verbose )
+    import loader
+    with loader.timer(label="load additional metabolomics CSVs", silent=not args.time):
+        load(config=cp, verbose=args.verbose)
 
+#
+# eof
