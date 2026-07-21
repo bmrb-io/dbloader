@@ -35,10 +35,17 @@ fastalib.py            standalone FASTA library generator
 ```
 
 Deleted: `loader/csvdump.py`, `loader/csvdump_better.py`, `loader/csvload.py`
-(merged into `csvio.py`), `load_postgres_db.py` (331 lines, imported by
-nothing), `pacsy_schema.sql` (byte-identical to
+(merged into `csvio.py`) and `pacsy_schema.sql` (byte-identical to
 `nmr-star-dictionary-scripts/conf/sql_pacsy_schema.sql` and referenced by
 neither repo).
+
+> `load_postgres_db.py` was deleted too, on the grounds that nothing in the
+> package imports it. That was wrong: **three HTCondor jobs in `updater_dag`
+> invoke it directly** (160, 260, 410) — it is the second half of the pipeline,
+> the step that loads the dump into the serving database. It has been restored
+> and ported; see "Where this runs in production" in `CLAUDE.md`. "Imported by
+> nothing" is not the same as "called by nothing" when the callers live in
+> another repo.
 
 Requires: `psycopg2`, `starobj` (Python 3, branch `dbloader-py3-fixes`, which
 pulls in `sas` + `ply`), and a `psql`/`pg_dump` client.
@@ -210,6 +217,27 @@ Deliberate, in the order they matter.
 - **`entries.py` cross-checks the file list against ETS.** Loud, and it does not
   stop the load, but it is how a withdrawn entry left on the website gets
   noticed.
+
+## The production pipeline
+
+`CLAUDE.md` now documents it, because misreading it is what caused the
+`load_postgres_db.py` mistake above. Two findings from reading `updater_dag`
+that are worth acting on independently of this port:
+
+1. **The committed `load_postgres_db.py` could not run under Python 3 at all** —
+   `open(infile, "rU")` raises `ValueError` on 3.11+, and `add_ro_grants` did
+   `bytes.split(",")`, a `TypeError`. The DAG has been running it with
+   `/usr/bin/python3` since the `dbloader3` deployment, so the deployed copy
+   must have been patched in place and the repo left behind. Worth diffing
+   `/projects/BMRB/software/dbloader3/` against this branch before deploying.
+   The restored version fixes both and round-trips losslessly (dump → load →
+   dump leaves 463 macromolecule tables identical to the golden).
+
+2. **The publish step has no transaction.** Each table is `truncate table only`
+   + `\copy` in separate `psql -c` invocations, so the truncate commits first:
+   a failed copy leaves that table empty on the live server, and readers can
+   see a partly reloaded database for the duration. Wrapping each table (or the
+   whole load) in a transaction is a small change to `load_postgres_db.py`.
 
 ## Follow-on work
 
