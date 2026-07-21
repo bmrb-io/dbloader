@@ -121,13 +121,9 @@ Things to know before changing any of this:
   rebuilds the serving schema from the dictionary as a side effect, so a
   dictionary change no longer has to be applied by hand. Job 410 gets this
   with no change to `updater_dag`.
-- **Only one thing still falls back to loading in place**: a dump whose CSVs
-  are not schema-qualified — the old-style layouts (`-d bmrb`), whose entry
-  tables go in the search_path, so swapping them would mean renaming `public`
-  and taking anything else living there with it. That is the *only* reason the
-  in-place path still exists; when the old-style serving databases go, it can
-  go too and the swap becomes the only path. `--shadow` demands the swap and
-  fails rather than falling back; `--no-shadow` forces in-place.
+- **There is only the one path.** The truncate-and-refill path is gone with
+  the old-style serving databases it existed for; a dump that cannot be
+  swapped (unqualified CSVs) is now an error, not a fallback.
 - **The reload is not atomic.** Each table is `truncate table only` + `\copy`
   in one `psql` call with no transaction, so the TRUNCATE commits before the
   `\copy` runs: a copy that fails leaves that table **empty** on the live

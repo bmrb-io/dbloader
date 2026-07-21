@@ -307,13 +307,13 @@ that are worth acting on independently of this port:
    in the first, opt-in cut of this it swapped all six, **taking the other
    five live empty**, which is the bug that made auto-detection worth having.
 
-   `can_shadow()` declines in two cases now: a dump with no `schema.sql`, and
-   one whose CSVs are not schema-qualified. The second is the old-style
-   layouts, whose entry tables live in the search_path — swapping those would
-   mean renaming `public` and taking anything else in it out of the live
-   database. **That is the only remaining reason the in-place path exists**;
-   when the old-style serving databases are retired it can be deleted and the
-   swap becomes the only path.
+   The truncate-and-refill path has since been **deleted**. It existed only
+   for the old-style serving databases, whose entry tables live in the
+   search_path and so cannot be swapped without renaming `public`; those are
+   retired, so `bmrb` joined `metabolomics` in `RETIRED` and the second path
+   went with it, along with `runscript()`, `--create`, `--shadow`/`--no-shadow`
+   and the `truncate` branch of `fromcsv`. A dump that cannot be swapped is now
+   an error rather than a quiet fallback to the weaker path.
 
    The DDL is rewritten textually: `<schema>.` becomes `<schema>_new.`
    everywhere including inside view bodies, and the `-c` clean section is
