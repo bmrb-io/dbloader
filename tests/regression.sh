@@ -63,14 +63,42 @@ EXCEPT=entry_saveframes.csv
 # deposited with -- 18 of them are in this subset.  See DATA_REMEDIATION.md.
 EXCEPT2=Entity_assembly.csv
 
+# `Spectral_dim` and `Spectral_peak_list` differ because the golden is missing
+# rows, not because the rewrite invented any: sas dropped the contents of a
+# saveframe whose values carry an embedded loop, and pynmrstar loads them. In
+# this subset that is entry 30959, whose spectral peak list holds a NEF peak
+# loop as a multi-line text value -- the py2 golden has no rows for it at all.
+# So these two are a superset of the golden and are checked by
+# check_spectral() instead: nothing lost, and every row real.
+#
+# Only in macromolecules. Both tables exist in metabolomics too and match the
+# golden exactly there, so excepting them in both schemas would give up real
+# coverage for a defect that this corpus does not exercise there.
+EXCEPT3=Spectral_dim.csv
+EXCEPT4=Spectral_peak_list.csv
+
+exceptions_for() {
+    echo "$EXCEPT $EXCEPT2"
+    [ "$1" != macromolecules ] || echo "$EXCEPT3 $EXCEPT4"
+}
+
+# drop the excepted tables from an md5 listing on stdin
+drop_exceptions() {
+    pat=""
+    for e in $(exceptions_for "$1"); do
+        pat="${pat:+$pat|}$(printf '%s' "$e" | sed 's/\./\\./g')"
+    done
+    grep -Ev " ($pat)\$"
+}
+
 # dump schema $1 and compare its fingerprints with the golden
 check() {
     schema=$1
     [ -f "$here/golden/$schema.md5" ] || { echo "no golden for $schema -- run tests/golden_*.sh"; exit 1; }
     rm -rf "$out/$schema"
     sh "$here/dump_schema.sh" "$schema" "$out/$schema" 2>/dev/null
-    grep -v " $EXCEPT\$" "$here/golden/$schema.md5" | grep -v " $EXCEPT2\$" > "$out/$schema.golden.md5"
-    ( cd "$out/$schema" && md5sum *.csv ) | grep -v " $EXCEPT\$" | grep -v " $EXCEPT2\$" > "$out/$schema.new.md5"
+    drop_exceptions "$schema" < "$here/golden/$schema.md5" > "$out/$schema.golden.md5"
+    ( cd "$out/$schema" && md5sum *.csv ) | drop_exceptions "$schema" > "$out/$schema.new.md5"
     n=$(wc -l < "$out/$schema.golden.md5")
     # the dict schema has no entry_saveframes, so no exception to mention
     skipped=$(($(wc -l < "$here/golden/$schema.md5") - n))
@@ -162,6 +190,52 @@ check_entity_assembly() {
     fi
 }
 
+# The two spectral tables, in place of a fingerprint comparison.
+#
+# Two assertions, because "differs from the golden" is only acceptable in one
+# direction here:
+#
+#   1. nothing the golden has may disappear -- the diff has to be purely
+#      additive, so this cannot mask the rewrite dropping rows of its own;
+#   2. every row of both tables must hang off a saveframe the entry itself
+#      declares as spectral_peak_list, so the extra rows are ones the entry
+#      really contains rather than ones the loader invented.
+#
+check_spectral() {
+    schema=$1
+
+    for t in "$EXCEPT3" "$EXCEPT4"; do
+        golden=$here/golden/$schema/$t
+        new=$out/$schema/$t
+        [ -f "$golden" ] || { echo "      (no golden dump for $t -- rerun tests/golden_*.sh)"; continue; }
+        [ -f "$new" ] || { echo "FAIL  $schema.$t: not dumped"; rc=1; continue; }
+
+        lost=$(diff "$golden" "$new" | grep -c '^<' || true)
+        gained=$(diff "$golden" "$new" | grep -c '^>' || true)
+        if [ "$lost" -ne 0 ]; then
+            echo "FAIL  $schema.$t: $lost line(s) in the golden are missing from the new dump"
+            diff "$golden" "$new" | grep '^<' | head -3 | sed 's/^/      /'
+            rc=1
+        else
+            echo "OK    $schema.$t: superset of the golden (+$gained lines, none lost)"
+        fi
+    done
+
+    # `Sf_ID` is text in the macromolecule schema, hence the cast
+    for t in Spectral_dim Spectral_peak_list; do
+        bad=$(psql -tAc "select count(*) from $schema.\"$t\" x
+                           left join $schema.entry_saveframes s on s.sfid = x.\"Sf_ID\"::int
+                          where s.sfid is null or s.category <> 'spectral_peak_list'")
+        total=$(psql -tAc "select count(*) from $schema.\"$t\"")
+        if [ "$bad" = "0" ]; then
+            echo "OK    $schema.$t: all $total rows hang off a declared spectral_peak_list saveframe"
+        else
+            echo "FAIL  $schema.$t: $bad of $total rows have no declared spectral_peak_list saveframe"
+            rc=1
+        fi
+    done
+}
+
 mkdir -p "$out"
 
 if [ "$what" = "all" ] || [ "$what" = "dict" ]; then
@@ -195,6 +269,7 @@ if [ "$what" = "all" ] || [ "$what" = "entries" ]; then
     check macromolecules
     check_saveframes macromolecules
     check_entity_assembly macromolecules
+    check_spectral macromolecules
     check metabolomics
     check_saveframes metabolomics
     check_entity_assembly metabolomics

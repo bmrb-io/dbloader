@@ -12,29 +12,35 @@ tests/golden_entries.sh   py2 -> macromolecules,       -> golden/*.md5
 tests/regression.sh       py3 -> the same schemas      -> diff vs golden
 ```
 
-> **The macromolecule golden has gone stale.** Eight tables in it
-> (`Atom_chem_shift`, `Citation`, `Citation_author`, `Datum`, `Entity`,
-> `Entry`, `Release`, `T1`) no longer match, because the entry corpus under
-> `~/git/query-bmrb` has been refreshed since the golden was built and the
-> subset symlinks now point at re-released entries — `Release` alone has 13
-> rows the golden never saw. It is not a loader regression: the *unmodified*
-> py3 loader produces the same rows as the current one. Rebuild it with
-> `golden_entries.sh` (needs the py2 stack) before trusting `regression.sh`
-> on macromolecules. `metabolomics` is unaffected and still matches.
+> **The golden tracks the entry corpus, not just the code.** When
+> `~/git/query-bmrb` is refreshed, `make_subset.sh` re-derives its stride
+> sample and re-released entries change under it, so tables start differing
+> for reasons that have nothing to do with the loader. Rebuild with
+> `golden_entries.sh` (needs the py2 stack) rather than reading it as a
+> regression — and check that the *unmodified* loader produces the same diff
+> before believing it is one.
 >
-> To compare two revisions of the *py3* loader in the meantime, dump with
+> To compare two revisions of the *py3* loader without a golden, dump with
 > `dump_schema.sh` before and after and `diff -rq` the two directories; that
 > is how the COPY rewrite in `../PORT_NOTES.md` §Speed was checked.
 
-Status: **942 of 946 tables match byte for byte** (16 `dict`, 463
+Status: **940 of 946 tables match byte for byte** (16 `dict`, 461
 `macromolecules`, 463 `metabolomics`), over a 300+300 entry subset, with the
-same 0 entries failing to load on both sides. Four tables are checked
-separately because the rewrite deliberately does not reproduce them —
-`entry_saveframes` and `Entity_assembly` in each schema, by `check_saveframes`
-and `check_entity_assembly`. Both are cases where the old loader hid a defect:
-see `../PORT_NOTES.md` and `../DATA_REMEDIATION.md`. `chemcomps` and most of
-`web` are not covered — they need ccdb and the ETS tracking database, deferred
-by design.
+same 0 entries failing to load on both sides. Six tables are checked
+separately because the rewrite deliberately does not reproduce them, each a
+case where the old loader hid a defect (see `../PORT_NOTES.md` and
+`../DATA_REMEDIATION.md`):
+
+| Table | Where | Checked by |
+|-------|-------|------------|
+| `entry_saveframes` | both schemas | `check_saveframes` — `line` is NULL now, and `category` agrees with the entry's own `Sf_category` |
+| `Entity_assembly` | both schemas | `check_entity_assembly` — the `$` sas stripped from `Entity_assembly_name` is back |
+| `Spectral_dim`, `Spectral_peak_list` | `macromolecules` | `check_spectral` — a superset of the golden, nothing lost, every row on a declared `spectral_peak_list` saveframe |
+
+`Spectral_*` is excepted only in `macromolecules`: both tables exist in
+`metabolomics` too and match exactly there, so excepting them in both would
+give up real coverage. `chemcomps` and most of `web` are not covered — they
+need ccdb and the ETS tracking database, deferred by design.
 
 ## Setup
 
