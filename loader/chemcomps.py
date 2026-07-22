@@ -78,6 +78,12 @@ def _src_dsn(config):
 
     Its own set of options, prefixed `src`, in the [chemcomps] section -- the
     section's unprefixed ones point at the database being loaded.
+
+    Each falls back to the unprefixed option when it is not set, so a source
+    on the same server as the target needs only `srcdatabase`.  Without that
+    fallback an unset `srchost` meant libpq's default -- the local unix socket
+    -- even where the rest of the config plainly said otherwise, so a config
+    that worked everywhere else failed here alone.
     """
 
     if not config.has_section(DB):
@@ -85,13 +91,19 @@ def _src_dsn(config):
     if not config.has_option(DB, "srcdatabase"):
         raise Exception("No srcdatabase in [%s] section in config file" % (DB,))
 
+    def _opt(name):
+        for option in ("src" + name, name):
+            if config.has_option(DB, option):
+                val = config.get(DB, option)
+                if val is not None and str(val).strip() != "":
+                    return val
+        return None
+
     dsn = {"dbname": config.get(DB, "srcdatabase")}
-    for opt, key in (("srcuser", "user"), ("srcpassword", "password"),
-                     ("srchost", "host"), ("srcport", "port")):
-        if config.has_option(DB, opt):
-            val = config.get(DB, opt)
-            if val is not None and str(val).strip() != "":
-                dsn[key] = val
+    for name in ("user", "password", "host", "port"):
+        val = _opt(name)
+        if val is not None:
+            dsn[name] = val
     return dsn
 
 
