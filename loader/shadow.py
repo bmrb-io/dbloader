@@ -62,6 +62,12 @@ def shadow_of(schema):
     return schema + SUFFIX
 
 
+def live_name(schema):
+    """The live name for a schema name that may already be a shadow."""
+
+    return schema[:-len(SUFFIX)] if schema.endswith(SUFFIX) else schema
+
+
 def live(config, section):
     """The schema a stage's output ends up as, once swapped in."""
 

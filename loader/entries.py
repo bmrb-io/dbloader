@@ -28,6 +28,7 @@ import loader
 from loader import db
 from loader.entryload import EntryLoader
 from loader import shadow
+from loader import indexes
 
 DATABASES = ("macromolecules", "metabolomics")
 
@@ -82,6 +83,17 @@ def load_db(dbname, config, verbose=False):
     """
 
     failed = load_entries(dbname, config, verbose)
+
+    # Index and analyze the shadow schema before anyone sees it: cs_stats.sql
+    # runs minutes later and is nine correlated scans of Atom_chem_shift, and
+    # BMRB-API would otherwise build the same indexes against the live schema
+    # after the swap.  See loader/indexes.py.
+    schema = shadow.target(config, dbname)
+    (made, analyzed) = indexes.prepare(db.dsn(config, dbname), schema, verbose)
+    if verbose:
+        sys.stdout.write("%s: %d indexes, %d tables analyzed\n"
+                         % (schema, made, analyzed,))
+
     if config.has_option(dbname, "rouser"):
         db.add_ro_grants(db.dsn(config, dbname), schema=shadow.target(config, dbname),
                          user=config.get(dbname, "rouser"), config=config, verbose=verbose)

@@ -18,6 +18,7 @@ from . import db
 from .db import add_ro_grants, connect, dsn, run_sql_file
 
 from . import shadow
+from . import indexes
 from .shadow import swap as swap_shadow
 
 from .ets import released_ids_itr, depids_itr, processing_queue_itr, removed_ids_itr, \
@@ -63,7 +64,7 @@ __all__ = ["db", "connect", "dsn", "run_sql_file", "add_ro_grants",
            "fix_macromolecules",
            "load_web_schema",
            "dump_new", "dump_macromolecules", "dump_metabolomics",
-           "shadow", "swap_shadow",
+           "shadow", "swap_shadow", "indexes",
            ]
 
 #
