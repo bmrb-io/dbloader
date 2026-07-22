@@ -35,6 +35,21 @@ source_dir="$dict_repo/internal_106_source"
 
 out=${1:-$here/build}
 
+# This directory is emptied below. Callers pass a work directory, but a typo
+# or a stray argument could name a checkout or a home directory, so refuse
+# anything that is obviously not scratch space.
+case $out in
+    ""|/|/*/..|.|..) echo "refusing to empty '$out'" >&2; exit 2 ;;
+esac
+if [ -e "$out/.git" ] || [ -d "$out/.hg" ]; then
+    echo "refusing to empty '$out': it looks like a checkout, not a work directory" >&2
+    exit 2
+fi
+for keep in "$HOME" / /usr /etc /var /projects; do
+    [ "$(cd "$out" 2>/dev/null && pwd)" = "$keep" ] || continue
+    echo "refusing to empty '$out'" >&2; exit 2
+done
+
 # Everything the scripts need now comes out of one generated distribution:
 # dictionary-converter passes the hand-maintained inputs (comments.str,
 # extra_enumerations.str, val_overide_add.csv, default-entry.cif, ...) through
