@@ -22,6 +22,17 @@ from loader import shadow
 
 SCHEMA = "dict"
 
+# name of the generated DDL script inside --dictdir
+DDLFILE = "dictionary.sql"
+
+
+def _ddlfile(config):
+    if config.has_option("dictionary", "ddlfile"):
+        name = config.get("dictionary", "ddlfile").strip()
+        if name:
+            return name
+    return DDLFILE
+
 
 #
 # main
@@ -30,15 +41,14 @@ def load(config, path, verbose=False):
 
     if not config.has_section("dictionary"):
         raise Exception("No [dictionary] section in config file\n")
-    if not config.has_option("dictionary", "ddlfile"):
-        raise Exception("No ddlfile in [dictionary] section in config file\n")
-
     wd = os.path.realpath(path)
     if not os.path.isdir(wd):
         raise Exception("Not a directory: %s\n" % (wd,))
 
     dsn = db.dsn(config, "dictionary")
-    ddl = os.path.realpath(os.path.join(wd, config.get("dictionary", "ddlfile")))
+    # unlike the other scripts this one is generated, not shipped: it lives in
+    # the directory given with -d/--dictdir, so the config only carries its name
+    ddl = os.path.realpath(os.path.join(wd, _ddlfile(config)))
 
     # dictionary.sql names its own schemas -- it opens with `drop schema if
     # exists dict cascade` and builds `validict` alongside -- so building the
@@ -114,7 +124,7 @@ if __name__ == "__main__":
         sys.exit(1)
 
     if args.swap:
-        ddlfile = os.path.join(wd, cp.get("dictionary", "ddlfile"))
+        ddlfile = os.path.join(wd, _ddlfile(cp))
         schemas = shadow.declared_schemas(ddlfile)
         shadow.swap(db.dsn(cp, "dictionary"),
                     [(x, shadow.shadow_of(x)) for x in schemas],

@@ -18,6 +18,7 @@ _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 from loader import db
 from loader import shadow
+from loader import datafiles
 
 DB = "macromolecules"
 
@@ -146,12 +147,16 @@ def fix_csref(curs, verbose=False):
 
 
 def _mapfile(config, option, verbose=False):
-    """Read one of the hand-maintained JSON maps; None if it isn't there."""
+    """Read one of the hand-maintained JSON maps; None if it isn't there.
 
-    f = os.path.realpath(config.get(DB, option))
-    if not os.path.exists(f):
+    Defaults to the copy in this checkout -- see loader/datafiles.py.
+    """
+
+    try:
+        f = datafiles.path(config, DB, option)
+    except IOError as e:
         if verbose:
-            sys.stderr.write("File not found: %s\n" % (f,))
+            sys.stderr.write("%s\n" % (e,))
         return None
     with open(f) as inf:
         return json.load(inf)

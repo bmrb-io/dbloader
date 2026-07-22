@@ -15,6 +15,7 @@ from configparser import ConfigParser
 _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 from loader import db
+from loader import datafiles
 
 DB = "meta"
 
@@ -36,9 +37,7 @@ def create_schema(config, verbose=False):
     if verbose:
         sys.stdout.write("create_schema()\n")
 
-    script = os.path.realpath(config.get(DB, "ddlfile"))
-    if not os.path.exists(script):
-        raise IOError("File not found: %s" % (script,))
+    script = datafiles.path(config, DB, "ddlfile")
 
     return db.run_sql_file(db.dsn(config, DB), script, config=config, verbose=verbose)
 
@@ -50,7 +49,7 @@ def load_files(config, verbose=False):
     if verbose:
         sys.stdout.write("load_files()\n")
 
-    datadir = os.path.realpath(config.get(DB, "csvdir"))
+    datadir = datafiles.path(config, DB, "csvdir")
     if not os.path.isdir(datadir):
         raise IOError("Not a directory: %s" % (datadir,))
 

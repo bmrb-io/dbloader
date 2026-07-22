@@ -101,7 +101,7 @@ def main(argv=None):
             # dictionary.sql builds validict alongside dict, as views over it,
             # so the two have to move together
             built += loader.shadow.declared_schemas(
-                os.path.join(dictdir, cp.get("dictionary", "ddlfile")))
+                os.path.join(dictdir, loader.dictionary_ddlfile(cp)))
 
         if args.load_chemcomps:
             with loader.timer(label="load chem. comps", silent=args.time):

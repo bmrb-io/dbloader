@@ -24,7 +24,7 @@ from .ets import released_ids_itr, depids_itr, processing_queue_itr, removed_ids
     bmrb_pdb_ids_itr
 from .csvio import dump_new, dump_macromolecules, dump_metabolomics, fromcsv, tocsv
 
-from .dictionary import load as load_dict
+from .dictionary import load as load_dict, _ddlfile as dictionary_ddlfile
 from .chemcomps import dump_and_load as load_chem_comps
 from .metabolomicsextras import load as load_meta_schema
 from .entries import load_metabolomics, load_macromolecules
@@ -56,7 +56,7 @@ __all__ = ["db", "connect", "dsn", "run_sql_file", "add_ro_grants",
            "released_ids_itr", "depids_itr", "processing_queue_itr", "removed_ids_itr",
            "bmrb_pdb_ids_itr",
            "fromcsv", "tocsv",
-           "load_dict",
+           "load_dict", "dictionary_ddlfile",
            "load_chem_comps",
            "load_meta_schema",
            "load_metabolomics", "load_macromolecules",

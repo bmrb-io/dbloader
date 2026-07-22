@@ -22,6 +22,7 @@ sys.path.append(_UP)
 import loader
 from loader import db
 from loader import shadow
+from loader import datafiles
 
 DB = "web"
 
@@ -49,10 +50,10 @@ def load(config, verbose=False):
 
 
 def _script(config, section, option):
-    script = os.path.realpath(config.get(section, option))
-    if not os.path.exists(script):
-        raise IOError("File not found: %s" % (script,))
-    return script
+    """One of the SQL scripts that ship with dbloader -- the config only has
+    to name it to point somewhere else (loader/datafiles.py)."""
+
+    return datafiles.path(config, section, option)
 
 
 #
@@ -194,8 +195,7 @@ def load_extras(config, verbose=False):
 
     pat = re.compile(r"([^.]+)\.([^.]+)\.csv$")
     dsn = db.dsn(config, DB)
-    for name in config.get(DB, "csvfiles").split():
-        f = os.path.realpath(name)
+    for f in datafiles.paths(config, DB, "csvfiles"):
         m = pat.search(os.path.split(f)[1])
         if not m:
             sys.stderr.write("%s does not match pattern\n" % (f,))
