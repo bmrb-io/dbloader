@@ -1,3 +1,11 @@
+-- Build-time tuning: the aggregate scans below are parallel seq scans of
+-- Atom_chem_shift, and PostgreSQL's default cap of 2 workers per gather
+-- leaves cores idle on the build host (which serves nothing during the
+-- reload).  Raising it to 6 roughly halves each scan; whole-script effect at
+-- archive scale was 441 s -> 418 s.  A host with fewer workers clamps this
+-- down safely, so it is a plain floor, not a requirement.
+set max_parallel_workers_per_gather = 6;
+
 -- To generate data files:
 --
 -- run this file in psql
