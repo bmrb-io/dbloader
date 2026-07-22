@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Site configs: real hosts and the plaintext ETS password (see loader.example.properties)
+uconn.properties
+*.local.properties
