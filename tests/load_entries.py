@@ -34,6 +34,16 @@ except ImportError:
 _HERE = os.path.dirname(os.path.realpath(__file__))
 
 
+def _argnames(fn):
+    """Parameter names of `fn`, under both Python 2 and 3."""
+
+    import inspect
+    try:
+        return list(inspect.signature(fn).parameters)          # Python 3
+    except AttributeError:
+        return list(inspect.getargspec(fn).args)               # Python 2
+
+
 def released_ids_stub(config):
     """Yield the BMRB IDs of every entry directory in [macromolecules] entrydir.
 
@@ -58,8 +68,8 @@ def main():
     ap.add_argument("-r", "--repo", dest="repo", default=os.path.join(_HERE, ".."),
                     help="dbloader checkout to import `loader` from")
     ap.add_argument("-v", "--verbose", dest="verbose", action="store_true", default=False)
-    ap.add_argument("--truncate", dest="drop", action="store_false", default=True,
-                    help="reload into the existing tables instead of dropping the schema")
+    ap.add_argument("--no-swap", dest="swap", action="store_false", default=True,
+                    help="py3 only: leave the data in <schema>_new")
     args = ap.parse_args()
 
     sys.path.insert(0, os.path.realpath(args.repo))
@@ -70,15 +80,33 @@ def main():
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
 
-    # drop_tables=True is the only path the legacy code implements, so it is
-    # what the golden was built with; --truncate exercises the one the rewrite
-    # added, which has to end up with the same database.
+    # The legacy loader takes drop_tables (and only implements drop_tables=True);
+    # the rewrite dropped the argument along with the in-place paths, and always
+    # builds a shadow schema.  Both are driven from here, so ask which one this
+    # is rather than assuming.
+    legacy = "drop_tables" in _argnames(loader.load_macromolecules)
+
+    loaded = []
     if args.db in ("macromolecules", "all"):
         with loader.timer(label="Load macromolecules"):
-            loader.load_macromolecules(config=cp, drop_tables=args.drop, verbose=args.verbose)
+            if legacy:
+                loader.load_macromolecules(config=cp, drop_tables=True, verbose=args.verbose)
+            else:
+                loader.load_macromolecules(config=cp, verbose=args.verbose)
+        loaded.append(cp.get("macromolecules", "schema"))
     if args.db in ("metabolomics", "all"):
         with loader.timer(label="Load metabolomics"):
-            loader.load_metabolomics(config=cp, drop_tables=args.drop, verbose=args.verbose)
+            if legacy:
+                loader.load_metabolomics(config=cp, drop_tables=True, verbose=args.verbose)
+            else:
+                loader.load_metabolomics(config=cp, verbose=args.verbose)
+        loaded.append(cp.get("metabolomics", "schema"))
+
+    # the legacy loader has no shadow to swap: it loaded in place
+    if args.swap and loaded and not legacy:
+        loader.shadow.swap(loader.db.dsn(cp, "macromolecules"),
+                           [(s, loader.shadow.shadow_of(s)) for s in loaded],
+                           config=cp, verbose=args.verbose)
 
 
 if __name__ == "__main__":

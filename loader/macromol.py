@@ -17,12 +17,21 @@ from configparser import ConfigParser
 _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 from loader import db
+from loader import shadow
 
 DB = "macromolecules"
 
+# `DB` is the config *section*; the schema it names is a separate thing, and
+# the two are only identical by convention.  These fixups used to qualify
+# their tables with the section name, which silently wrote to a schema called
+# `macromolecules` whatever the config said -- including, once shadow loads
+# existed, the live schema while the data was still in the shadow.  fixup()
+# resolves it once, here.
+_SCHEMA = DB
+
 
 def _table(name):
-    return db.qualified(DB, name)
+    return db.qualified(_SCHEMA, name)
 
 
 def _log(verbose, sql, curs=None):
@@ -38,7 +47,20 @@ def fixup(config, verbose=False):
     if verbose:
         sys.stdout.write("fixup()\n")
 
+    # Normally this runs between the load and the swap, so the schema to fix
+    # up is the shadow.  Run on its own after a swap there is no shadow left,
+    # and the live schema is the thing that was loaded -- so fall back to it
+    # rather than failing on a schema that does not exist.
+    global _SCHEMA
     conn = db.connect(db.dsn(config, DB))
+    _SCHEMA = shadow.target(config, DB)
+    with conn.cursor() as curs:
+        curs.execute("select 1 from pg_namespace where nspname = %s", (_SCHEMA,))
+        if curs.fetchone() is None:
+            _SCHEMA = config.get(DB, "schema")
+    if verbose:
+        sys.stdout.write("fixing up schema %s\n" % (_SCHEMA,))
+
     try:
         with conn.cursor() as curs:
             fix_software(curs, config, verbose=verbose)

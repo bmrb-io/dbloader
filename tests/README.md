@@ -94,15 +94,14 @@ paths throughout, because the golden runs out of a different checkout.
 sh tests/golden_dict.sh            # build inputs + golden dict   (~2 min)
 sh tests/golden_entries.sh         # golden entry schemas         (~3 min)
 sh tests/regression.sh             # the rewrite, diffed          (~3 min)
-sh tests/regression.sh truncate    # again, via the truncate path (~3 min)
 sh tests/regression.sh dumps       # the CSV dump path            (~1 min)
 sh tests/shadow_swap.sh            # the publish step             (~1 min)
 ```
 
 `shadow_swap.sh` tests `load_postgres_db.py`, the half of the pipeline that
-loads a dump into the serving database: the `--shadow` swap, the
-truncate-in-place path, and -- the cases that matter -- that neither leaves the
-serving database emptier than it found it when a copy fails. It needs a dump,
+loads a dump into the serving database: the `--shadow` swap and -- the case
+that matters -- that a failed copy never leaves the serving database emptier
+than it found it. It needs a dump,
 so run `regression.sh dumps` first.
 
 `tests/bench.py` times the entry load on its own, and `--parse-only` times just
@@ -115,6 +114,13 @@ venv/bin/python tests/bench.py -c tests/build/loader.properties --parse-only pyn
 
 `golden_dict.sh --no-build` reuses `tests/build/csv` instead of rebuilding the
 dictionary artifacts. `regression.sh dict` / `entries` run one stage.
+
+There used to be a `regression.sh truncate` mode, for reloading into the live
+schema in place. Both in-place paths are gone -- every load builds
+`<schema>_new` and is swapped in (`loader/shadow.py`) -- so there is nothing
+left for it to exercise. The regression drives the stages with `--no-swap` only
+where it needs to compare a shadow before it lands; otherwise each stage swaps
+its own schema in and the dumps read the live ones.
 
 A failure prints the tables whose fingerprints differ and the first few
 differing rows of each; the full dumps are left in `tests/build/test/`.

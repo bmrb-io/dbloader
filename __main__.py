@@ -49,10 +49,22 @@ def parse_args(argv=None):
         ap.add_argument("--no-" + stage, help="don't load the %s schema" % (stage,),
                         dest="load_" + stage, action="store_false", default=True)
 
+    ap.add_argument("--no-swap", dest="swap", action="store_false", default=True,
+                    help="leave every stage in its <schema>_new and do not swap")
+
+    # Accepted and ignored.  Every load now builds a fresh shadow schema and
+    # swaps it in, so there is no longer a choice between dropping and
+    # truncating the live one -- but the deployed condor jobs (120, 220) still
+    # pass this, and failing them on an unrecognized argument would be a worse
+    # outcome than saying so.  Drop it once updater_dag no longer sends it.
     ap.add_argument("--drop-tables", dest="drop_tables", action="store_true", default=False,
-                    help="drop and re-create entry tables instead of truncating them")
+                    help=argparse.SUPPRESS)
 
     args = ap.parse_args(argv)
+
+    if args.drop_tables:
+        sys.stderr.write("--drop-tables is obsolete and ignored: every load now builds"
+                         " <schema>_new and swaps it in.\n")
 
     # --no-load turns off every load stage
     if not args.load:
@@ -75,6 +87,7 @@ def main(argv=None):
     cp.read(os.path.realpath(args.conffile))
 
     failed = []
+    built = []          # live schema names, in load order, to swap in at the end
 
     with loader.timer(label="total", silent=args.time):
 
@@ -85,6 +98,10 @@ def main(argv=None):
                 return 1
             with loader.timer(label="load dictionary", silent=args.time):
                 loader.load_dict(config=cp, path=dictdir, verbose=args.verbose)
+            # dictionary.sql builds validict alongside dict, as views over it,
+            # so the two have to move together
+            built += loader.shadow.declared_schemas(
+                os.path.join(dictdir, cp.get("dictionary", "ddlfile")))
 
         if args.load_chemcomps:
             with loader.timer(label="load chem. comps", silent=args.time):
@@ -92,20 +109,30 @@ def main(argv=None):
 
         if args.load_metabolomics:
             with loader.timer(label="load metabolomics", silent=args.time):
-                failed += loader.load_metabolomics(config=cp, drop_tables=args.drop_tables,
-                                                   verbose=args.verbose)
+                failed += loader.load_metabolomics(config=cp, verbose=args.verbose)
                 loader.load_meta_schema(config=cp, verbose=args.verbose)
+            built.append(cp.get("metabolomics", "schema"))
 
         if args.load_macromolecules:
             with loader.timer(label="load macromolecules", silent=args.time):
-                failed += loader.load_macromolecules(config=cp, drop_tables=args.drop_tables,
-                                                     verbose=args.verbose)
+                failed += loader.load_macromolecules(config=cp, verbose=args.verbose)
                 loader.fix_macromolecules(config=cp, verbose=args.verbose)
+            built.append(cp.get("macromolecules", "schema"))
 
             # CS statistics are computed from the macromolecules just loaded
             if args.load_web:
                 with loader.timer(label="load web extras", silent=args.time):
                     loader.load_web_schema(config=cp, verbose=args.verbose)
+                built.append(cp.get("web", "schema"))
+
+        # One transaction renaming every schema built above into place.  Until
+        # this runs the load is invisible: readers are still on the previous
+        # contents, and a failure anywhere above leaves them there for good.
+        if args.swap and built:
+            with loader.timer(label="swap schemas in", silent=args.time):
+                loader.shadow.swap(loader.db.dsn(cp, "dictionary"),
+                                   [(x, loader.shadow.shadow_of(x)) for x in built],
+                                   config=cp, verbose=args.verbose)
 
         if args.dump:
             if args.dump_macro:

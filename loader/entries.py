@@ -27,37 +27,63 @@ sys.path.append(_UP)
 import loader
 from loader import db
 from loader.entryload import EntryLoader
+from loader import shadow
 
 DATABASES = ("macromolecules", "metabolomics")
 
-# the dictionary schema the entry tables are generated from
+# the dictionary schema the entry tables are generated from, if the config
+# does not name one
 DICT_SCHEMA = "dict"
+
+
+def _dict_schema(conn, config):
+    """The dictionary schema the entry tables are generated from.
+
+    Whichever dictionary was loaded most recently: the shadow one if a
+    dictionary load is still in flight (the orchestrated case -- everything is
+    built, then swapped in together), otherwise the live one, because the
+    dictionary stage already swapped its own in.  Getting this backwards would
+    silently generate the entry tables from the *previous* dictionary.
+    """
+
+    if not (config.has_section("dictionary") and config.has_option("dictionary", "schema")):
+        return DICT_SCHEMA
+
+    live = config.get("dictionary", "schema")
+    with conn.cursor() as curs:
+        for name in (shadow.shadow_of(live), live):
+            curs.execute("select 1 from pg_namespace where nspname = %s", (name,))
+            if curs.fetchone() is not None:
+                return name
+    raise Exception("no dictionary schema: neither %s nor %s exists"
+                    % (shadow.shadow_of(live), live,))
 
 
 # wrappers
 #
 #
-def load_metabolomics(config, drop_tables, verbose=False):
-    return load_db("metabolomics", config, drop_tables, verbose)
+def load_metabolomics(config, verbose=False):
+    return load_db("metabolomics", config, verbose)
 
 
 #
 #
-def load_macromolecules(config, drop_tables, verbose=False):
-    return load_db("macromolecules", config, drop_tables, verbose)
+def load_macromolecules(config, verbose=False):
+    return load_db("macromolecules", config, verbose)
 
 
 #
 #
-def load_db(dbname, config, drop_tables, verbose=False):
-    """Load one archive and grant the read-only user access to it.
+def load_db(dbname, config, verbose=False):
+    """Load one archive into its shadow schema and grant the read-only user
+    access to it.  The caller swaps it in -- see loader/shadow.py.
 
     Returns the list of entry files that failed to load (empty on success).
     """
 
-    failed = load_entries(dbname, config, drop_tables, verbose)
+    failed = load_entries(dbname, config, verbose)
     if config.has_option(dbname, "rouser"):
-        db.add_ro_grants(db.dsn(config, dbname), schema=config.get(dbname, "schema"),
+        db.add_ro_grants(db.dsn(config, dbname), schema=shadow.target(config, dbname),
                          user=config.get(dbname, "rouser"), config=config, verbose=verbose)
     return failed
 
@@ -65,11 +91,10 @@ def load_db(dbname, config, drop_tables, verbose=False):
 #
 #
 #
-def load_entries(dbname, config, drop_tables=False, verbose=False):
+def load_entries(dbname, config, verbose=False):
 
     if verbose:
-        sys.stdout.write("load_entries( %s, %s )\n"
-                         % (dbname, drop_tables and "drop_tables" or "truncate_tables",))
+        sys.stdout.write("load_entries( %s )\n" % (dbname,))
 
     assert dbname in DATABASES
 
@@ -94,7 +119,7 @@ def load_entries(dbname, config, drop_tables=False, verbose=False):
         sys.stdout.write("*********\nFiles to load:\n")
         pprint.pprint(files)
 
-    return _load_entries(config, dbname, files, drop_tables, verbose=verbose)
+    return _load_entries(config, dbname, files, verbose=verbose)
 
 
 # cross-check the files on the website against ETS: everything released should
@@ -166,57 +191,47 @@ def _gen_file_list(dbname, directory, verbose=False):
     return sorted(filelist)
 
 
-# Empty the entry schema, one way or the other.
+# Create the shadow schema the entries are loaded into.
 #
-# Dropping and re-creating is the safe choice: the table set comes from the
-# dictionary, so a dictionary update adds and removes tables and only a
-# re-create picks that up.  Truncating is for reloading against an unchanged
-# dictionary; it used to be `raise Exception( "FIXME!!!! Not implemented" )`,
-# which meant the *documented default* aborted every time.
+# It is always built from scratch: the table set comes from the dictionary, so
+# a dictionary update adds and removes tables and only a re-create picks that
+# up.  The two in-place paths this used to have -- drop-and-refill and
+# truncate-and-refill of the *live* schema -- are gone; they were what made a
+# reload visible to readers.  Any leftover shadow from a run that died before
+# the swap is dropped here.
 #
-# Either way every table ends up empty, entry_saveframes included -- the next
-# Sf_ID comes from max(sfid) there, so both paths number from 1.
+# Every table ends up empty, entry_saveframes included: the next Sf_ID comes
+# from max(sfid) there, so numbering starts at 1.
 #
-def _prepare_schema(conn, schema, use_types, drop_tables, verbose=False):
+def _prepare_schema(conn, schema, verbose=False):
 
     with conn.cursor() as curs:
         curs.execute("set client_min_messages=WARNING")
-
-        if not drop_tables:
-            tables = _tables_in(conn, schema)
-            if len(tables) > 0:
-                if verbose:
-                    sys.stdout.write("truncating %d tables in %s\n" % (len(tables), schema,))
-                curs.execute("truncate %s"
-                             % (",".join(db.qualified(schema, t) for t in tables),))
-                return False
-            sys.stderr.write("%s: nothing to truncate, creating the tables\n" % (schema,))
-
+        if verbose:
+            sys.stdout.write("building shadow schema %s\n" % (schema,))
         curs.execute("drop schema if exists %s cascade" % (schema,))
         curs.execute("create schema %s" % (schema,))
-    return True
-
-
-def _tables_in(conn, schema):
-    with conn.cursor() as curs:
-        curs.execute("select table_name from information_schema.tables"
-                     " where table_schema = %s and table_type = 'BASE TABLE'", (schema,))
-        return [row[0] for row in curs.fetchall()]
 
 
 #
 #
 #
-def _load_entries(config, dbname, filelist, drop_tables=False, verbose=False):
+def _load_entries(config, dbname, filelist, verbose=False):
 
     # macromolecules load as all-text, metabolomics with types from the dictionary
     use_types = (dbname != "macromolecules")
-    schema = config.get(dbname, "schema")
+    schema = shadow.target(config, dbname)
 
     conn = db.connect(db.dsn(config, dbname))
     try:
-        # DDL in its own transaction, then one transaction per entry
+        # DDL in its own transaction, then one transaction per entry.  This
+        # comes first: psycopg2 will not change the session's autocommit once
+        # a transaction is open, and looking the dictionary up opens one.
         conn.autocommit = True
+
+        dict_schema = _dict_schema(conn, config)
+        if verbose:
+            sys.stdout.write("generating %s from %s\n" % (schema, dict_schema,))
 
         # One commit per entry means one fsync per entry -- ~14,800 of them for
         # the macromolecule archive -- to protect a load that is thrown away
@@ -227,13 +242,11 @@ def _load_entries(config, dbname, filelist, drop_tables=False, verbose=False):
         with conn.cursor() as curs:
             curs.execute("set synchronous_commit = off")
 
-        if _prepare_schema(conn, schema, use_types, drop_tables, verbose):
-            loader_ = EntryLoader(conn, schema, DICT_SCHEMA, verbose=verbose)
-            n = loader_.create_tables(DICT_SCHEMA, use_types=use_types)
-            if verbose:
-                sys.stdout.write("created %d tables in %s\n" % (n, schema,))
-        else:
-            loader_ = EntryLoader(conn, schema, DICT_SCHEMA, verbose=verbose)
+        _prepare_schema(conn, schema, verbose)
+        loader_ = EntryLoader(conn, schema, dict_schema, verbose=verbose)
+        n = loader_.create_tables(dict_schema, use_types=use_types)
+        if verbose:
+            sys.stdout.write("created %d tables in %s\n" % (n, schema,))
         conn.autocommit = False
 
         return _parse_all(conn, loader_, filelist, verbose)
@@ -282,19 +295,27 @@ if __name__ == "__main__":
     ap.add_argument("-c", "--config", help="config file", dest="conffile", required=True)
     ap.add_argument("-s", "--schema", help="database to load: macromolecules or metabolomics",
                     dest="db", default="all", choices=DATABASES + ("all",))
-    ap.add_argument("-d", "--drop-tables", dest="droptables", action="store_true", default=False,
-                    help="drop and re-create tables (default: truncate existing)")
+    ap.add_argument("--no-swap", dest="swap", action="store_false", default=True,
+                    help="leave the data in <schema>_new instead of swapping it in"
+                         " (for a caller that swaps several schemas together)")
     args = ap.parse_args()
 
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
 
     failed = []
+    loaded = []
     for dbname in DATABASES:
         if args.db in (dbname, "all"):
             with loader.timer(label="Load " + dbname, silent=args.time):
-                failed.extend(load_db(dbname, config=cp, drop_tables=args.droptables,
-                                      verbose=args.verbose))
+                failed.extend(load_db(dbname, config=cp, verbose=args.verbose))
+            loaded.append((dbname, cp.get(dbname, "schema")))
+
+    # every section names the same database, so any of them will do for the DSN
+    if args.swap and loaded:
+        shadow.swap(db.dsn(cp, loaded[0][0]),
+                    [(s, shadow.shadow_of(s)) for (_, s) in loaded],
+                    config=cp, verbose=args.verbose)
 
     if len(failed) > 0:
         sys.exit(1)

@@ -12,12 +12,12 @@
 # and pg-tmp is running with roles `bmrb`/`web` and database `bmrb`.  See
 # tests/README.md.
 #
-#     sh tests/regression.sh [dict|entries|truncate|dumps]  # default: dict + entries
+#     sh tests/regression.sh [dict|entries|dumps]           # default: dict + entries
 #
-# `truncate` re-runs the entry load over the schema the previous run left
-# behind, using the truncate-and-reload path the rewrite implemented (the
-# legacy code raised "FIXME!!!! Not implemented" there), and checks it lands on
-# the same golden.  It needs an entries run before it.
+# There used to be a `truncate` mode here, for the truncate-and-reload path the
+# rewrite implemented over the live schema.  Both in-place paths are gone --
+# every load now builds <schema>_new and is swapped in (loader/shadow.py) --
+# so there is nothing left for it to exercise.
 #
 # `dumps` needs no golden: it points the old dumper and the new one at the same
 # database and diffs their output directly.
@@ -170,14 +170,9 @@ if [ "$what" = "all" ] || [ "$what" = "dict" ]; then
     check dict
 fi
 
-if [ "$what" = "all" ] || [ "$what" = "entries" ] || [ "$what" = "truncate" ]; then
-    if [ "$what" = "truncate" ]; then
-        echo "== reloading entries into the existing tables (python3, --truncate) =="
-        "$python" "$here/load_entries.py" -c "$conf" --truncate > "$out/entries.log" 2>&1 && loadrc=0 || loadrc=$?
-    else
-        echo "== loading entries (python3) =="
-        "$python" "$here/load_entries.py" -c "$conf" > "$out/entries.log" 2>&1 && loadrc=0 || loadrc=$?
-    fi
+if [ "$what" = "all" ] || [ "$what" = "entries" ]; then
+    echo "== loading entries (python3) =="
+    "$python" "$here/load_entries.py" -c "$conf" > "$out/entries.log" 2>&1 && loadrc=0 || loadrc=$?
     tail -2 "$out/entries.log"
 
     # a crash in the loader must not read as "0 entries failed" further down:

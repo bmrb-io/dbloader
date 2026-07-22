@@ -39,13 +39,25 @@ python __main__.py -c loader.properties --dictdir <dir-with-dictionary.sql+dict.
 `__main__.py` is a big switchboard of `--no-*` flags; by default it loads
 **everything** and dumps `bmrbeverything`. Key stages, each a `loader.*` call:
 
+Every stage builds `<schema>_new` and the run ends by renaming them all into
+place in one transaction (`loader/shadow.py`) — so a reload is invisible to
+readers, and a failure anywhere leaves the previous contents serving. This is
+not optional: the drop-and-refill and truncate-and-refill paths that used to
+load the live schema directly are gone, the same cleanup
+`load_postgres_db.py` did on the serving side. `--drop-tables` is still
+accepted, ignored, and warns (condor jobs 120/220 still pass it).
+
+`chemcomps` and `meta` are the exceptions — both load from sources that are
+unreachable outside BMRB, so they still load in place.
+
 | Stage | Function | What it does |
 |-------|----------|--------------|
-| dictionary | `load_dict` (`loader/dictionary.py`) | run `dictionary.sql` DDL into `dict` schema, then `COPY` every `dict.*.csv` in `--dictdir` into `dict.<table>`. |
+| dictionary | `load_dict` (`loader/dictionary.py`) | rewrite `dictionary.sql` to build `dict_new`/`validict_new`, run it, then `COPY` every `dict.*.csv` in `--dictdir` into `dict_new.<table>`. |
 | chem comps | `load_chem_comps` (`chemcomps.py`) | dump released chem comps from the `ccdb` database, load into `chemcomps` schema. |
 | metabolomics | `load_metabolomics` + `load_meta_schema` | parse metabolomics NMR-STAR entries into the `metabolomics` schema; load `meta` extras from CSV. |
 | macromolecules | `load_macromolecules` + `fix_macromolecules` | parse macromolecule entries into the `macromolecules` schema, then cleanups. |
 | web | `load_web_schema` (`webextras.py`) | `web` schema: chemical-shift statistics (`cs_stats.sql`) + CSV extras. |
+| swap | `shadow.swap` (`loader/shadow.py`) | rename every `<schema>_new` built above into place, in one transaction; drop the retired ones afterwards, outside it. |
 | dump | `dump_new` / `dump_macromolecules` / `dump_metabolomics` | write schema contents back out to CSV in `-d <outdir>`. |
 
 Connection details (host, db, user, schema) per stage come from
@@ -161,7 +173,8 @@ Things to know before changing any of this:
 | `loader/db.py` | **The only module that talks to PostgreSQL**: `dsn()`, `connect()`, `run_sql_file()`, `copy_from_csv()`/`copy_to_csv()` (via `psql \copy`), `add_ro_grants()`, identifier quoting. |
 | `loader/__init__.py` | `timer`; re-exports every stage. |
 | `loader/dictionary.py` | Load `dictionary.sql` + `dict.*.csv` into the `dict` schema. |
-| `loader/entries.py` | Find entry files, prepare the schema, keep score. |
+| `loader/entries.py` | Find entry files, build the shadow schema, keep score. |
+| `loader/shadow.py` | Build alongside and swap in: DDL rewriting, and the swap transaction. |
 | `loader/starschema.py` | The dictionary read as a schema definition: type mapping, `create_tables`. |
 | `loader/entryload.py` | pynmrstar parse + batched insert of one entry. |
 | `loader/chemcomps.py` | Dump-and-load chem comps from `ccdb`. |
