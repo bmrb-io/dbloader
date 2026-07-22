@@ -30,22 +30,47 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 alter table web.cs_stat_rna_full
   add column num_outliers integer;
 
-update web.cs_stat_rna_full set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_rna_full.comp_id and
-  "Atom_ID"=web.cs_stat_rna_full.atom_id and
-  (cast( "Val" as float ) > web.cs_stat_rna_full.avg + 3 * web.cs_stat_rna_full.std
-  or cast( "Val" as float ) < web.cs_stat_rna_full.avg - 3 * web.cs_stat_rna_full.std));
+-- Counting outliers used to be a correlated subquery evaluated once per
+-- statistics row: a lookup into Atom_chem_shift for every (comp_id, atom_id),
+-- times six statements of this shape.  Grouping the whole thing instead reads
+-- the table once per statement.
+--
+-- The join is LEFT so that a statistics row with no outliers still produces a
+-- group, and the count is over a join column rather than `count(*)` so that
+-- the unmatched row counts 0 -- which is what the old `count(*)` over an empty
+-- subquery returned.  That also covers avg/std being NULL (a single-observation
+-- group): the comparisons are then NULL, nothing matches, and the answer is 0
+-- either way.
+
+update web.cs_stat_rna_full t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_rna_full s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = s.atom_id
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 -- RNA exclusion list
 --
 create temporary table cs_stat_exclude_rna (id text);
 
+-- The +/-8 sigma band used to be fetched by two correlated scalar subqueries
+-- per row of Atom_chem_shift -- two subplan executions for every shift in the
+-- archive, against a table of a few hundred rows.  As a join the planner
+-- hashes that table once.  The join is inner, matching the old semantics: a
+-- (comp_id, atom_id) with no statistics row gave NULL bounds, `not (x between
+-- NULL and NULL)` is NULL, and the row was not excluded -- which is what
+-- dropping it does.  The statistics are grouped by (comp_id, atom_id), so
+-- there is exactly one match and the join cannot duplicate a row.
+
 insert into cs_stat_exclude_rna select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
-  where "Comp_ID" in ('A','C','G','U') and not (cast(a."Val" as numeric)
-  between (select avg - 8 * std from web.cs_stat_rna_full where comp_id=a."Comp_ID" and atom_id=a."Atom_ID") 
-  and (select avg + 8 * std from web.cs_stat_rna_full where comp_id=a."Comp_ID" and atom_id=a."Atom_ID"));
+  join web.cs_stat_rna_full s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
+  where a."Comp_ID" in ('A','C','G','U')
+  and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
 
 --
 -- RNA restricted set
@@ -64,12 +89,20 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 alter table web.cs_stat_rna_filt
   add column num_outliers integer;
 
-update web.cs_stat_rna_filt set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_rna_filt.comp_id and
-  "Atom_ID"=web.cs_stat_rna_filt.atom_id and
-  (cast( "Val" as float ) > web.cs_stat_rna_filt.avg + 3 * web.cs_stat_rna_filt.std
-  or cast( "Val" as float ) < web.cs_stat_rna_filt.avg - 3 * web.cs_stat_rna_filt.std));
+-- NB as before: no exclusion-list filter here, so the outlier count on a
+-- _filt table is taken over every entry, not over the filtered set.  That is
+-- what the correlated form did; preserved deliberately.
+
+update web.cs_stat_rna_filt t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_rna_filt s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = s.atom_id
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 --
@@ -88,9 +121,9 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 create temporary table cs_stat_exclude_dna (id text);
 
 insert into cs_stat_exclude_dna select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
-  where "Comp_ID" in ('DA','DC','DG','DT') and not (cast(a."Val" as numeric)
-  between (select avg - 8 * std from cs_stat_dna_full_raw where comp_id=a."Comp_ID" and atom_id=a."Atom_ID")
-  and (select avg + 8 * std from cs_stat_dna_full_raw where comp_id=a."Comp_ID" and atom_id=a."Atom_ID"));
+  join cs_stat_dna_full_raw s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
+  where a."Comp_ID" in ('DA','DC','DG','DT')
+  and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
 
 --
 -- DNA restricted set for validator
@@ -126,12 +159,16 @@ select distinct comp_id,atom_id,
 alter table web.cs_stat_dna_full
   add column num_outliers integer;
 
-update web.cs_stat_dna_full set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_dna_full.comp_id and
-  "Atom_ID"=(case when web.cs_stat_dna_full.atom_id='M7' then 'H71' else web.cs_stat_dna_full.atom_id end) and
-  (cast( "Val" as float ) > web.cs_stat_dna_full.avg + 3 * web.cs_stat_dna_full.std
-  or cast( "Val" as float ) < web.cs_stat_dna_full.avg - 3 * web.cs_stat_dna_full.std));
+update web.cs_stat_dna_full t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_dna_full s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = (case when s.atom_id='M7' then 'H71' else s.atom_id end)
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 -- DNA restricted set with methyls collapsed
@@ -154,12 +191,16 @@ select distinct comp_id,atom_id,case when comp_id='DT' and atom_id='M7' then cou
 alter table web.cs_stat_dna_filt
   add column num_outliers integer;
 
-update web.cs_stat_dna_filt set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_dna_filt.comp_id and
-  "Atom_ID"=(case when web.cs_stat_dna_filt.atom_id='M7' then 'H71' else web.cs_stat_dna_filt.atom_id end) and
-  (cast( "Val" as float ) > web.cs_stat_dna_filt.avg + 3 * web.cs_stat_dna_filt.std
-  or cast( "Val" as float ) < web.cs_stat_dna_filt.avg - 3 * web.cs_stat_dna_filt.std));
+update web.cs_stat_dna_filt t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_dna_filt s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = (case when s.atom_id='M7' then 'H71' else s.atom_id end)
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 -- peptide full set
@@ -177,50 +218,57 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 create temporary table cs_stat_exclude_aa (id text);
 
 insert into cs_stat_exclude_aa select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
-  where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
-  and not (cast(a."Val" as numeric) between (select avg - 8 * std from cs_stat_aa_full_raw where comp_id=a."Comp_ID" and atom_id=a."Atom_ID")
-  and (select avg + 8 * std from cs_stat_aa_full_raw where comp_id=a."Comp_ID" and atom_id=a."Atom_ID"));
+  join cs_stat_aa_full_raw s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
+  where a."Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
+  and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
-  where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL') 
+-- These thirteen hard limits stay thirteen statements on purpose.  OR-ing them
+-- into a single scan is the obvious tidy-up and it is slower: measured at
+-- archive scale it cost 14 s (761 s against a 747 s baseline).  Each statement
+-- as written is a narrow (Comp_ID, Atom_ID) equality that the index built in
+-- loader/indexes.py turns into a cheap index scan; the merged form is one
+-- sequential scan of the whole table instead.
+
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
+  where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
   and "Atom_ID"='H' and not (cast("Val" as numeric) between -2.5 and 22.0);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and "Atom_ID"='HD1' and cast("Val" as numeric) < 2.0;
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and "Atom_ID"='HD2' and cast("Val" as numeric) > 12.0;
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and "Atom_ID"='HE1' and cast("Val" as numeric) > 15.0;
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and "Atom_ID"='HE2' and cast("Val" as numeric) < 2.0;
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
-  where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL') 
-  and "Atom_type"='H' and "Atom_ID" not in ('H','HE','HE1','HE2','HD1','HD2','HZ','HH') 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
+  where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
+  and "Atom_type"='H' and "Atom_ID" not in ('H','HE','HE1','HE2','HD1','HD2','HZ','HH')
   and not (cast("Val" as numeric) between -2.5 and 10.0);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='ARG' and "Atom_ID"='NE' and not (cast("Val" as numeric) between 60.0 and 100.0);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='ARG' and "Atom_ID" similar to 'NH[12]' and not (cast("Val" as numeric) between 50 and 90);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='PRO' and "Atom_ID"='N' and not (cast("Val" as numeric) between 110 and 150);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='LYS' and "Atom_ID"='NZ' and not (cast("Val" as numeric) between 12 and 52);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and ("Atom_ID"='ND1' or "Atom_ID"='NE2') and not (cast("Val" as numeric) between 160 and 230);
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='HIS' and "Atom_ID" similar to 'CD[12]' and cast("Val" as numeric) < 90;
 
-insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift" 
+insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."Atom_chem_shift"
   where "Comp_ID"='TYR' and "Atom_ID"='CZ' and cast("Val" as numeric) < 90;
 
 --
@@ -274,21 +322,25 @@ select distinct comp_id,atom_id,
 alter table web.cs_stat_aa_full
   add column num_outliers integer;
 
-update web.cs_stat_aa_full set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_aa_full.comp_id and
-  "Atom_ID"=(case when web.cs_stat_aa_full.atom_id='MB' then 'HB1'
-    when web.cs_stat_aa_full.atom_id='MG1' then 'HG11'
-    when web.cs_stat_aa_full.atom_id='MG2' then 'HG21'
-    when web.cs_stat_aa_full.atom_id='MG' then 'HG21'
-    when web.cs_stat_aa_full.atom_id='MD' then 'HD11'
-    when web.cs_stat_aa_full.atom_id='MD1' then 'HD11'
-    when web.cs_stat_aa_full.atom_id='MD2' then 'HD21'
-    when web.cs_stat_aa_full.atom_id='ME' then 'HE1'
-    when web.cs_stat_aa_full.atom_id='QZ' then 'HZ1'
-    else web.cs_stat_aa_full.atom_id end) and
-  (cast( "Val" as float ) > web.cs_stat_aa_full.avg + 3 * web.cs_stat_aa_full.std
-  or cast( "Val" as float ) < web.cs_stat_aa_full.avg - 3 * web.cs_stat_aa_full.std));
+update web.cs_stat_aa_full t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_aa_full s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = (case when s.atom_id='MB' then 'HB1'
+                 when s.atom_id='MG1' then 'HG11'
+                 when s.atom_id='MG2' then 'HG21'
+                 when s.atom_id='MG' then 'HG21'
+                 when s.atom_id='MD' then 'HD11'
+                 when s.atom_id='MD1' then 'HD11'
+                 when s.atom_id='MD2' then 'HD21'
+                 when s.atom_id='ME' then 'HE1'
+                 when s.atom_id='QZ' then 'HZ1'
+                 else s.atom_id end)
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 -- peptide restricted set
@@ -331,21 +383,25 @@ select distinct comp_id,atom_id,
 alter table web.cs_stat_aa_filt
   add column num_outliers integer;
 
-update web.cs_stat_aa_filt set num_outliers=
-  (select count(*) from macromolecules."Atom_chem_shift" where
-  "Comp_ID"=web.cs_stat_aa_filt.comp_id and
-  "Atom_ID"=(case when web.cs_stat_aa_filt.atom_id='MB' then 'HB1'
-    when web.cs_stat_aa_filt.atom_id='MG1' then 'HG11'
-    when web.cs_stat_aa_filt.atom_id='MG2' then 'HG21'
-    when web.cs_stat_aa_filt.atom_id='MG' then 'HG21'
-    when web.cs_stat_aa_filt.atom_id='MD' then 'HD11'
-    when web.cs_stat_aa_filt.atom_id='MD1' then 'HD11'
-    when web.cs_stat_aa_filt.atom_id='MD2' then 'HD21'
-    when web.cs_stat_aa_filt.atom_id='ME' then 'HE1'
-    when web.cs_stat_aa_filt.atom_id='QZ' then 'HZ1'
-    else web.cs_stat_aa_filt.atom_id end) and
-  (cast( "Val" as float ) > web.cs_stat_aa_filt.avg + 3 * web.cs_stat_aa_filt.std
-  or cast( "Val" as float ) < web.cs_stat_aa_filt.avg - 3 * web.cs_stat_aa_filt.std));
+update web.cs_stat_aa_filt t set num_outliers = o.n
+  from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
+          from web.cs_stat_aa_filt s
+          left join macromolecules."Atom_chem_shift" a
+            on a."Comp_ID" = s.comp_id
+           and a."Atom_ID" = (case when s.atom_id='MB' then 'HB1'
+                 when s.atom_id='MG1' then 'HG11'
+                 when s.atom_id='MG2' then 'HG21'
+                 when s.atom_id='MG' then 'HG21'
+                 when s.atom_id='MD' then 'HD11'
+                 when s.atom_id='MD1' then 'HD11'
+                 when s.atom_id='MD2' then 'HD21'
+                 when s.atom_id='ME' then 'HE1'
+                 when s.atom_id='QZ' then 'HZ1'
+                 else s.atom_id end)
+           and (cast(a."Val" as float) > s.avg + 3 * s.std
+             or cast(a."Val" as float) < s.avg - 3 * s.std)
+         group by s.comp_id, s.atom_id) o
+ where t.comp_id = o.comp_id and t.atom_id = o.atom_id;
 
 --
 -- everything else
