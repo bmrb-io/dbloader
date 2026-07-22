@@ -12,6 +12,20 @@ tests/golden_entries.sh   py2 -> macromolecules,       -> golden/*.md5
 tests/regression.sh       py3 -> the same schemas      -> diff vs golden
 ```
 
+> **The macromolecule golden has gone stale.** Eight tables in it
+> (`Atom_chem_shift`, `Citation`, `Citation_author`, `Datum`, `Entity`,
+> `Entry`, `Release`, `T1`) no longer match, because the entry corpus under
+> `~/git/query-bmrb` has been refreshed since the golden was built and the
+> subset symlinks now point at re-released entries — `Release` alone has 13
+> rows the golden never saw. It is not a loader regression: the *unmodified*
+> py3 loader produces the same rows as the current one. Rebuild it with
+> `golden_entries.sh` (needs the py2 stack) before trusting `regression.sh`
+> on macromolecules. `metabolomics` is unaffected and still matches.
+>
+> To compare two revisions of the *py3* loader in the meantime, dump with
+> `dump_schema.sh` before and after and `diff -rq` the two directories; that
+> is how the COPY rewrite in `../PORT_NOTES.md` §Speed was checked.
+
 Status: **942 of 946 tables match byte for byte** (16 `dict`, 463
 `macromolecules`, 463 `metabolomics`), over a 300+300 entry subset, with the
 same 0 entries failing to load on both sides. Four tables are checked

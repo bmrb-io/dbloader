@@ -381,8 +381,9 @@ macromolecule subset (52 MB) and the 300-entry metabolomics subset (13.7 MB):
 |---|---|---|
 | Python 2 + starobj + pgdb | 110 s | 19 s |
 | Python 3 + starobj + psycopg2 | 79 s | 15 s |
-| Python 3 + pynmrstar, batched | **15 s** | **3.2 s** |
-| | **5.3x** faster | **4.6x** faster |
+| Python 3 + pynmrstar, batched | 16.3 s | 3.5 s |
+| \+ COPY and the row layout | **4.8 s** | **1.8 s** |
+| | **23x** faster | **10.6x** faster |
 
 Two things were slow, and only one of them was the parser:
 
@@ -392,11 +393,60 @@ Two things were slow, and only one of them was the parser:
 - **Inserts.** starobj issued one `INSERT` per row — 115,579 statements for 50
   macromolecule entries, ~2,300 per entry — and a profile put
   `cursor.execute` at the top by a wide margin. `entryload.py` groups every row
-  of a table that shares a column set and sends it in one `execute_values`.
+  of a table that shares a column set and sends it to the server in one call.
   That is where the rest of the factor comes from.
 
+### What was left after batching
+
+Batching cut the statement count by ~50x, so *bigger* batches had nothing left
+to win: at `execute_values(page_size=500)` the 300-entry macromolecule load
+already issued only ~44 statements per entry, and an unbounded page size would
+have made it ~40. The profile said the remaining 16.3 s was split about evenly
+between the server round trip and building the rows in Python:
+
+| | tottime |
+|---|---|
+| `cursor.execute` (13,203 calls) | 7.0 s |
+| `cursor.mogrify` (496,228 calls — one per row) | 4.0 s |
+| `_value` + the dict-per-row build (9.6M values) | ~9 s |
+| pynmrstar parse | 2.3 s |
+
+Four changes, in the order they pay:
+
+- **`COPY ... FROM STDIN` instead of `INSERT`** (`_write`). It skips `mogrify`
+  on the client and statement parsing on the server. Measured against
+  `execute_values` at every batch size, COPY won at *all* of them — including
+  the 2-row batches that are the common case — so there is no size threshold
+  and no second write path. `COPY FROM STDIN` is client-side and needs no
+  superuser, unlike server-side `COPY FROM 'file'`.
+- **A row layout per loop, not a dict per row** (`_plan`). A loop's tag list is
+  fixed, so the column set, the sorted column order, the `Sf_ID` slot and the
+  pointer mask are computed once per distinct tag list and cached; each row is
+  then built straight from the loop data by index. That removed the dict build,
+  the `sorted()` and the second pass over every row.
+- **The `Sf_ID` counter is kept in memory** rather than re-read with
+  `select max(sfid)` once per entry. It advances only after an entry's rows are
+  in, so a failed entry still leaves its IDs to be reused — and
+  `entries.py` calls `resync()` after a rollback, so even a failed *commit*
+  cannot drift the numbering.
+- **`synchronous_commit = off`** for the load session (`entries.py`). One
+  commit per entry is one fsync per entry, ~14,800 of them, to protect a schema
+  that is dropped and rebuilt from scratch if the run does not finish. It made
+  no measurable difference on the test box, whose data directory is a tmpfs;
+  it is there for production disks.
+
+The rows are unchanged: all 930 tables of both archives dump byte-identically
+to the pre-change loader, through the drop-and-create path and the truncate
+path, and a corpus with a deliberate parse failure and a deliberate insert
+failure reproduces the same failures with the same `Sf_ID` assignment.
+
+**Not done: `UNLOGGED` tables.** Halving WAL is tempting and the build database
+would tolerate it, but `csvio.dump_ddl` publishes the schema with `pg_dump -s`
+and `load_postgres_db.py` replays it — so the serving database would silently
+inherit unlogged tables, and a crash there would empty the public data.
+
 Extrapolating to the full archives (14,772 macromolecule + 3,629 metabolomics
-entries), the entry load goes from about **68 minutes to about 13** — or from
+entries), the entry load goes from about **68 minutes to under 5** — or from
 90 minutes, if you start from where this began, Python 2.
 
 ## The three differences from the golden

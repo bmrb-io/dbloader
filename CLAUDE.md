@@ -22,9 +22,13 @@ See [`../ORGANIZATION.md`](../ORGANIZATION.md) for the whole pipeline.
 > [`PORT_NOTES.md`](PORT_NOTES.md) for what changed and what is verified,
 > [`tests/README.md`](tests/README.md) for how to run the regression against
 > the Python 2 golden, and [`DATA_REMEDIATION.md`](DATA_REMEDIATION.md) for
-> defects in the deposited entries that the old loader used to hide. It shells
-> out to `psql`/`pg_dump` for `COPY` (server `copy` needs superuser; `psql
-> \copy` does not).
+> defects in the deposited entries that the old loader used to hide. Bulk CSV
+> in and out shells out to `psql`/`pg_dump` (server-side `copy` needs
+> superuser; `psql \copy` does not) — while the entry loader runs its own
+> `COPY ... FROM STDIN` in process through psycopg2's `copy_expert`, which is
+> client-side and needs no superuser either. That is what makes the entry load
+> fast; bigger *insert* batches are not — see `PORT_NOTES.md` §Speed before
+> reaching for them.
 
 ## How to run it
 

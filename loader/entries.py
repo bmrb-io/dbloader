@@ -217,6 +217,16 @@ def _load_entries(config, dbname, filelist, drop_tables=False, verbose=False):
     try:
         # DDL in its own transaction, then one transaction per entry
         conn.autocommit = True
+
+        # One commit per entry means one fsync per entry -- ~14,800 of them for
+        # the macromolecule archive -- to protect a load that is thrown away
+        # and re-run if it does not finish.  The schema is dropped and rebuilt
+        # from scratch here, so there is nothing in it worth waiting on the
+        # disk for: a crash costs the run, not the database.  (Session-local;
+        # it does not outlive this connection.)
+        with conn.cursor() as curs:
+            curs.execute("set synchronous_commit = off")
+
         if _prepare_schema(conn, schema, use_types, drop_tables, verbose):
             loader_ = EntryLoader(conn, schema, DICT_SCHEMA, verbose=verbose)
             n = loader_.create_tables(DICT_SCHEMA, use_types=use_types)
@@ -248,6 +258,7 @@ def _parse_all(conn, entryloader, filelist, verbose=False):
         # left the run looking successful.
         except Exception:
             conn.rollback()
+            entryloader.resync()
             sys.stderr.write("Exception on %s\n" % (f,))
             traceback.print_exc()
             failed.append(f)
