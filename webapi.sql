@@ -525,7 +525,17 @@ GRANT ALL PRIVILEGES ON TABLE web.metabolomics_summary to bmrb;
 GRANT ALL PRIVILEGES ON TABLE web.pdb_link to web;
 GRANT ALL PRIVILEGES ON TABLE web.pdb_link to bmrb;
 
-ANALYSE;
+-- Update planner statistics for the tables this script just built. A bare
+-- ANALYZE (as this was) analyzes every table in the database, including the
+-- shared catalogs -- pg_authid, pg_database and the like -- which the loader
+-- role does not own, so it warned about each one and analyzed nothing extra
+-- of any use. Name the five instead; the schema is rewritten to the shadow
+-- along with every other reference in this file.
+ANALYZE web.query_grid;
+ANALYZE web.chem_shifts;
+ANALYZE web.metabolomics_summary;
+ANALYZE web.instant_extra_search_terms;
+ANALYZE web.instant_cache;
 
 GRANT USAGE ON schema web TO PUBLIC;
 GRANT SELECT ON ALL TABLES IN schema web TO PUBLIC;
