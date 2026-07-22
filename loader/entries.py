@@ -32,33 +32,6 @@ from loader import indexes
 
 DATABASES = ("macromolecules", "metabolomics")
 
-# the dictionary schema the entry tables are generated from, if the config
-# does not name one
-DICT_SCHEMA = "dict"
-
-
-def _dict_schema(conn, config):
-    """The dictionary schema the entry tables are generated from.
-
-    Whichever dictionary was loaded most recently: the shadow one if a
-    dictionary load is still in flight (the orchestrated case -- everything is
-    built, then swapped in together), otherwise the live one, because the
-    dictionary stage already swapped its own in.  Getting this backwards would
-    silently generate the entry tables from the *previous* dictionary.
-    """
-
-    if not (config.has_section("dictionary") and config.has_option("dictionary", "schema")):
-        return DICT_SCHEMA
-
-    live = config.get("dictionary", "schema")
-    with conn.cursor() as curs:
-        for name in (shadow.shadow_of(live), live):
-            curs.execute("select 1 from pg_namespace where nspname = %s", (name,))
-            if curs.fetchone() is not None:
-                return name
-    raise Exception("no dictionary schema: neither %s nor %s exists"
-                    % (shadow.shadow_of(live), live,))
-
 
 # wrappers
 #
@@ -241,7 +214,7 @@ def _load_entries(config, dbname, filelist, verbose=False):
         # a transaction is open, and looking the dictionary up opens one.
         conn.autocommit = True
 
-        dict_schema = _dict_schema(conn, config)
+        dict_schema = shadow.dict_schema(conn, config)
         if verbose:
             sys.stdout.write("generating %s from %s\n" % (schema, dict_schema,))
 

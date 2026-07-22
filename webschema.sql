@@ -84,4 +84,18 @@ create table pdb_link (
     pdb_id text not null
 );
 
+-- How much time domain (raw FID) data each entry has, filled in by
+-- loader/webextras.py from the entry directories on disk.
+--
+-- This was created ad hoc by BMRB-API's `reloaders --timedomain`; it is
+-- declared here because webapi.sql reads it while building query_grid and
+-- instant_extra_search_terms, and an entry with no time domain data still has
+-- to produce a row of zeros rather than an error.  Declaring it means the API
+-- tables build even when the scan finds nothing.
+create table timedomain_data (
+    bmrbid text primary key,
+    size numeric,
+    sets numeric
+);
+
 -- eof

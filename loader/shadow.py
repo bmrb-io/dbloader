@@ -26,9 +26,12 @@
 # Costs about twice the disk of the schema being rebuilt, at peak -- the same
 # price load_postgres_db.py already pays on the serving host.
 #
-# Not covered: `chemcomps` and `meta`.  Both load from sources that are not
-# reachable outside BMRB (the ccdb database on octopus, and static CSVs), so
-# the change could not be exercised here; they still load in place.
+# Every schema the loader builds goes through this now, `chemcomps` and `meta`
+# included.  Those two were the last in-place loads -- each opened with `drop
+# schema <s> cascade` against the live name -- which was survivable only while
+# the reload happened on a build database nobody read.  Loading straight into
+# the served database makes an in-place drop an outage by definition: not stale
+# data for a while, but no schema at all until the load finishes.
 #
 
 import os
@@ -72,6 +75,50 @@ def live(config, section):
     """The schema a stage's output ends up as, once swapped in."""
 
     return config.get(section, "schema")
+
+
+# the dictionary schema the generated tables are defined from, if the config
+# does not name one
+DICT_SCHEMA = "dict"
+
+
+def dict_schema(conn, config, section="dictionary", default=DICT_SCHEMA):
+    """The dictionary schema to generate tables from: shadow if it exists, else live.
+
+    Every stage that builds tables out of the dictionary -- entries, chem comps
+    -- has to answer this, and the answer depends on where in the run it is
+    asked.  During an orchestrated reload the dictionary is still sitting in
+    `dict_new` waiting for the swap; run as a standalone stage after the
+    dictionary has been swapped in, it is `dict`.
+
+    Getting it backwards is silent and expensive: the tables come out generated
+    from the *previous* dictionary, which looks like a successful load.
+    """
+
+    if not (config.has_section(section) and config.has_option(section, "schema")):
+        return default
+
+    livename = config.get(section, "schema")
+    with conn.cursor() as curs:
+        for name in (shadow_of(livename), livename):
+            curs.execute("select 1 from pg_namespace where nspname = %s", (name,))
+            if curs.fetchone() is not None:
+                return name
+    raise Exception("no dictionary schema: neither %s nor %s exists"
+                    % (shadow_of(livename), livename,))
+
+
+def workdir(config, section):
+    """Where rewritten copies of this section's SQL scripts go.
+
+    `shadowdir` is set by the drivers (reload_db.py, load_db.sh) to somewhere
+    writable; without it the rewritten script lands under the current
+    directory, which is what the standalone CLIs get.
+    """
+
+    base = config.get(section, "shadowdir") \
+        if config.has_option(section, "shadowdir") else "."
+    return os.path.join(os.path.realpath(base), "shadow")
 
 
 # Rewriting a DDL script to build the shadow instead of the live schema.
@@ -259,6 +306,8 @@ if __name__ == "__main__":
     ap.add_argument("-c", "--config", dest="conffile", required=True)
     ap.add_argument("-s", "--section", dest="section", default="dictionary",
                     help="config section to take the connection from (default: %(default)s)")
+    # the swap has to be pointed at the same database the load stages were
+    db.add_target_args(ap)
     ap.add_argument("--suffix", dest="suffix", default=None,
                     help="shadow suffix (default: the `shadow` option of --section)")
     ap.add_argument("schemas", nargs="+",
@@ -267,6 +316,8 @@ if __name__ == "__main__":
 
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
+    db.repoint(cp, host=args.host, port=args.port, database=args.database,
+               verbose=args.verbose)
 
     sfx = args.suffix if args.suffix is not None else suffix(cp, args.section)
     if not sfx:

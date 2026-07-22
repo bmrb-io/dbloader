@@ -45,7 +45,11 @@ if [ -e "$out/.git" ] || [ -d "$out/.hg" ]; then
     echo "refusing to empty '$out': it looks like a checkout, not a work directory" >&2
     exit 2
 fi
-for keep in "$HOME" / /usr /etc /var /projects; do
+# ${HOME:-} because `set -u` plus a condor job's empty environment turns the
+# guard itself into the failure -- "HOME: parameter not set", before anything
+# is built.
+for keep in "${HOME:-}" / /usr /etc /var /projects; do
+    [ -n "$keep" ] || continue
     [ "$(cd "$out" 2>/dev/null && pwd)" = "$keep" ] || continue
     echo "refusing to empty '$out'" >&2; exit 2
 done

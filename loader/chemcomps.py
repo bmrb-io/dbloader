@@ -21,12 +21,9 @@ from configparser import ConfigParser
 
 _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
-from loader import csvio, db, starschema
+from loader import csvio, db, shadow, starschema
 
 DB = "chemcomps"
-
-# the dictionary schema the chem-comp tables are generated from
-DICT_SCHEMA = "dict"
 
 # schema the chem comps are dumped from, in the source database
 SRCSCHEMA = "chem_comp"
@@ -128,7 +125,7 @@ def dump_and_load(config, verbose=False):
         load(config, where=wd, verbose=verbose)
         fix_entry_id(config, verbose=verbose)
         if config.has_option(DB, "rouser"):
-            db.add_ro_grants(db.dsn(config, DB), schema=config.get(DB, "schema"),
+            db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
                              user=config.get(DB, "rouser"), config=config, verbose=verbose)
     finally:
         shutil.rmtree(wd)
@@ -222,19 +219,22 @@ def load(config, where, verbose=False):
     assert os.path.isdir(indir)
 
     dsn = _target(config)
-    schema = config.get(DB, "schema")
 
-    # the tables are in sub-schemas, just drop and re-create the whole thing.
-    # no other option for now
-    #
+    # The whole schema is rebuilt from scratch every time -- the table set
+    # comes from the dictionary, so only a re-create picks up a dictionary
+    # change -- but it is the *shadow* that gets dropped and rebuilt, never the
+    # live one.  Dropping the live `chemcomps` is fine on a build database
+    # nobody reads and is an outage on the database being served.
+    schema = shadow.target(config, DB)
+
     with db.connection(dsn, autocommit=True) as conn:
         with conn.cursor() as curs:
             curs.execute("set client_min_messages=WARNING")
             curs.execute("drop schema if exists %s cascade" % (schema,))
             curs.execute("create schema %s" % (schema,))
         # only the chem-comp subset of the dictionary, and always typed
-        starschema.create_tables(conn, schema, DICT_SCHEMA, use_types=True,
-                                 only=TABLES, verbose=verbose)
+        starschema.create_tables(conn, schema, shadow.dict_schema(conn, config),
+                                 use_types=True, only=TABLES, verbose=verbose)
 
     for f in sorted(glob.glob(os.path.join(indir, "*.csv"))):
         table = os.path.splitext(os.path.split(f)[1])[0]
@@ -243,7 +243,11 @@ def load(config, where, verbose=False):
         if table not in TABLES:
             sys.stderr.write("%s.csv not in tables, skipping\n" % (table,))
             continue
-        db.copy_from_csv(dsn, filename=f, schema=DB, table=table, config=config, verbose=verbose)
+        # `schema`, not DB: the section is named for the schema it loads, so
+        # passing the section name worked right up until the two differed --
+        # which is exactly what the shadow suffix does.
+        db.copy_from_csv(dsn, filename=f, schema=schema, table=table,
+                         config=config, verbose=verbose)
 
 
 # There are no Entry_IDs in chem comps, but Entry_ID is part of the primary key
@@ -255,12 +259,13 @@ def fix_entry_id(config, verbose=False):
         sys.stdout.write("fix_entry_id()\n")
 
     dsn = _target(config)
-    scam = config.get(DB, "schema")
+    scam = shadow.target(config, DB)
 
     with db.connection(dsn) as conn:
         # ugh
         #
-        for (table, column) in starschema.entryid_columns(conn, DICT_SCHEMA, only=TABLES):
+        for (table, column) in starschema.entryid_columns(
+                conn, shadow.dict_schema(conn, config), only=TABLES):
 
             tbl = db.qualified(scam, table)
             col = db.quote(column)

@@ -47,8 +47,18 @@ load the live schema directly are gone, the same cleanup
 `load_postgres_db.py` did on the serving side. `--drop-tables` is still
 accepted, ignored, and warns (condor jobs 120/220 still pass it).
 
-`chemcomps` and `meta` are the exceptions — both load from sources that are
-unreachable outside BMRB, so they still load in place.
+**Every** schema goes through this, `chemcomps` and `meta` included. Those two
+were the last in-place loads (each opened with `drop schema <s> cascade` on the
+live name), which only ever looked harmless because the reload happened on a
+build database nobody read.
+
+`--host`/`--port` override the server for the sections that name the target
+database, so a DAG job or a test run can say where it is loading without
+editing the deployed properties file. `[ets]` and the chem-comp source (`ccdb`)
+are deliberately left where the config puts them — they are different servers,
+read-only, and following the override would either fail or silently read the
+wrong data. Note `ccdb` shares the `[chemcomps]` section with the target and
+falls back to the unprefixed options, so the override pins `srchost` first.
 
 | Stage | Function | What it does |
 |-------|----------|--------------|
@@ -56,7 +66,7 @@ unreachable outside BMRB, so they still load in place.
 | chem comps | `load_chem_comps` (`chemcomps.py`) | dump released chem comps from the `ccdb` database, load into `chemcomps` schema. |
 | metabolomics | `load_metabolomics` + `load_meta_schema` | parse metabolomics NMR-STAR entries into the `metabolomics` schema; load `meta` extras from CSV. |
 | macromolecules | `load_macromolecules` + `fix_macromolecules` | parse macromolecule entries into the `macromolecules` schema, then cleanups. |
-| web | `load_web_schema` (`webextras.py`) | `web` schema: chemical-shift statistics (`cs_stats.sql`) + CSV extras. |
+| web | `load_web_schema` (`webextras.py`) | `web` schema: chemical-shift statistics (`cs_stats.sql`) + CSV extras, the time domain scan, then the API's derived tables (`webapi.sql`). |
 | swap | `shadow.swap` (`loader/shadow.py`) | rename every `<schema>_new` built above into place, in one transaction; drop the retired ones afterwards, outside it. |
 | dump | `dump_new` / `dump_macromolecules` / `dump_metabolomics` | write schema contents back out to CSV in `-d <outdir>`. |
 
@@ -83,87 +93,95 @@ saveframe inherits it.
 ## Where this runs in production
 
 Driven by HTCondor DAGs in [`~/git/updater_dag`](../../updater_dag), deployed as
-`/projects/BMRB/software/dbloader3/` (its own venv; config `uconn.properties`,
-not in this repo). **The database is built in one place and served from
-another**, and both halves live here:
+`/projects/BMRB/software/dictionary-meta/dbloader/` (its own venv; config
+`uconn.properties`, not in this repo). **One database.** The reload loads the
+served database directly, building every schema alongside the live ones and
+renaming them all into place in a single transaction:
 
 ```
         entry files (CVS/SVN, validated by updater_dag/update_check.py)
                               │
    ┌──────────────────────────▼───────────────────────────┐
-   │ BUILD DB  -- __main__.py -c uconn.properties         │
-   │  100 --dictdir .../nmr-star-dictionary-scripts/csv   │  dict
-   │  110 --drop-tables (chemcomps only)                  │  chemcomps
-   │  131 --drop-tables (metabolomics)                    │  metabolomics + meta
-   │  231 --drop-tables (macromolecules)                  │  macromolecules + web
-   │  401 BMRB-API reloaders (not this repo)              │  API extras
+   │ __main__.py -c uconn.properties --host --database    │
+   │   --no-swap on every stage: nothing becomes visible  │
+   │  100 --dictdir .../nmr-star-dictionary-scripts/csv   │  dict_new, validict_new
+   │  110                                                 │  chemcomps_new
+   │  131                                                 │  metabolomics_new, meta_new
+   │  231                                                 │  macromolecules_new, web_new
+   │        (231's web stage also runs cs_stats.sql, the  │
+   │         timedomain scan and webapi.sql)              │
    └──────────────────────────┬───────────────────────────┘
-                              │  __main__.py --no-load -d <dir>
+                              │  300: loader/shadow.py -- ONE transaction
                               ▼
-        /projects/BMRB/staging/dbdump/{bmrb,metabolomics,bmrbeverything}
-                    CSV per table + schema.sql          (151 / 251 / 400)
-                              │
-                              │  load_postgres_db.py -d <db> -g
-                              ▼          (160 / 260 / 410)
    ┌──────────────────────────────────────────────────────┐
-   │ SERVING DB  bmrb-staging.cam.uchc.edu                │
-   │  databases: bmrb, metabolomics, bmrbeverything       │
-   └──────────────────────────────────────────────────────┘
-                              │  602 rsync
-                              ▼
-        ftp/pub/bmrb/relational_tables/nmr-star3.1/   (the public dump)
+   │ bmrbeverything @ bmrb-staging.nmrbox.org             │
+   │   the whole release appears at once                  │
+   └──────────────────────────┬───────────────────────────┘
+                              │
+              ┌───────────────┼────────────────┐
+              ▼               ▼                ▼
+        401 redis/xml    151 dump         251 dump
+                              │                │
+                              ▼ 602 rsync      ▼ 602 rsync
+              ftp/pub/bmrb/relational_tables/{metabolomics,nmr-star3.1}
 ```
 
-Three dumps, two layouts (see `loader/csvio.py`). `bmrbeverything` is
-**"new-style"**: every file `<schema>.<table>.csv`. The `bmrb` and
-`metabolomics` dumps are **"old-style"**: entry tables unqualified, each with
-its own copy of `dict`. That layout was shaped by the separate website
-databases, which are retired — but it is *also* the format published on the
-FTP site, which is why it stays.
+Two dumps, one layout each (see `loader/csvio.py`). Both are **"old-style"** —
+entry tables unqualified, each with its own copy of `dict` — which was shaped
+by the separate website databases, long retired, but is *also* the format
+published on the FTP site, which is why it stays. The "new-style"
+`bmrbeverything` dump (`dump_new`, every file `<schema>.<table>.csv`) existed
+only to feed the serving database and is no longer produced by any job.
 
 Things to know before changing any of this:
 
-- **`load_postgres_db.py` is not dead code.** It is invoked directly by three
-  DAG jobs, with the *system* `/usr/bin/python3` rather than the dbloader venv
-  — so it must keep working with the standard library and `psql` alone, and
-  must not import `loader` (which needs psycopg2).
-- **The serving host is hard-coded** in its `CONF`, not read from a properties
-  file. `-H/--host`, `-U/--user` and `--psql` can override it.
-- **The reload is a schema swap, and that is the only path.** It builds
-  `<schema>_new` from the dump's `schema.sql`, loads into that, and renames it
-  into place: atomic (~1 ms of locking instead of a whole reload), a failure
-  leaves the live database untouched, and since `schema.sql` comes from the
-  build database — whose schema dbloader generates from the dictionary — it
-  rebuilds the serving schema from the dictionary as a side effect, so a
-  dictionary change no longer has to be applied by hand. Job 410 gets this
-  with no change to `updater_dag`. A dump that cannot be swapped (unqualified
-  CSVs) is an error, not a fallback to something weaker.
-- **`-d bmrb` and `-d metabolomics` load nothing.** Both serving databases are
-  retired; everything is served from `bmrbeverything`. Jobs 160 and 260 still
-  call them and stay green no-ops that say so.
-- **Job 251 must stay: it feeds the public FTP relational tables.** It dumps
-  the *build* database — `csvio.dump()` connects via `[dictionary]` and reads
-  the `dict`/`macromolecules`/`web` schemas out of it — so it never touched
-  the retired `bmrb` serving database. Verified by renaming that database out
-  of existence and re-running the dump: byte-identical, 159 files.
+- **`load_postgres_db.py` is now dead code.** It existed to load a CSV dump
+  into the separate serving database; jobs 160, 260 and 410 called it and all
+  three are gone. Nothing invokes it. Delete it once a release has run green on
+  the single-server DAG — it is kept for one cycle only so there is something
+  to fall back to. Its hard-coded `CONF["host"]` is also stale
+  (`bmrb-staging.cam.uchc.edu`; the host is `bmrb-staging.nmrbox.org`).
+- **Where the release lands is stated in the DAG, not here.** Every job passes
+  `--host`/`--database`, set by the `VARS` lines in `update_bmrb_db.dag` — one
+  place to repoint a whole release. `[ets]` and the chem-comp source never
+  follow the override (`loader/db.py:repoint`).
+- **Job 300 is the release.** It swaps `dict validict chemcomps metabolomics
+  meta macromolecules web` — spelled out, because all of them have to arrive
+  together (validict is views over dict, web is built from macromolecules, meta
+  from metabolomics) and one silently missing from an auto-detected list would
+  be stranded in its `_new` form while the live schema served the old data. A
+  missing shadow is an error, not a partial swap.
+- **Jobs 151 and 251 feed the public FTP relational tables**, and now run
+  *after* the swap, since they dump the live schemas.
 
-      251 → staging/dbdump/bmrb → 602 rsync → ftp/…/relational_tables/nmr-star3.1
-                                            → rsync_to_library.sh → /librarym/BMRB
-
-- **The metabolomics relational tables have no publication step.** The old
-  condor jobs in `condor/` dumped *straight* to the FTP directories
-  (`relational_tables/nmr-star3.1` and `relational_tables/metabolomics`). When
-  updater_dag moved to dump-to-staging-then-rsync, job 602 was added for the
-  macromolecule dump and nothing was added for the metabolomics one — so job
-  151 writes `staging/dbdump/metabolomics` and no job copies it anywhere.
-  Either add an rsync alongside 602 or point 151 at the FTP directory the way
-  the old job did; until then `relational_tables/metabolomics` is frozen.
+- **The metabolomics relational tables are published now.** They were not: the
+  old condor jobs in `condor/` dumped *straight* to the FTP directories, and
+  when updater_dag moved to dump-to-staging-then-rsync, job 602 was added for
+  the macromolecule dump and nothing for the metabolomics one — so job 151
+  wrote `staging/dbdump/metabolomics` and nothing copied it anywhere.
+  `602_copy_metabolomics_dump_to_ftp.sub` closes that.
 - **`origin/python3` is the deployed branch** (`dbloader3`): a mechanical
   py2→py3 + pgdb→psycopg2 port of the same base commit this branch forked
   from. Everything in it is superseded here except the metabolomics
   retirement, which has been carried across.
 - `--no-web` on job 100 is redundant (the web stage only runs inside the
   macromolecules branch) but harmless.
+- **Two BMRB-API reloaders moved here.** `webapi.sql` was
+  `bmrbapi/reloaders/sql/initialize.sql`, and `webextras.load_timedomain()` was
+  `bmrbapi/reloaders/timedomain.py`. Both had to be inside the swap: they build
+  on `macromolecules`/`metabolomics`/`web`, which the loader replaces
+  wholesale, so run afterwards they would rebuild objects the swap had just
+  destroyed — in public. The API keeps `--sql` and `--timedomain` as warning
+  no-ops so the deployed job 401 does not die on an unrecognized argument;
+  drop them from both sides once `updater_dag` stops sending them. The other
+  API writers into `web` — `inext`, `csrosetta`, `uniprot` — have **not**
+  moved, and are still destroyed by every reload with nothing rebuilding them.
+- **`[web] timedomain_dir`** names the per-entry time domain directory, with
+  `%s` for the entry ID. It exists because BMRB-API's
+  `macromolecule_entry_directory` (`…/bmr%s/clean`) and dbloader's `entrydir`
+  (`…/bmr%s`) disagree about the layout. The scan reports how many entries it
+  found and warns loudly at zero — a wrong pattern is otherwise
+  indistinguishable from an archive with no time domain data.
 
 ## Layout
 
@@ -183,7 +201,7 @@ Things to know before changing any of this:
 | `loader/csvio.py` | CSV in and out: per-schema dumps and bulk loads. |
 | `loader/ets.py` | Iterators over the ETS tracking DB (released/deposited/queued IDs). |
 | `fastalib.py` | Standalone FASTA library generator (not imported by the loader). |
-| `*.sql` | Schemas: `webschema.sql`, `metabolomics_meta_schema.sql`, `cs_stats.sql`. |
+| `*.sql` | Schemas: `webschema.sql`, `metabolomics_meta_schema.sql`, `cs_stats.sql`, `webapi.sql`. |
 | `*.js`, `*.csv`, `metabolomics_meta_files/` | Static mapping/side-data loaded into `web`/`meta`. |
 | `condor/*.sub` | HTCondor submit files that run these stages in production. |
 | `loader.properties` | Per-schema DB connection + file-path config. |

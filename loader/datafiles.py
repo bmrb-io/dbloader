@@ -34,6 +34,7 @@ DEFAULTS = {
     ("macromolecules", "software_authors_mapfile"): "swauthors.js",
     ("macromolecules", "task_mapfile"): "task.js",
     ("web", "ddlfile"): "webschema.sql",
+    ("web", "apiddl"): "webapi.sql",
     ("web", "csvfiles"): "web.pulsefilelist.csv\nweb.termlist.csv",
     ("meta", "ddlfile"): "metabolomics_meta_schema.sql",
     ("meta", "csvdir"): "metabolomics_meta_files",

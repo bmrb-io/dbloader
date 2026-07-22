@@ -131,3 +131,6 @@ dmypy.json
 # Site configs: real hosts and the plaintext ETS password (see loader.example.properties)
 uconn.properties*
 *.local.properties
+
+# rewritten shadow copies of the SQL scripts, when no shadowdir is configured
+shadow/

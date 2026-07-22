@@ -16,6 +16,7 @@ _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 from loader import db
 from loader import datafiles
+from loader import shadow
 
 DB = "meta"
 
@@ -37,9 +38,20 @@ def create_schema(config, verbose=False):
     if verbose:
         sys.stdout.write("create_schema()\n")
 
+    # metabolomics_meta_schema.sql names its own schema (`drop schema if exists
+    # meta cascade; create schema meta`), so building the shadow means
+    # rewriting it -- same as dictionary.sql and webschema.sql.  Left alone it
+    # would drop the live schema out from under whoever is reading it.
     script = datafiles.path(config, DB, "ddlfile")
+    sfx = shadow.suffix(config, DB)
+    if sfx:
+        mapping = dict((x, x + sfx) for x in shadow.declared_schemas(script))
+        script = shadow.rewritten_copy(script, mapping, shadow.workdir(config, DB),
+                                       verbose=verbose)
 
-    return db.run_sql_file(db.dsn(config, DB), script, config=config, verbose=verbose)
+    if not db.run_sql_file(db.dsn(config, DB), script, config=config, verbose=verbose):
+        raise Exception("failed to build the %s schema: %s" % (DB, script,))
+    return True
 
 
 # these files are named meta.tablename.csv
@@ -53,6 +65,10 @@ def load_files(config, verbose=False):
     if not os.path.isdir(datadir):
         raise IOError("Not a directory: %s" % (datadir,))
 
+    # the schema in the file name is the *live* one; the load goes to the
+    # shadow that create_schema() just built
+    schema = shadow.target(config, DB)
+
     pat = re.compile(r"([^.]+)\.([^.]+)\.csv$")
     dsn = db.dsn(config, DB)
     for name in sorted(glob.glob(os.path.join(datadir, "meta.*.csv"))):
@@ -60,7 +76,7 @@ def load_files(config, verbose=False):
         if not m:
             sys.stderr.write("%s does not match pattern, skipping\n" % (name,))
             continue
-        db.copy_from_csv(dsn, filename=name, schema=m.group(1), table=m.group(2),
+        db.copy_from_csv(dsn, filename=name, schema=schema, table=m.group(2),
                          config=config, verbose=verbose)
 
 
@@ -72,7 +88,7 @@ def add_grants(config, verbose=False):
         sys.stdout.write("add_grants()\n")
 
     if config.has_option(DB, "rouser"):
-        db.add_ro_grants(db.dsn(config, DB), schema=config.get(DB, "schema"),
+        db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
                          user=config.get(DB, "rouser"), config=config, verbose=verbose)
 
 

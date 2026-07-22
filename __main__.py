@@ -21,7 +21,6 @@ import loader
 # load stages, in order: flag name -> (description, what it needs)
 STAGES = ("dict", "chemcomps", "metabolomics", "macromolecules", "web")
 
-
 def parse_args(argv=None):
 
     ap = argparse.ArgumentParser(description="Reload the BMRB database")
@@ -30,6 +29,10 @@ def parse_args(argv=None):
     ap.add_argument("-t", "--time", help="time the operatons", dest="time",
                     action="store_false", default=True)
     ap.add_argument("-c", "--config", help="config file", dest="conffile", required=True)
+
+    # Where this release lands, stated at the point of use rather than by
+    # editing the deployed properties file.  See loader/db.py:repoint().
+    loader.db.add_target_args(ap)
 
     ap.add_argument("-d", "--outdir", help="directory for output CSV files", dest="outdir")
     ap.add_argument("--dictdir", help="directory with dictionary files", dest="dictdir")
@@ -85,6 +88,8 @@ def main(argv=None):
 
     cp = ConfigParser()
     cp.read(os.path.realpath(args.conffile))
+    loader.db.repoint(cp, host=args.host, port=args.port,
+                      database=args.database, verbose=args.verbose)
 
     failed = []
     built = []          # live schema names, in load order, to swap in at the end
@@ -106,12 +111,14 @@ def main(argv=None):
         if args.load_chemcomps:
             with loader.timer(label="load chem. comps", silent=args.time):
                 loader.load_chem_comps(config=cp, verbose=args.verbose)
+            built.append(cp.get("chemcomps", "schema"))
 
         if args.load_metabolomics:
             with loader.timer(label="load metabolomics", silent=args.time):
                 failed += loader.load_metabolomics(config=cp, verbose=args.verbose)
                 loader.load_meta_schema(config=cp, verbose=args.verbose)
             built.append(cp.get("metabolomics", "schema"))
+            built.append(cp.get("meta", "schema"))
 
         if args.load_macromolecules:
             with loader.timer(label="load macromolecules", silent=args.time):

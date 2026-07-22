@@ -63,6 +63,69 @@ def dsn(config, section):
     return rc
 
 
+# Sections whose connection points at the database being loaded, and so follow
+# a --host/--port/--database override.  [ets] is absent on purpose: it is the
+# tracking database on its own server, is only ever read, and repointing it at
+# the target would either fail or -- worse -- silently read the wrong
+# released-ID list.
+TARGET_SECTIONS = ("dictionary", "macromolecules", "metabolomics",
+                   "chemcomps", "web", "meta")
+
+
+def repoint(config, host=None, port=None, database=None, verbose=False):
+    """Override the server and database for the sections naming the target.
+
+    Which database a release lands in is the thing an operator wants to state
+    at the point of use -- a condor job, a test run against a scratch host --
+    rather than by editing a deployed properties file.
+
+    The chem-comp source (`ccdb`) is pinned first.  It shares the [chemcomps]
+    section with the target and falls back to the unprefixed options when its
+    own `src*` ones are unset, so moving the target would drag the source along
+    with it, to a server that has no ccdb.  Writing the current value into
+    `srchost` before the override keeps it where it was.  `srcdatabase` is
+    always set explicitly, so it needs no such protection.
+    """
+
+    if host is None and port is None and database is None:
+        return
+
+    if config.has_section("chemcomps"):
+        for (src, opt, val) in (("srchost", "host", host), ("srcport", "port", port)):
+            if val is not None and not config.has_option("chemcomps", src) \
+                    and config.has_option("chemcomps", opt):
+                config.set("chemcomps", src, config.get("chemcomps", opt))
+                if verbose:
+                    sys.stdout.write("chemcomps: pinning source %s to %s\n"
+                                     % (src, config.get("chemcomps", src),))
+
+    for section in TARGET_SECTIONS:
+        if not config.has_section(section):
+            continue
+        for (opt, val) in (("host", host), ("port", port), ("database", database)):
+            if val is not None:
+                config.set(section, opt, str(val))
+
+    if verbose:
+        sys.stdout.write("target: %s%s%s\n"
+                         % (database or "(config)", " on " + host if host else "",
+                            ":" + str(port) if port else "",))
+
+
+def add_target_args(ap):
+    """Add --host/--port/--database to an argument parser."""
+
+    ap.add_argument("--host", dest="host", default=None,
+                    help="PostgreSQL host, overriding the config")
+    ap.add_argument("--port", dest="port", default=None,
+                    help="PostgreSQL port, overriding the config")
+    ap.add_argument("--database", dest="database", default=None,
+                    help="database to load, overriding the config -- applies to every"
+                         " section naming the target, never to [ets] or the chem-comp"
+                         " source")
+    return ap
+
+
 def connect(dsn, autocommit=False):
     """Open a psycopg2 connection from a `dsn()` dict."""
 
@@ -160,14 +223,29 @@ def run_command(cmd, verbose=False):
     return (True, out)
 
 
-def run_sql_file(dsn, script, config=None, verbose=False):
-    """`psql -f script`. Returns True on success."""
+def run_sql_file(dsn, script, config=None, verbose=False, stop_on_error=True):
+    """`psql -f script`. Returns True on success.
+
+    ON_ERROR_STOP matters more than it looks.  Without it psql runs every
+    remaining statement after a failure and still exits 0, so a script that
+    half worked reports success -- which is how a run of webapi.sql that could
+    not build `query_grid` (a missing dependency, eight statements in) came
+    back "ok" with the rest of the schema built around the hole.  Under the
+    shadow-and-swap loader that partial schema is then renamed into place over
+    the good one.
+
+    The scripts this runs are all `drop ... if exists` / `create` DDL, so there
+    is nothing here that is expected to fail; `stop_on_error=False` is for a
+    caller that knows otherwise.
+    """
 
     f = os.path.realpath(script)
     if not os.path.exists(f):
         raise IOError("File not found: %s" % (f,))
 
     cmd = _cmd(binary(config, "psql"), dsn)
+    if stop_on_error:
+        cmd.extend(["-v", "ON_ERROR_STOP=1"])
     if not verbose:
         cmd.extend(["--quiet", "--echo-errors"])
     cmd.extend(["-f", f])
