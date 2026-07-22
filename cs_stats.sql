@@ -21,6 +21,29 @@ insert into cs_stat_exclude_all select distinct c."Entry_ID" from macromolecules
     union select distinct "Entry_ID" from macromolecules."Entity" where "Paramagnetic"='yes';
 
 --
+-- Pre-cast working set.  Every query below that scans the whole shift table
+-- (the aggregate GROUP BYs, the sigma-band exclusion joins, the num_outliers
+-- joins) reads it from here instead of from macromolecules."Atom_chem_shift":
+-- the text->numeric cast on "Val" is done once, and each of those ~20 scans
+-- reads a four-column table instead of the forty-column archive one.
+--
+-- UNLOGGED, not TEMPORARY, on purpose: a temp table cannot be scanned by
+-- parallel workers, which is exactly what the aggregate scans rely on.  It is
+-- built in the web schema and dropped again at the end so the swap never sees
+-- it.  The thirteen narrow (Comp_ID, Atom_ID) exclusion inserts are left on
+-- the archive table on purpose -- they are index scans there (loader/
+-- indexes.py), and a seq scan of this table would be slower.
+--
+-- "Val" keeps its name and is numeric here, so every `cast("Val" as numeric)`
+-- downstream is a no-op and `cast(..."Val" as float)` casts numeric->float --
+-- the same double the old text->float produced.
+--
+drop table if exists web.cs_stat_acs;
+create unlogged table web.cs_stat_acs as
+  select "Entry_ID", "Comp_ID", "Atom_ID", cast("Val" as numeric) as "Val"
+  from macromolecules."Atom_chem_shift";
+
+--
 -- the easy one
 --
 -- RNA full set
@@ -30,7 +53,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
   into table web.cs_stat_rna_full
   from
     (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from
-    macromolecules."Atom_chem_shift" where "Comp_ID" in ('A','C','G','U')) as qry
+    web.cs_stat_acs where "Comp_ID" in ('A','C','G','U')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
 -- add outlier count
@@ -53,7 +76,7 @@ alter table web.cs_stat_rna_full
 update web.cs_stat_rna_full t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_rna_full s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = s.atom_id
            and (cast(a."Val" as float) > s.avg + 3 * s.std
@@ -78,7 +101,7 @@ create temporary table cs_stat_exclude_rna (id text);
 -- statistics are grouped by (comp_id, atom_id), so there is exactly one match
 -- and the join cannot duplicate a row.
 
-insert into cs_stat_exclude_rna select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
+insert into cs_stat_exclude_rna select distinct a."Entry_ID" from web.cs_stat_acs a
   join web.cs_stat_rna_full s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
   where a."Comp_ID" in ('A','C','G','U')
   and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
@@ -91,7 +114,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
   into table web.cs_stat_rna_filt 
   from 
     (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from 
-    macromolecules."Atom_chem_shift" where "Comp_ID" in ('A','C','G','U') and "Entry_ID" not in 
+    web.cs_stat_acs where "Comp_ID" in ('A','C','G','U') and "Entry_ID" not in 
     (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_rna)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
@@ -108,7 +131,7 @@ alter table web.cs_stat_rna_filt
 update web.cs_stat_rna_filt t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_rna_filt s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = s.atom_id
            and (cast(a."Val" as float) > s.avg + 3 * s.std
@@ -124,7 +147,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
   into temporary table cs_stat_dna_full_raw 
   from
     (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from
-    macromolecules."Atom_chem_shift" where "Comp_ID" in ('DA','DC','DG','DT')) as qry
+    web.cs_stat_acs where "Comp_ID" in ('DA','DC','DG','DT')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
 --
@@ -132,7 +155,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 --
 create temporary table cs_stat_exclude_dna (id text);
 
-insert into cs_stat_exclude_dna select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
+insert into cs_stat_exclude_dna select distinct a."Entry_ID" from web.cs_stat_acs a
   join cs_stat_dna_full_raw s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
   where a."Comp_ID" in ('DA','DC','DG','DT')
   and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
@@ -144,7 +167,7 @@ select distinct comp_id,atom_id,count(val), min(val) as min,max(val) as max,roun
   into temporary table cs_stat_dna_filt_raw
   from
     (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val 
-    from macromolecules."Atom_chem_shift" 
+    from web.cs_stat_acs 
     where "Comp_ID" in ('DA','DC','DG','DT') and "Entry_ID" not in
     (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_dna)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
@@ -162,7 +185,7 @@ select distinct comp_id,atom_id,
     (select "Comp_ID" as comp_id,
     case when "Comp_ID"='DT' and "Atom_ID" similar to 'H7[123]' then 'M7' else "Atom_ID" end as atom_id,
     cast("Val" as numeric) as val
-    from macromolecules."Atom_chem_shift" 
+    from web.cs_stat_acs 
     where "Comp_ID" in ('DA','DC','DG','DT')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
@@ -174,7 +197,7 @@ alter table web.cs_stat_dna_full
 update web.cs_stat_dna_full t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_dna_full s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = (case when s.atom_id='M7' then 'H71' else s.atom_id end)
            and (cast(a."Val" as float) > s.avg + 3 * s.std
@@ -193,7 +216,7 @@ select distinct comp_id,atom_id,case when comp_id='DT' and atom_id='M7' then cou
     (select "Comp_ID" as comp_id,
     case when "Comp_ID"='DT' and "Atom_ID" similar to 'H7[123]' then 'M7' else "Atom_ID" end as atom_id,
     cast("Val" as numeric) as val 
-    from macromolecules."Atom_chem_shift" 
+    from web.cs_stat_acs 
     where "Comp_ID" in ('DA','DC','DG','DT') and "Entry_ID" not in
     (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_dna)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
@@ -206,7 +229,7 @@ alter table web.cs_stat_dna_filt
 update web.cs_stat_dna_filt t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_dna_filt s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = (case when s.atom_id='M7' then 'H71' else s.atom_id end)
            and (cast(a."Val" as float) > s.avg + 3 * s.std
@@ -220,7 +243,7 @@ update web.cs_stat_dna_filt t set num_outliers = o.n
 select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round(avg(val),3) as avg,round(stddev(val),3) as std 
   into temporary table cs_stat_aa_full_raw 
   from
-    (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from macromolecules."Atom_chem_shift" 
+    (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from web.cs_stat_acs 
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
@@ -229,7 +252,7 @@ select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round
 --
 create temporary table cs_stat_exclude_aa (id text);
 
-insert into cs_stat_exclude_aa select distinct a."Entry_ID" from macromolecules."Atom_chem_shift" a
+insert into cs_stat_exclude_aa select distinct a."Entry_ID" from web.cs_stat_acs a
   join cs_stat_aa_full_raw s on s.comp_id=a."Comp_ID" and s.atom_id=a."Atom_ID"
   where a."Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
   and not (cast(a."Val" as numeric) between s.avg - 8 * s.std and s.avg + 8 * s.std);
@@ -289,7 +312,7 @@ insert into cs_stat_exclude_aa select distinct "Entry_ID" from macromolecules."A
 select distinct comp_id,atom_id,count(val),min(val) as min,max(val) as max,round(avg(val),3) as avg,round(stddev(val),3) as std 
   into temporary table cs_stat_aa_filt_raw
   from
-    (select "Comp_ID" as comp_id,"Atom_ID" atom_id,cast("Val" as numeric) as val from macromolecules."Atom_chem_shift" 
+    (select "Comp_ID" as comp_id,"Atom_ID" atom_id,cast("Val" as numeric) as val from web.cs_stat_acs 
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
     and "Entry_ID" not in (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_aa)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
@@ -325,7 +348,7 @@ select distinct comp_id,atom_id,
     when "Comp_ID"='MET' and "Atom_ID" similar to 'HE[123]' then 'ME'
     when "Comp_ID"='LYS' and "Atom_ID" similar to 'HZ[123]' then 'QZ'
     else "Atom_ID" end as atom_id,
-    cast("Val" as numeric) as val from macromolecules."Atom_chem_shift" 
+    cast("Val" as numeric) as val from web.cs_stat_acs 
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
 
@@ -337,7 +360,7 @@ alter table web.cs_stat_aa_full
 update web.cs_stat_aa_full t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_aa_full s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = (case when s.atom_id='MB' then 'HB1'
                  when s.atom_id='MG1' then 'HG11'
@@ -385,7 +408,7 @@ select distinct comp_id,atom_id,
     when "Comp_ID"='MET' and "Atom_ID" similar to 'HE[123]' then 'ME'
     when "Comp_ID"='LYS' and "Atom_ID" similar to 'HZ[123]' then 'QZ'
     else "Atom_ID" end as atom_id,
-    cast("Val" as numeric) as val from macromolecules."Atom_chem_shift" 
+    cast("Val" as numeric) as val from web.cs_stat_acs 
     where "Comp_ID" in ('ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')
     and "Entry_ID" not in (select distinct id from cs_stat_exclude_all union select distinct id from cs_stat_exclude_aa)) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
@@ -398,7 +421,7 @@ alter table web.cs_stat_aa_filt
 update web.cs_stat_aa_filt t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
           from web.cs_stat_aa_filt s
-          left join macromolecules."Atom_chem_shift" a
+          left join web.cs_stat_acs a
             on a."Comp_ID" = s.comp_id
            and a."Atom_ID" = (case when s.atom_id='MB' then 'HB1'
                  when s.atom_id='MG1' then 'HG11'
@@ -422,10 +445,12 @@ drop table if exists web.cs_stat_nstd;
 select comp_id,atom_id,count(val) as count,min(val) as min,max(val) as max,round(avg(val),3) as avg,round(stddev(val),3) as std
   into table web.cs_stat_nstd 
   from
-    (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from macromolecules."Atom_chem_shift" 
+    (select "Comp_ID" as comp_id,"Atom_ID" as atom_id,cast("Val" as numeric) as val from web.cs_stat_acs 
     where "Comp_ID" not in ('A','C','G','U','DA','DC','DG','DT','ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY',
     'HIS','ILE','LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL')) as qry
   group by comp_id,atom_id order by comp_id,atom_id;
+
+drop table if exists web.cs_stat_acs;
 
 --
 -- export
