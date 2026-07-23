@@ -126,7 +126,13 @@ alter table web.cs_stat_rna_filt
 -- NB, unchanged from the correlated form and preserved deliberately: there is
 -- no exclusion-list filter here, so the outlier count on a _filt table is
 -- taken over every entry, not over the filtered set the rest of the row
--- describes.
+-- describes.  This is by design: on the stats page (htdocs ref_info/
+-- csstats.php) the count is a link to csoutliers.php, which lists the actual
+-- outliers by re-scanning the whole macromolecules."Atom_chem_shift" table --
+-- no exclusion list -- for shifts outside avg +/- 3*std, with avg/std taken
+-- from this row.  Counting outliers over every entry here is what makes the
+-- number shown match the list that page produces; restricting it to the
+-- filtered set would advertise fewer outliers than the link then displays.
 
 update web.cs_stat_rna_filt t set num_outliers = o.n
   from (select s.comp_id, s.atom_id, count(a."Comp_ID") as n
