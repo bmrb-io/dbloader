@@ -35,9 +35,23 @@ source_dir="$dict_repo/internal_106_source"
 
 out=${1:-$here/build}
 
+# Absolute from here on. Step 1 runs the converter from inside its own
+# checkout, so a relative -o resolved against *that* directory rather than the
+# caller's: `sh dbloader/tests/build_dict_inputs.sh dbloader/build/dict` wrote
+# the distribution to dictionary-converter/dbloader/build/dict/dist, the
+# converter exited 0, and the run failed two steps later at the `cp` with
+# "cannot stat" -- having silently left a tree inside a sibling repo that this
+# script promises above not to touch. The condor job always passed an absolute
+# path, so only hand runs hit it.
+case $out in
+    /*) ;;
+    *)  out=$(pwd)/$out ;;
+esac
+
 # This directory is emptied below. Callers pass a work directory, but a typo
 # or a stray argument could name a checkout or a home directory, so refuse
-# anything that is obviously not scratch space.
+# anything that is obviously not scratch space. Checked after the line above,
+# so that the guards below see the same path the rest of the script uses.
 case $out in
     ""|/|/*/..|.|..) echo "refusing to empty '$out'" >&2; exit 2 ;;
 esac
