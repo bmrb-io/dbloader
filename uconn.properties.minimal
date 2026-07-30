@@ -68,6 +68,22 @@ user = bmrb
 # read-only user, granted select on each schema after it loads
 rouser = web
 
+# Where rewritten copies of the SQL scripts go.
+#
+# dictionary.sql, webschema.sql, webapi.sql and metabolomics_meta_schema.sql
+# name their own schema (`create schema dict`, `set search_path = dict`), so
+# building the shadow means rewriting the script, not passing a name. The
+# rewritten copy lands here.
+#
+# This is the PARENT: workdir() appends `shadow`, so the scripts end up in
+# <shadowdir>/shadow/shadow.<name>.sql and nothing is written to this
+# directory itself. Naming .../shadow here would nest to shadow/shadow.
+#
+# Unset it and the fallback is `.` -- the process's current directory, which
+# under condor is whatever cwd the job happens to get. reload_db.py and
+# load_db.sh set this themselves; the condor jobs take it from here.
+shadowdir = /projects/BMRB/private/updater3
+
 # Deliberately no `port` here: [ets] inherits everything in this section, and
 # a port set for the build database would follow it to the tracking server.
 
