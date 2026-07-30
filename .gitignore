@@ -132,5 +132,11 @@ dmypy.json
 uconn.properties*
 *.local.properties
 
+# ... except the template the deployed config is copied from.  It carries an
+# empty password and a non-production default target, so there is nothing in it
+# to leak, and keeping it out of git meant the one file describing the
+# production layout only existed on the server.
+!uconn.properties.minimal
+
 # rewritten shadow copies of the SQL scripts, when no shadowdir is configured
 shadow/

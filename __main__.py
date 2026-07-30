@@ -57,9 +57,10 @@ def parse_args(argv=None):
 
     # Accepted and ignored.  Every load now builds a fresh shadow schema and
     # swaps it in, so there is no longer a choice between dropping and
-    # truncating the live one -- but the deployed condor jobs (120, 220) still
-    # pass this, and failing them on an unrecognized argument would be a worse
-    # outcome than saying so.  Drop it once updater_dag no longer sends it.
+    # truncating the live one -- but a deployed condor job that still passes it
+    # should not fail on an unrecognized argument.  updater_dag stopped sending
+    # it on the single-server branch (jobs 110, 131 and 231); this can go once
+    # that is what is deployed.
     ap.add_argument("--drop-tables", dest="drop_tables", action="store_true", default=False,
                     help=argparse.SUPPRESS)
 
