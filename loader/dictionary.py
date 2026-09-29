@@ -66,9 +66,10 @@ def load(config, path, verbose=False):
         return False
 
     if config.has_option("dictionary", "rouser"):
-        db.add_ro_grants(dsn, schema=schema,
-                         user=config.get("dictionary", "rouser"),
-                         config=config, verbose=verbose)
+        if not db.add_ro_grants(dsn, schema=schema,
+                                user=config.get("dictionary", "rouser"),
+                                config=config, verbose=verbose):
+            return False
     return True
 
 

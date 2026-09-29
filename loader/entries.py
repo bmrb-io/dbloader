@@ -67,9 +67,14 @@ def load_db(dbname, config, verbose=False):
         sys.stdout.write("%s: %d indexes, %d tables analyzed\n"
                          % (schema, made, analyzed,))
 
+    # Not a warning: without the grants the swap puts a schema live that the
+    # website cannot read.
     if config.has_option(dbname, "rouser"):
-        db.add_ro_grants(db.dsn(config, dbname), schema=shadow.target(config, dbname),
-                         user=config.get(dbname, "rouser"), config=config, verbose=verbose)
+        if not db.add_ro_grants(db.dsn(config, dbname), schema=shadow.target(config, dbname),
+                                user=config.get(dbname, "rouser"), config=config,
+                                verbose=verbose):
+            raise Exception("failed to grant %s read access to %s"
+                            % (config.get(dbname, "rouser"), shadow.target(config, dbname),))
     return failed
 
 

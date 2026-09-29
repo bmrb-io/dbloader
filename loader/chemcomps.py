@@ -121,12 +121,16 @@ def dump_and_load(config, verbose=False):
     wd = tempfile.mkdtemp()
     try:
         dump(config, where=wd, verbose=verbose)
-        fix_inchi_column(where=wd, verbose=verbose)
+        if not fix_inchi_column(where=wd, verbose=verbose):
+            raise Exception("no Chem_comp.csv in the dump from %s" % (SRCSCHEMA,))
         load(config, where=wd, verbose=verbose)
         fix_entry_id(config, verbose=verbose)
         if config.has_option(DB, "rouser"):
-            db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
-                             user=config.get(DB, "rouser"), config=config, verbose=verbose)
+            if not db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
+                                    user=config.get(DB, "rouser"), config=config,
+                                    verbose=verbose):
+                raise Exception("failed to grant %s read access to %s"
+                                % (config.get(DB, "rouser"), shadow.target(config, DB),))
     finally:
         shutil.rmtree(wd)
 
@@ -171,8 +175,9 @@ def dump(config, where=None, verbose=False):
             sql = 'select * from %s where "Sf_ID" not in %s' % (tbl, unreleased_sfids,)
 
         outfile = table + ".csv" if where is None else os.path.join(where, table + ".csv")
-        csvio.tocsv(dsn, table="(%s)" % (sql,), outfile=outfile,
-                    config=config, verbose=verbose)
+        if not csvio.tocsv(dsn, table="(%s)" % (sql,), outfile=outfile,
+                           config=config, verbose=verbose):
+            raise Exception("failed to dump %s.%s" % (SRCSCHEMA, table,))
 
     return True
 
@@ -246,8 +251,9 @@ def load(config, where, verbose=False):
         # `schema`, not DB: the section is named for the schema it loads, so
         # passing the section name worked right up until the two differed --
         # which is exactly what the shadow suffix does.
-        db.copy_from_csv(dsn, filename=f, schema=schema, table=table,
-                         config=config, verbose=verbose)
+        if not db.copy_from_csv(dsn, filename=f, schema=schema, table=table,
+                                config=config, verbose=verbose):
+            raise Exception("failed to load %s into %s" % (f, schema,))
 
 
 # There are no Entry_IDs in chem comps, but Entry_ID is part of the primary key

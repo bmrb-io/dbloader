@@ -102,8 +102,16 @@ def main(argv=None):
             if not os.path.isdir(dictdir):
                 sys.stderr.write("Not a directory: %s\n" % (dictdir,))
                 return 1
+            # A failure here has to stop the run, not just the stage: every
+            # later stage generates its tables from the dictionary, and with
+            # no dict_new it falls back to the live `dict` -- the previous
+            # release's -- without a word (shadow.dict_schema()).  This used
+            # to ignore the result, so job 100 hit "permission denied", exited
+            # 0, and the DAG carried on.
             with loader.timer(label="load dictionary", silent=args.time):
-                loader.load_dict(config=cp, path=dictdir, verbose=args.verbose)
+                if not loader.load_dict(config=cp, path=dictdir, verbose=args.verbose):
+                    sys.stderr.write("** failed to load the dictionary from %s\n" % (dictdir,))
+                    return 1
             # dictionary.sql builds validict alongside dict, as views over it,
             # so the two have to move together
             built += loader.shadow.declared_schemas(
@@ -149,8 +157,11 @@ def main(argv=None):
                 label, dump = "dump metabolomics database", loader.dump_metabolomics
             else:
                 label, dump = "dump bmrbeverything database", loader.dump_new
+            # 151/251: a partial dump is rsynced to the public FTP site by 602
             with loader.timer(label=label, silent=args.time):
-                dump(config=cp, path=args.outdir, verbose=args.verbose)
+                if not dump(config=cp, path=args.outdir, verbose=args.verbose):
+                    sys.stderr.write("** %s failed: %s\n" % (label, args.outdir,))
+                    return 1
 
     if len(failed) > 0:
         sys.stderr.write("** %d entries failed to load:\n" % (len(failed),))

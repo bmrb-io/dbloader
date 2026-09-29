@@ -76,8 +76,9 @@ def load_files(config, verbose=False):
         if not m:
             sys.stderr.write("%s does not match pattern, skipping\n" % (name,))
             continue
-        db.copy_from_csv(dsn, filename=name, schema=schema, table=m.group(2),
-                         config=config, verbose=verbose)
+        if not db.copy_from_csv(dsn, filename=name, schema=schema, table=m.group(2),
+                                config=config, verbose=verbose):
+            raise Exception("failed to load %s into %s" % (name, schema,))
 
 
 # add grants
@@ -88,8 +89,10 @@ def add_grants(config, verbose=False):
         sys.stdout.write("add_grants()\n")
 
     if config.has_option(DB, "rouser"):
-        db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
-                         user=config.get(DB, "rouser"), config=config, verbose=verbose)
+        if not db.add_ro_grants(db.dsn(config, DB), schema=shadow.target(config, DB),
+                                user=config.get(DB, "rouser"), config=config, verbose=verbose):
+            raise Exception("failed to grant %s read access to %s"
+                            % (config.get(DB, "rouser"), shadow.target(config, DB),))
 
 
 #

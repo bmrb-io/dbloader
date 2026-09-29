@@ -52,8 +52,10 @@ def load(config, verbose=False):
     # particular) as well as on the loaded entry schemas
     generate_api_tables(config, verbose)
     if config.has_option(DB, "rouser"):
-        db.add_ro_grants(db.dsn(config, DB), schema=_schema(config),
-                         user=config.get(DB, "rouser"), config=config, verbose=verbose)
+        if not db.add_ro_grants(db.dsn(config, DB), schema=_schema(config),
+                                user=config.get(DB, "rouser"), config=config, verbose=verbose):
+            raise Exception("failed to grant %s read access to %s"
+                            % (config.get(DB, "rouser"), _schema(config),))
 
 
 def _script(config, section, option):
@@ -462,8 +464,9 @@ def load_extras(config, verbose=False):
             continue
         # the file prefix names the live schema; during a shadow load the rows
         # have to go into the shadow one
-        db.copy_from_csv(dsn, filename=f, schema=m.group(1) + shadow.suffix(config, DB),
-                         table=m.group(2), config=config, verbose=verbose)
+        if not db.copy_from_csv(dsn, filename=f, schema=m.group(1) + shadow.suffix(config, DB),
+                                table=m.group(2), config=config, verbose=verbose):
+            raise Exception("failed to load %s" % (f,))
 
 
 #
@@ -491,8 +494,9 @@ if __name__ == "__main__":
     with loader.timer(label="make web schema", silent=not args.time):
         create_schema(config=cp, verbose=args.verbose)
         if cp.has_option(DB, "rouser"):
-            db.add_ro_grants(db.dsn(cp, DB), schema=_schema(cp),
-                             user=cp.get(DB, "rouser"), config=cp, verbose=args.verbose)
+            if not db.add_ro_grants(db.dsn(cp, DB), schema=_schema(cp),
+                                    user=cp.get(DB, "rouser"), config=cp, verbose=args.verbose):
+                sys.exit(1)
 
     if args.genstats:
         with loader.timer(label="generate CS stats", silent=not args.time):
