@@ -113,7 +113,7 @@ renaming them all into place in a single transaction:
    │         webapi.sql)                                  │
    └──────────────────────────┬───────────────────────────┘
                               │  300: loader/shadow.py -- ONE transaction
-                              │  (moves [web] carry tables into web_new first)
+                              │  (moves any `carry` tables into the shadow first)
                               ▼
    ┌──────────────────────────────────────────────────────┐
    │ bmrbeverything @ bmrb-staging.nmrbox.org             │
@@ -187,11 +187,14 @@ Things to know before changing any of this:
   unless it is named in that section's `carry` option. The remaining API
   writers into `web` — `inext`, `csrosetta` — have not moved. A table like
   that has to be built by a stage here or live in a schema the reload does not
-  swap; `carry` is the stopgap until then. `[web] carry = webserver_logs`
-  (a separate log loader's table) moves it into `web_new` inside the swap
-  transaction with `ALTER TABLE ... SET SCHEMA` — no copy, so a write landing
-  mid-reload is not lost. `tests/carry_swap.sh` covers it. It is in the
-  config, not the DAG, so the deployed `uconn.properties` needs the line too.
+  swap; `carry` is the stopgap until then. `[web] carry = <table> ...` moves
+  each named table into `web_new` inside the swap transaction with
+  `ALTER TABLE ... SET SCHEMA` — no copy, so a write landing mid-reload is
+  not lost. `tests/carry_swap.sh` covers it. It is in the config, not the
+  DAG, so the deployed `uconn.properties` needs the line too. Nothing is
+  carried at present: `webserver_logs` (a separate log loader's table), which
+  the option was added for, has moved to its own `logs` schema, outside the
+  swap.
 - **`[web] timedomain_dir`** names the per-entry time domain directory, with
   `%s` for the entry ID. It exists because BMRB-API's
   `macromolecule_entry_directory` (`…/bmr%s/clean`) and dbloader's `entrydir`

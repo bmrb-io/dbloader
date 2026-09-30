@@ -1,9 +1,10 @@
 #!/bin/sh
 #
 # Test the `carry` option of the swap (loader/shadow.py:carried()): a table in
-# a swapped schema that the reload does not build -- web.webserver_logs -- has
-# to come through the swap with its rows, sequence, indexes and grants, and a
-# write to it that is in flight during the swap must not be lost.
+# a swapped schema that the reload does not build -- web.webserver_logs here,
+# as it was in production before it moved to `logs` -- has to come through the
+# swap with its rows, sequence, indexes and grants, and a write to it that is
+# in flight during the swap must not be lost.
 #
 #     sh tests/carry_swap.sh
 #

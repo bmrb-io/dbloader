@@ -240,9 +240,9 @@ def rewritten_copy(script, mapping, workdir, copy_outdir=None, verbose=False):
 # Tables that live in a swapped schema but that the reload does not build.
 #
 # The swap replaces a schema wholesale, so a table put there by something else
-# -- web.webserver_logs, which a separate log loader appends to -- is dropped
-# with the old schema at every release.  The first single-server release lost
-# it that way.  Naming it in the section's `carry` option moves it into the
+# is dropped with the old schema at every release.  The first single-server
+# release lost web.webserver_logs, which a separate log loader appends to,
+# that way.  Naming such a table in the section's `carry` option moves it into the
 # shadow inside the swap transaction, just before the rename: an ALTER TABLE
 # ... SET SCHEMA, which copies nothing and takes its indexes, constraints,
 # owned sequences and grants with it.  Doing it in the transaction rather than
@@ -250,7 +250,8 @@ def rewritten_copy(script, mapping, workdir, copy_outdir=None, verbose=False):
 # from being lost.
 #
 # A stopgap.  Such a table belongs in a schema the reload does not swap;
-# carrying it is for until it has been moved.
+# carrying it is for until it has been moved.  webserver_logs has been, to
+# `logs`, so nothing is carried at present.
 #
 def carried(config, livename):
     """Table names the `carry` option says to move from `livename` into its
