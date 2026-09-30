@@ -7,3 +7,6 @@
 #
 psycopg2-binary
 pynmrstar
+# loader/uniprot.py: SIFTS and UniProt lookups.  Installed with pynmrstar
+# anyway; named because this uses it directly.
+requests

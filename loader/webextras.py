@@ -23,6 +23,7 @@ import loader
 from loader import db
 from loader import shadow
 from loader import datafiles
+from loader import uniprot
 
 DB = "web"
 
@@ -44,6 +45,9 @@ def load(config, verbose=False):
     load_depids(config, verbose)
     load_extras(config, verbose)
     load_bmrb_pdb_map(config, start=1, verbose=verbose)
+    # after pdb_link, which it reads; see loader/uniprot.py for why it is here
+    # at all rather than in BMRB-API
+    uniprot.load(config, verbose)
     generate_stats(config, verbose)
     # before the API tables: query_grid and instant_extra_search_terms read
     # web.timedomain_data

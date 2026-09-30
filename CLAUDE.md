@@ -166,16 +166,26 @@ Things to know before changing any of this:
   retirement, which has been carried across.
 - `--no-web` on job 100 is redundant (the web stage only runs inside the
   macromolecules branch) but harmless.
-- **Two BMRB-API reloaders moved here.** `webapi.sql` was
-  `bmrbapi/reloaders/sql/initialize.sql`, and `webextras.load_timedomain()` was
-  `bmrbapi/reloaders/timedomain.py`. Both had to be inside the swap: they build
+- **Three BMRB-API reloaders moved here.** `webapi.sql` was
+  `bmrbapi/reloaders/sql/initialize.sql`, `webextras.load_timedomain()` was
+  `bmrbapi/reloaders/timedomain.py`, and `loader/uniprot.py` was
+  `bmrbapi/reloaders/uniprot/`. All had to be inside the swap: they build
   on `macromolecules`/`metabolomics`/`web`, which the loader replaces
   wholesale, so run afterwards they would rebuild objects the swap had just
-  destroyed — in public. The API keeps `--sql` and `--timedomain` as warning
-  no-ops so the deployed job 401 does not die on an unrecognized argument;
-  drop them from both sides once `updater_dag` stops sending them. The other
-  API writers into `web` — `inext`, `csrosetta`, `uniprot` — have **not**
-  moved, and are still destroyed by every reload with nothing rebuilding them.
+  destroyed — in public. The API keeps `--sql`, `--timedomain` and `--uniprot`
+  as warning no-ops so a job passing them does not die on an unrecognized
+  argument; drop them from both sides once nothing sends them.
+- **`loader/uniprot.py` is the only stage that needs the internet** (SIFTS'
+  bulk PDB→UniProt file, and rest.uniprot.org). If either is unreachable it
+  carries the previous release's `uniprot_mappings` forward, loudly, rather
+  than failing job 231 — whose rescue would rerun the whole macromolecule
+  load. It moved after the first single-server release dropped
+  `uniprot_mappings` and the website's summary pages failed on it.
+- **Anything else written into a swapped schema is lost at every release.**
+  The remaining API writers into `web` — `inext`, `csrosetta` — have not
+  moved, and `web.webserver_logs` belongs to a separate log loader. Such a
+  table has to be built by a stage here or live in a schema the reload does
+  not swap.
 - **`[web] timedomain_dir`** names the per-entry time domain directory, with
   `%s` for the entry ID. It exists because BMRB-API's
   `macromolecule_entry_directory` (`…/bmr%s/clean`) and dbloader's `entrydir`
