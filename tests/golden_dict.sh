@@ -6,7 +6,7 @@
 #
 # Steps:
 #   1. build the dictionary artifacts (dictionary.sql + dict.*.csv) from the
-#      CURRENT dictionary source -- see tests/build_dict_inputs.sh;
+#      CURRENT dictionary source -- see ../build_dict_inputs.sh;
 #   2. run loader/dictionary.py under Python 2.7 against a throwaway
 #      PostgreSQL, with the golden-stack PYTHONPATH (see below);
 #   3. dump every dict table to deterministic CSV + md5s under tests/golden/.
@@ -45,7 +45,7 @@ export PGHOST PGUSER PGDATABASE
 # 1. dictionary artifacts (skip with --no-build to reuse an existing build/)
 #
 if [ "${1:-}" != "--no-build" ]; then
-    sh "$here/build_dict_inputs.sh" "$build"
+    sh "$repo/build_dict_inputs.sh" "$build"
 fi
 [ -f "$build/csv/dictionary.sql" ] || { echo "no $build/csv -- run without --no-build"; exit 1; }
 

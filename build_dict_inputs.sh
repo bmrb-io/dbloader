@@ -3,9 +3,9 @@
 # Build the dictionary artifacts dbloader loads (dictionary.sql + dict.*.csv)
 # from the CURRENT dictionary source, without touching either sibling repo.
 #
-#     sh tests/build_dict_inputs.sh [outdir]        (default: tests/build)
+#     sh build_dict_inputs.sh [outdir]        (default: build/dict)
 #
-# Chain (see ../../ORGANIZATION.md):
+# Chain (see ../ORGANIZATION.md):
 #
 #   nmr-star-dictionary/NMR-STAR/internal_106_source
 #        │  dictionary-converter        -> a complete CSV distribution
@@ -24,8 +24,7 @@
 
 set -eu
 
-here=$(cd "$(dirname "$0")" && pwd)
-repo=$(cd "$here/.." && pwd)
+repo=$(cd "$(dirname "$0")" && pwd)
 top=$(cd "$repo/.." && pwd)
 
 converter="$top/dictionary-converter"
@@ -33,11 +32,11 @@ scripts="$top/nmr-star-dictionary-scripts"
 dict_repo="$top/nmr-star-dictionary/NMR-STAR"
 source_dir="$dict_repo/internal_106_source"
 
-out=${1:-$here/build}
+out=${1:-$repo/build/dict}
 
 # Absolute from here on. Step 1 runs the converter from inside its own
 # checkout, so a relative -o resolved against *that* directory rather than the
-# caller's: `sh dbloader/tests/build_dict_inputs.sh dbloader/build/dict` wrote
+# caller's: `sh dbloader/build_dict_inputs.sh dbloader/build/dict` wrote
 # the distribution to dictionary-converter/dbloader/build/dict/dist, the
 # converter exited 0, and the run failed two steps later at the `cp` with
 # "cannot stat" -- having silently left a tree inside a sibling repo that this

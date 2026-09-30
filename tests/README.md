@@ -172,7 +172,7 @@ and present in **1,005** macromolecule entries. (Not a code defect — py2 and
 py3 fail identically, and the old `entries.py` swallowed it in a bare
 `except:` — but proving parity on entries that load incomplete is worthless.)
 
-So `tests/build_dict_inputs.sh` builds the whole chain from
+So `build_dict_inputs.sh`, in the repo root, builds the whole chain from
 `nmr-star-dictionary/NMR-STAR/internal_106_source`:
 
 ```
