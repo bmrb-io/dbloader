@@ -132,6 +132,15 @@ srcuser = bmrb
 [web]
 schema = web
 
+# Tables in `web` that the reload does not build, moved into web_new inside the
+# swap transaction so that they survive it (loader/shadow.py:carried()).
+# Anything in a swapped schema that is not built by the reload and not listed
+# here is dropped at every release.  webserver_logs is appended to by a
+# separate log loader; this is a stopgap until it moves to a schema of its own,
+# at which point delete the line -- the swap warns while it names a table that
+# is not there.
+carry = webserver_logs
+
 # Per-entry time domain (raw FID) directory, %s for the entry ID; scanned to
 # fill web.timedomain_data, which webapi.sql reads.
 #

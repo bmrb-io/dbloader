@@ -237,6 +237,59 @@ def rewritten_copy(script, mapping, workdir, copy_outdir=None, verbose=False):
     return out
 
 
+# Tables that live in a swapped schema but that the reload does not build.
+#
+# The swap replaces a schema wholesale, so a table put there by something else
+# -- web.webserver_logs, which a separate log loader appends to -- is dropped
+# with the old schema at every release.  The first single-server release lost
+# it that way.  Naming it in the section's `carry` option moves it into the
+# shadow inside the swap transaction, just before the rename: an ALTER TABLE
+# ... SET SCHEMA, which copies nothing and takes its indexes, constraints,
+# owned sequences and grants with it.  Doing it in the transaction rather than
+# as a copy earlier in the reload is what keeps a write that lands in between
+# from being lost.
+#
+# A stopgap.  Such a table belongs in a schema the reload does not swap;
+# carrying it is for until it has been moved.
+#
+def carried(config, livename):
+    """Table names the `carry` option says to move from `livename` into its
+    shadow at the swap -- from the config section whose schema is `livename`."""
+
+    if config is None:
+        return []
+    for section in config.sections():
+        if config.has_option(section, "schema") and config.get(section, "schema") == livename:
+            if config.has_option(section, "carry"):
+                return config.get(section, "carry").split()
+    return []
+
+
+def _carry(curs, livename, shadow, tables, verbose=False):
+    """Move each of `tables` from the live schema into the shadow.  Called
+    inside the swap transaction, before the live schema is renamed aside."""
+
+    def exists(schema, table):
+        curs.execute("select 1 from pg_tables where schemaname = %s and tablename = %s",
+                     (schema, table,))
+        return curs.fetchone() is not None
+
+    for table in tables:
+        if exists(shadow, table):
+            # the reload built one: not something to overwrite on a guess
+            raise Exception("carry: %s is in both %s and %s -- the reload builds it, so it"
+                            " should not be in the `carry` list" % (table, livename, shadow,))
+        if not exists(livename, table):
+            sys.stderr.write("carry: no table %s.%s to carry forward; nothing moved"
+                             " (remove it from `carry` if it now lives elsewhere)\n"
+                             % (livename, table,))
+            continue
+        curs.execute("alter table %s set schema %s"
+                     % (db.qualified(livename, table), db.quote(shadow),))
+        if verbose:
+            sys.stdout.write("carry: %s.%s -> %s\n" % (livename, table, shadow,))
+
+
 # The swap itself.
 #
 def swap(dsn, schemas, config=None, verbose=False):
@@ -270,6 +323,7 @@ def swap(dsn, schemas, config=None, verbose=False):
             for (livename, shadow) in pairs:
                 curs.execute("select 1 from pg_namespace where nspname = %s", (livename,))
                 if curs.fetchone() is not None:
+                    _carry(curs, livename, shadow, carried(config, livename), verbose=verbose)
                     old = livename + RETIRING
                     curs.execute("drop schema if exists %s cascade" % (db.quote(old),))
                     curs.execute("alter schema %s rename to %s"

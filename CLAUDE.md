@@ -181,11 +181,15 @@ Things to know before changing any of this:
   than failing job 231 — whose rescue would rerun the whole macromolecule
   load. It moved after the first single-server release dropped
   `uniprot_mappings` and the website's summary pages failed on it.
-- **Anything else written into a swapped schema is lost at every release.**
-  The remaining API writers into `web` — `inext`, `csrosetta` — have not
-  moved, and `web.webserver_logs` belongs to a separate log loader. Such a
-  table has to be built by a stage here or live in a schema the reload does
-  not swap.
+- **Anything else written into a swapped schema is lost at every release**,
+  unless it is named in that section's `carry` option. The remaining API
+  writers into `web` — `inext`, `csrosetta` — have not moved. A table like
+  that has to be built by a stage here or live in a schema the reload does not
+  swap; `carry` is the stopgap until then. `[web] carry = webserver_logs`
+  (a separate log loader's table) moves it into `web_new` inside the swap
+  transaction with `ALTER TABLE ... SET SCHEMA` — no copy, so a write landing
+  mid-reload is not lost. `tests/carry_swap.sh` covers it. It is in the
+  config, not the DAG, so the deployed `uconn.properties` needs the line too.
 - **`[web] timedomain_dir`** names the per-entry time domain directory, with
   `%s` for the entry ID. It exists because BMRB-API's
   `macromolecule_entry_directory` (`…/bmr%s/clean`) and dbloader's `entrydir`
