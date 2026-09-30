@@ -1,0 +1,47 @@
+# Released macromolecule entries that exist only as NMR-STAR 2.1.
+#
+# They are missing tags that NMR-STAR 3 makes mandatory, so they cannot be
+# converted and will never have a bmr<id>_3.str.  The entry load leaves them out
+# of its "released but not in file list" and "Not found" warnings, which
+# otherwise repeat these 34 IDs every release and bury the entries that are
+# missing for a reason someone can fix.
+#
+# One ID per line.  If one of these ever gets a _3.str it is loaded as normal,
+# and the load says to take it off this list.
+#
+# Default location of [macromolecules] v2only -- see loader/datafiles.py.
+
+4
+77
+119
+332
+528
+529
+646
+647
+648
+649
+1514
+2545
+4077
+4096
+4356
+4450
+4481
+4667
+4705
+4764
+4776
+6417
+6697
+6887
+6931
+7138
+7143
+7195
+7197
+7198
+7265
+7267
+7275
+7355

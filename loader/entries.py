@@ -25,6 +25,7 @@ from configparser import ConfigParser
 _UP = os.path.abspath(os.path.join(os.path.split(__file__)[0], ".."))
 sys.path.append(_UP)
 import loader
+from loader import datafiles
 from loader import db
 from loader.entryload import EntryLoader
 from loader import shadow
@@ -97,13 +98,16 @@ def load_entries(dbname, config, verbose=False):
         if not config.has_option(section, what):
             raise Exception("No %s in [%s] section in config file" % (what, section,))
 
-    files = _gen_file_list(dbname, directory=config.get(dbname, "entrydir"), verbose=verbose)
+    v2only = _v2_only(config) if dbname == "macromolecules" else set()
+
+    files = _gen_file_list(dbname, directory=config.get(dbname, "entrydir"), verbose=verbose,
+                           expect_missing=v2only)
     if len(files) < 1:
         raise Exception("Nothing to load: no entry files under %s"
                         % (config.get(dbname, "entrydir"),))
 
     if dbname == "macromolecules":
-        files = _released_only(files, config)
+        files = _released_only(files, config, expect_missing=v2only)
 
     if verbose:
         sys.stdout.write("*********\nFiles to load:\n")
@@ -112,10 +116,25 @@ def load_entries(dbname, config, verbose=False):
     return _load_entries(config, dbname, files, verbose=verbose)
 
 
-# cross-check the files on the website against ETS: everything released should
-# be on disk, and nothing on disk should be unreleased.
+# Released entries that exist only as NMR-STAR 2.1, and so are expected to have
+# no _3.str -- see macromolecules.v2only.txt.
 #
-def _released_only(files, config):
+def _v2_only(config):
+
+    ids = set()
+    with open(datafiles.path(config, "macromolecules", "v2only")) as handle:
+        for line in handle:
+            line = line.split("#", 1)[0].strip()
+            if line:
+                ids.add(line)
+    return ids
+
+
+# cross-check the files on the website against ETS: everything released should
+# be on disk, and nothing on disk should be unreleased.  Released IDs in
+# `expect_missing` are left out of the report when they have no file.
+#
+def _released_only(files, config, expect_missing=()):
 
     released = set(loader.released_ids_itr(config))
 
@@ -129,12 +148,16 @@ def _released_only(files, config):
         if bmrbid in released:
             released.remove(bmrbid)
             toload.append(f)
+            if bmrbid in expect_missing:
+                sys.stderr.write("bmr%s has a _3.str now: take it off the NMR-STAR 2.1 only list"
+                                 " (macromolecules.v2only.txt)\n" % (bmrbid,))
         else:
             sys.stderr.write("*************** ERROR ******************\n")
             sys.stderr.write("BMRB ID of %s is not in released IDs!\n" % (f,))
             sys.stderr.write("Delete from public website!\n")
             sys.stderr.write("****************************************\n")
 
+    released -= set(expect_missing)
     if len(released) > 0:
         sys.stderr.write("Following BMRB IDs are released but not in file list:\n")
         for i in sorted(released, key=int):
@@ -144,9 +167,10 @@ def _released_only(files, config):
 
 
 # list input files for the metabolomics or macromolecule database.
-# this reads files actually on the website, without checking ETS status
+# this reads files actually on the website, without checking ETS status.
+# IDs in `expect_missing` are not reported when their file is missing.
 #
-def _gen_file_list(dbname, directory, verbose=False):
+def _gen_file_list(dbname, directory, verbose=False, expect_missing=()):
 
     assert dbname in DATABASES
     entrydir = os.path.realpath(directory)
@@ -172,7 +196,8 @@ def _gen_file_list(dbname, directory, verbose=False):
             continue
         infile = os.path.join(i, filename % (m.group(1),))
         if not os.path.exists(infile):
-            sys.stderr.write("Not found: %s\n" % (infile,))
+            if m.group(1) not in expect_missing:
+                sys.stderr.write("Not found: %s\n" % (infile,))
             continue
 
         filelist.append(infile)

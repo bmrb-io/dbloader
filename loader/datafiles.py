@@ -33,6 +33,7 @@ DEFAULTS = {
     ("macromolecules", "software_mapfile"): "software.js",
     ("macromolecules", "software_authors_mapfile"): "swauthors.js",
     ("macromolecules", "task_mapfile"): "task.js",
+    ("macromolecules", "v2only"): "macromolecules.v2only.txt",
     ("web", "ddlfile"): "webschema.sql",
     ("web", "apiddl"): "webapi.sql",
     ("web", "csvfiles"): "web.pulsefilelist.csv\nweb.termlist.csv",
