@@ -104,14 +104,16 @@ renaming them all into place in a single transaction:
    ┌──────────────────────────▼───────────────────────────┐
    │ __main__.py -c uconn.properties --host --database    │
    │   --no-swap on every stage: nothing becomes visible  │
-   │  100 --dictdir .../nmr-star-dictionary-scripts/csv   │  dict_new, validict_new
+   │  100 --dictdir build/dict/csv (built by job 090)     │  dict_new, validict_new
    │  110                                                 │  chemcomps_new
    │  131                                                 │  metabolomics_new, meta_new
    │  231                                                 │  macromolecules_new, web_new
-   │        (231's web stage also runs cs_stats.sql, the  │
-   │         timedomain scan and webapi.sql)              │
+   │        (231's web stage also runs loader/uniprot.py, │
+   │         cs_stats.sql, the timedomain scan and        │
+   │         webapi.sql)                                  │
    └──────────────────────────┬───────────────────────────┘
                               │  300: loader/shadow.py -- ONE transaction
+                              │  (moves [web] carry tables into web_new first)
                               ▼
    ┌──────────────────────────────────────────────────────┐
    │ bmrbeverything @ bmrb-staging.nmrbox.org             │

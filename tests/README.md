@@ -102,7 +102,13 @@ sh tests/golden_entries.sh         # golden entry schemas         (~3 min)
 sh tests/regression.sh             # the rewrite, diffed          (~3 min)
 sh tests/regression.sh dumps       # the CSV dump path            (~1 min)
 sh tests/shadow_swap.sh            # the publish step             (~1 min)
+sh tests/carry_swap.sh             # [web] carry through the swap (~10 s)
 ```
+
+`carry_swap.sh` runs `loader/shadow.py` as job 300 does and checks that a
+table named in `carry` -- `web.webserver_logs` in production -- survives the
+swap with its rows, index, sequence and grants, including a write held open
+across it. It needs only pg-tmp, no dump or golden.
 
 `shadow_swap.sh` tests `load_postgres_db.py`, the half of the pipeline that
 loads a dump into the serving database: the `--shadow` swap and -- the case
